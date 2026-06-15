@@ -8,8 +8,8 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_fallback', {
 
 // Using a service role key here because webhooks need to bypass RLS to update club tiers
 const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
+  process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://fallback.supabase.co',
+  process.env.SUPABASE_SERVICE_ROLE_KEY || 'fallback_key'
 );
 
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET!;
