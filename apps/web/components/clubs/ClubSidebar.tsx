@@ -85,7 +85,7 @@ export function ClubSidebar({ clubs, isLoading, selectedClubId, hoveredClubId, o
               return (
                 <div
                   key={virtualRow.index}
-                  id={!isLoader ? `card-${club.id}` : undefined}
+                  id={!isLoader && club ? `card-${club.id}` : undefined}
                   style={{
                     position: 'absolute',
                     top: 0,
@@ -96,7 +96,7 @@ export function ClubSidebar({ clubs, isLoading, selectedClubId, hoveredClubId, o
                     paddingBottom: '16px'
                   }}
                 >
-                  {isLoader ? (
+                  {isLoader || !club ? (
                     <ClubCardSkeleton />
                   ) : (
                     <ClubCard 
