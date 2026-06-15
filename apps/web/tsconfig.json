@@ -6,6 +6,10 @@
         "name": "next"
       }
     ],
+    "paths": {
+      "@/*": ["./*"]
+    },
+    "moduleResolution": "bundler",
     "strictNullChecks": true
   },
   "include": [
