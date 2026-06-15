@@ -54,7 +54,7 @@ export function DiscoveryContainer({ initialLat, initialLon, initialZoom = 13 }:
       }
     } else {
       // Center map if clicked from list
-      const club = clubs.find(c => c.id === id);
+      const club = clubs.find((c: any) => c.id === id);
       if (club) {
         handleViewportChange({ ...viewport, latitude: club.lat, longitude: club.lng });
       }

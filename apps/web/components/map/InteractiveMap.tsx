@@ -28,7 +28,7 @@ const PinMarker = React.memo(({ club, isSelected, isHovered, onSelect, onHover }
       longitude={club.lng}
       latitude={club.lat}
       anchor="bottom"
-      onClick={e => {
+      onClick={(e: any) => {
         e.originalEvent.stopPropagation();
         onSelect(club.id);
       }}
