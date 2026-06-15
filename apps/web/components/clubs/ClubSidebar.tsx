@@ -40,9 +40,11 @@ export function ClubSidebar({ clubs, isLoading, selectedClubId, hoveredClubId, o
       </div>
 
       {/* Header Fijo */}
-      <div className="px-5 py-3 md:pt-6 bg-white shrink-0 z-10 border-b border-gray-100">
-        <h2 className="font-display font-bold text-2xl mb-4 text-text-primary hidden md:block">Explorar</h2>
-        <div className="flex gap-2">
+      <div className="px-5 py-3 md:pt-6 bg-white shrink-0 z-10 border-b border-gray-100 flex items-center justify-between">
+        <h2 className="font-display font-bold text-xl md:text-2xl text-text-primary">Explorar</h2>
+        
+        {/* Search for Desktop */}
+        <div className="hidden md:flex gap-2 flex-1 ml-4">
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
             <input 
@@ -54,6 +56,16 @@ export function ClubSidebar({ clubs, isLoading, selectedClubId, hoveredClubId, o
           <button className="p-3 bg-gray-100 rounded-xl text-gray-600 hover:bg-gray-200 transition-colors">
             <SlidersHorizontal className="w-5 h-5" />
           </button>
+        </div>
+
+        {/* Mobile Search Button triggers modal (to be implemented) */}
+        <div className="flex md:hidden gap-2">
+           <button className="p-2 bg-gray-100 rounded-full text-gray-600">
+             <Search className="w-5 h-5" />
+           </button>
+           <button className="p-2 bg-gray-100 rounded-full text-gray-600">
+             <SlidersHorizontal className="w-5 h-5" />
+           </button>
         </div>
       </div>
 

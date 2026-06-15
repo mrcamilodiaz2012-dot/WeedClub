@@ -5,6 +5,7 @@ import { Card, CardContent } from '../ui/Card';
 import { Badge } from '../ui/Badge';
 import { MapPin, Clock, Star, Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import type { Club } from '@/types';
 
 interface ClubCardProps {
@@ -40,11 +41,12 @@ export function ClubCard({ club, isSelected, isHovered, onClick, onMouseEnter, o
         `}
       >
         <div className="relative w-full h-48 bg-gray-100 overflow-hidden">
-          <img 
+          <Image 
             src={coverUrl} 
             alt={club.name} 
-            loading="lazy"
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105" 
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover transition-transform duration-700 hover:scale-105" 
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
           
