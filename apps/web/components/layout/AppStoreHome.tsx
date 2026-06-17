@@ -29,8 +29,8 @@ export function AppStoreHome() {
       </div>
 
       {/* Search Bar (Sticky) */}
-      <div className="px-5 py-3 sticky top-0 bg-background-base/95 backdrop-blur-xl z-40">
-        <div className="w-full h-[54px] bg-background-secondary rounded-full flex items-center px-5 gap-3 border-[1.5px] border-[#00E676]/30 focus-within:border-[#00E676] transition-colors shadow-sm">
+      <div className="px-5 py-3 sticky top-0 bg-background-base z-40">
+        <div className="w-full h-[54px] bg-background-secondary rounded-full flex items-center px-5 gap-3 border-[1.5px] border-[#00E676]/30 focus-within:border-[#00E676] transition-colors">
           <Search size={22} className="text-[#00E676]" />
           <input 
             type="text" 
