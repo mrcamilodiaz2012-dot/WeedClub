@@ -8,6 +8,7 @@ import { BottomNavigationBar } from './BottomNavigationBar';
 import { MapModal } from './MapModal';
 import { Search, SlidersHorizontal, MapPin } from 'lucide-react';
 import { cn } from '@/utils/cn';
+import type { Club } from '@/types';
 
 interface DiscoveryContainerProps {
   initialLat: number;
@@ -106,7 +107,7 @@ export function DiscoveryContainer({ initialLat, initialLon, initialZoom = 13 }:
                Clubes cerca de ti
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {clubs.map(club => (
+              {clubs.map((club: Club) => (
                 <ClubCard key={club.id} club={club} />
               ))}
             </div>
