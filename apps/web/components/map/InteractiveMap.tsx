@@ -45,35 +45,34 @@ const PinMarker = React.memo(({ club, isSelected, isHovered, onSelect, onHover }
         onMouseLeave={() => onHover(null)}
       >
         <motion.div 
-          className="relative flex items-center justify-center w-8 h-8 rounded-full shadow-md bg-white border border-gray-200"
+          className="px-2 py-1 rounded-full shadow-md font-medium text-sm whitespace-nowrap transition-colors"
           animate={{
-            scale: active ? 1.2 : 1,
-            backgroundColor: isSelected ? '#3B82F6' : '#FFFFFF', // Apple Maps Blue for selected
-            borderColor: active ? 'transparent' : '#E5E7EB',
+            backgroundColor: isSelected ? '#000000' : isHovered ? '#00AA6C' : '#FFFFFF',
+            color: active ? '#FFFFFF' : '#18181B',
+            borderColor: active ? 'transparent' : '#E4E4E7',
+            borderWidth: 1
           }}
         >
-          {/* Inner colored dot */}
-          <motion.div 
-            className="w-2.5 h-2.5 rounded-full"
-            animate={{
-              backgroundColor: isSelected ? '#FFFFFF' : '#EF4444' // Apple Maps Red for unselected points of interest
-            }}
-          />
-          
-          {/* Tooltip for hover/active */}
-          <AnimatePresence>
-            {active && (
-              <motion.div 
-                initial={{ opacity: 0, y: 10, scale: 0.8 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 10, scale: 0.8 }}
-                className="absolute bottom-full mb-2 px-3 py-1.5 bg-white/90 backdrop-blur-md rounded-xl shadow-lg border border-gray-100 whitespace-nowrap z-50 pointer-events-none"
-              >
-                <span className="text-xs font-semibold text-gray-900">{club.name.substring(0, 20)}</span>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <span className="flex items-center space-x-1.5">
+            <motion.span 
+              className="w-2 h-2 rounded-full"
+              animate={{ backgroundColor: active ? '#FFFFFF' : '#00AA6C' }}
+            />
+            <span className={active ? 'inline-block' : 'hidden group-hover:inline-block ml-1'}>
+              {club.name.substring(0, 16)}
+            </span>
+          </span>
         </motion.div>
+        
+        <motion.div 
+          className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 rotate-45"
+          animate={{
+            backgroundColor: isSelected ? '#000000' : isHovered ? '#00AA6C' : '#FFFFFF',
+            borderColor: active ? 'transparent' : '#E4E4E7',
+            borderBottomWidth: active ? 0 : 1,
+            borderRightWidth: active ? 0 : 1
+          }}
+        />
       </motion.div>
     </Marker>
   );
