@@ -4,12 +4,13 @@ import React from "react";
 import { HeroCard } from "@/components/ui/HeroCard";
 import { Carousel } from "@/components/ui/Carousel";
 import { AppListItem } from "@/components/ui/AppListItem";
-import { Search, Map as MapIcon, ChevronRight } from "lucide-react";
+import { Search, Map as MapIcon, ChevronRight, Heart } from "lucide-react";
 
 export function AppStoreHome() {
   return (
     <div className="w-full h-full pb-32 overflow-y-auto bg-background-base">
-      <div className="px-5 pt-12 pb-4 sticky top-0 bg-background-base/80 backdrop-blur-md z-40 flex items-center justify-between border-b border-border-subtle/50">
+      {/* Top Header (Not Sticky) */}
+      <div className="px-5 pt-12 pb-2 bg-background-base flex items-center justify-between relative">
         <div className="w-10 h-10 flex items-center justify-center">
           <img src="/logo2.svg" alt="WeedClub Logo" className="w-8 h-8" />
         </div>
@@ -18,9 +19,22 @@ export function AppStoreHome() {
           CLUBS
         </h1>
 
-        <button className="w-10 h-10 rounded-full bg-background-secondary flex items-center justify-center text-text-primary hover:bg-gray-200 transition-colors">
-          <Search size={20} strokeWidth={2.5} />
+        <button className="w-10 h-10 rounded-full bg-background-secondary flex items-center justify-center text-[#00AA6C] hover:bg-gray-200 transition-colors">
+          <Heart size={20} strokeWidth={2.5} className="fill-[#00AA6C]" />
         </button>
+      </div>
+
+      {/* Search Bar (Sticky) */}
+      <div className="px-5 py-3 sticky top-0 bg-background-base/95 backdrop-blur-xl z-40 border-b border-border-subtle/50">
+        <div className="w-full h-[52px] bg-background-secondary rounded-[20px] flex items-center px-4 gap-3 shadow-sm border border-border-subtle/40">
+          <Search size={22} className="text-text-secondary" />
+          <input 
+            type="text" 
+            placeholder="Buscar Clubs en tu zona" 
+            className="bg-transparent border-none outline-none text-base text-text-primary w-full placeholder:text-text-secondary/80 font-medium"
+            readOnly
+          />
+        </div>
       </div>
 
       <div className="pt-6 px-5">
