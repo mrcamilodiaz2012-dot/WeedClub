@@ -7,7 +7,7 @@ import { useClubsMap } from '@/lib/hooks/useClubsMap';
 import { ClubCard, ClubCardSkeleton } from '../clubs/ClubCard';
 import { BottomNavigationBar } from './BottomNavigationBar';
 import { MapModal } from './MapModal';
-import { Search, SlidersHorizontal, MapPin } from 'lucide-react';
+import { Search, MapPin } from 'lucide-react';
 import { cn } from '@/utils/cn';
 import type { Club } from '@/types';
 
@@ -49,18 +49,21 @@ export function DiscoveryContainer({ initialLat, initialLon, initialZoom = 13 }:
       
       {/* App Hero / Header */}
       <header className="sticky top-0 z-40 bg-white border-b border-gray-100 shadow-sm px-4 pt-safe">
-        <div className="flex items-center justify-between py-3">
-          <div className="relative w-32 h-8">
+        <div className="flex items-center justify-between py-3 relative">
+          <div className="relative w-8 h-8">
             <Image 
-              src="/logos/logo.svg" 
-              alt="WeedClub Logo" 
+              src="/logos/logo2.svg" 
+              alt="WeedClub Isotipo" 
               fill 
-              className="object-contain object-left"
+              className="object-contain"
               priority
             />
           </div>
+          <h1 className="absolute left-1/2 -translate-x-1/2 text-lg font-display font-bold tracking-tight text-gray-900">
+            Weed Clubs
+          </h1>
           <button className="p-2 text-gray-600 hover:bg-gray-100 rounded-full transition">
-            <SlidersHorizontal size={20} />
+            <Search size={20} />
           </button>
         </div>
 
