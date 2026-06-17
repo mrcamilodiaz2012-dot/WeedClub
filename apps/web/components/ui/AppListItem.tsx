@@ -48,7 +48,7 @@ export function AppListItem({
               VER
             </button>
             {verified && (
-              <span className="text-[9px] text-[#00AA6C] font-semibold mt-1 text-center leading-tight flex items-center gap-0.5">
+              <span className="text-[9px] text-[#00E676] font-semibold mt-1 text-center leading-tight flex items-center gap-0.5">
                 <ShieldCheck size={10} />
                 Verificado
               </span>

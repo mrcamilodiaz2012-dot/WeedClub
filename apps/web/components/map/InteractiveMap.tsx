@@ -47,7 +47,7 @@ const PinMarker = React.memo(({ club, isSelected, isHovered, onSelect, onHover }
         <motion.div 
           className="px-2 py-1 rounded-full shadow-md font-medium text-sm whitespace-nowrap transition-colors"
           animate={{
-            backgroundColor: isSelected ? '#000000' : isHovered ? '#00AA6C' : '#FFFFFF',
+            backgroundColor: isSelected ? '#000000' : isHovered ? '#00E676' : '#FFFFFF',
             color: active ? '#FFFFFF' : '#18181B',
             borderColor: active ? 'transparent' : '#E4E4E7',
             borderWidth: 1
@@ -56,7 +56,7 @@ const PinMarker = React.memo(({ club, isSelected, isHovered, onSelect, onHover }
           <span className="flex items-center space-x-1.5">
             <motion.span 
               className="w-2 h-2 rounded-full"
-              animate={{ backgroundColor: active ? '#FFFFFF' : '#00AA6C' }}
+              animate={{ backgroundColor: active ? '#FFFFFF' : '#00E676' }}
             />
             <span className={active ? 'inline-block' : 'hidden group-hover:inline-block ml-1'}>
               {club.name.substring(0, 16)}
@@ -67,7 +67,7 @@ const PinMarker = React.memo(({ club, isSelected, isHovered, onSelect, onHover }
         <motion.div 
           className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 rotate-45"
           animate={{
-            backgroundColor: isSelected ? '#000000' : isHovered ? '#00AA6C' : '#FFFFFF',
+            backgroundColor: isSelected ? '#000000' : isHovered ? '#00E676' : '#FFFFFF',
             borderColor: active ? 'transparent' : '#E4E4E7',
             borderBottomWidth: active ? 0 : 1,
             borderRightWidth: active ? 0 : 1
