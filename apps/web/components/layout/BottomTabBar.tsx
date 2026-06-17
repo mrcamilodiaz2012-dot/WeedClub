@@ -5,7 +5,7 @@ import { LayoutGrid, MapPin, Layers, Heart, Search } from "lucide-react";
 
 export function BottomTabBar() {
   return (
-    <div className="fixed bottom-0 left-0 right-0 h-[84px] bg-background-base/90 backdrop-blur-xl border-t border-border-subtle flex items-start justify-around pt-2 px-2 z-50">
+    <div className="fixed bottom-6 left-4 right-4 h-[72px] bg-white/70 dark:bg-black/70 backdrop-blur-3xl border border-white/40 dark:border-white/10 rounded-[36px] shadow-[0_8px_32px_rgba(0,0,0,0.1)] flex items-center justify-around px-2 z-50">
       <TabItem icon={<LayoutGrid size={24} />} label="Hoy" active />
       <TabItem icon={<MapPin size={24} />} label="Cerca" />
       <TabItem icon={<Layers size={24} />} label="Explorar" />

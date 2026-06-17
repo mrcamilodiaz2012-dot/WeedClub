@@ -4,29 +4,23 @@ import React from "react";
 import { HeroCard } from "@/components/ui/HeroCard";
 import { Carousel } from "@/components/ui/Carousel";
 import { AppListItem } from "@/components/ui/AppListItem";
-import { UserCircle } from "lucide-react";
+import { Search } from "lucide-react";
 
 export function AppStoreHome() {
-  const currentDate = new Date().toLocaleDateString("es-ES", {
-    weekday: "long",
-    month: "long",
-    day: "numeric",
-  }).toUpperCase();
-
   return (
-    <div className="w-full h-full pb-24 overflow-y-auto bg-background-base">
-      <div className="px-5 pt-12 pb-4">
-        <span className="text-text-secondary text-sm font-semibold tracking-wider">
-          {currentDate}
-        </span>
-        <div className="flex items-center justify-between mt-1">
-          <h1 className="text-4xl font-display font-bold text-text-primary">
-            Hoy
-          </h1>
-          <button className="w-9 h-9 rounded-full bg-background-secondary flex items-center justify-center text-blue-500 overflow-hidden">
-            <UserCircle size={36} strokeWidth={1} />
-          </button>
+    <div className="w-full h-full pb-32 overflow-y-auto bg-background-base">
+      <div className="px-5 pt-12 pb-4 sticky top-0 bg-background-base/80 backdrop-blur-md z-40 flex items-center justify-between border-b border-border-subtle/50">
+        <div className="w-10 h-10 flex items-center justify-center">
+          <img src="/logo2.svg" alt="WeedClub Logo" className="w-8 h-8" />
         </div>
+        
+        <h1 className="text-xl font-display font-black tracking-[0.2em] text-text-primary text-center absolute left-1/2 -translate-x-1/2">
+          CLUBS
+        </h1>
+
+        <button className="w-10 h-10 rounded-full bg-background-secondary flex items-center justify-center text-text-primary hover:bg-gray-200 transition-colors">
+          <Search size={20} strokeWidth={2.5} />
+        </button>
       </div>
 
       <div className="px-5">
