@@ -18,7 +18,7 @@ interface ClubCardProps {
 }
 
 export function ClubCard({ club, isSelected, isHovered, onClick, onMouseEnter, onMouseLeave }: ClubCardProps) {
-  const coverUrl = club.cover_image_url || `https://source.unsplash.com/random/400x300/?interior,cafe&sig=${club.id}`;
+  const coverUrl = club.cover_image_url || `https://picsum.photos/seed/${club.id}/400/300`;
   const isOpen = club.status === 'active'; // Lógica simplificada por ahora
   const isPremium = club.subscription_tier === 'premium';
 
