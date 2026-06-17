@@ -2,13 +2,13 @@
 
 @theme {
   /* Colors */
-  --color-brand-primary: #143D30;
-  --color-brand-accent: #C4F042;
+  --color-brand-primary: #000000;
+  --color-brand-accent: #00AA6C; /* Trustworthy TripAdvisor-style green */
   --color-background-base: #FFFFFF;
-  --color-background-secondary: #FAFAFA;
+  --color-background-secondary: #F3F4F6;
   --color-background-dark: #09090B;
   --color-text-primary: #18181B;
-  --color-text-secondary: #71717A;
+  --color-text-secondary: #52525B;
   --color-border-subtle: #E4E4E7;
   
   --color-status-error: #EF4444;

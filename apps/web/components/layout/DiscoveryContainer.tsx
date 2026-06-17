@@ -3,8 +3,11 @@
 import * as React from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useClubsMap } from '@/lib/hooks/useClubsMap';
-import { InteractiveMap } from '../map/InteractiveMap';
-import { ClubSidebar } from '../clubs/ClubSidebar';
+import { ClubCard, ClubCardSkeleton } from '../clubs/ClubCard';
+import { BottomNavigationBar } from './BottomNavigationBar';
+import { MapModal } from './MapModal';
+import { Search, SlidersHorizontal, MapPin } from 'lucide-react';
+import { cn } from '@/utils/cn';
 
 interface DiscoveryContainerProps {
   initialLat: number;
@@ -12,100 +15,117 @@ interface DiscoveryContainerProps {
   initialZoom?: number;
 }
 
+const CATEGORIES = [
+  { id: 'all', label: 'Todos' },
+  { id: 'popular', label: 'Populares' },
+  { id: 'work', label: 'Para Trabajar' },
+  { id: 'events', label: 'Eventos' },
+];
+
 export function DiscoveryContainer({ initialLat, initialLon, initialZoom = 13 }: DiscoveryContainerProps) {
-  const router = useRouter();
   const searchParams = useSearchParams();
   
-  const urlLat = searchParams.get('lat');
-  const urlLng = searchParams.get('lng');
-  const urlClub = searchParams.get('club');
+  const [activeTab, setActiveTab] = React.useState<'explore' | 'saved' | 'profile' | 'map'>('explore');
+  const [activeCategory, setActiveCategory] = React.useState('all');
 
   const [viewport, setViewport] = React.useState({
-    latitude: urlLat ? parseFloat(urlLat) : initialLat,
-    longitude: urlLng ? parseFloat(urlLng) : initialLon,
+    latitude: initialLat,
+    longitude: initialLon,
     zoom: initialZoom
   });
-
-  const [selectedClubId, setSelectedClubId] = React.useState<string | null>(urlClub || null);
-  const [hoveredClubId, setHoveredClubId] = React.useState<string | null>(null);
 
   const radiusKm = Math.max(1, 40000 / Math.pow(2, viewport.zoom)); 
   const { clubs, isLoading, isError } = useClubsMap(viewport.latitude, viewport.longitude, radiusKm, searchParams.get('amenity'));
 
-  const handleViewportChange = React.useCallback((newViewport: any) => {
+  const handleViewportChange = React.useCallback((newViewport: { latitude: number, longitude: number, zoom: number }) => {
     setViewport(newViewport);
-    const params = new URLSearchParams(searchParams.toString());
-    params.set('lat', newViewport.latitude.toFixed(4));
-    params.set('lng', newViewport.longitude.toFixed(4));
-    router.replace(`/?${params.toString()}`, { scroll: false });
-  }, [router, searchParams]);
-
-  const handleSelectClub = React.useCallback((id: string, fromList = false) => {
-    setSelectedClubId(id);
-    const params = new URLSearchParams(searchParams.toString());
-    params.set('club', id);
-    router.replace(`/?${params.toString()}`, { scroll: false });
-
-    if (!fromList) {
-      // Auto-scroll list if clicked from map
-      const cardEl = document.getElementById(`card-${id}`);
-      if (cardEl) {
-        cardEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
-    } else {
-      // Center map if clicked from list
-      const club = clubs.find((c: any) => c.id === id);
-      if (club) {
-        handleViewportChange({ ...viewport, latitude: club.lat, longitude: club.lng });
-      }
-    }
-  }, [router, searchParams, clubs, viewport, handleViewportChange]);
-
-  const handleHoverClub = React.useCallback((id: string | null) => {
-    setHoveredClubId(id);
+    // Para simplificar, no actualizamos la URL constantemente al mover el mapa modal
   }, []);
 
-  if (isError) {
-    return <div className="w-full h-full flex items-center justify-center p-4 bg-status-error text-white">Error cargando el mapa: {isError.message}</div>;
-  }
-
   return (
-    <div className="flex flex-col-reverse md:flex-row w-full h-screen overflow-hidden bg-background-base relative">
+    <div className="flex flex-col w-full min-h-screen bg-background-base pb-[80px]">
       
-      {/* Sidebar (Resultados) - Desktop Only, Mobile uses Bottom Sheet inside Sidebar component */}
-      <ClubSidebar 
-        clubs={clubs} 
-        isLoading={isLoading} 
-        selectedClubId={selectedClubId} 
-        hoveredClubId={hoveredClubId}
-        onSelectClub={handleSelectClub} 
-        onHoverClub={handleHoverClub}
-      />
-
-      {/* Main Map Area */}
-      <div className="flex-1 relative h-full">
-        <div className="absolute top-4 left-4 right-4 z-30 flex justify-between items-center pointer-events-none">
-           <div className="bg-white/80 backdrop-blur-md px-4 py-2 rounded-2xl shadow-float pointer-events-auto flex items-center gap-2">
-             <div className="w-6 h-6 rounded-md bg-brand-primary flex items-center justify-center text-brand-accent font-bold text-xs">W</div>
-             <h1 className="font-display font-bold text-brand-primary text-xl tracking-tight hidden sm:block">WeedClub</h1>
-           </div>
-           <div className="pointer-events-auto">
-             <button className="bg-brand-primary text-white px-4 py-2 rounded-xl text-sm font-medium shadow-float hover:bg-brand-primary/90 transition-transform active:scale-95">
-               Soy Propietario
-             </button>
-           </div>
+      {/* App Hero / Header */}
+      <header className="sticky top-0 z-40 bg-white border-b border-gray-100 shadow-sm px-4 pt-safe">
+        <div className="flex items-center justify-between py-3">
+          <h1 className="text-2xl font-display font-bold tracking-tight text-black">Explorar</h1>
+          <button className="p-2 text-gray-600 hover:bg-gray-100 rounded-full transition">
+            <SlidersHorizontal size={20} />
+          </button>
         </div>
 
-        <InteractiveMap 
-          clubs={clubs} 
-          selectedClubId={selectedClubId} 
-          hoveredClubId={hoveredClubId}
-          onSelectClub={handleSelectClub} 
-          onHoverClub={handleHoverClub}
-          viewport={viewport} 
-          onViewportChange={handleViewportChange} 
-        />
-      </div>
+        {/* Search Bar - TripAdvisor Style */}
+        <div className="relative mb-4 mt-2">
+          <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+            <Search className="h-5 w-5 text-gray-400" />
+          </div>
+          <input 
+            type="text" 
+            placeholder="¿A dónde quieres ir?" 
+            className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-full text-base focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-shadow shadow-inner"
+          />
+        </div>
+
+        {/* Categories Pills */}
+        <div className="flex overflow-x-auto gap-2 pb-4 scrollbar-hide">
+          {CATEGORIES.map(cat => (
+            <button
+              key={cat.id}
+              onClick={() => setActiveCategory(cat.id)}
+              className={cn(
+                "px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors",
+                activeCategory === cat.id 
+                  ? "bg-black text-white" 
+                  : "bg-white border border-gray-200 text-gray-600 hover:border-gray-300"
+              )}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
+      </header>
+
+      {/* Main Content List */}
+      <main className="flex-1 px-4 py-6 max-w-5xl mx-auto w-full">
+        {isLoading ? (
+           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+             <ClubCardSkeleton />
+             <ClubCardSkeleton />
+             <ClubCardSkeleton />
+           </div>
+        ) : isError ? (
+          <div className="text-center py-10 text-red-500">Error al cargar clubes.</div>
+        ) : clubs.length === 0 ? (
+          <div className="text-center py-20 text-gray-500">
+            <p className="text-lg">No hay clubes en esta zona.</p>
+          </div>
+        ) : (
+          <>
+            <h2 className="text-lg font-bold mb-4 flex items-center text-gray-900">
+               <MapPin className="w-5 h-5 mr-1.5 text-brand-accent" />
+               Clubes cerca de ti
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {clubs.map(club => (
+                <ClubCard key={club.id} club={club} />
+              ))}
+            </div>
+          </>
+        )}
+      </main>
+
+      {/* Bottom Navigation */}
+      <BottomNavigationBar activeTab={activeTab} onTabChange={setActiveTab} />
+
+      {/* Map Modal */}
+      <MapModal 
+        isOpen={activeTab === 'map'} 
+        onClose={() => setActiveTab('explore')}
+        clubs={clubs}
+        viewport={viewport}
+        onViewportChange={handleViewportChange}
+      />
+      
     </div>
   );
 }
