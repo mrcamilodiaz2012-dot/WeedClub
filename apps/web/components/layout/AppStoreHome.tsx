@@ -4,24 +4,32 @@ import React from "react";
 import { HeroCard } from "@/components/ui/HeroCard";
 import { Carousel } from "@/components/ui/Carousel";
 import { AppListItem } from "@/components/ui/AppListItem";
-import { Search, Map as MapIcon, ChevronRight, Heart } from "lucide-react";
+import { Search, Map as MapIcon, ChevronRight, Heart, UserCircle } from "lucide-react";
 
 export function AppStoreHome() {
   return (
     <div className="w-full h-full pb-32 overflow-y-auto bg-background-base">
       {/* Top Header (Not Sticky) */}
       <div className="px-5 pt-12 pb-2 bg-background-base flex items-center justify-between relative">
-        <div className="w-14 h-14 flex items-center justify-center">
-          <img src="/logo2.svg" alt="WeedClub Logo" className="w-11 h-11" />
+        <div className="flex items-center">
+          <span className="font-display font-black text-[22px] tracking-tight">
+            <span className="text-[#00AA6C]">Weed</span>
+            <span className="text-text-primary">Club</span>
+          </span>
         </div>
         
         <h1 className="text-3xl font-display font-black tracking-[0.2em] text-text-primary text-center absolute left-1/2 -translate-x-1/2 mt-1">
           CLUBS
         </h1>
 
-        <button className="flex items-center justify-center text-[#00AA6C] hover:opacity-80 transition-opacity">
-          <Heart size={30} strokeWidth={2.5} className="fill-[#00AA6C]" />
-        </button>
+        <div className="flex items-center gap-4">
+          <button className="flex items-center justify-center text-[#00AA6C] hover:opacity-80 transition-opacity">
+            <Heart size={30} strokeWidth={2.5} className="fill-[#00AA6C]" />
+          </button>
+          <button className="w-9 h-9 rounded-full bg-background-secondary flex items-center justify-center text-text-primary hover:bg-gray-200 transition-colors">
+            <UserCircle size={24} strokeWidth={2} />
+          </button>
+        </div>
       </div>
 
       {/* Search Bar (Sticky) */}
