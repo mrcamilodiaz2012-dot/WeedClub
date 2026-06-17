@@ -23,7 +23,7 @@ export function HeroCard({
   return (
     <motion.div
       whileTap={{ scale: 0.96 }}
-      className="relative w-full h-[400px] rounded-2xl overflow-hidden shadow-lg mb-6 flex flex-col"
+      className="relative w-full h-[400px] rounded-2xl overflow-hidden mb-6 flex flex-col"
     >
       {/* Background Image */}
       <div

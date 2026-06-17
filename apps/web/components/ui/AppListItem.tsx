@@ -24,7 +24,7 @@ export function AppListItem({
       whileTap={{ scale: 0.98 }}
       className="flex items-center gap-4 py-3 w-full"
     >
-      <div className="w-16 h-16 rounded-2xl overflow-hidden bg-background-secondary shadow-sm shrink-0 border border-border-subtle">
+      <div className="w-16 h-16 rounded-[14px] overflow-hidden bg-background-secondary shrink-0">
         {iconSrc ? (
           <img src={iconSrc} alt={title} className="w-full h-full object-cover" />
         ) : (
@@ -32,7 +32,7 @@ export function AppListItem({
         )}
       </div>
 
-      <div className="flex flex-col flex-1 h-full justify-center border-b border-border-subtle/50 pb-3">
+      <div className="flex flex-col flex-1 h-full justify-center border-b border-border-subtle/30 pb-3">
         <div className="flex items-center justify-between w-full">
           <div className="flex flex-col">
             <span className="text-text-primary font-semibold text-base">
@@ -48,7 +48,7 @@ export function AppListItem({
               VER
             </button>
             {verified && (
-              <span className="text-[9px] text-brand-accent font-semibold mt-1 text-center leading-tight flex items-center gap-0.5">
+              <span className="text-[9px] text-[#00AA6C] font-semibold mt-1 text-center leading-tight flex items-center gap-0.5">
                 <ShieldCheck size={10} />
                 Verificado
               </span>

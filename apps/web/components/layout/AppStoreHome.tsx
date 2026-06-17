@@ -25,13 +25,13 @@ export function AppStoreHome() {
       </div>
 
       {/* Search Bar (Sticky) */}
-      <div className="px-5 py-3 sticky top-0 bg-background-base/95 backdrop-blur-xl z-40 border-b border-border-subtle/50">
-        <div className="w-full h-[52px] bg-background-secondary rounded-[20px] flex items-center px-4 gap-3 shadow-sm border border-border-subtle/40">
-          <Search size={22} className="text-text-secondary" />
+      <div className="px-5 py-3 sticky top-0 bg-background-base/95 backdrop-blur-xl z-40">
+        <div className="w-full h-[36px] bg-background-secondary rounded-lg flex items-center px-3 gap-2 border-[1.5px] border-[#00AA6C]/30 focus-within:border-[#00AA6C] transition-colors">
+          <Search size={18} className="text-[#00AA6C]" />
           <input 
             type="text" 
             placeholder="Buscar Clubs en tu zona" 
-            className="bg-transparent border-none outline-none text-base text-text-primary w-full placeholder:text-text-secondary/80 font-medium"
+            className="bg-transparent border-none outline-none text-[15px] text-text-primary w-full placeholder:text-text-secondary font-medium"
             readOnly
           />
         </div>
@@ -70,7 +70,7 @@ export function AppStoreHome() {
       <Carousel title="Ciudades Populares" subtitle="Explora por ubicación">
         {["Barcelona", "Madrid", "Valencia", "Alicante"].map((city, idx) => (
           <div key={idx} className="w-[140px] shrink-0 snap-start">
-            <div className="w-full h-[180px] bg-background-secondary rounded-2xl overflow-hidden relative shadow-sm">
+            <div className="w-full h-[180px] bg-background-secondary rounded-2xl overflow-hidden relative">
                <img src={`https://images.unsplash.com/photo-1559815024-11f81dfca8d4?q=80&w=400&auto=format&fit=crop&sig=${idx}`} className="w-full h-full object-cover" alt={city} />
                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                <span className="absolute bottom-4 left-4 text-white font-bold text-lg">{city}</span>
@@ -121,7 +121,7 @@ export function AppStoreHome() {
         </div>
         <div className="grid grid-cols-2 gap-3">
           {["Sativa", "Indica", "Híbridas", "Extractos", "Comestibles", "Eventos"].map((cat) => (
-            <div key={cat} className="bg-background-secondary rounded-xl py-3 px-4 flex items-center justify-between shadow-sm active:scale-95 transition-transform">
+            <div key={cat} className="bg-background-secondary rounded-xl py-3 px-4 flex items-center justify-between active:scale-95 transition-transform">
               <span className="font-semibold text-text-primary text-sm">{cat}</span>
               <ChevronRight size={16} className="text-text-secondary" />
             </div>
@@ -136,13 +136,13 @@ export function AppStoreHome() {
             Mapa
           </h2>
         </div>
-        <div className="w-full h-[250px] bg-gray-200 rounded-3xl overflow-hidden relative shadow-md border border-border-subtle">
+        <div className="w-full h-[250px] bg-gray-200 rounded-3xl overflow-hidden relative">
           {/* Mocked Map Background */}
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-60 mix-blend-multiply" />
           <div className="absolute inset-0 bg-black/10" />
           
           <div className="absolute inset-0 flex items-center justify-center">
-            <button className="bg-white text-text-primary font-bold text-sm px-6 py-3 rounded-full uppercase tracking-wide shadow-xl flex items-center gap-2 hover:scale-105 transition-transform">
+            <button className="bg-white text-text-primary font-bold text-sm px-6 py-3 rounded-full uppercase tracking-wide flex items-center gap-2 hover:scale-105 transition-transform">
               <MapIcon size={18} />
               Abrir Mapa
             </button>
