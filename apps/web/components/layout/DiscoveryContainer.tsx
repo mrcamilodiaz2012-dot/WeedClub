@@ -88,7 +88,7 @@ export function DiscoveryContainer({ initialLat, initialLon, initialZoom = 13 }:
               className={cn(
                 "px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors",
                 activeCategory === cat.id 
-                  ? "bg-black text-white" 
+                  ? "bg-[#6be86e] text-black" 
                   : "bg-white border border-gray-200 text-gray-600 hover:border-gray-300"
               )}
             >

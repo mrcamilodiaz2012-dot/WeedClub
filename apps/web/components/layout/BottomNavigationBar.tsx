@@ -31,7 +31,7 @@ export function BottomNavigationBar({ activeTab, onTabChange }: BottomNavigation
         {/* Center Search Button (Apple Style) */}
         <button 
           onClick={() => onTabChange('map')}
-          className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-900 text-white shadow-md active:scale-95 transition-transform"
+          className="flex items-center justify-center w-10 h-10 rounded-full bg-[#6be86e] text-black shadow-md active:scale-95 transition-transform"
         >
           <Search size={18} strokeWidth={2.5} />
         </button>
