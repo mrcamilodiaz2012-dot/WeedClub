@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { motion, useAnimation, useDragControls, PanInfo } from 'framer-motion';
+import { motion, useAnimation, PanInfo } from 'framer-motion';
 import { Search, SlidersHorizontal } from 'lucide-react';
 import { ClubCard, ClubCardSkeleton } from '../clubs/ClubCard';
 import { cn } from '@/utils/cn';
@@ -24,7 +24,6 @@ const CATEGORIES = [
 
 export function BottomSheet({ clubs, isLoading, activeCategory, setActiveCategory, onSelectClub }: BottomSheetProps) {
   const controls = useAnimation();
-  const dragControls = useDragControls();
   const [isExpanded, setIsExpanded] = React.useState(false);
 
   const snapPoints = {
@@ -59,11 +58,10 @@ export function BottomSheet({ clubs, isLoading, activeCategory, setActiveCategor
       {/* Drag Handle Area */}
       <div 
         className="w-full flex justify-center py-3 cursor-grab active:cursor-grabbing touch-none shrink-0"
-        onPointerDown={(e) => dragControls.start(e)}
+        onPointerDown={(e) => controls.start(e as unknown as React.PointerEvent<HTMLDivElement>)}
       >
         <motion.div 
           drag="y"
-          dragControls={dragControls}
           dragConstraints={{ top: 0, bottom: 0 }}
           dragElastic={0}
           onDragEnd={handleDragEnd}
