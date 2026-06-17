@@ -5,7 +5,8 @@ export type EventName =
   | 'search' 
   | 'filter_applied' 
   | 'city_visit' 
-  | 'claim_started';
+  | 'claim_started'
+  | 'app_store_visit';
 
 export const trackEvent = (eventName: EventName, properties?: Record<string, any>) => {
   // TODO: Implementar Mixpanel / PostHog / Google Analytics
