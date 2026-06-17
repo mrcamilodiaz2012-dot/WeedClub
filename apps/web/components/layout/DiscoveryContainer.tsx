@@ -1,7 +1,8 @@
 'use client';
 
 import * as React from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+import Image from 'next/image';
 import { useClubsMap } from '@/lib/hooks/useClubsMap';
 import { ClubCard, ClubCardSkeleton } from '../clubs/ClubCard';
 import { BottomNavigationBar } from './BottomNavigationBar';
@@ -49,7 +50,15 @@ export function DiscoveryContainer({ initialLat, initialLon, initialZoom = 13 }:
       {/* App Hero / Header */}
       <header className="sticky top-0 z-40 bg-white border-b border-gray-100 shadow-sm px-4 pt-safe">
         <div className="flex items-center justify-between py-3">
-          <h1 className="text-2xl font-display font-bold tracking-tight text-black">Explorar</h1>
+          <div className="relative w-32 h-8">
+            <Image 
+              src="/logos/logo.svg" 
+              alt="WeedClub Logo" 
+              fill 
+              className="object-contain object-left"
+              priority
+            />
+          </div>
           <button className="p-2 text-gray-600 hover:bg-gray-100 rounded-full transition">
             <SlidersHorizontal size={20} />
           </button>
