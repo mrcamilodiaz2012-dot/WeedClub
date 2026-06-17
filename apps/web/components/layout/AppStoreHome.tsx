@@ -17,10 +17,6 @@ export function AppStoreHome() {
             <span className="text-text-primary">Club</span>
           </span>
         </div>
-        
-        <h1 className="text-3xl font-display font-black tracking-[0.2em] text-text-primary text-center absolute left-1/2 -translate-x-1/2 mt-1">
-          CLUBS
-        </h1>
 
         <div className="flex items-center gap-4">
           <button className="flex items-center justify-center text-[#00AA6C] hover:opacity-80 transition-opacity">
