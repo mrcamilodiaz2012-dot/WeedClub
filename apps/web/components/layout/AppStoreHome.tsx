@@ -11,7 +11,8 @@ export function AppStoreHome() {
     <div className="w-full h-full pb-32 overflow-y-auto bg-background-base">
       {/* Top Header (Not Sticky) */}
       <div className="px-5 pt-12 pb-2 bg-background-base flex items-center justify-between relative">
-        <div className="flex items-center">
+        <div className="flex items-center gap-1.5">
+          <img src="/logo2.svg" alt="WeedClub" className="w-[28px] h-[28px] mt-0.5" />
           <span className="font-display font-black text-[28px] tracking-tighter">
             <span className="text-[#00E676]">Weed</span>
             <span className="text-text-primary">Club</span>
