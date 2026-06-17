@@ -50,7 +50,7 @@ export function DiscoveryContainer({ initialLat, initialLon, initialZoom = 13 }:
       {/* App Hero / Header */}
       <header className="sticky top-0 z-40 bg-white border-b border-gray-100 shadow-sm px-4 pt-safe">
         <div className="flex items-center justify-between py-3 relative">
-          <div className="relative w-8 h-8">
+          <div className="relative w-10 h-10">
             <Image 
               src="/logos/logo2.svg" 
               alt="WeedClub Isotipo" 
@@ -59,11 +59,11 @@ export function DiscoveryContainer({ initialLat, initialLon, initialZoom = 13 }:
               priority
             />
           </div>
-          <h1 className="absolute left-1/2 -translate-x-1/2 text-lg font-display font-bold tracking-tight text-gray-900">
+          <h1 className="absolute left-1/2 -translate-x-1/2 text-xl font-display font-bold tracking-tight text-gray-900">
             Weed Clubs
           </h1>
           <button className="p-2 text-gray-600 hover:bg-gray-100 rounded-full transition">
-            <Search size={20} />
+            <Search size={24} />
           </button>
         </div>
 
