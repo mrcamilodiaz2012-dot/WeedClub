@@ -44,7 +44,7 @@ export function AppListItem({
           </div>
 
           <div className="flex flex-col items-center ml-4">
-            <button className="bg-background-secondary hover:bg-gray-200 text-blue-500 font-bold text-sm px-5 py-1.5 rounded-full uppercase tracking-wide">
+            <button className="bg-[#2C2C2E] hover:bg-[#3A3A3C] text-blue-500 font-bold text-sm px-5 py-1.5 rounded-full uppercase tracking-wide transition-colors">
               VER
             </button>
             {verified && (

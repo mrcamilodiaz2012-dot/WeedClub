@@ -2,14 +2,14 @@
 
 @theme {
   /* Colors */
-  --color-brand-primary: #000000;
-  --color-brand-accent: #00E676; /* Trustworthy TripAdvisor-style green */
-  --color-background-base: #FFFFFF;
-  --color-background-secondary: #F3F4F6;
-  --color-background-dark: #09090B;
-  --color-text-primary: #18181B;
-  --color-text-secondary: #52525B;
-  --color-border-subtle: #E4E4E7;
+  --color-brand-primary: #FFFFFF;
+  --color-brand-accent: #00E676; /* Vibrant Fluorescent Green */
+  --color-background-base: #000000;
+  --color-background-secondary: #1C1C1E;
+  --color-background-dark: #000000;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #8E8E93;
+  --color-border-subtle: #2C2C2E;
   
   --color-status-error: #EF4444;
   --color-status-warning: #F59E0B;

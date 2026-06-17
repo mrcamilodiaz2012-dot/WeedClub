@@ -23,7 +23,7 @@ export function AppStoreHome() {
           <button className="flex items-center justify-center text-[#00E676] hover:opacity-80 transition-opacity">
             <Heart size={30} strokeWidth={2.5} className="fill-[#00E676]" />
           </button>
-          <button className="w-9 h-9 rounded-full bg-background-secondary flex items-center justify-center text-text-primary hover:bg-gray-200 transition-colors">
+          <button className="w-9 h-9 rounded-full bg-background-secondary flex items-center justify-center text-text-primary hover:bg-[#2C2C2E] transition-colors">
             <UserCircle size={24} strokeWidth={2} />
           </button>
         </div>
@@ -141,13 +141,13 @@ export function AppStoreHome() {
             Mapa
           </h2>
         </div>
-        <div className="w-full h-[250px] bg-gray-200 rounded-3xl overflow-hidden relative">
+        <div className="w-full h-[250px] bg-background-secondary rounded-3xl overflow-hidden relative">
           {/* Mocked Map Background */}
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-60 mix-blend-multiply" />
-          <div className="absolute inset-0 bg-black/10" />
+          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-40 mix-blend-screen" />
+          <div className="absolute inset-0 bg-black/40" />
           
           <div className="absolute inset-0 flex items-center justify-center">
-            <button className="bg-white text-text-primary font-bold text-sm px-6 py-3 rounded-full uppercase tracking-wide flex items-center gap-2 hover:scale-105 transition-transform">
+            <button className="bg-[#2C2C2E] text-white font-bold text-sm px-6 py-3 rounded-full uppercase tracking-wide flex items-center gap-2 hover:scale-105 transition-transform">
               <MapIcon size={18} />
               Abrir Mapa
             </button>
