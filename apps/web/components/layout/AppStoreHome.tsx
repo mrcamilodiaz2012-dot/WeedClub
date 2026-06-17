@@ -30,8 +30,8 @@ export function AppStoreHome() {
 
       {/* Search Bar (Sticky) */}
       <div className="px-5 py-3 sticky top-0 bg-background-base z-40">
-        <div className="w-full h-[54px] bg-background-secondary rounded-full flex items-center px-5 gap-3 border-[1.5px] border-[#00E676] transition-colors">
-          <Search size={22} className="text-[#00E676]" />
+        <div className="w-full h-[54px] bg-background-secondary rounded-full flex items-center px-5 gap-3">
+          <Search size={22} className="text-text-secondary" />
           <input 
             type="text" 
             placeholder="Buscar Clubs en tu zona" 
