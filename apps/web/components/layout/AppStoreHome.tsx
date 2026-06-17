@@ -11,27 +11,27 @@ export function AppStoreHome() {
     <div className="w-full h-full pb-32 overflow-y-auto bg-background-base">
       {/* Top Header (Not Sticky) */}
       <div className="px-5 pt-12 pb-2 bg-background-base flex items-center justify-between relative">
-        <div className="w-10 h-10 flex items-center justify-center">
-          <img src="/logo2.svg" alt="WeedClub Logo" className="w-8 h-8" />
+        <div className="w-14 h-14 flex items-center justify-center">
+          <img src="/logo2.svg" alt="WeedClub Logo" className="w-11 h-11" />
         </div>
         
-        <h1 className="text-xl font-display font-black tracking-[0.2em] text-text-primary text-center absolute left-1/2 -translate-x-1/2">
+        <h1 className="text-3xl font-display font-black tracking-[0.2em] text-text-primary text-center absolute left-1/2 -translate-x-1/2 mt-1">
           CLUBS
         </h1>
 
-        <button className="w-10 h-10 rounded-full bg-background-secondary flex items-center justify-center text-[#00AA6C] hover:bg-gray-200 transition-colors">
-          <Heart size={20} strokeWidth={2.5} className="fill-[#00AA6C]" />
+        <button className="flex items-center justify-center text-[#00AA6C] hover:opacity-80 transition-opacity">
+          <Heart size={30} strokeWidth={2.5} className="fill-[#00AA6C]" />
         </button>
       </div>
 
       {/* Search Bar (Sticky) */}
       <div className="px-5 py-3 sticky top-0 bg-background-base/95 backdrop-blur-xl z-40">
-        <div className="w-full h-[36px] bg-background-secondary rounded-lg flex items-center px-3 gap-2 border-[1.5px] border-[#00AA6C]/30 focus-within:border-[#00AA6C] transition-colors">
-          <Search size={18} className="text-[#00AA6C]" />
+        <div className="w-full h-[54px] bg-background-secondary rounded-full flex items-center px-5 gap-3 border-[1.5px] border-[#00AA6C]/30 focus-within:border-[#00AA6C] transition-colors shadow-sm">
+          <Search size={22} className="text-[#00AA6C]" />
           <input 
             type="text" 
             placeholder="Buscar Clubs en tu zona" 
-            className="bg-transparent border-none outline-none text-[15px] text-text-primary w-full placeholder:text-text-secondary font-medium"
+            className="bg-transparent border-none outline-none text-[17px] text-text-primary w-full placeholder:text-text-secondary font-medium"
             readOnly
           />
         </div>
