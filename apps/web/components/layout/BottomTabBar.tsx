@@ -17,7 +17,7 @@ export function BottomTabBar() {
 
 function TabItem({ icon, label, active = false }: { icon: React.ReactNode; label: string; active?: boolean }) {
   return (
-    <button className={`flex flex-col items-center gap-1 w-16 ${active ? 'text-blue-500' : 'text-text-secondary hover:text-text-primary'}`}>
+    <button className={`flex flex-col items-center gap-1 w-16 ${active ? 'text-[#00E676]' : 'text-text-secondary hover:text-text-primary'}`}>
       <div className={active ? 'stroke-[2.5px]' : 'stroke-2'}>
         {icon}
       </div>

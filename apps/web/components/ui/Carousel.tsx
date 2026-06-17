@@ -25,7 +25,7 @@ export function Carousel({ title, subtitle, children }: CarouselProps) {
               </h2>
             )}
           </div>
-          <button className="text-blue-500 font-semibold text-sm">See All</button>
+          <button className="text-[#00E676] font-semibold text-sm hover:opacity-80 transition-opacity">Ver Todos</button>
         </div>
       )}
       <div className="w-full overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4">
