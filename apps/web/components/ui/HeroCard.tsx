@@ -7,18 +7,18 @@ interface HeroCardProps {
   subtitle: string;
   title: string;
   imageSrc: string;
-  appName: string;
-  appSubtitle: string;
-  appIconSrc?: string;
+  clubName: string;
+  clubSubtitle: string;
+  clubIconSrc?: string;
 }
 
 export function HeroCard({
   subtitle,
   title,
   imageSrc,
-  appName,
-  appSubtitle,
-  appIconSrc,
+  clubName,
+  clubSubtitle,
+  clubIconSrc,
 }: HeroCardProps) {
   return (
     <motion.div
@@ -45,21 +45,21 @@ export function HeroCard({
 
       <div className="mt-auto" />
 
-      {/* Bottom App Info */}
+      {/* Bottom Club Info */}
       <div className="relative z-10 p-4 pb-5 flex items-center gap-3 w-full bg-black/20 backdrop-blur-md">
         <div className="w-10 h-10 rounded-lg overflow-hidden bg-white/20 shrink-0">
-          {appIconSrc ? (
-            <img src={appIconSrc} alt={appName} className="w-full h-full object-cover" />
+          {clubIconSrc ? (
+            <img src={clubIconSrc} alt={clubName} className="w-full h-full object-cover" />
           ) : (
             <div className="w-full h-full bg-gradient-to-tr from-brand-accent to-emerald-400" />
           )}
         </div>
         <div className="flex flex-col flex-1">
-          <span className="text-white font-semibold text-sm leading-tight">{appName}</span>
-          <span className="text-white/70 text-xs">{appSubtitle}</span>
+          <span className="text-white font-semibold text-sm leading-tight">{clubName}</span>
+          <span className="text-white/70 text-xs">{clubSubtitle}</span>
         </div>
         <button className="bg-white/20 backdrop-blur-md hover:bg-white/30 text-white font-bold text-sm px-4 py-1.5 rounded-full uppercase tracking-wide">
-          GET
+          VER
         </button>
       </div>
     </motion.div>

@@ -1,16 +1,16 @@
 "use client";
 
 import React from "react";
-import { LayoutGrid, Gamepad2, Search, Zap, Layers } from "lucide-react";
+import { LayoutGrid, MapPin, Layers, Heart, Search } from "lucide-react";
 
 export function BottomTabBar() {
   return (
     <div className="fixed bottom-0 left-0 right-0 h-[84px] bg-background-base/90 backdrop-blur-xl border-t border-border-subtle flex items-start justify-around pt-2 px-2 z-50">
-      <TabItem icon={<LayoutGrid size={24} />} label="Today" active />
-      <TabItem icon={<Gamepad2 size={24} />} label="Games" />
-      <TabItem icon={<Layers size={24} />} label="Apps" />
-      <TabItem icon={<Zap size={24} />} label="Arcade" />
-      <TabItem icon={<Search size={24} />} label="Search" />
+      <TabItem icon={<LayoutGrid size={24} />} label="Hoy" active />
+      <TabItem icon={<MapPin size={24} />} label="Cerca" />
+      <TabItem icon={<Layers size={24} />} label="Explorar" />
+      <TabItem icon={<Heart size={24} />} label="Guardados" />
+      <TabItem icon={<Search size={24} />} label="Buscar" />
     </div>
   );
 }
