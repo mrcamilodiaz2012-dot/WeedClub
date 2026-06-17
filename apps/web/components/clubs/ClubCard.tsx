@@ -18,10 +18,8 @@ interface ClubCardProps {
 }
 
 export function ClubCard({ club, isSelected, isHovered, onClick, onMouseEnter, onMouseLeave }: ClubCardProps) {
-  let coverUrl = club.cover_image_url || `https://picsum.photos/seed/${club.id}/400/300`;
-  if (coverUrl.includes('source.unsplash.com')) {
-    coverUrl = `https://picsum.photos/seed/${club.id}/400/300`;
-  }
+  // Usamos una URL estática segura de images.unsplash.com para que funcione siempre y al instante
+  const coverUrl = 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=400';
   const isOpen = club.status === 'active'; // Lógica simplificada por ahora
   const isPremium = club.subscription_tier === 'premium';
 
