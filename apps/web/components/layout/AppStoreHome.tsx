@@ -45,7 +45,7 @@ export function AppStoreHome() {
       {/* Top Header (Not Sticky) */}
       <div className="px-5 pt-12 pb-2 bg-background-base flex items-center justify-between relative">
         <div className="flex items-center z-10">
-          <img src="/logo3.svg" alt="WeedClub" className="h-[45px] w-auto mt-0.5" />
+          <img src="/logo3.svg" alt="WeedClub" className="h-[40px] w-auto mt-0.5" />
         </div>
 
         {/* Location Selector (Centered) */}
