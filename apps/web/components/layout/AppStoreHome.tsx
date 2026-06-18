@@ -4,12 +4,14 @@ import React from "react";
 import { HeroCard } from "@/components/ui/HeroCard";
 import { Carousel } from "@/components/ui/Carousel";
 import { AppListItem } from "@/components/ui/AppListItem";
-import { Search, Map as MapIcon, ChevronRight, Heart, UserCircle } from "lucide-react";
+import { Search, Map as MapIcon, ChevronRight, ChevronDown, Heart, UserCircle } from "lucide-react";
 import { useState } from "react";
-import { LocationSearch, type Location } from "@/components/ui/LocationSearch";
+import { type Location } from "@/components/ui/LocationSearch";
+import { LocationModal } from "@/components/ui/LocationModal";
 
 export function AppStoreHome() {
   const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
+  const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
 
   const MOCK_CLUBS = [
     { id: 1, name: "Green Leaf Club 1", city: "Madrid", imgSig: 1 },
@@ -42,14 +44,25 @@ export function AppStoreHome() {
     <div className="w-full h-full pb-32 overflow-y-auto bg-background-base">
       {/* Top Header (Not Sticky) */}
       <div className="px-5 pt-12 pb-2 bg-background-base flex items-center justify-between relative">
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-1.5 z-10">
           <img src="/logo2.svg" alt="WeedClub" className="w-[28px] h-[28px] mt-0.5" />
           <span className="font-display font-black text-[28px] tracking-tighter text-white">
             Club
           </span>
         </div>
 
-        <div className="flex items-center gap-4">
+        {/* Location Selector (Centered) */}
+        <div className="absolute inset-0 flex items-center justify-center pt-10 pointer-events-none">
+          <button 
+            onClick={() => setIsLocationModalOpen(true)}
+            className="pointer-events-auto flex items-center gap-1 text-text-primary hover:opacity-80 transition-opacity"
+          >
+            <span className="font-bold text-[17px]">{selectedLocation ? selectedLocation.name : "Ubicación"}</span>
+            <ChevronDown size={20} className="text-text-primary mt-0.5" />
+          </button>
+        </div>
+
+        <div className="flex items-center gap-4 z-10">
           <button className="flex items-center justify-center text-[#00E676] hover:opacity-80 transition-opacity">
             <Heart size={30} strokeWidth={2.5} className="fill-[#00E676]" />
           </button>
@@ -61,10 +74,14 @@ export function AppStoreHome() {
 
       {/* Search Bar (Sticky) */}
       <div className="px-5 py-3 sticky top-0 bg-background-base z-40">
-        <LocationSearch 
-          selectedLocation={selectedLocation}
-          onLocationSelect={setSelectedLocation}
-        />
+        <div className="w-full h-[54px] bg-background-secondary rounded-full flex items-center px-5 gap-3 border border-transparent focus-within:border-border-subtle transition-colors">
+          <Search size={22} className="text-text-secondary shrink-0" />
+          <input 
+            type="text" 
+            placeholder="Buscar Clubs, productos..." 
+            className="bg-transparent border-none outline-none text-[17px] text-text-primary w-full placeholder:text-text-secondary font-medium"
+          />
+        </div>
       </div>
 
       <div className="pt-6 px-5">
@@ -191,6 +208,12 @@ export function AppStoreHome() {
         </div>
       </div>
 
+      <LocationModal 
+        isOpen={isLocationModalOpen}
+        onClose={() => setIsLocationModalOpen(false)}
+        selectedLocation={selectedLocation}
+        onLocationSelect={setSelectedLocation}
+      />
     </div>
   );
 }
