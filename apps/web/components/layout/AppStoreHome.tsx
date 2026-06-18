@@ -99,7 +99,7 @@ export function AppStoreHome() {
       </div>
 
       {/* 2. Clubes destacados */}
-      <Carousel title="Clubes Destacados" subtitle="Selección especial para ti">
+      <Carousel title="Clubes Destacados">
         {featuredClubs.length > 0 ? featuredClubs.map((club) => (
           <div key={club.id} className="w-[280px] shrink-0 snap-start">
             <div className="w-full h-[200px] bg-background-secondary rounded-2xl overflow-hidden mb-3 relative">
@@ -121,7 +121,7 @@ export function AppStoreHome() {
       </Carousel>
 
       {/* 3. Ciudades populares */}
-      <Carousel title="Ciudades Populares" subtitle="Explora por ubicación">
+      <Carousel title="Ciudades Populares">
         {["Barcelona", "Madrid", "Valencia", "Alicante"].map((city, idx) => (
           <div key={idx} className="w-[140px] shrink-0 snap-start">
             <div className="w-full h-[180px] bg-background-secondary rounded-2xl overflow-hidden relative">
@@ -134,7 +134,7 @@ export function AppStoreHome() {
       </Carousel>
 
       {/* 4. Nuevos clubes */}
-      <Carousel title="Nuevos Clubes" subtitle="Recién añadidos">
+      <Carousel title="Nuevos Clubes">
         {newClubs.length > 0 ? newClubs.map((club) => (
           <div key={club.id} className="w-[280px] shrink-0 snap-start">
             <div className="w-full h-[200px] bg-background-secondary rounded-2xl overflow-hidden mb-3 relative">

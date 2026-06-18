@@ -11,19 +11,12 @@ interface CarouselProps {
 export function Carousel({ title, subtitle, children }: CarouselProps) {
   return (
     <div className="mb-8 w-full">
-      {(title || subtitle) && (
+      {title && (
         <div className="px-5 mb-3 flex items-end justify-between">
           <div>
-            {subtitle && (
-              <h4 className="text-xs uppercase text-text-secondary font-bold tracking-wider mb-0.5">
-                {subtitle}
-              </h4>
-            )}
-            {title && (
-              <h2 className="text-2xl font-display font-bold text-text-primary">
-                {title}
-              </h2>
-            )}
+            <h2 className="text-2xl font-display font-bold text-text-primary">
+              {title}
+            </h2>
           </div>
           <button className="text-[#00E676] font-semibold text-sm hover:opacity-80 transition-opacity">Ver Todos</button>
         </div>
