@@ -4,7 +4,7 @@ import React from "react";
 
 import { Carousel } from "@/components/ui/Carousel";
 import { AppListItem } from "@/components/ui/AppListItem";
-import { Search, Map as MapIcon, ChevronRight, ChevronDown, Heart, UserCircle } from "lucide-react";
+import { Search, Map as MapIcon, ChevronRight, ChevronDown, Bell, UserCircle } from "lucide-react";
 import { useState } from "react";
 import { type Location } from "@/components/ui/LocationSearch";
 import { LocationModal } from "@/components/ui/LocationModal";
@@ -60,8 +60,8 @@ export function AppStoreHome() {
         </div>
 
         <div className="flex items-center gap-4 z-10">
-          <button className="flex items-center justify-center text-[#00E676] hover:opacity-80 transition-opacity">
-            <Heart size={30} strokeWidth={2.5} className="fill-[#00E676]" />
+          <button className="flex items-center justify-center text-text-primary hover:opacity-80 transition-opacity">
+            <Bell size={26} strokeWidth={2} />
           </button>
           <button className="w-9 h-9 rounded-full bg-background-secondary flex items-center justify-center text-text-primary hover:bg-[#2C2C2E] transition-colors">
             <UserCircle size={24} strokeWidth={2} />

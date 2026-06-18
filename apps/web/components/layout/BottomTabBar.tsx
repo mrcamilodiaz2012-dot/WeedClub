@@ -8,7 +8,7 @@ export function BottomTabBar() {
     <div className="fixed bottom-6 left-4 right-4 h-[72px] bg-[#1C1C1E]/80 backdrop-blur-3xl rounded-[36px] shadow-[0_4px_24px_rgba(0,0,0,0.4)] flex items-center justify-around px-2 z-50">
       <TabItem icon={<Home size={24} />} label="Inicio" active />
       <TabItem icon={<Map size={24} />} label="Mapa" />
-      <TabItem icon={<Heart size={24} />} label="Guardados" />
+      <TabItem icon={<Heart size={24} />} label="Seguidos" />
       <TabItem icon={<Search size={24} />} label="Buscar" />
     </div>
   );
