@@ -85,12 +85,12 @@ export function AppStoreHome() {
       </div>
 
       {/* Categories Carousel */}
-      <div className="px-5 pt-4 pb-6 w-full overflow-x-auto hide-scrollbar">
-        <div className="flex items-center gap-3 w-max">
+      <div className="px-3 pt-3 pb-5 w-full overflow-x-auto hide-scrollbar">
+        <div className="flex items-center gap-4 w-max px-2">
           {["Clubes destacados", "Grow Shops", "Dispensarios", "Productos", "Marcas", "Eventos"].map((cat, i) => (
             <button 
               key={i}
-              className="px-5 py-2.5 rounded-full bg-background-secondary text-text-primary text-[15px] font-semibold whitespace-nowrap active:scale-95 transition-all border border-border-subtle hover:border-[#00E676]"
+              className="text-text-secondary hover:text-text-primary text-[14px] font-semibold whitespace-nowrap transition-colors"
             >
               {cat}
             </button>
