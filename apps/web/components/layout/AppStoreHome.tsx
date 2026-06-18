@@ -45,26 +45,26 @@ export function AppStoreHome() {
       {/* Top Header (Not Sticky) */}
       <div className="px-5 pt-12 pb-2 bg-background-base flex items-center justify-between relative">
         <div className="flex items-center z-10">
-          <img src="/logo4.svg" alt="WeedClub" className="h-[40px] w-auto mt-0.5" />
+          <img src="/logo4.svg" alt="WeedClub" className="h-[34px] w-auto" />
         </div>
 
         {/* Location Selector (Centered) */}
-        <div className="absolute inset-0 flex items-center justify-center pt-10 pointer-events-none">
+        <div className="absolute left-0 right-0 top-12 bottom-2 flex items-center justify-center pointer-events-none">
           <button 
             onClick={() => setIsLocationModalOpen(true)}
             className="pointer-events-auto flex items-center gap-1 text-text-primary hover:opacity-80 transition-opacity"
           >
-            <span className="font-bold text-[17px]">{selectedLocation ? selectedLocation.name : "Ubicación"}</span>
+            <span className="font-bold text-[16px]">{selectedLocation ? selectedLocation.name : "Ubicación"}</span>
             <ChevronDown size={20} className="text-text-primary mt-0.5" />
           </button>
         </div>
 
-        <div className="flex items-center gap-4 z-10">
+        <div className="flex items-center gap-3 z-10">
           <button className="flex items-center justify-center text-text-primary hover:opacity-80 transition-opacity">
-            <Bell size={26} strokeWidth={2} />
+            <Bell size={24} strokeWidth={2} />
           </button>
-          <button className="w-9 h-9 rounded-full bg-background-secondary flex items-center justify-center text-text-primary hover:bg-[#2C2C2E] transition-colors">
-            <UserCircle size={24} strokeWidth={2} />
+          <button className="w-8 h-8 rounded-full bg-background-secondary flex items-center justify-center text-text-primary hover:bg-[#2C2C2E] transition-colors">
+            <UserCircle size={20} strokeWidth={2} />
           </button>
         </div>
       </div>
