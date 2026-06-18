@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Home, Map, Heart, User } from "lucide-react";
+import { Home, Map, Heart, Search } from "lucide-react";
 
 export function BottomTabBar() {
   return (
@@ -9,7 +9,7 @@ export function BottomTabBar() {
       <TabItem icon={<Home size={24} />} label="Inicio" active />
       <TabItem icon={<Map size={24} />} label="Mapa" />
       <TabItem icon={<Heart size={24} />} label="Guardados" />
-      <TabItem icon={<User size={24} />} label="Perfil" />
+      <TabItem icon={<Search size={24} />} label="Buscar" />
     </div>
   );
 }
