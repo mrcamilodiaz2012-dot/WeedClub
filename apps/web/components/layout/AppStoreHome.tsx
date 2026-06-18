@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { HeroCard } from "@/components/ui/HeroCard";
+
 import { Carousel } from "@/components/ui/Carousel";
 import { AppListItem } from "@/components/ui/AppListItem";
 import { Search, Map as MapIcon, ChevronRight, ChevronDown, Heart, UserCircle } from "lucide-react";
@@ -84,15 +84,18 @@ export function AppStoreHome() {
         </div>
       </div>
 
-      <div className="pt-6 px-5">
-        {/* 1. Hero */}
-        <HeroCard
-          subtitle="DESTACADO"
-          title="Descubre WeedClub"
-          clubName="WeedClub España"
-          clubSubtitle="La comunidad líder en Europa"
-          imageSrc="https://images.unsplash.com/photo-1603909223429-69bb7101f420?q=80&w=2000&auto=format&fit=crop"
-        />
+      {/* Categories Carousel */}
+      <div className="px-5 pt-4 pb-6 w-full overflow-x-auto hide-scrollbar">
+        <div className="flex items-center gap-3 w-max">
+          {["Clubes destacados", "Grow Shops", "Dispensarios", "Productos", "Marcas", "Eventos"].map((cat, i) => (
+            <button 
+              key={i}
+              className="px-5 py-2.5 rounded-full bg-background-secondary text-text-primary text-[15px] font-semibold whitespace-nowrap active:scale-95 transition-all border border-border-subtle hover:border-[#00E676]"
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* 2. Clubes destacados */}
