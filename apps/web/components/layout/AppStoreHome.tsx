@@ -5,17 +5,47 @@ import { HeroCard } from "@/components/ui/HeroCard";
 import { Carousel } from "@/components/ui/Carousel";
 import { AppListItem } from "@/components/ui/AppListItem";
 import { Search, Map as MapIcon, ChevronRight, Heart, UserCircle } from "lucide-react";
+import { useState } from "react";
+import { LocationSearch, type Location } from "@/components/ui/LocationSearch";
 
 export function AppStoreHome() {
+  const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
+
+  const MOCK_CLUBS = [
+    { id: 1, name: "Green Leaf Club 1", city: "Madrid", imgSig: 1 },
+    { id: 2, name: "Green Leaf Club 2", city: "Barcelona", imgSig: 2 },
+    { id: 3, name: "Green Leaf Club 3", city: "Valencia", imgSig: 3 },
+    { id: 4, name: "Canna 4", city: "Madrid", imgSig: 4 },
+    { id: 5, name: "Canna 5", city: "Sevilla", imgSig: 5 },
+    { id: 6, name: "Canna 6", city: "Barcelona", imgSig: 6 },
+  ];
+
+  const filteredClubs = selectedLocation 
+    ? MOCK_CLUBS.filter(c => c.city.toLowerCase() === selectedLocation.name.toLowerCase() || c.city.toLowerCase() === selectedLocation.province?.toLowerCase())
+    : MOCK_CLUBS;
+
+  const featuredClubs = filteredClubs.slice(0, 3);
+  const newClubs = filteredClubs.slice(3, 6);
+
+  const MOCK_RATED = [
+    { id: 1, title: "The Green House", subtitle: "Asociación Cannábica", verified: true, city: "Barcelona" },
+    { id: 2, title: "CannaClub BCN", subtitle: "Club de fumadores", verified: false, city: "Barcelona" },
+    { id: 3, title: "Weed Lovers Madrid", subtitle: "Asociación Privada", verified: true, city: "Madrid" },
+    { id: 4, title: "High Society", subtitle: "Experiencia Premium", verified: false, city: "Valencia" },
+  ];
+  
+  const filteredRated = selectedLocation
+    ? MOCK_RATED.filter(c => c.city.toLowerCase() === selectedLocation.name.toLowerCase() || c.city.toLowerCase() === selectedLocation.province?.toLowerCase())
+    : MOCK_RATED;
+
   return (
     <div className="w-full h-full pb-32 overflow-y-auto bg-background-base">
       {/* Top Header (Not Sticky) */}
       <div className="px-5 pt-12 pb-2 bg-background-base flex items-center justify-between relative">
         <div className="flex items-center gap-1.5">
           <img src="/logo2.svg" alt="WeedClub" className="w-[28px] h-[28px] mt-0.5" />
-          <span className="font-display font-black text-[28px] tracking-tighter">
-            <span className="text-[#00E676]">Weed</span>
-            <span className="text-text-primary">Club</span>
+          <span className="font-display font-black text-[28px] tracking-tighter text-white">
+            Club
           </span>
         </div>
 
@@ -31,15 +61,10 @@ export function AppStoreHome() {
 
       {/* Search Bar (Sticky) */}
       <div className="px-5 py-3 sticky top-0 bg-background-base z-40">
-        <div className="w-full h-[54px] bg-background-secondary rounded-full flex items-center px-5 gap-3">
-          <Search size={22} className="text-text-secondary" />
-          <input 
-            type="text" 
-            placeholder="Buscar Clubs en tu zona" 
-            className="bg-transparent border-none outline-none text-[17px] text-text-primary w-full placeholder:text-text-secondary font-medium"
-            readOnly
-          />
-        </div>
+        <LocationSearch 
+          selectedLocation={selectedLocation}
+          onLocationSelect={setSelectedLocation}
+        />
       </div>
 
       <div className="pt-6 px-5">
@@ -55,20 +80,24 @@ export function AppStoreHome() {
 
       {/* 2. Clubes destacados */}
       <Carousel title="Clubes Destacados" subtitle="Selección especial para ti">
-        {[1, 2, 3].map((i) => (
-          <div key={i} className="w-[280px] shrink-0 snap-start">
+        {featuredClubs.length > 0 ? featuredClubs.map((club) => (
+          <div key={club.id} className="w-[280px] shrink-0 snap-start">
             <div className="w-full h-[200px] bg-background-secondary rounded-2xl overflow-hidden mb-3 relative">
-               <img src={`https://images.unsplash.com/photo-1603909223429-69bb7101f420?q=80&w=600&auto=format&fit=crop&sig=${i}`} className="w-full h-full object-cover" alt="" />
+               <img src={`https://images.unsplash.com/photo-1603909223429-69bb7101f420?q=80&w=600&auto=format&fit=crop&sig=${club.imgSig}`} className="w-full h-full object-cover" alt="" />
             </div>
             <div className="flex items-center gap-3">
                <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-brand-accent to-emerald-400 shrink-0" />
                <div className="flex flex-col">
-                 <span className="text-sm font-semibold">Green Leaf Club {i}</span>
-                 <span className="text-xs text-text-secondary">Club Social Privado</span>
+                 <span className="text-sm font-semibold">{club.name}</span>
+                 <span className="text-xs text-text-secondary">Club Social Privado • {club.city}</span>
                </div>
             </div>
           </div>
-        ))}
+        )) : (
+          <div className="w-full text-center py-8 text-text-secondary text-sm">
+            No se encontraron clubes en esta zona.
+          </div>
+        )}
       </Carousel>
 
       {/* 3. Ciudades populares */}
@@ -86,20 +115,24 @@ export function AppStoreHome() {
 
       {/* 4. Nuevos clubes */}
       <Carousel title="Nuevos Clubes" subtitle="Recién añadidos">
-        {[4, 5, 6].map((i) => (
-          <div key={i} className="w-[280px] shrink-0 snap-start">
+        {newClubs.length > 0 ? newClubs.map((club) => (
+          <div key={club.id} className="w-[280px] shrink-0 snap-start">
             <div className="w-full h-[200px] bg-background-secondary rounded-2xl overflow-hidden mb-3 relative">
-               <img src={`https://images.unsplash.com/photo-1603909223429-69bb7101f420?q=80&w=600&auto=format&fit=crop&sig=${i}`} className="w-full h-full object-cover" alt="" />
+               <img src={`https://images.unsplash.com/photo-1603909223429-69bb7101f420?q=80&w=600&auto=format&fit=crop&sig=${club.imgSig}`} className="w-full h-full object-cover" alt="" />
             </div>
             <div className="flex items-center gap-3">
                <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 shrink-0" />
                <div className="flex flex-col">
-                 <span className="text-sm font-semibold">Canna {i}</span>
-                 <span className="text-xs text-text-secondary">Apertura reciente</span>
+                 <span className="text-sm font-semibold">{club.name}</span>
+                 <span className="text-xs text-text-secondary">Apertura reciente • {club.city}</span>
                </div>
             </div>
           </div>
-        ))}
+        )) : (
+          <div className="w-full text-center py-8 text-text-secondary text-sm">
+            No se encontraron nuevos clubes.
+          </div>
+        )}
       </Carousel>
 
       {/* 5. Mejor valorados */}
@@ -110,10 +143,13 @@ export function AppStoreHome() {
           </h2>
         </div>
         <div className="flex flex-col gap-1">
-          <AppListItem title="The Green House" subtitle="Asociación Cannábica" verified />
-          <AppListItem title="CannaClub BCN" subtitle="Club de fumadores" />
-          <AppListItem title="Weed Lovers Madrid" subtitle="Asociación Privada" verified />
-          <AppListItem title="High Society" subtitle="Experiencia Premium" />
+          {filteredRated.length > 0 ? filteredRated.map(club => (
+            <AppListItem key={club.id} title={club.title} subtitle={`${club.subtitle} • ${club.city}`} verified={club.verified} />
+          )) : (
+            <div className="w-full text-center py-4 text-text-secondary text-sm">
+              No hay clubes valorados aquí aún.
+            </div>
+          )}
         </div>
       </div>
 
