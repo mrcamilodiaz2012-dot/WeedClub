@@ -17,14 +17,35 @@ export default async function ClubDetailPage({ params }: { params: Promise<{ slu
   const resolvedParams = await params;
   
   // Asumimos que el slug es el ID por ahora
-  const { data: club, error } = await supabase
+  let { data: club, error } = await supabase
     .from('clubs')
     .select('*')
     .eq('id', resolvedParams.slug)
     .single();
 
   if (error || !club) {
-    notFound();
+    // FALLBACK A MOCK CLUB PARA PRUEBAS (Permite clickear los del home y verlos)
+    const isMock = ['1', '2', '3', '4', '5', '6'].includes(resolvedParams.slug);
+    
+    if (isMock) {
+      club = {
+        id: resolvedParams.slug,
+        name: `Mock Club ${resolvedParams.slug}`,
+        slug: `mock-club-${resolvedParams.slug}`,
+        description: `Bienvenido al Club ${resolvedParams.slug}. Este es un perfil generado dinámicamente para probar la nueva arquitectura de perfil.`,
+        logo_url: `https://api.dicebear.com/7.x/shapes/svg?seed=MockClub${resolvedParams.slug}`,
+        cover_image_url: `https://images.unsplash.com/photo-1603909223429-69bb7101f420?q=80&w=1200&auto=format&fit=crop&sig=${resolvedParams.slug}`,
+        lat: 40.4168,
+        lng: -3.7038,
+        address: 'Calle Falsa 123',
+        city: ['Madrid', 'Barcelona', 'Valencia'][Number(resolvedParams.slug) % 3],
+        province: 'Provincia',
+        status: 'active',
+        subscription_tier: 'premium'
+      } as any;
+    } else {
+      notFound();
+    }
   }
 
   // Mock property para probar la vista condicional del banner
