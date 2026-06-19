@@ -6,10 +6,10 @@ import { Home, Map, Heart, Search } from "lucide-react";
 export function BottomTabBar() {
   return (
     <div className="fixed bottom-6 left-5 right-5 h-[64px] bg-white/90 backdrop-blur-3xl rounded-[32px] shadow-[0_4px_24px_rgba(0,0,0,0.08)] border border-gray-100 flex items-center justify-around px-2 z-50">
-      <TabItem icon={<Home size={22} />} label="Inicio" active />
-      <TabItem icon={<Map size={22} />} label="Mapa" />
-      <TabItem icon={<Heart size={22} />} label="Seguidos" />
-      <TabItem icon={<Search size={22} />} label="Buscar" />
+      <TabItem icon={<Home size={26} />} label="Inicio" active />
+      <TabItem icon={<Map size={26} />} label="Mapa" />
+      <TabItem icon={<Heart size={26} />} label="Seguidos" />
+      <TabItem icon={<Search size={26} />} label="Buscar" />
     </div>
   );
 }
