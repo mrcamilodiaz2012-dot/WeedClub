@@ -16,7 +16,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
   return (
     <div className="relative w-full">
       {/* Cover Image */}
-      <div className="w-full h-[260px] md:h-[360px] relative overflow-hidden rounded-b-[2rem] md:rounded-b-[2.5rem] md:rounded-t-3xl shadow-sm">
+      <div className="w-full h-[260px] md:h-[360px] relative overflow-hidden md:rounded-t-3xl">
         <Image
           src={coverUrl}
           alt={`${club.name} cover`}
@@ -25,10 +25,21 @@ export function ProfileHero({ club }: ProfileHeroProps) {
           priority
         />
         {/* Arc Browser style top shadow for better integration */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/40"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-transparent"></div>
         
+        {/* App Logo (Top Left) */}
+        <div className="absolute top-5 left-5 z-10">
+          <Image 
+            src="/logo4.svg" 
+            alt="WeedClub" 
+            width={120} 
+            height={34} 
+            className="h-7 w-auto md:h-8 drop-shadow-[0_2px_4px_rgba(255,255,255,0.5)]" 
+          />
+        </div>
+
         {/* Actions (Top Right) */}
-        <div className="absolute top-4 right-4 flex items-center gap-3">
+        <div className="absolute top-4 right-4 flex items-center gap-3 z-10">
           <button className="bg-white/20 backdrop-blur-md p-2.5 rounded-full text-white hover:bg-white/30 transition-all shadow-sm">
             <Share2 className="w-5 h-5" />
           </button>
@@ -36,6 +47,9 @@ export function ProfileHero({ club }: ProfileHeroProps) {
             <Bookmark className="w-5 h-5" />
           </button>
         </div>
+
+        {/* Bottom Curve Overlay (makes corners curve downwards) */}
+        <div className="absolute bottom-[-1px] left-0 right-0 h-8 bg-white rounded-t-[2rem] md:rounded-t-[3rem] z-10"></div>
       </div>
 
       {/* Identity Container (Superimposed) */}
