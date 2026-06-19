@@ -44,7 +44,7 @@ export function AppStoreHome() {
       {/* Top Header (Not Sticky) */}
       <div className="px-5 pt-12 pb-2 bg-background-base flex items-center justify-between relative">
         <div className="flex items-center z-10">
-          <img src="/logo4.svg" alt="WeedClub" className="h-[34px] w-auto invert" />
+          <img src="/logo4.svg" alt="WeedClub" className="h-[34px] w-auto" />
         </div>
 
         {/* Location Selector (Centered) */}
@@ -84,15 +84,15 @@ export function AppStoreHome() {
       <div className="px-5 pt-4 pb-6 w-full overflow-x-auto hide-scrollbar">
         <div className="flex items-start gap-4 w-max">
           {[
-            { name: "Destacados", color: "from-amber-400 to-orange-500", icon: "⭐" },
-            { name: "Flores", color: "from-emerald-400 to-green-500", icon: "🌿" },
-            { name: "Extractos", color: "from-purple-400 to-fuchsia-500", icon: "🍯" },
-            { name: "Edibles", color: "from-pink-400 to-rose-500", icon: "🍪" },
-            { name: "CBD", color: "from-cyan-400 to-blue-500", icon: "💧" },
-            { name: "Eventos", color: "from-indigo-400 to-violet-500", icon: "🎉" }
+            { name: "Destacados", color: "bg-amber-100", icon: "⭐" },
+            { name: "Flores", color: "bg-emerald-100", icon: "🌿" },
+            { name: "Extractos", color: "bg-purple-100", icon: "🍯" },
+            { name: "Edibles", color: "bg-rose-100", icon: "🍪" },
+            { name: "CBD", color: "bg-cyan-100", icon: "💧" },
+            { name: "Eventos", color: "bg-indigo-100", icon: "🎉" }
           ].map((cat, i) => (
             <button key={i} className="flex flex-col items-center gap-2 group">
-              <div className={`w-[68px] h-[68px] rounded-full bg-gradient-to-tr ${cat.color} flex items-center justify-center text-2xl overflow-hidden group-active:scale-95 transition-transform shadow-sm`}>
+              <div className={`w-[68px] h-[68px] rounded-full ${cat.color} flex items-center justify-center text-2xl overflow-hidden group-active:scale-95 transition-transform shadow-sm`}>
                 {cat.icon}
               </div>
               <span className="text-[12px] font-medium text-text-primary">{cat.name}</span>
