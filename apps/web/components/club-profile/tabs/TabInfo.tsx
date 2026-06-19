@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Club } from '@/types';
-import { MapPin, Clock, Globe, Instagram, Phone, Gamepad2, Coffee, Wifi } from 'lucide-react';
+import { MapPin, Clock, Globe, Camera, Phone, Gamepad2, Coffee, Wifi } from 'lucide-react';
 
 export function TabInfo({ club }: { club: Club }) {
   return (
@@ -75,7 +75,7 @@ export function TabInfo({ club }: { club: Club }) {
         <h3 className="text-lg font-bold text-gray-900 mb-4">Contacto</h3>
         <div className="flex flex-wrap gap-3">
           <a href="#" className="flex items-center gap-2 px-5 py-3 bg-gray-50 hover:bg-gray-100 rounded-xl text-sm font-medium transition-colors">
-            <Instagram className="w-4 h-4" />
+            <Camera className="w-4 h-4" />
             Instagram
           </a>
           <a href="#" className="flex items-center gap-2 px-5 py-3 bg-gray-50 hover:bg-gray-100 rounded-xl text-sm font-medium transition-colors">
