@@ -44,7 +44,7 @@ export function AppStoreHome() {
       {/* Top Header (Not Sticky) */}
       <div className="px-5 pt-12 pb-2 bg-background-base flex items-center justify-between relative">
         <div className="flex items-center z-10">
-          <img src="/logo4.svg" alt="WeedClub" className="h-[34px] w-auto" />
+          <img src="/logo4.svg" alt="WeedClub" className="h-[34px] w-auto invert" />
         </div>
 
         {/* Location Selector (Centered) */}
@@ -62,7 +62,7 @@ export function AppStoreHome() {
           <button className="flex items-center justify-center text-text-primary hover:opacity-80 transition-opacity">
             <Bell size={24} strokeWidth={2} />
           </button>
-          <button className="w-8 h-8 rounded-full bg-background-secondary flex items-center justify-center text-text-primary hover:bg-[#2C2C2E] transition-colors">
+          <button className="w-8 h-8 rounded-full bg-background-secondary flex items-center justify-center text-text-primary hover:bg-black/10 transition-colors">
             <UserCircle size={20} strokeWidth={2} />
           </button>
         </div>
