@@ -92,10 +92,8 @@ export function AppStoreHome() {
             { name: "Eventos", color: "from-indigo-400 to-violet-500", icon: "🎉" }
           ].map((cat, i) => (
             <button key={i} className="flex flex-col items-center gap-2 group">
-              <div className={`w-[68px] h-[68px] rounded-full bg-gradient-to-tr ${cat.color} p-[2px] overflow-hidden`}>
-                <div className="w-full h-full rounded-full bg-background-base flex items-center justify-center text-2xl group-active:scale-95 transition-transform">
-                  {cat.icon}
-                </div>
+              <div className={`w-[68px] h-[68px] rounded-full bg-gradient-to-tr ${cat.color} flex items-center justify-center text-2xl overflow-hidden group-active:scale-95 transition-transform shadow-sm`}>
+                {cat.icon}
               </div>
               <span className="text-[12px] font-medium text-text-primary">{cat.name}</span>
             </button>
