@@ -16,7 +16,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
   return (
     <div className="relative w-full">
       {/* Cover Image */}
-      <div className="w-full h-[280px] md:h-[380px] relative overflow-hidden md:rounded-b-3xl md:rounded-t-3xl">
+      <div className="w-full h-[260px] md:h-[360px] relative overflow-hidden rounded-b-[2rem] md:rounded-b-[2.5rem] md:rounded-t-3xl shadow-sm">
         <Image
           src={coverUrl}
           alt={`${club.name} cover`}
@@ -42,7 +42,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
       <div className="max-w-4xl mx-auto px-5 md:px-8 relative -mt-16 md:-mt-20">
         <div className="flex flex-col items-center justify-center text-center gap-4">
           {/* Logo */}
-          <div className="relative w-28 h-28 md:w-36 md:h-36 rounded-full border-4 border-white shadow-lg overflow-hidden bg-white shrink-0">
+          <div className="relative w-[120px] h-[120px] md:w-[150px] md:h-[150px] rounded-full border-4 border-white shadow-lg overflow-hidden bg-white shrink-0">
             <Image
               src={logoUrl}
               alt={`${club.name} logo`}
