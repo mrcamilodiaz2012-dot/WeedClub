@@ -27,8 +27,6 @@ export function AppStoreHome() {
     : MOCK_CLUBS;
 
   const featuredClubs = filteredClubs.slice(0, 3);
-  const newClubs = filteredClubs.slice(3, 6);
-
   const MOCK_RATED = [
     { id: 1, title: "The Green House", subtitle: "Asociación Cannábica", verified: true, city: "Barcelona" },
     { id: 2, title: "CannaClub BCN", subtitle: "Club de fumadores", verified: false, city: "Barcelona" },
@@ -81,79 +79,109 @@ export function AppStoreHome() {
         </div>
       </div>
 
-      {/* Categories Carousel */}
-      <div className="px-3 pt-3 pb-5 w-full overflow-x-auto hide-scrollbar">
-        <div className="flex items-center gap-4 w-max px-2">
-          {["Clubes destacados", "Grow Shops", "Dispensarios", "Productos", "Marcas", "Eventos"].map((cat, i) => (
-            <button 
-              key={i}
-              className="text-text-secondary hover:text-text-primary text-[14px] font-semibold whitespace-nowrap transition-colors"
-            >
-              {cat}
+      {/* 1. Categorías (Stories) */}
+      <div className="px-5 pt-4 pb-6 w-full overflow-x-auto hide-scrollbar">
+        <div className="flex items-start gap-4 w-max">
+          {[
+            { name: "Destacados", color: "from-amber-400 to-orange-500", icon: "⭐" },
+            { name: "Flores", color: "from-emerald-400 to-green-500", icon: "🌿" },
+            { name: "Extractos", color: "from-purple-400 to-fuchsia-500", icon: "🍯" },
+            { name: "Edibles", color: "from-pink-400 to-rose-500", icon: "🍪" },
+            { name: "CBD", color: "from-cyan-400 to-blue-500", icon: "💧" },
+            { name: "Eventos", color: "from-indigo-400 to-violet-500", icon: "🎉" }
+          ].map((cat, i) => (
+            <button key={i} className="flex flex-col items-center gap-2 group">
+              <div className={`w-[68px] h-[68px] rounded-full bg-gradient-to-tr ${cat.color} p-[2px] overflow-hidden`}>
+                <div className="w-full h-full rounded-full bg-background-base flex items-center justify-center text-2xl group-active:scale-95 transition-transform">
+                  {cat.icon}
+                </div>
+              </div>
+              <span className="text-[12px] font-medium text-text-primary">{cat.name}</span>
             </button>
           ))}
         </div>
       </div>
 
-      {/* 2. Clubes destacados */}
-      <Carousel title="Clubes Destacados">
-        {featuredClubs.length > 0 ? featuredClubs.map((club) => (
-          <div key={club.id} className="w-[280px] shrink-0 snap-start">
-            <div className="w-full h-[200px] bg-background-secondary rounded-2xl overflow-hidden mb-3 relative">
-               <img src={`https://images.unsplash.com/photo-1603909223429-69bb7101f420?q=80&w=600&auto=format&fit=crop&sig=${club.imgSig}`} className="w-full h-full object-cover" alt="" />
-            </div>
-            <div className="flex items-center gap-3">
-               <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-brand-accent to-emerald-400 shrink-0" />
-               <div className="flex flex-col">
-                 <span className="text-sm font-semibold">{club.name}</span>
-                 <span className="text-xs text-text-secondary">Club Social Privado • {club.city}</span>
+      {/* 2. Cerca de Ti (Rectángulos Verticales 4:5) */}
+      <Carousel title="Cerca de Ti">
+        {filteredClubs.length > 0 ? filteredClubs.map((club) => (
+          <div key={club.id} className="w-[200px] shrink-0 snap-start">
+            <div className="w-full h-[250px] bg-background-secondary rounded-2xl overflow-hidden mb-3 relative group">
+               <img src={`https://images.unsplash.com/photo-1603909223429-69bb7101f420?q=80&w=600&auto=format&fit=crop&sig=${club.imgSig}`} className="w-full h-full object-cover group-active:scale-105 transition-transform duration-500" alt="" />
+               <div className="absolute top-2 left-2 bg-black/60 backdrop-blur-md text-white text-[10px] font-bold px-2 py-1 rounded-full flex items-center gap-1">
+                 <MapIcon size={10} /> 1.2 km
                </div>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-[15px] font-bold text-text-primary leading-tight mb-1">{club.name}</span>
+              <span className="text-[13px] text-text-secondary">{club.city}</span>
             </div>
           </div>
         )) : (
           <div className="w-full text-center py-8 text-text-secondary text-sm">
-            No se encontraron clubes en esta zona.
+            No se encontraron clubes cerca de ti.
           </div>
         )}
       </Carousel>
 
-      {/* 3. Ciudades populares */}
+      {/* 3. Ciudades Populares (Cuadrados 1:1) */}
       <Carousel title="Ciudades Populares">
         {["Barcelona", "Madrid", "Valencia", "Alicante"].map((city, idx) => (
           <div key={idx} className="w-[140px] shrink-0 snap-start">
-            <div className="w-full h-[180px] bg-background-secondary rounded-2xl overflow-hidden relative">
-               <img src={`https://images.unsplash.com/photo-1559815024-11f81dfca8d4?q=80&w=400&auto=format&fit=crop&sig=${idx}`} className="w-full h-full object-cover" alt={city} />
-               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-               <span className="absolute bottom-4 left-4 text-white font-bold text-lg">{city}</span>
+            <div className="w-full aspect-square bg-background-secondary rounded-2xl overflow-hidden relative">
+               <img src={`https://images.unsplash.com/photo-1559815024-11f81dfca8d4?q=80&w=400&auto=format&fit=crop&sig=${idx}`} className="w-full h-full object-cover transition-transform duration-700 hover:scale-110" alt={city} />
+               <div className="absolute inset-0 bg-black/30" />
+               <span className="absolute inset-0 flex items-center justify-center text-white font-bold text-[17px] tracking-wide">{city}</span>
             </div>
           </div>
         ))}
       </Carousel>
 
-      {/* 4. Nuevos clubes */}
-      <Carousel title="Nuevos Clubes">
-        {newClubs.length > 0 ? newClubs.map((club) => (
-          <div key={club.id} className="w-[280px] shrink-0 snap-start">
-            <div className="w-full h-[200px] bg-background-secondary rounded-2xl overflow-hidden mb-3 relative">
-               <img src={`https://images.unsplash.com/photo-1603909223429-69bb7101f420?q=80&w=600&auto=format&fit=crop&sig=${club.imgSig}`} className="w-full h-full object-cover" alt="" />
-            </div>
-            <div className="flex items-center gap-3">
-               <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 shrink-0" />
-               <div className="flex flex-col">
-                 <span className="text-sm font-semibold">{club.name}</span>
-                 <span className="text-xs text-text-secondary">Apertura reciente • {club.city}</span>
-               </div>
-            </div>
-          </div>
-        )) : (
-          <div className="w-full text-center py-8 text-text-secondary text-sm">
-            No se encontraron nuevos clubes.
-          </div>
-        )}
-      </Carousel>
+      {/* 4. Banner para Propietarios (Edge-to-edge Pattern Breaker) */}
+      <div className="w-full bg-brand-primary text-white mt-8 mb-10 py-10 px-6 relative overflow-hidden">
+        <div className="absolute -right-10 -top-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+        <div className="absolute -left-10 -bottom-10 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+        <div className="relative z-10 flex flex-col items-start gap-3">
+          <h3 className="text-[22px] font-display font-bold leading-tight">¿Tienes un<br/>Club Cannábico?</h3>
+          <p className="text-white/90 text-[13px] max-w-[220px] mb-2 leading-relaxed">Únete a WeedClub y llega a miles de usuarios activos en tu ciudad de forma segura.</p>
+          <button className="bg-white text-brand-primary font-bold text-sm px-6 py-3 rounded-full shadow-lg active:scale-95 transition-transform">
+            Dar de alta mi club
+          </button>
+        </div>
+      </div>
 
-      {/* 5. Mejor valorados */}
-      <div className="px-5 mt-8 mb-4">
+      {/* 5. Clubes Destacados (Billboards 16:9 apilados verticalmente) */}
+      <div className="px-5 mt-2 mb-8">
+        <div className="flex items-end justify-between mb-5">
+          <h2 className="text-2xl font-display font-bold text-text-primary">
+            Clubes Destacados
+          </h2>
+        </div>
+        <div className="flex flex-col gap-8">
+          {featuredClubs.length > 0 ? featuredClubs.map((club) => (
+            <div key={club.id} className="w-full group cursor-pointer active:scale-[0.98] transition-transform">
+              <div className="w-full aspect-video bg-background-secondary rounded-2xl overflow-hidden mb-3 relative">
+                 <img src={`https://images.unsplash.com/photo-1603909223429-69bb7101f420?q=80&w=800&auto=format&fit=crop&sig=${club.imgSig + 10}`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="" />
+                 <div className="absolute top-3 right-3 bg-brand-accent text-white text-[10px] uppercase tracking-wider font-bold px-2.5 py-1.5 rounded-md shadow-md">
+                   Destacado
+                 </div>
+              </div>
+              <div className="flex items-start justify-between px-1">
+                 <div className="flex flex-col">
+                   <span className="text-lg font-bold text-text-primary mb-0.5">{club.name}</span>
+                   <span className="text-[13px] text-text-secondary">Club Social Privado • {club.city}</span>
+                 </div>
+                 <div className="w-8 h-8 rounded-full bg-background-secondary flex items-center justify-center">
+                   <ChevronRight size={18} className="text-text-secondary" />
+                 </div>
+              </div>
+            </div>
+          )) : null}
+        </div>
+      </div>
+
+      {/* 6. Mejor valorados (Listado denso) */}
+      <div className="px-5 mt-10 mb-8">
         <div className="flex items-end justify-between mb-4 border-b border-border-subtle pb-2">
           <h2 className="text-2xl font-display font-bold text-text-primary">
             Mejor valorados
@@ -167,44 +195,6 @@ export function AppStoreHome() {
               No hay clubes valorados aquí aún.
             </div>
           )}
-        </div>
-      </div>
-
-      {/* 6. Explorar por categorías */}
-      <div className="px-5 mt-10 mb-6">
-        <div className="flex items-end justify-between mb-4">
-          <h2 className="text-2xl font-display font-bold text-text-primary">
-            Explorar por categorías
-          </h2>
-        </div>
-        <div className="grid grid-cols-2 gap-3">
-          {["Sativa", "Indica", "Híbridas", "Extractos", "Comestibles", "Eventos"].map((cat) => (
-            <div key={cat} className="bg-background-secondary rounded-xl py-3 px-4 flex items-center justify-between active:scale-95 transition-transform">
-              <span className="font-semibold text-text-primary text-sm">{cat}</span>
-              <ChevronRight size={16} className="text-text-secondary" />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* 7. Mapa */}
-      <div className="px-5 mt-10 mb-8">
-        <div className="flex items-end justify-between mb-4">
-          <h2 className="text-2xl font-display font-bold text-text-primary">
-            Mapa
-          </h2>
-        </div>
-        <div className="w-full h-[250px] bg-background-secondary rounded-3xl overflow-hidden relative">
-          {/* Mocked Map Background */}
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-40 mix-blend-screen" />
-          <div className="absolute inset-0 bg-black/40" />
-          
-          <div className="absolute inset-0 flex items-center justify-center">
-            <button className="bg-[#2C2C2E] text-white font-bold text-sm px-6 py-3 rounded-full uppercase tracking-wide flex items-center gap-2 hover:scale-105 transition-transform">
-              <MapIcon size={18} />
-              Abrir Mapa
-            </button>
-          </div>
         </div>
       </div>
 
