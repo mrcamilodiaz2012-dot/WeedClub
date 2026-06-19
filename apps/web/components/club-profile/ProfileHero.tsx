@@ -48,16 +48,12 @@ export function ProfileHero({ club }: ProfileHeroProps) {
           </button>
         </div>
 
-        {/* Smooth Curve Overlay (caída a los lados) */}
-        <div className="absolute bottom-[-1px] left-0 w-full z-10 leading-none flex items-end">
-          <svg viewBox="0 0 1440 120" className="w-full h-[30px] md:h-[50px]" preserveAspectRatio="none">
-            <path d="M0,120 L1440,120 L1440,60 C1200,0 960,0 720,0 C480,0 240,0 0,60 Z" fill="#ffffff" />
-          </svg>
-        </div>
+        {/* Bottom Curve Overlay (Línea recta que cae en los bordes) */}
+        <div className="absolute bottom-[-1px] left-0 right-0 h-12 md:h-16 bg-white rounded-t-[3rem] md:rounded-t-[4rem] z-10"></div>
       </div>
 
       {/* Identity Container (Superimposed) */}
-      <div className="max-w-4xl mx-auto px-5 md:px-8 relative z-20 -mt-[90px] md:-mt-[125px]">
+      <div className="max-w-4xl mx-auto px-5 md:px-8 relative z-20 -mt-[108px] md:-mt-[139px]">
         <div className="flex flex-col items-center justify-center text-center gap-4">
           {/* Logo */}
           <div className="relative w-[120px] h-[120px] md:w-[150px] md:h-[150px] rounded-full border-4 border-white shadow-lg overflow-hidden bg-white shrink-0">
