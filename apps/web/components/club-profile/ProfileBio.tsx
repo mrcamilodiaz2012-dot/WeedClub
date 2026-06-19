@@ -13,7 +13,7 @@ export function ProfileBio({ description }: ProfileBioProps) {
   
   return (
     <div className="max-w-4xl mx-auto px-5 md:px-8 mt-6">
-      <div className="text-base text-gray-800 leading-relaxed max-w-2xl">
+      <div className="text-base text-gray-800 leading-relaxed max-w-2xl text-center mx-auto">
         <p className={!expanded && isLong ? "line-clamp-3" : ""}>
           {description || "Club social privado con un ambiente relajado y acceso exclusivo para socios. Un espacio seguro y confortable para compartir y disfrutar en comunidad."}
         </p>

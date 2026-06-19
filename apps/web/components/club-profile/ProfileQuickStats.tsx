@@ -18,7 +18,7 @@ export function ProfileQuickStats({ city }: ProfileQuickStatsProps) {
   return (
     <div className="max-w-4xl mx-auto px-5 md:px-8 mt-6">
       {/* Scrollable container for mobile, flex wrap for desktop */}
-      <div className="flex overflow-x-auto hide-scrollbar gap-3 pb-2 -mx-5 px-5 md:mx-0 md:px-0 md:flex-wrap">
+      <div className="flex overflow-x-auto hide-scrollbar gap-3 pb-2 -mx-5 px-5 md:mx-0 md:px-0 md:flex-wrap md:justify-center">
         {stats.map((stat, i) => (
           <div 
             key={i} 

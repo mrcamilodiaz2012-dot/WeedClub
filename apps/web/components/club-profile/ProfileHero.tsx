@@ -16,7 +16,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
   return (
     <div className="relative w-full">
       {/* Cover Image */}
-      <div className="w-full h-[250px] md:h-[350px] relative overflow-hidden md:rounded-b-3xl md:rounded-t-3xl">
+      <div className="w-full h-[280px] md:h-[380px] relative overflow-hidden md:rounded-b-3xl md:rounded-t-3xl">
         <Image
           src={coverUrl}
           alt={`${club.name} cover`}
@@ -40,9 +40,9 @@ export function ProfileHero({ club }: ProfileHeroProps) {
 
       {/* Identity Container (Superimposed) */}
       <div className="max-w-4xl mx-auto px-5 md:px-8 relative -mt-16 md:-mt-20">
-        <div className="flex flex-col md:flex-row md:items-end gap-4 md:gap-6">
+        <div className="flex flex-col items-center justify-center text-center gap-4">
           {/* Logo */}
-          <div className="relative w-28 h-28 md:w-36 md:h-36 rounded-[1.5rem] md:rounded-[2rem] border-4 border-white shadow-lg overflow-hidden bg-white shrink-0">
+          <div className="relative w-28 h-28 md:w-36 md:h-36 rounded-full border-4 border-white shadow-lg overflow-hidden bg-white shrink-0">
             <Image
               src={logoUrl}
               alt={`${club.name} logo`}
@@ -52,8 +52,8 @@ export function ProfileHero({ club }: ProfileHeroProps) {
           </div>
 
           {/* Info */}
-          <div className="flex-1 pb-1 md:pb-3">
-            <div className="flex items-center gap-2 flex-wrap mb-1">
+          <div className="w-full pb-1 md:pb-3">
+            <div className="flex items-center justify-center gap-2 flex-wrap mb-2">
               <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900">
                 {club.name}
               </h1>
@@ -66,7 +66,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
               )}
             </div>
             
-            <div className="flex items-center gap-3 text-sm md:text-base text-gray-600 font-medium">
+            <div className="flex items-center justify-center gap-3 text-sm md:text-base text-gray-600 font-medium">
               <span className="flex items-center gap-1.5">
                 <span className="w-2.5 h-2.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></span>
                 Abierto ahora
