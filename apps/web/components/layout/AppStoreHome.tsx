@@ -90,7 +90,7 @@ export function AppStoreHome() {
             { name: "Grow Shops", color: "bg-lime-100", icon: <img src="/iconos/grow.webp" alt="Grow Shops" className="w-11 h-11 object-contain opacity-90" /> },
             { name: "Nuevos", color: "bg-slate-100", icon: <img src="/iconos/new.webp" alt="Nuevos" className="w-11 h-11 object-contain opacity-90" /> },
             { name: "Tendencia", color: "bg-orange-100", icon: <img src="/iconos/fuego.webp" alt="Tendencia" className="w-11 h-11 object-contain opacity-90" /> },
-            { name: "Eventos", color: "bg-purple-100", icon: "🎪" }
+            { name: "Eventos", color: "bg-purple-100", icon: <img src="/iconos/eventos.webp" alt="Eventos" className="w-11 h-11 object-contain opacity-90" /> }
           ].map((cat, i) => (
             <button key={i} className="flex flex-col items-center gap-2 group">
               <div className={`w-[68px] h-[68px] rounded-full ${cat.color} flex items-center justify-center text-2xl overflow-hidden group-active:scale-95 transition-transform shadow-sm`}>
