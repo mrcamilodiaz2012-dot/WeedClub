@@ -16,7 +16,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
   return (
     <div className="relative w-full">
       {/* Cover Image */}
-      <div className="w-full h-[260px] md:h-[360px] relative overflow-hidden md:rounded-t-3xl">
+      <div className="w-full h-[280px] md:h-[380px] relative overflow-hidden rounded-b-[40px] md:rounded-b-[60px] shadow-sm">
         <Image
           src={coverUrl}
           alt={`${club.name} cover`}
@@ -24,8 +24,8 @@ export function ProfileHero({ club }: ProfileHeroProps) {
           className="object-cover"
           priority
         />
-        {/* Arc Browser style top shadow for better integration */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-transparent"></div>
+        {/* Subtle shadow overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/5"></div>
         
         {/* App Logo (Top Left) */}
         <div className="absolute top-5 left-5 z-10">
@@ -47,16 +47,13 @@ export function ProfileHero({ club }: ProfileHeroProps) {
             <Bookmark className="w-5 h-5" />
           </button>
         </div>
-
-        {/* Bottom Curve Overlay (Línea recta que cae en los bordes) */}
-        <div className="absolute bottom-[-1px] left-0 right-0 h-12 md:h-16 bg-white rounded-t-[3rem] md:rounded-t-[4rem] z-10"></div>
       </div>
 
       {/* Identity Container (Superimposed) */}
-      <div className="max-w-4xl mx-auto px-5 md:px-8 relative z-20 -mt-[108px] md:-mt-[139px]">
+      <div className="max-w-4xl mx-auto px-5 md:px-8 relative z-20 -mt-[60px] md:-mt-[75px]">
         <div className="flex flex-col items-center justify-center text-center gap-3">
           {/* Logo */}
-          <div className="relative w-[120px] h-[120px] md:w-[150px] md:h-[150px] rounded-full border-[2px] border-white shadow-[0_4px_16px_rgba(0,0,0,0.06)] overflow-hidden bg-white shrink-0 -mb-1">
+          <div className="relative w-[120px] h-[120px] md:w-[150px] md:h-[150px] rounded-full border-[2px] border-white shadow-[0_4px_16px_rgba(0,0,0,0.08)] overflow-hidden bg-white shrink-0 -mb-1">
             <Image
               src={logoUrl}
               alt={`${club.name} logo`}
