@@ -72,12 +72,6 @@ export function ProfileHero({ club }: ProfileHeroProps) {
                 {club.name}
               </h1>
               <BadgeCheck className="w-6 h-6 text-[#007AFF] shrink-0" />
-              {isPremium && (
-                <span className="inline-flex items-center gap-1 bg-gradient-to-r from-amber-200 to-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded-full shadow-sm">
-                  <Sparkles className="w-3 h-3" />
-                  PREMIUM
-                </span>
-              )}
             </div>
             
             <div className="flex items-center justify-center gap-3 text-sm md:text-base text-gray-600 font-medium">
