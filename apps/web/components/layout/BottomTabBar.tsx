@@ -22,12 +22,12 @@ export function BottomTabBar() {
         <div 
           className="absolute inset-0 bg-white/85 backdrop-blur-2xl rounded-[34px] shadow-[0_4px_24px_rgba(0,0,0,0.08)]" 
           style={{ 
-            WebkitMaskImage: 'radial-gradient(circle at 50% 22px, transparent 27px, black 28px)',
-            maskImage: 'radial-gradient(circle at 50% 22px, transparent 27px, black 28px)'
+            WebkitMaskImage: 'radial-gradient(circle at 50% 21px, transparent 24px, black 25px)',
+            maskImage: 'radial-gradient(circle at 50% 21px, transparent 24px, black 25px)'
           }}
         />
         {/* Dome perfectly filling the hole */}
-        <div className="absolute left-1/2 -translate-x-1/2 -top-[8px] w-[60px] h-[60px] bg-white/85 backdrop-blur-2xl rounded-full" />
+        <div className="absolute left-1/2 -translate-x-1/2 -top-[6px] w-[54px] h-[54px] bg-white/85 backdrop-blur-2xl rounded-full" />
       </div>
 
       <TabItem icon={<Home size={28} />} label="Inicio" href="/" active={isActive("/")} />
@@ -37,10 +37,10 @@ export function BottomTabBar() {
       <div className="relative flex flex-col items-center justify-center">
         <Link 
           href="/mapa"
-          className={`flex flex-col items-center gap-[2px] w-14 transition-colors -mt-3 ${isActive('/mapa') ? 'text-[#00C853]' : 'text-gray-500 hover:text-black'}`}
+          className={`flex flex-col items-center gap-[2px] w-14 transition-colors -mt-2.5 ${isActive('/mapa') ? 'text-[#00C853]' : 'text-gray-500 hover:text-black'}`}
         >
           <div className={`transition-all ${isActive('/mapa') ? 'stroke-[2.5px] scale-110' : 'stroke-2'}`}>
-            <Map size={34} />
+            <Map size={32} />
           </div>
           <span className="text-[10px] font-medium tracking-tight mt-[2px]">Mapa</span>
         </Link>
