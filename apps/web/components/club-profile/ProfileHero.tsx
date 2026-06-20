@@ -36,25 +36,25 @@ export function ProfileHero({ club }: ProfileHeroProps) {
         <div className="absolute top-4 left-4 z-10">
           <button 
             onClick={() => router.back()}
-            className="flex items-center gap-2.5 bg-white/20 backdrop-blur-xl pl-3 pr-3.5 py-2 rounded-full text-white hover:bg-white/30 transition-all border border-white/20 shadow-[0_4px_12px_rgba(0,0,0,0.1)]"
+            className="flex items-center gap-1.5 bg-white/30 backdrop-blur-md px-3 py-1.5 rounded-full text-white hover:bg-white/40 transition-all border border-white/40 shadow-[0_2px_8px_rgba(0,0,0,0.05)]"
           >
-            <ArrowLeft className="w-5 h-5" />
+            <ArrowLeft className="w-4 h-4" />
             <Image 
               src="/logos/logo2.svg" 
               alt="WeedClub" 
-              width={22} 
-              height={22} 
+              width={18} 
+              height={18} 
             />
           </button>
         </div>
 
         {/* Actions (Top Right) */}
-        <div className="absolute top-4 right-4 flex items-center gap-3 z-10">
-          <button className="bg-white/20 backdrop-blur-xl p-2.5 rounded-full text-white hover:bg-white/30 transition-all border border-white/20 shadow-[0_4px_12px_rgba(0,0,0,0.1)]">
-            <Share2 className="w-5 h-5" />
+        <div className="absolute top-4 right-4 flex items-center gap-2.5 z-10">
+          <button className="bg-white/30 backdrop-blur-md p-2 rounded-full text-white hover:bg-white/40 transition-all border border-white/40 shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
+            <Share2 className="w-4 h-4" />
           </button>
-          <button className="bg-white/20 backdrop-blur-xl p-2.5 rounded-full text-white hover:bg-white/30 transition-all border border-white/20 shadow-[0_4px_12px_rgba(0,0,0,0.1)]">
-            <Bookmark className="w-5 h-5" />
+          <button className="bg-white/30 backdrop-blur-md p-2 rounded-full text-white hover:bg-white/40 transition-all border border-white/40 shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
+            <Bookmark className="w-4 h-4" />
           </button>
         </div>
       </div>
