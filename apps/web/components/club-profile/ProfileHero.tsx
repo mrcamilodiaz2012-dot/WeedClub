@@ -36,7 +36,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
         <div className="absolute top-4 left-4 z-10">
           <button 
             onClick={() => router.back()}
-            className="flex items-center gap-2.5 bg-black/15 backdrop-blur-xl pl-3 pr-3.5 py-2 rounded-full text-white hover:bg-black/25 transition-all border border-white/10 shadow-[0_2px_8px_rgba(0,0,0,0.08)]"
+            className="flex items-center gap-2.5 bg-white/20 backdrop-blur-xl pl-3 pr-3.5 py-2 rounded-full text-white hover:bg-white/30 transition-all border border-white/20 shadow-[0_4px_12px_rgba(0,0,0,0.1)]"
           >
             <ArrowLeft className="w-5 h-5" />
             <Image 
@@ -44,17 +44,16 @@ export function ProfileHero({ club }: ProfileHeroProps) {
               alt="WeedClub" 
               width={22} 
               height={22} 
-              className="drop-shadow-[0_2px_8px_rgba(255,255,255,0.4)]" 
             />
           </button>
         </div>
 
         {/* Actions (Top Right) */}
         <div className="absolute top-4 right-4 flex items-center gap-3 z-10">
-          <button className="bg-black/15 backdrop-blur-xl p-2.5 rounded-full text-white hover:bg-black/25 transition-all border border-white/10 shadow-[0_2px_8px_rgba(0,0,0,0.08)]">
+          <button className="bg-white/20 backdrop-blur-xl p-2.5 rounded-full text-white hover:bg-white/30 transition-all border border-white/20 shadow-[0_4px_12px_rgba(0,0,0,0.1)]">
             <Share2 className="w-5 h-5" />
           </button>
-          <button className="bg-black/15 backdrop-blur-xl p-2.5 rounded-full text-white hover:bg-black/25 transition-all border border-white/10 shadow-[0_2px_8px_rgba(0,0,0,0.08)]">
+          <button className="bg-white/20 backdrop-blur-xl p-2.5 rounded-full text-white hover:bg-white/30 transition-all border border-white/20 shadow-[0_4px_12px_rgba(0,0,0,0.1)]">
             <Bookmark className="w-5 h-5" />
           </button>
         </div>
