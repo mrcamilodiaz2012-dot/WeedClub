@@ -21,22 +21,45 @@ export function ProfileContent({ club }: ProfileContentProps) {
         
         {/* Variedades Disponibles Section */}
         <section>
-          <h2 className="text-2xl font-display font-bold text-gray-900 mb-6 tracking-tight">
-            Variedades disponibles
-          </h2>
-          <div className="flex overflow-x-auto hide-scrollbar gap-4 pb-4 -mx-5 px-5 md:mx-0 md:px-0">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-              <div key={i} className="flex flex-col items-center gap-3 shrink-0 group cursor-pointer">
-                <div className="w-[84px] h-[84px] rounded-[22px] bg-emerald-50 flex items-center justify-center shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-emerald-100/50 group-hover:scale-105 transition-transform duration-300">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">
+              Variedades disponibles
+            </h2>
+            <button className="text-sm font-semibold text-[#007AFF] hover:opacity-80 transition-opacity">Ver todas</button>
+          </div>
+          <div className="flex overflow-x-auto hide-scrollbar gap-4 pb-6 -mx-5 px-5 md:mx-0 md:px-0">
+            {[
+              { id: 1, name: "Gelato 41", type: "Híbrida", thc: "24%", cbd: "< 1%", price: "12€/g", color: "text-purple-600" },
+              { id: 2, name: "Amnesia Haze", type: "Sativa", thc: "21%", cbd: "0.5%", price: "10€/g", color: "text-amber-600" },
+              { id: 3, name: "OG Kush", type: "Índica", thc: "22%", cbd: "1.2%", price: "11€/g", color: "text-emerald-600" },
+              { id: 4, name: "Gorilla Glue", type: "Híbrida", thc: "26%", cbd: "0.1%", price: "14€/g", color: "text-purple-600" },
+              { id: 5, name: "Lemon Skunk", type: "Sativa", thc: "18%", cbd: "2%", price: "9€/g", color: "text-amber-600" },
+            ].map((varie) => (
+              <div key={varie.id} className="w-[170px] shrink-0 bg-white rounded-[24px] border border-black/[0.04] shadow-[0_4px_20px_rgba(0,0,0,0.04)] overflow-hidden group cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300">
+                <div className="w-full h-[140px] flex items-center justify-center pt-4 relative bg-gradient-to-b from-gray-50/50 to-white">
                   <Image 
                     src="/iconos/flor.webp" 
-                    alt="Flor" 
-                    width={48} 
-                    height={48} 
-                    className="object-contain opacity-90 drop-shadow-sm" 
+                    alt={varie.name} 
+                    width={96} 
+                    height={96} 
+                    className="object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-500" 
                   />
+                  <div className="absolute top-3 left-3">
+                    <span className={`bg-white/90 backdrop-blur-md text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-full shadow-sm ${varie.color}`}>
+                      {varie.type}
+                    </span>
+                  </div>
                 </div>
-                <span className="text-[13px] font-semibold text-gray-700">Variedad {i}</span>
+                <div className="p-4 pt-1 flex flex-col gap-1">
+                  <h3 className="font-display font-bold text-gray-900 text-lg leading-tight truncate">{varie.name}</h3>
+                  <div className="flex items-center gap-2 mt-1">
+                    <div className="flex items-center gap-1 bg-gray-100 rounded-md px-1.5 py-0.5">
+                      <span className="text-[10px] font-bold text-gray-500">THC</span>
+                      <span className="text-xs font-bold text-gray-900">{varie.thc}</span>
+                    </div>
+                    <span className="text-xs font-semibold text-gray-500">{varie.price}</span>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
