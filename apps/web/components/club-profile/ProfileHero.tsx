@@ -54,9 +54,9 @@ export function ProfileHero({ club }: ProfileHeroProps) {
 
       {/* Identity Container (Superimposed) */}
       <div className="max-w-4xl mx-auto px-5 md:px-8 relative z-20 -mt-[108px] md:-mt-[139px]">
-        <div className="flex flex-col items-center justify-center text-center gap-4">
+        <div className="flex flex-col items-center justify-center text-center gap-3">
           {/* Logo */}
-          <div className="relative w-[120px] h-[120px] md:w-[150px] md:h-[150px] rounded-full border-[2px] border-white shadow-[0_4px_16px_rgba(0,0,0,0.06)] overflow-hidden bg-white shrink-0">
+          <div className="relative w-[120px] h-[120px] md:w-[150px] md:h-[150px] rounded-full border-[2px] border-white shadow-[0_4px_16px_rgba(0,0,0,0.06)] overflow-hidden bg-white shrink-0 -mb-1">
             <Image
               src={logoUrl}
               alt={`${club.name} logo`}

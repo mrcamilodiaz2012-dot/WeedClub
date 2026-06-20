@@ -16,8 +16,8 @@ export function ProfileContent({ club }: ProfileContentProps) {
   });
 
   return (
-    <div className="w-full mt-4 pb-20">
-      <div className="max-w-4xl mx-auto px-5 md:px-8 py-8 flex flex-col gap-12">
+    <div className="w-full mt-1 pb-20">
+      <div className="max-w-4xl mx-auto px-5 md:px-8 py-5 flex flex-col gap-8">
         
         {/* Variedades Disponibles Section */}
         <section>
