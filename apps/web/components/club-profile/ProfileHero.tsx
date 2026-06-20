@@ -16,7 +16,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
   return (
     <div className="relative w-full px-2 pt-2 md:px-4 md:pt-4">
       {/* Cover Image */}
-      <div className="w-full h-[160px] md:h-[224px] relative overflow-hidden rounded-[28px] md:rounded-[40px] shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-black/[0.04]">
+      <div className="w-full h-[144px] md:h-[200px] relative overflow-hidden rounded-[28px] md:rounded-[40px] shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-black/[0.04]">
         <Image
           src={coverUrl}
           alt={`${club.name} cover`}
@@ -78,14 +78,17 @@ export function ProfileHero({ club }: ProfileHeroProps) {
 
         {/* Info (Below, Left Aligned) */}
         <div className="w-full pt-3 pb-2">
-          <div className="flex items-center justify-start gap-1.5 flex-wrap mb-1">
-            <h1 className="text-[26px] md:text-3xl font-display font-bold tracking-tight text-gray-900 leading-none">
-              {club.name}
-            </h1>
-            <BadgeCheck className="w-6 h-6 text-[#007AFF] shrink-0" />
+          <div className="flex flex-col gap-0.5 mb-3">
+            <div className="flex items-center justify-start gap-1.5 flex-wrap">
+              <h1 className="text-[24px] md:text-3xl font-display font-bold tracking-tight text-gray-900 leading-none">
+                {club.name}
+              </h1>
+              <BadgeCheck className="w-6 h-6 text-[#007AFF] shrink-0" />
+            </div>
+            <span className="text-[15px] text-gray-500 font-medium">@{club.slug || club.name.toLowerCase().replace(/\s+/g, '')}</span>
           </div>
           
-          <div className="flex items-center justify-start gap-3 text-[14px] md:text-base text-gray-600 font-medium mt-1.5">
+          <div className="flex items-center justify-start gap-3 text-[14px] md:text-[15px] text-gray-600 font-medium">
             <span className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-[#34C759] shadow-[0_1px_3px_rgba(52,199,89,0.3)]"></span>
               Abierto ahora

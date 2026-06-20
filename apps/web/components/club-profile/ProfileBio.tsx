@@ -12,8 +12,8 @@ export function ProfileBio({ description }: ProfileBioProps) {
   const isLong = description && description.length > 150;
   
   return (
-    <div className="max-w-4xl mx-auto px-5 md:px-8 mt-4">
-      <div className="text-[15px] md:text-base text-gray-800 leading-relaxed max-w-2xl text-center mx-auto">
+    <div className="max-w-4xl mx-auto px-5 md:px-8 mt-1 mb-4">
+      <div className="text-[15px] md:text-[15px] text-gray-800 leading-snug max-w-3xl text-left">
         <p className={!expanded && isLong ? "line-clamp-3" : ""}>
           {description || "Club social privado con un ambiente relajado y acceso exclusivo para socios. Un espacio seguro y confortable para compartir y disfrutar en comunidad."}
         </p>
