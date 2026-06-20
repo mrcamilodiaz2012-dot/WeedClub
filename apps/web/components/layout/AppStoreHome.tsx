@@ -86,9 +86,8 @@ export function AppStoreHome() {
           {[
             { name: "Ciudades", color: "bg-sky-100", icon: "🏙️" },
             { name: "Top Clubs", color: "bg-amber-100", icon: "⭐" },
-            { name: "Flores", color: "bg-emerald-100", icon: "🌿" },
+            { name: "Flores Top", color: "bg-emerald-100", icon: "🌿" },
             { name: "Grow Shops", color: "bg-lime-100", icon: "🌱" },
-            { name: "Abiertos", color: "bg-green-100", icon: "🟢" },
             { name: "Nuevos", color: "bg-blue-100", icon: "🆕" },
             { name: "Tendencia", color: "bg-orange-100", icon: "🔥" },
             { name: "Eventos", color: "bg-purple-100", icon: "🎪" }
