@@ -15,11 +15,11 @@ export function BottomTabBar() {
 
   return (
     <div className="fixed bottom-6 left-4 right-4 h-[68px] z-50 flex items-center justify-between px-6 bg-white/85 backdrop-blur-2xl rounded-[34px] shadow-[0_4px_24px_rgba(0,0,0,0.08)]">
-      <TabItem icon={<Home size={28} />} label="Inicio" href="/" active={isActive("/")} />
-      <TabItem icon={<Search size={28} />} label="Buscar" href="/buscar" active={isActive("/buscar")} />
-      <TabItem icon={<Map size={28} />} label="Mapa" href="/mapa" active={isActive("/mapa")} />
-      <TabItem icon={<Heart size={28} />} label="Seguidos" href="/seguidos" active={isActive("/seguidos")} />
-      <TabItem icon={<User size={28} />} label="Perfil" href="/perfil" active={isActive("/perfil")} />
+      <TabItem icon={<Home size={32} />} label="Inicio" href="/" active={isActive("/")} />
+      <TabItem icon={<Search size={32} />} label="Buscar" href="/buscar" active={isActive("/buscar")} />
+      <TabItem icon={<Map size={32} />} label="Mapa" href="/mapa" active={isActive("/mapa")} />
+      <TabItem icon={<Heart size={32} />} label="Seguidos" href="/seguidos" active={isActive("/seguidos")} />
+      <TabItem icon={<User size={32} />} label="Perfil" href="/perfil" active={isActive("/perfil")} />
     </div>
   );
 }
