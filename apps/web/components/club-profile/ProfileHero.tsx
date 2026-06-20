@@ -16,7 +16,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
   return (
     <div className="relative w-full px-2 pt-2 md:px-4 md:pt-4">
       {/* Cover Image */}
-      <div className="w-full h-[280px] md:h-[380px] relative overflow-hidden rounded-[32px] md:rounded-[48px] shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-black/[0.04]">
+      <div className="w-full h-[250px] md:h-[340px] relative overflow-hidden rounded-[32px] md:rounded-[48px] shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-black/[0.04]">
         <Image
           src={coverUrl}
           alt={`${club.name} cover`}
