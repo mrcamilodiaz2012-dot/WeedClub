@@ -25,10 +25,14 @@ export function BottomTabBar() {
 }
 
 function TabItem({ icon, label, href, active = false }: { icon: React.ReactNode; label: string; href: string; active?: boolean }) {
+  const iconWithProps = React.cloneElement(icon as React.ReactElement, {
+    strokeWidth: active ? 2.5 : 1.5,
+  });
+
   return (
     <Link href={href} className={`flex flex-col items-center gap-[3px] w-14 transition-colors ${active ? 'text-[#00C853]' : 'text-gray-500 hover:text-black'}`}>
-      <div className={`transition-all ${active ? 'stroke-[2.5px] scale-110' : 'stroke-2'}`}>
-        {icon}
+      <div className={`transition-transform duration-200 ${active ? 'scale-110' : 'scale-100'}`}>
+        {iconWithProps}
       </div>
       <span className="text-[10px] font-medium tracking-tight">
         {label}
