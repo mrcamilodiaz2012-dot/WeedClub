@@ -24,8 +24,8 @@ export function ProfileQuickStats({ city }: ProfileQuickStatsProps) {
             key={i} 
             className={`flex items-center gap-2 whitespace-nowrap px-4 py-2 rounded-full border transition-colors ${
               stat.highlight 
-                ? 'bg-gray-900 text-white border-gray-900' 
-                : 'bg-white text-gray-700 border-gray-200 shadow-sm hover:border-gray-300'
+                ? 'bg-gray-900 text-white border-transparent shadow-[0_2px_8px_rgba(0,0,0,0.12)]' 
+                : 'bg-white text-gray-700 border-black/[0.06] shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:border-black/10'
             }`}
           >
             {stat.icon}
