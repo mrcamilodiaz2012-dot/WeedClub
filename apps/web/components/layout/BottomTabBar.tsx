@@ -18,13 +18,19 @@ export function BottomTabBar() {
       <TabItem icon={<Home size={28} />} label="Inicio" href="/" active={isActive("/")} />
       <TabItem icon={<Search size={28} />} label="Buscar" href="/buscar" active={isActive("/buscar")} />
       
-      {/* Center Floating Action Button (FAB) for Map */}
-      <div className="relative -top-3">
+      {/* Center Map Icon with Subtle Bulge */}
+      <div className="relative flex flex-col items-center justify-center">
+        {/* Subtle curve/bulge behind the icon */}
+        <div className="absolute -top-[10px] w-[52px] h-[52px] bg-white/90 backdrop-blur-3xl rounded-full shadow-[0_-4px_12px_rgba(0,0,0,0.04)] border-t border-gray-100 -z-10" />
+        
         <Link 
           href="/mapa"
-          className="flex flex-col items-center justify-center w-[54px] h-[54px] bg-[#18181B] text-white rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.15)] hover:scale-105 active:scale-95 transition-all border-[3px] border-white"
+          className={`flex flex-col items-center gap-[3px] w-14 transition-colors -mt-2 ${isActive('/mapa') ? 'text-[#00C853]' : 'text-gray-500 hover:text-black'}`}
         >
-          <Map size={24} strokeWidth={2.5} />
+          <div className={`transition-all ${isActive('/mapa') ? 'stroke-[2.5px] scale-110' : 'stroke-2'}`}>
+            <Map size={30} />
+          </div>
+          <span className="text-[10px] font-medium tracking-tight mt-[1px]">Mapa</span>
         </Link>
       </div>
 
