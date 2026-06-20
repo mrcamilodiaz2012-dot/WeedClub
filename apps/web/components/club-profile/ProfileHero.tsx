@@ -16,7 +16,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
   return (
     <div className="relative w-full px-2 pt-2 md:px-4 md:pt-4">
       {/* Cover Image */}
-      <div className="w-full h-[225px] md:h-[306px] relative overflow-hidden rounded-[32px] md:rounded-[48px] shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-black/[0.04]">
+      <div className="w-full h-[200px] md:h-[280px] relative overflow-hidden rounded-[32px] md:rounded-[48px] shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-black/[0.04]">
         <Image
           src={coverUrl}
           alt={`${club.name} cover`}
@@ -51,7 +51,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
 
       {/* Identity Container (Superimposed) */}
       <div className="max-w-4xl mx-auto px-5 md:px-8 relative z-20 -mt-[48px] md:-mt-[60px]">
-        <div className="flex flex-col items-start text-left gap-3 md:ml-4">
+        <div className="flex flex-col items-center justify-center text-center gap-3">
           {/* Logo */}
           <div className="relative w-[96px] h-[96px] md:w-[120px] md:h-[120px] rounded-full border-[4px] border-white shadow-[0_4px_20px_rgba(0,0,0,0.08)] overflow-hidden bg-white shrink-0 -mb-1">
             <Image
@@ -64,14 +64,14 @@ export function ProfileHero({ club }: ProfileHeroProps) {
 
           {/* Info */}
           <div className="w-full pb-1 md:pb-3">
-            <div className="flex items-center justify-start gap-2 flex-wrap mb-2">
+            <div className="flex items-center justify-center gap-2 flex-wrap mb-2">
               <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900">
                 {club.name}
               </h1>
               <BadgeCheck className="w-6 h-6 text-[#007AFF] shrink-0" />
             </div>
             
-            <div className="flex items-center justify-start gap-3 text-sm md:text-base text-gray-600 font-medium">
+            <div className="flex items-center justify-center gap-3 text-sm md:text-base text-gray-600 font-medium">
               <span className="flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-[#34C759] shadow-[0_1px_3px_rgba(52,199,89,0.3)]"></span>
                 Abierto ahora
@@ -82,7 +82,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
           </div>
 
           {/* Action Buttons (Follow, Message) */}
-          <div className="flex items-center justify-start gap-3 w-full max-w-[320px] mt-1">
+          <div className="flex items-center justify-center gap-3 w-full max-w-[320px] mt-1">
             <button className="flex-1 flex items-center justify-center gap-2 bg-[#34C759] text-white font-semibold px-4 py-2.5 rounded-full hover:bg-[#2FB350] transition-colors shadow-[0_2px_10px_rgba(52,199,89,0.2)] text-sm">
               <Heart className="w-4 h-4" />
               Seguir
