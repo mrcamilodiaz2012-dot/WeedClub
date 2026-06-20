@@ -89,7 +89,7 @@ export function AppStoreHome() {
             { name: "Flores", color: "bg-emerald-100", icon: <img src="/iconos/flor.webp" alt="Flores" className="w-11 h-11 object-contain opacity-90" /> },
             { name: "Grow Shops", color: "bg-lime-100", icon: <img src="/iconos/grow.webp" alt="Grow Shops" className="w-11 h-11 object-contain opacity-90" /> },
             { name: "Nuevos", color: "bg-slate-100", icon: <img src="/iconos/new.webp" alt="Nuevos" className="w-11 h-11 object-contain opacity-90" /> },
-            { name: "Tendencia", color: "bg-orange-100", icon: "🔥" },
+            { name: "Tendencia", color: "bg-orange-100", icon: <img src="/iconos/fuego.webp" alt="Tendencia" className="w-11 h-11 object-contain opacity-90" /> },
             { name: "Eventos", color: "bg-purple-100", icon: "🎪" }
           ].map((cat, i) => (
             <button key={i} className="flex flex-col items-center gap-2 group">
