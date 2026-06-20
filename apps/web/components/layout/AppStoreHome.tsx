@@ -87,7 +87,7 @@ export function AppStoreHome() {
             { name: "Ciudades", color: "bg-sky-100", icon: <img src="/iconos/Ciudad.webp" alt="Ciudades" className="w-11 h-11 object-contain opacity-90" /> },
             { name: "Top Clubs", color: "bg-amber-100", icon: <img src="/iconos/estrella.webp" alt="Top Clubs" className="w-11 h-11 object-contain opacity-90" /> },
             { name: "Flores", color: "bg-emerald-100", icon: <img src="/iconos/flor.webp" alt="Flores" className="w-11 h-11 object-contain opacity-90" /> },
-            { name: "Grow Shops", color: "bg-lime-100", icon: "🌱" },
+            { name: "Grow Shops", color: "bg-lime-100", icon: <img src="/iconos/grow.webp" alt="Grow Shops" className="w-11 h-11 object-contain opacity-90" /> },
             { name: "Nuevos", color: "bg-blue-100", icon: "🆕" },
             { name: "Tendencia", color: "bg-orange-100", icon: "🔥" },
             { name: "Eventos", color: "bg-purple-100", icon: "🎪" }
