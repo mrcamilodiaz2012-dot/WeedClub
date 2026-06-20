@@ -14,9 +14,9 @@ export function ProfileHero({ club }: ProfileHeroProps) {
   const isPremium = club.subscription_tier === 'premium';
   
   return (
-    <div className="relative w-full">
+    <div className="relative w-full px-2 pt-2 md:px-4 md:pt-4">
       {/* Cover Image */}
-      <div className="w-full h-[280px] md:h-[380px] relative overflow-hidden rounded-b-[40px] md:rounded-b-[60px] shadow-sm">
+      <div className="w-full h-[280px] md:h-[380px] relative overflow-hidden rounded-[32px] md:rounded-[48px] shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-black/[0.04]">
         <Image
           src={coverUrl}
           alt={`${club.name} cover`}
@@ -53,7 +53,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
       <div className="max-w-4xl mx-auto px-5 md:px-8 relative z-20 -mt-[60px] md:-mt-[75px]">
         <div className="flex flex-col items-center justify-center text-center gap-3">
           {/* Logo */}
-          <div className="relative w-[120px] h-[120px] md:w-[150px] md:h-[150px] rounded-full border-[2px] border-white shadow-[0_4px_16px_rgba(0,0,0,0.08)] overflow-hidden bg-white shrink-0 -mb-1">
+          <div className="relative w-[120px] h-[120px] md:w-[150px] md:h-[150px] rounded-full border-[4px] border-white shadow-[0_4px_20px_rgba(0,0,0,0.08)] overflow-hidden bg-white shrink-0 -mb-1">
             <Image
               src={logoUrl}
               alt={`${club.name} logo`}
