@@ -1,13 +1,18 @@
+'use client';
+
 import React from 'react';
 import type { Club } from '@/types';
-import { BadgeCheck, Share2, Bookmark, Sparkles, Heart } from 'lucide-react';
+import { BadgeCheck, Share2, Bookmark, Sparkles, Heart, ArrowLeft } from 'lucide-react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 interface ProfileHeroProps {
   club: Club;
 }
 
 export function ProfileHero({ club }: ProfileHeroProps) {
+  const router = useRouter();
+
   // Default images if none provided
   const coverUrl = club.cover_image_url || 'https://images.unsplash.com/photo-1576085898323-218337e3e43c?auto=format&fit=crop&q=80';
   const logoUrl = club.logo_url || 'https://api.dicebear.com/7.x/shapes/svg?seed=' + club.id;
@@ -27,15 +32,23 @@ export function ProfileHero({ club }: ProfileHeroProps) {
         {/* Subtle shadow overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/5"></div>
         
-        {/* App Logo (Top Left) */}
-        <div className="absolute top-5 left-5 z-10">
-          <Image 
-            src="/logo4.svg" 
-            alt="WeedClub" 
-            width={120} 
-            height={34} 
-            className="h-7 w-auto md:h-8 drop-shadow-[0_2px_4px_rgba(255,255,255,0.5)]" 
-          />
+        {/* Top Left Nav (Back Arrow & Leaf) */}
+        <div className="absolute top-4 left-4 flex items-center gap-3 z-10">
+          <button 
+            onClick={() => router.back()}
+            className="bg-black/15 backdrop-blur-xl p-2.5 rounded-full text-white hover:bg-black/25 transition-all border border-white/10 shadow-[0_2px_8px_rgba(0,0,0,0.08)]"
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </button>
+          <div className="flex items-center justify-center p-1">
+            <Image 
+              src="/logos/logo2.svg" 
+              alt="WeedClub" 
+              width={26} 
+              height={26} 
+              className="drop-shadow-[0_2px_8px_rgba(255,255,255,0.4)]" 
+            />
+          </div>
         </div>
 
         {/* Actions (Top Right) */}
