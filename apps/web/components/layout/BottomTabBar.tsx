@@ -19,12 +19,12 @@ export function BottomTabBar() {
       <TabItem icon={<Search size={28} />} label="Buscar" href="/buscar" active={isActive("/buscar")} />
       
       {/* Center Floating Action Button (FAB) for Map */}
-      <div className="relative -top-6">
+      <div className="relative -top-3">
         <Link 
           href="/mapa"
-          className="flex flex-col items-center justify-center w-[64px] h-[64px] bg-[#18181B] text-white rounded-full shadow-[0_8px_20px_rgba(0,0,0,0.25)] hover:scale-105 active:scale-95 transition-all border-4 border-white"
+          className="flex flex-col items-center justify-center w-[54px] h-[54px] bg-[#18181B] text-white rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.15)] hover:scale-105 active:scale-95 transition-all border-[3px] border-white"
         >
-          <Map size={26} strokeWidth={2.5} />
+          <Map size={24} strokeWidth={2.5} />
         </Link>
       </div>
 
