@@ -33,22 +33,20 @@ export function ProfileHero({ club }: ProfileHeroProps) {
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/5"></div>
         
         {/* Top Left Nav (Back Arrow & Leaf) */}
-        <div className="absolute top-4 left-4 flex items-center gap-3 z-10">
+        <div className="absolute top-4 left-4 z-10">
           <button 
             onClick={() => router.back()}
-            className="bg-black/15 backdrop-blur-xl p-2.5 rounded-full text-white hover:bg-black/25 transition-all border border-white/10 shadow-[0_2px_8px_rgba(0,0,0,0.08)]"
+            className="flex items-center gap-2.5 bg-black/15 backdrop-blur-xl pl-3 pr-3.5 py-2 rounded-full text-white hover:bg-black/25 transition-all border border-white/10 shadow-[0_2px_8px_rgba(0,0,0,0.08)]"
           >
             <ArrowLeft className="w-5 h-5" />
-          </button>
-          <div className="flex items-center justify-center p-1">
             <Image 
               src="/logos/logo2.svg" 
               alt="WeedClub" 
-              width={26} 
-              height={26} 
+              width={22} 
+              height={22} 
               className="drop-shadow-[0_2px_8px_rgba(255,255,255,0.4)]" 
             />
-          </div>
+          </button>
         </div>
 
         {/* Actions (Top Right) */}
