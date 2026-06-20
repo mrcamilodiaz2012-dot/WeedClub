@@ -22,8 +22,8 @@ export function BottomTabBar() {
         <div 
           className="absolute inset-0 bg-white/85 backdrop-blur-2xl rounded-[34px] shadow-[0_4px_24px_rgba(0,0,0,0.08)]" 
           style={{ 
-            WebkitMaskImage: 'radial-gradient(circle at 50% 22px, transparent 29.5px, black 30px)',
-            maskImage: 'radial-gradient(circle at 50% 22px, transparent 29.5px, black 30px)'
+            WebkitMaskImage: 'radial-gradient(circle at 50% 22px, transparent 27px, black 28px)',
+            maskImage: 'radial-gradient(circle at 50% 22px, transparent 27px, black 28px)'
           }}
         />
         {/* Dome perfectly filling the hole */}
