@@ -14,23 +14,23 @@ export function BottomTabBar() {
   };
 
   return (
-    <div className="fixed bottom-6 left-4 right-4 h-[68px] bg-white/90 backdrop-blur-3xl rounded-[34px] shadow-[0_4px_24px_rgba(0,0,0,0.08)] border border-gray-100 flex items-center justify-between px-6 z-50">
+    <div className="fixed bottom-6 left-4 right-4 h-[68px] bg-white rounded-[34px] shadow-[0_4px_24px_rgba(0,0,0,0.08)] flex items-center justify-between px-6 z-50">
       <TabItem icon={<Home size={28} />} label="Inicio" href="/" active={isActive("/")} />
       <TabItem icon={<Search size={28} />} label="Buscar" href="/buscar" active={isActive("/buscar")} />
       
       {/* Center Map Icon with Subtle Bulge */}
       <div className="relative flex flex-col items-center justify-center">
         {/* Subtle curve/bulge behind the icon */}
-        <div className="absolute -top-[10px] w-[52px] h-[52px] bg-white/90 backdrop-blur-3xl rounded-full shadow-[0_-4px_12px_rgba(0,0,0,0.04)] border-t border-gray-100 -z-10" />
+        <div className="absolute -top-[12px] w-[64px] h-[64px] bg-white rounded-full shadow-[0_-8px_16px_rgba(0,0,0,0.03)] -z-10" />
         
         <Link 
           href="/mapa"
-          className={`flex flex-col items-center gap-[3px] w-14 transition-colors -mt-2 ${isActive('/mapa') ? 'text-[#00C853]' : 'text-gray-500 hover:text-black'}`}
+          className={`flex flex-col items-center gap-[2px] w-14 transition-colors -mt-3.5 ${isActive('/mapa') ? 'text-[#00C853]' : 'text-gray-500 hover:text-black'}`}
         >
           <div className={`transition-all ${isActive('/mapa') ? 'stroke-[2.5px] scale-110' : 'stroke-2'}`}>
-            <Map size={30} />
+            <Map size={36} />
           </div>
-          <span className="text-[10px] font-medium tracking-tight mt-[1px]">Mapa</span>
+          <span className="text-[10px] font-medium tracking-tight mt-[2px]">Mapa</span>
         </Link>
       </div>
 
