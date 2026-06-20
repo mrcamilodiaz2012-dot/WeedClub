@@ -16,7 +16,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
   return (
     <div className="relative w-full px-2 pt-2 md:px-4 md:pt-4">
       {/* Cover Image */}
-      <div className="w-full h-[160px] md:h-[224px] relative overflow-hidden rounded-[32px] md:rounded-[48px] shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-black/[0.04]">
+      <div className="w-full h-[160px] md:h-[224px] relative overflow-hidden rounded-[28px] md:rounded-[40px] shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-black/[0.04]">
         <Image
           src={coverUrl}
           alt={`${club.name} cover`}
@@ -54,7 +54,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
         {/* Top Row: Profile Pic & Action Buttons */}
         <div className="flex items-end justify-between w-full">
           {/* Logo (Left) */}
-          <div className="relative w-[96px] h-[96px] md:w-[120px] md:h-[120px] rounded-full border-[4px] border-white shadow-[0_4px_20px_rgba(0,0,0,0.08)] overflow-hidden bg-white shrink-0 ml-3 md:ml-6">
+          <div className="relative w-[96px] h-[96px] md:w-[120px] md:h-[120px] rounded-full border-[4px] border-white shadow-[0_4px_20px_rgba(0,0,0,0.08)] overflow-hidden bg-white shrink-0">
             <Image
               src={logoUrl}
               alt={`${club.name} logo`}
@@ -77,7 +77,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
         </div>
 
         {/* Info (Below, Left Aligned) */}
-        <div className="w-full pt-4 pb-2 ml-3 md:ml-6">
+        <div className="w-full pt-3 pb-2">
           <div className="flex items-center justify-start gap-1.5 flex-wrap mb-1">
             <h1 className="text-[26px] md:text-3xl font-display font-bold tracking-tight text-gray-900 leading-none">
               {club.name}
