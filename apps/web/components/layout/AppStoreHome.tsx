@@ -84,9 +84,10 @@ export function AppStoreHome() {
       <div className="px-5 pt-4 pb-6 w-full overflow-x-auto hide-scrollbar">
         <div className="flex items-start gap-4 w-max">
           {[
-            { name: "Destacados", color: "bg-amber-100", icon: "⭐" },
+            { name: "Ciudades", color: "bg-sky-100", icon: "🏙️" },
+            { name: "Top Clubs", color: "bg-amber-100", icon: "⭐" },
             { name: "Flores", color: "bg-emerald-100", icon: "🌿" },
-            { name: "Extractos", color: "bg-purple-100", icon: "🍯" },
+            { name: "Grow Shops", color: "bg-lime-100", icon: "🌱" },
             { name: "Edibles", color: "bg-rose-100", icon: "🍪" },
             { name: "CBD", color: "bg-cyan-100", icon: "💧" },
             { name: "Eventos", color: "bg-indigo-100", icon: "🎉" }
