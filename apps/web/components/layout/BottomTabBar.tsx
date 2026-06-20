@@ -14,15 +14,19 @@ export function BottomTabBar() {
   };
 
   return (
-    <div className="fixed bottom-6 left-4 right-4 h-[68px] bg-white rounded-[34px] shadow-[0_4px_24px_rgba(0,0,0,0.08)] flex items-center justify-between px-6 z-50">
+    <div className="fixed bottom-6 left-4 right-4 z-50 flex items-center justify-between px-6 drop-shadow-[0_4px_24px_rgba(0,0,0,0.08)] h-[68px]">
+      
+      {/* Background shape (Pill + Bulge merged via drop-shadow) */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-white/95 backdrop-blur-md rounded-[34px]" />
+        <div className="absolute left-1/2 -translate-x-1/2 -top-[10px] w-[60px] h-[60px] bg-white/95 backdrop-blur-md rounded-full" />
+      </div>
+
       <TabItem icon={<Home size={28} />} label="Inicio" href="/" active={isActive("/")} />
       <TabItem icon={<Search size={28} />} label="Buscar" href="/buscar" active={isActive("/buscar")} />
       
-      {/* Center Map Icon with Subtle Bulge */}
+      {/* Center Map Icon */}
       <div className="relative flex flex-col items-center justify-center">
-        {/* Subtle curve/bulge behind the icon */}
-        <div className="absolute -top-[12px] w-[64px] h-[64px] bg-white rounded-full shadow-[0_-8px_16px_rgba(0,0,0,0.03)] -z-10" />
-        
         <Link 
           href="/mapa"
           className={`flex flex-col items-center gap-[2px] w-14 transition-colors -mt-3.5 ${isActive('/mapa') ? 'text-[#00C853]' : 'text-gray-500 hover:text-black'}`}
