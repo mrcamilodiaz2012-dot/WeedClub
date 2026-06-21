@@ -117,7 +117,14 @@ export function ProfileHero({ club }: ProfileHeroProps) {
             </div>
             <div className="flex items-center gap-1">
               <MapPin className="w-[16px] h-[16px]" />
-              <span>{club.address || "Calle de Ejemplo 123"}, {club.city}</span>
+              <a 
+                href={`https://maps.google.com/?q=${club.address || "Calle de Ejemplo 123"}, ${club.city}`} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-[#00C853] hover:underline cursor-pointer"
+              >
+                {club.address || "Calle de Ejemplo 123"}, {club.city}
+              </a>
             </div>
           </div>
         </div>
