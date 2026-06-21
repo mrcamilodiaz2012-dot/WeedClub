@@ -60,11 +60,11 @@ export function ProfileHero({ club }: ProfileHeroProps) {
       </div>
 
       {/* Identity Container (Superimposed) */}
-      <div className="max-w-4xl mx-auto px-5 md:px-8 relative z-20 -mt-[48px] md:-mt-[60px] pb-6">
+      <div className="max-w-4xl mx-auto px-4 md:px-6 relative z-20 pb-6">
         {/* Top Row: Profile Pic & Action Buttons */}
-        <div className="flex items-end justify-between w-full mb-3">
+        <div className="flex justify-between items-start w-full">
           {/* Logo (Left) */}
-          <div className="relative w-[96px] h-[96px] md:w-[120px] md:h-[120px] rounded-full border-[4px] border-white shadow-sm overflow-hidden bg-white shrink-0">
+          <div className="relative w-[76px] h-[76px] md:w-[134px] md:h-[134px] rounded-full border-[4px] border-white shadow-sm overflow-hidden bg-white shrink-0 -mt-[38px] md:-mt-[67px]">
             <Image
               src={logoUrl}
               alt={`${club.name} logo`}
@@ -74,49 +74,49 @@ export function ProfileHero({ club }: ProfileHeroProps) {
           </div>
 
           {/* Action Buttons (Right) */}
-          <div className="flex items-center gap-2 pb-2">
-            <button className="flex items-center justify-center w-[36px] h-[36px] bg-gray-100 text-gray-900 rounded-full hover:bg-gray-200 transition-colors">
+          <div className="flex items-center gap-2 pt-3">
+            <button className="flex items-center justify-center w-[34px] h-[34px] border border-gray-300 text-gray-900 rounded-full hover:bg-gray-100 transition-colors">
               <Mail className="w-[18px] h-[18px]" />
             </button>
-            <button className="flex items-center justify-center bg-gray-900 text-white font-semibold px-5 py-[8px] rounded-full hover:bg-black transition-colors text-[14px]">
+            <button className="bg-black text-white font-bold px-4 py-[6px] rounded-full hover:bg-gray-900 transition-colors text-[14px]">
               Seguir
             </button>
           </div>
         </div>
 
         {/* Info (Vertical Flow) */}
-        <div className="w-full flex flex-col">
+        <div className="w-full flex flex-col mt-2 md:mt-4">
           {/* Name & Badge */}
-          <div className="flex items-center gap-1.5 mb-1">
-            <h1 className="text-2xl md:text-3xl font-display font-extrabold tracking-tight text-gray-900 leading-none">
+          <div className="flex items-center gap-1">
+            <h1 className="text-[20px] md:text-[22px] font-bold text-gray-900 leading-tight">
               {club.name}
             </h1>
-            <BadgeCheck className="w-5 h-5 text-[#00C853] shrink-0" />
+            <BadgeCheck className="w-[18px] h-[18px] text-[#00C853] shrink-0" />
           </div>
           
           {/* Username */}
-          <span className="text-[15px] text-gray-500 font-light mb-4">
+          <span className="text-[15px] text-gray-500 font-normal mt-0.5 mb-3">
             @{club.slug || club.name.toLowerCase().replace(/\s+/g, '')}
           </span>
 
           {/* Bio */}
-          <p className="text-[15px] md:text-[16px] text-gray-700 leading-relaxed mb-5">
+          <p className="text-[15px] text-[#0F1419] leading-snug mb-3 pr-2">
             {club.description || "Club social privado con un ambiente relajado y acceso exclusivo para socios. Un espacio seguro y confortable para compartir y disfrutar en comunidad."}
           </p>
 
-          {/* Contact Info */}
-          <div className="flex flex-col gap-2.5 mb-2">
-            <div className="flex items-center gap-2.5 text-[15px] text-gray-700">
-              <MapPin className="w-[18px] h-[18px] text-gray-400 shrink-0" />
-              <span>{club.address || "Calle de Ejemplo 123"}, {club.city}{club.province ? `, ${club.province}` : ''}</span>
+          {/* Meta Info (Inline flow) */}
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[14px] text-gray-500">
+            <div className="flex items-center gap-1">
+              <MapPin className="w-[16px] h-[16px]" />
+              <span>{club.address || "Calle de Ejemplo 123"}, {club.city}</span>
             </div>
-            <div className="flex items-center gap-2.5 text-[15px] text-gray-700">
-              <Phone className="w-[18px] h-[18px] text-gray-400 shrink-0" />
+            <div className="flex items-center gap-1">
+              <Phone className="w-[16px] h-[16px]" />
               <span>+34 600 000 000</span>
             </div>
-            <div className="flex items-center gap-1.5 text-[15px] text-gray-700 mt-0.5 ml-[28px]">
+            <div className="flex items-center gap-1">
               <span className="text-red-500 font-medium">Cerrado</span>
-              <span className="text-gray-600">⋅ Abre a las 8:00</span>
+              <span>⋅ Abre a las 8:00</span>
             </div>
           </div>
         </div>
