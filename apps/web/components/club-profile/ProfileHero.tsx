@@ -19,9 +19,9 @@ export function ProfileHero({ club }: ProfileHeroProps) {
   const isPremium = club.subscription_tier === 'premium';
   
   return (
-    <div className="relative w-full px-2 pt-2 md:px-4 md:pt-4">
+    <div className="relative w-full">
       {/* Cover Image */}
-      <div className="w-full h-[144px] md:h-[200px] relative overflow-hidden rounded-[28px] md:rounded-[40px] shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-black/[0.04]">
+      <div className="w-full h-[144px] md:h-[200px] relative overflow-hidden">
         <Image
           src={coverUrl}
           alt={`${club.name} cover`}
@@ -64,7 +64,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
         {/* Top Row: Profile Pic & Action Buttons */}
         <div className="flex justify-between items-start w-full">
           {/* Logo (Left) */}
-          <div className="relative w-[76px] h-[76px] md:w-[134px] md:h-[134px] rounded-full border-[4px] border-white shadow-sm overflow-hidden bg-white shrink-0 -mt-[38px] md:-mt-[67px]">
+          <div className="relative w-[76px] h-[76px] md:w-[134px] md:h-[134px] rounded-full border-[4px] border-white overflow-hidden bg-white shrink-0 -mt-[38px] md:-mt-[67px]">
             <Image
               src={logoUrl}
               alt={`${club.name} logo`}
@@ -87,8 +87,8 @@ export function ProfileHero({ club }: ProfileHeroProps) {
         {/* Info (Vertical Flow) */}
         <div className="w-full flex flex-col mt-2 md:mt-4">
           {/* Name & Badge */}
-          <div className="flex items-center gap-1">
-            <h1 className="text-[28px] md:text-[31px] font-bold text-gray-900 leading-tight">
+          <div className="flex items-center gap-1 mt-1">
+            <h1 className="text-[24px] md:text-[28px] font-[900] text-[#0F1419] leading-tight">
               {club.name}
             </h1>
             <BadgeCheck className="w-[20px] h-[20px] text-white shrink-0" fill="#00C853" />
@@ -108,7 +108,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[15px] text-[#536471] leading-[20px]">
             <div className="flex items-center gap-1">
               <Clock className="w-[18px] h-[18px]" />
-              <span className="text-red-500 font-medium">Cerrado</span>
+              <span className="text-[#0F1419] font-medium">Cerrado</span>
               <span>⋅ Abre a las 8:00</span>
             </div>
             <div className="flex items-center gap-1">
@@ -121,7 +121,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
                 href={`https://maps.google.com/?q=${club.address || "Calle de Ejemplo 123"}, ${club.city}`} 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="text-[#00C853] hover:underline cursor-pointer"
+                className="text-[#536471] hover:underline cursor-pointer"
               >
                 {club.address || "Calle de Ejemplo 123"}, {club.city}
               </a>
