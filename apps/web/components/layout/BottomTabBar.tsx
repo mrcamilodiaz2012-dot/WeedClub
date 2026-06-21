@@ -26,7 +26,7 @@ export function BottomTabBar() {
 
 function TabItem({ icon, label, href, active = false }: { icon: React.ReactNode; label: string; href: string; active?: boolean }) {
   const iconWithProps = React.cloneElement(icon as React.ReactElement<{ strokeWidth?: number }>, {
-    strokeWidth: active ? 1.9 : 1.5,
+    strokeWidth: active ? 1.8 : 1.5,
   });
 
   return (
