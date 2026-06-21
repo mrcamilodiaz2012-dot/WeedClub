@@ -25,7 +25,7 @@ export function ProfileContent({ club }: ProfileContentProps) {
             <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">
               Variedades disponibles
             </h2>
-            <button className="text-sm font-semibold text-[#007AFF] hover:opacity-80 transition-opacity">Ver todas</button>
+            <button className="text-sm font-semibold text-gray-500 hover:text-gray-900 transition-colors">Ver todas</button>
           </div>
           <div className="flex overflow-x-auto hide-scrollbar gap-4 pb-6 -mx-5 px-5 md:mx-0 md:px-0">
             {[

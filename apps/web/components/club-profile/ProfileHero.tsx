@@ -64,7 +64,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
         {/* Top Row: Profile Pic & Action Buttons */}
         <div className="flex items-end justify-between w-full">
           {/* Logo (Left) */}
-          <div className="relative w-[96px] h-[96px] md:w-[120px] md:h-[120px] rounded-full border-[4px] border-white shadow-[0_4px_20px_rgba(0,0,0,0.08)] overflow-hidden bg-white shrink-0">
+          <div className="relative w-[96px] h-[96px] md:w-[120px] md:h-[120px] rounded-full border-[4px] border-white shadow-sm overflow-hidden bg-white shrink-0">
             <Image
               src={logoUrl}
               alt={`${club.name} logo`}
@@ -73,34 +73,34 @@ export function ProfileHero({ club }: ProfileHeroProps) {
             />
           </div>
 
-          {/* Action Buttons (Right) - Twitter Style */}
+          {/* Action Buttons (Right) - Clean minimalist style */}
           <div className="flex items-center gap-2 pb-2">
-            <button className="flex items-center justify-center w-[38px] h-[38px] bg-white border border-black/[0.08] text-gray-900 rounded-full hover:bg-gray-50 transition-colors shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
-              <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg">
+            <button className="flex items-center justify-center w-[36px] h-[36px] bg-gray-100 text-gray-900 rounded-full hover:bg-gray-200 transition-colors">
+              <svg viewBox="0 0 24 24" className="w-[18px] h-[18px] fill-current" xmlns="http://www.w3.org/2000/svg">
                 <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
               </svg>
             </button>
-            <button className="flex items-center justify-center gap-1.5 bg-[#18181B] text-white font-bold px-5 py-[9px] rounded-full hover:bg-[#27272A] transition-colors shadow-[0_2px_10px_rgba(0,0,0,0.15)] text-[14px]">
+            <button className="flex items-center justify-center bg-gray-900 text-white font-semibold px-5 py-[8px] rounded-full hover:bg-black transition-colors text-[14px]">
               Seguir
             </button>
           </div>
         </div>
 
         {/* Info (Below, Left Aligned) */}
-        <div className="w-full pt-3 pb-2">
-          <div className="flex flex-col gap-0.5 mb-3">
+        <div className="w-full pt-3 pb-1">
+          <div className="flex flex-col gap-0.5 mb-2.5">
             <div className="flex items-center justify-start gap-1.5 flex-wrap">
-              <h1 className="text-[24px] md:text-3xl font-display font-bold tracking-tight text-gray-900 leading-none">
+              <h1 className="text-2xl md:text-3xl font-display font-bold tracking-tight text-gray-900 leading-none">
                 {club.name}
               </h1>
-              <BadgeCheck className="w-6 h-6 text-[#007AFF] shrink-0" />
+              <BadgeCheck className="w-5 h-5 text-[#00C853] shrink-0" />
             </div>
             <span className="text-[15px] text-gray-500 font-medium">@{club.slug || club.name.toLowerCase().replace(/\s+/g, '')}</span>
           </div>
           
-          <div className="flex items-center justify-start gap-3 text-[14px] md:text-[15px] text-gray-600 font-medium">
-            <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-[#34C759] shadow-[0_1px_3px_rgba(52,199,89,0.3)]"></span>
+          <div className="flex items-center justify-start gap-2 text-[14px] md:text-[15px] text-gray-600 font-medium">
+            <span className="flex items-center gap-1.5 text-gray-900">
+              <span className="w-2 h-2 rounded-full bg-[#00C853]"></span>
               Abierto ahora
             </span>
             <span className="text-gray-300">•</span>

@@ -16,20 +16,18 @@ export function ProfileQuickStats({ city }: ProfileQuickStatsProps) {
   ];
 
   return (
-    <div className="max-w-4xl mx-auto px-5 md:px-8 mt-4">
+    <div className="max-w-4xl mx-auto px-5 md:px-8 mb-8">
       {/* Scrollable container for mobile, flex wrap for desktop */}
-      <div className="flex overflow-x-auto hide-scrollbar gap-3 pb-2 -mx-5 px-5 md:mx-0 md:px-0 md:flex-wrap md:justify-center">
+      <div className="flex overflow-x-auto hide-scrollbar gap-6 pb-2 -mx-5 px-5 md:mx-0 md:px-0 md:flex-wrap text-gray-800">
         {stats.map((stat, i) => (
           <div 
             key={i} 
-            className={`flex items-center gap-2 whitespace-nowrap px-4 py-2 rounded-full border transition-colors ${
-              stat.highlight 
-                ? 'bg-gray-900 text-white border-transparent shadow-[0_2px_8px_rgba(0,0,0,0.12)]' 
-                : 'bg-white text-gray-700 border-black/[0.06] shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:border-black/10'
+            className={`flex items-center gap-1.5 whitespace-nowrap transition-opacity hover:opacity-70 ${
+              stat.highlight ? 'text-gray-900 font-bold' : 'text-gray-600'
             }`}
           >
-            {stat.icon}
-            <span className="font-semibold text-sm">{stat.text}</span>
+            <span className={stat.highlight ? 'text-[#00C853]' : 'text-gray-400'}>{stat.icon}</span>
+            <span className="text-[14px] font-medium">{stat.text}</span>
           </div>
         ))}
       </div>
