@@ -2,7 +2,7 @@
 
 import React from 'react';
 import type { Club } from '@/types';
-import { BadgeCheck, Share2, Bookmark, ArrowLeft, MapPin, Phone, Mail } from 'lucide-react';
+import { BadgeCheck, Share2, Bookmark, ArrowLeft, MapPin, Phone, Mail, Clock } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
@@ -115,6 +115,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
               <span>+34 600 000 000</span>
             </div>
             <div className="flex items-center gap-1">
+              <Clock className="w-[16px] h-[16px]" />
               <span className="text-red-500 font-medium">Cerrado</span>
               <span>⋅ Abre a las 8:00</span>
             </div>
