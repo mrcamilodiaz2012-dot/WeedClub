@@ -91,7 +91,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
             <h1 className="text-[28px] md:text-[31px] font-bold text-gray-900 leading-tight">
               {club.name}
             </h1>
-            <BadgeCheck className="w-[20px] h-[20px] text-[#00C853] shrink-0" />
+            <BadgeCheck className="w-[20px] h-[20px] text-white shrink-0" fill="#00C853" />
           </div>
           
           {/* Username */}
