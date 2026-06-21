@@ -88,10 +88,10 @@ export function ProfileHero({ club }: ProfileHeroProps) {
         <div className="w-full flex flex-col mt-2 md:mt-4">
           {/* Name & Badge */}
           <div className="flex items-center gap-1">
-            <h1 className="text-[20px] md:text-[22px] font-bold text-gray-900 leading-tight">
+            <h1 className="text-[28px] md:text-[31px] font-bold text-gray-900 leading-tight">
               {club.name}
             </h1>
-            <BadgeCheck className="w-[18px] h-[18px] text-[#00C853] shrink-0" />
+            <BadgeCheck className="w-[20px] h-[20px] text-[#00C853] shrink-0" />
           </div>
           
           {/* Username */}
@@ -107,17 +107,17 @@ export function ProfileHero({ club }: ProfileHeroProps) {
           {/* Meta Info (Inline flow) */}
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[14px] text-gray-500">
             <div className="flex items-center gap-1">
-              <MapPin className="w-[16px] h-[16px]" />
-              <span>{club.address || "Calle de Ejemplo 123"}, {club.city}</span>
+              <Clock className="w-[16px] h-[16px]" />
+              <span className="text-red-500 font-medium">Cerrado</span>
+              <span>⋅ Abre a las 8:00</span>
             </div>
             <div className="flex items-center gap-1">
               <Phone className="w-[16px] h-[16px]" />
               <span>+34 600 000 000</span>
             </div>
             <div className="flex items-center gap-1">
-              <Clock className="w-[16px] h-[16px]" />
-              <span className="text-red-500 font-medium">Cerrado</span>
-              <span>⋅ Abre a las 8:00</span>
+              <MapPin className="w-[16px] h-[16px]" />
+              <span>{club.address || "Calle de Ejemplo 123"}, {club.city}</span>
             </div>
           </div>
         </div>
