@@ -95,28 +95,28 @@ export function ProfileHero({ club }: ProfileHeroProps) {
           </div>
           
           {/* Username */}
-          <span className="text-[15px] text-gray-500 font-normal mt-0.5 mb-3">
+          <span className="text-[15px] text-[#536471] leading-[20px] font-normal mt-0.5 mb-3">
             @{club.slug || club.name.toLowerCase().replace(/\s+/g, '')}
           </span>
 
           {/* Bio */}
-          <p className="text-[15px] text-[#0F1419] leading-snug mb-3 pr-2">
+          <p className="text-[15px] text-[#0F1419] leading-[20px] mb-3 pr-2 whitespace-pre-wrap break-words">
             {club.description || "Club social privado con un ambiente relajado y acceso exclusivo para socios. Un espacio seguro y confortable para compartir y disfrutar en comunidad."}
           </p>
 
           {/* Meta Info (Inline flow) */}
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[14px] text-gray-500">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[15px] text-[#536471] leading-[20px]">
             <div className="flex items-center gap-1">
-              <Clock className="w-[16px] h-[16px]" />
+              <Clock className="w-[18px] h-[18px]" />
               <span className="text-red-500 font-medium">Cerrado</span>
               <span>⋅ Abre a las 8:00</span>
             </div>
             <div className="flex items-center gap-1">
-              <Phone className="w-[16px] h-[16px]" />
+              <Phone className="w-[18px] h-[18px]" />
               <span>+34 600 000 000</span>
             </div>
             <div className="flex items-center gap-1">
-              <MapPin className="w-[16px] h-[16px]" />
+              <MapPin className="w-[18px] h-[18px]" />
               <a 
                 href={`https://maps.google.com/?q=${club.address || "Calle de Ejemplo 123"}, ${club.city}`} 
                 target="_blank" 
