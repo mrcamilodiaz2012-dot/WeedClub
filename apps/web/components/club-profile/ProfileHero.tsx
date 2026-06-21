@@ -61,22 +61,34 @@ export function ProfileHero({ club }: ProfileHeroProps) {
 
       {/* Identity Container (Superimposed) */}
       <div className="max-w-4xl mx-auto px-5 md:px-8 relative z-20 -mt-[48px] md:-mt-[60px] pb-6">
-        {/* Top Row: Profile Pic & Status */}
+        {/* Top Row: Profile Pic + Status & Action Buttons */}
         <div className="flex items-end justify-between w-full mb-3">
-          {/* Logo (Left) */}
-          <div className="relative w-[96px] h-[96px] md:w-[120px] md:h-[120px] rounded-full border-[4px] border-white shadow-sm overflow-hidden bg-white shrink-0">
-            <Image
-              src={logoUrl}
-              alt={`${club.name} logo`}
-              fill
-              className="object-cover"
-            />
+          <div className="flex items-end gap-3">
+            {/* Logo (Left) */}
+            <div className="relative w-[96px] h-[96px] md:w-[120px] md:h-[120px] rounded-full border-[4px] border-white shadow-sm overflow-hidden bg-white shrink-0">
+              <Image
+                src={logoUrl}
+                alt={`${club.name} logo`}
+                fill
+                className="object-cover"
+              />
+            </div>
+
+            {/* Status (Next to Profile Pic) */}
+            <div className="flex items-center gap-1.5 pb-3">
+              <span className="w-2 h-2 rounded-full bg-[#00C853]"></span>
+              <span className="text-[13px] font-medium text-gray-600">Abierto</span>
+            </div>
           </div>
 
-          {/* Status (Right) */}
-          <div className="flex items-center gap-1.5 pb-2">
-            <span className="w-2 h-2 rounded-full bg-[#00C853]"></span>
-            <span className="text-[13px] font-medium text-gray-600">Abierto</span>
+          {/* Action Buttons (Right) */}
+          <div className="flex items-center gap-2 pb-2">
+            <button className="flex items-center justify-center w-[36px] h-[36px] bg-gray-100 text-gray-900 rounded-full hover:bg-gray-200 transition-colors">
+              <Mail className="w-[18px] h-[18px]" />
+            </button>
+            <button className="flex items-center justify-center bg-gray-900 text-white font-semibold px-5 py-[8px] rounded-full hover:bg-black transition-colors text-[14px]">
+              Seguir
+            </button>
           </div>
         </div>
 
@@ -101,7 +113,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
           </p>
 
           {/* Contact Info */}
-          <div className="flex flex-col gap-2.5 mb-6">
+          <div className="flex flex-col gap-2.5 mb-2">
             <div className="flex items-center gap-2.5 text-[15px] text-gray-700">
               <MapPin className="w-[18px] h-[18px] text-gray-400 shrink-0" />
               <span>{club.address || "Calle de Ejemplo 123"}, {club.city}{club.province ? `, ${club.province}` : ''}</span>
@@ -110,16 +122,6 @@ export function ProfileHero({ club }: ProfileHeroProps) {
               <Phone className="w-[18px] h-[18px] text-gray-400 shrink-0" />
               <span>+34 600 000 000</span>
             </div>
-          </div>
-
-          {/* Action Buttons */}
-          <div className="flex items-center gap-3 w-full">
-            <button className="flex-1 flex items-center justify-center bg-gray-900 text-white font-semibold px-5 py-3 rounded-xl hover:bg-black transition-colors text-[15px]">
-              Seguir
-            </button>
-            <button className="flex items-center justify-center w-12 h-12 bg-gray-100 text-gray-900 rounded-xl hover:bg-gray-200 transition-colors">
-              <Mail className="w-[20px] h-[20px]" />
-            </button>
           </div>
         </div>
       </div>
