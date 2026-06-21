@@ -2,7 +2,7 @@
 
 import React from 'react';
 import type { Club } from '@/types';
-import { BadgeCheck, Share2, Bookmark, Sparkles, Heart, ArrowLeft } from 'lucide-react';
+import { BadgeCheck, Share2, Bookmark, ArrowLeft, MapPin, Phone, Mail } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
@@ -60,9 +60,9 @@ export function ProfileHero({ club }: ProfileHeroProps) {
       </div>
 
       {/* Identity Container (Superimposed) */}
-      <div className="max-w-4xl mx-auto px-5 md:px-8 relative z-20 -mt-[48px] md:-mt-[60px]">
-        {/* Top Row: Profile Pic & Action Buttons */}
-        <div className="flex items-end justify-between w-full">
+      <div className="max-w-4xl mx-auto px-5 md:px-8 relative z-20 -mt-[48px] md:-mt-[60px] pb-6">
+        {/* Top Row: Profile Pic & Status */}
+        <div className="flex items-end justify-between w-full mb-3">
           {/* Logo (Left) */}
           <div className="relative w-[96px] h-[96px] md:w-[120px] md:h-[120px] rounded-full border-[4px] border-white shadow-sm overflow-hidden bg-white shrink-0">
             <Image
@@ -73,38 +73,53 @@ export function ProfileHero({ club }: ProfileHeroProps) {
             />
           </div>
 
-          {/* Action Buttons (Right) - Clean minimalist style */}
-          <div className="flex items-center gap-2 pb-2">
-            <button className="flex items-center justify-center w-[36px] h-[36px] bg-gray-100 text-gray-900 rounded-full hover:bg-gray-200 transition-colors">
-              <svg viewBox="0 0 24 24" className="w-[18px] h-[18px] fill-current" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-              </svg>
-            </button>
-            <button className="flex items-center justify-center bg-gray-900 text-white font-semibold px-5 py-[8px] rounded-full hover:bg-black transition-colors text-[14px]">
-              Seguir
-            </button>
+          {/* Status (Right) */}
+          <div className="flex items-center gap-1.5 pb-2">
+            <span className="w-2 h-2 rounded-full bg-[#00C853]"></span>
+            <span className="text-[13px] font-medium text-gray-600">Abierto</span>
           </div>
         </div>
 
-        {/* Info (Below, Left Aligned) */}
-        <div className="w-full pt-3 pb-1">
-          <div className="flex flex-col gap-0.5 mb-2.5">
-            <div className="flex items-center justify-start gap-1.5 flex-wrap">
-              <h1 className="text-2xl md:text-3xl font-display font-bold tracking-tight text-gray-900 leading-none">
-                {club.name}
-              </h1>
-              <BadgeCheck className="w-5 h-5 text-[#00C853] shrink-0" />
-            </div>
-            <span className="text-[15px] text-gray-500 font-medium">@{club.slug || club.name.toLowerCase().replace(/\s+/g, '')}</span>
+        {/* Info (Vertical Flow) */}
+        <div className="w-full flex flex-col">
+          {/* Name & Badge */}
+          <div className="flex items-center gap-1.5 mb-1">
+            <h1 className="text-2xl md:text-3xl font-display font-extrabold tracking-tight text-gray-900 leading-none">
+              {club.name}
+            </h1>
+            <BadgeCheck className="w-5 h-5 text-[#00C853] shrink-0" />
           </div>
           
-          <div className="flex items-center justify-start gap-2 text-[14px] md:text-[15px] text-gray-600 font-medium">
-            <span className="flex items-center gap-1.5 text-gray-900">
-              <span className="w-2 h-2 rounded-full bg-[#00C853]"></span>
-              Abierto ahora
-            </span>
-            <span className="text-gray-300">•</span>
-            <span>{club.city}{club.province ? `, ${club.province}` : ''}</span>
+          {/* Username */}
+          <span className="text-[15px] text-gray-500 font-light mb-4">
+            @{club.slug || club.name.toLowerCase().replace(/\s+/g, '')}
+          </span>
+
+          {/* Bio */}
+          <p className="text-[15px] md:text-[16px] text-gray-700 leading-relaxed mb-5">
+            {club.description || "Club social privado con un ambiente relajado y acceso exclusivo para socios. Un espacio seguro y confortable para compartir y disfrutar en comunidad."}
+          </p>
+
+          {/* Contact Info */}
+          <div className="flex flex-col gap-2.5 mb-6">
+            <div className="flex items-center gap-2.5 text-[15px] text-gray-700">
+              <MapPin className="w-[18px] h-[18px] text-gray-400 shrink-0" />
+              <span>{club.address || "Calle de Ejemplo 123"}, {club.city}{club.province ? `, ${club.province}` : ''}</span>
+            </div>
+            <div className="flex items-center gap-2.5 text-[15px] text-gray-700">
+              <Phone className="w-[18px] h-[18px] text-gray-400 shrink-0" />
+              <span>+34 600 000 000</span>
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex items-center gap-3 w-full">
+            <button className="flex-1 flex items-center justify-center bg-gray-900 text-white font-semibold px-5 py-3 rounded-xl hover:bg-black transition-colors text-[15px]">
+              Seguir
+            </button>
+            <button className="flex items-center justify-center w-12 h-12 bg-gray-100 text-gray-900 rounded-xl hover:bg-gray-200 transition-colors">
+              <Mail className="w-[20px] h-[20px]" />
+            </button>
           </div>
         </div>
       </div>

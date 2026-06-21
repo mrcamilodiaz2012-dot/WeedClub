@@ -4,8 +4,6 @@ import { notFound } from 'next/navigation';
 
 // Nuevos componentes de la arquitectura Premium
 import { ProfileHero } from '@/components/club-profile/ProfileHero';
-import { ProfileBio } from '@/components/club-profile/ProfileBio';
-import { ProfileQuickStats } from '@/components/club-profile/ProfileQuickStats';
 import { ProfileContent } from '@/components/club-profile/ProfileContent';
 import { SimilarClubs } from '@/components/club-profile/SimilarClubs';
 import { ClaimClubBanner } from '@/components/club-profile/ClaimClubBanner';
@@ -56,13 +54,7 @@ export default async function ClubDetailPage({ params }: { params: Promise<{ slu
       {/* 1. Hero Header (Identidad Principal) */}
       <ProfileHero club={club} />
 
-      {/* 2. Bio & Contexto */}
-      <ProfileBio description={club.description} />
-
-      {/* 3. Quick Stats (Pills) */}
-      <ProfileQuickStats city={club.city} />
-
-      {/* 4 & 5. Sticky Navigation y Contenido de Tabs */}
+      {/* 2. Sticky Navigation y Contenido de Tabs */}
       <ProfileContent club={club} />
 
       {/* 6. Clubes Similares (Carrusel) */}
