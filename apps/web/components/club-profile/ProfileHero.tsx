@@ -61,24 +61,16 @@ export function ProfileHero({ club }: ProfileHeroProps) {
 
       {/* Identity Container (Superimposed) */}
       <div className="max-w-4xl mx-auto px-5 md:px-8 relative z-20 -mt-[48px] md:-mt-[60px] pb-6">
-        {/* Top Row: Profile Pic + Status & Action Buttons */}
+        {/* Top Row: Profile Pic & Action Buttons */}
         <div className="flex items-end justify-between w-full mb-3">
-          <div className="flex items-end gap-3">
-            {/* Logo (Left) */}
-            <div className="relative w-[96px] h-[96px] md:w-[120px] md:h-[120px] rounded-full border-[4px] border-white shadow-sm overflow-hidden bg-white shrink-0">
-              <Image
-                src={logoUrl}
-                alt={`${club.name} logo`}
-                fill
-                className="object-cover"
-              />
-            </div>
-
-            {/* Status (Next to Profile Pic) */}
-            <div className="flex items-center gap-1.5 pb-3">
-              <span className="w-2 h-2 rounded-full bg-[#00C853]"></span>
-              <span className="text-[13px] font-medium text-gray-600">Abierto</span>
-            </div>
+          {/* Logo (Left) */}
+          <div className="relative w-[96px] h-[96px] md:w-[120px] md:h-[120px] rounded-full border-[4px] border-white shadow-sm overflow-hidden bg-white shrink-0">
+            <Image
+              src={logoUrl}
+              alt={`${club.name} logo`}
+              fill
+              className="object-cover"
+            />
           </div>
 
           {/* Action Buttons (Right) */}
@@ -121,6 +113,10 @@ export function ProfileHero({ club }: ProfileHeroProps) {
             <div className="flex items-center gap-2.5 text-[15px] text-gray-700">
               <Phone className="w-[18px] h-[18px] text-gray-400 shrink-0" />
               <span>+34 600 000 000</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-[15px] text-gray-700 mt-0.5 ml-[28px]">
+              <span className="text-red-500 font-medium">Cerrado</span>
+              <span className="text-gray-600">⋅ Abre a las 8:00</span>
             </div>
           </div>
         </div>
