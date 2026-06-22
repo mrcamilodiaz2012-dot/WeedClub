@@ -40,18 +40,18 @@ export function ProfileHero({ club }: ProfileHeroProps) {
           </div>
 
           {/* Meta Info Integrated */}
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[13px] text-white/90 leading-tight mt-2 drop-shadow-sm">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[14px] text-white/90 leading-tight mt-2 drop-shadow-sm">
             <div className="flex items-center gap-1">
-              <Clock className="w-[14px] h-[14px]" />
+              <Clock className="w-[15px] h-[15px]" />
               <span className="font-semibold text-white">Cerrado</span>
               <span className="text-white/80">⋅ Abre 8:00</span>
             </div>
             <div className="flex items-center gap-1">
-              <Phone className="w-[14px] h-[14px]" />
+              <Phone className="w-[15px] h-[15px]" />
               <span>+34 600 000 000</span>
             </div>
             <div className="flex items-center gap-1">
-              <MapPin className="w-[14px] h-[14px]" />
+              <MapPin className="w-[15px] h-[15px]" />
               <a 
                 href={`https://maps.google.com/?q=${club.address || "Calle de Ejemplo 123"}, ${club.city}`} 
                 target="_blank" 
