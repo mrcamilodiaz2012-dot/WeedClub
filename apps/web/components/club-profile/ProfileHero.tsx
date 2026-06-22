@@ -69,35 +69,35 @@ export function ProfileHero({ club }: ProfileHeroProps) {
         <div className="absolute top-4 left-4 z-10">
           <button 
             onClick={() => router.back()}
-            className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-full text-black hover:bg-gray-100 transition-all shadow-sm"
+            className="flex items-center gap-2 text-white hover:text-white/80 transition-all drop-shadow-md p-1"
           >
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft className="w-5 h-5" />
             <Image 
               src="/logos/logo2.svg" 
               alt="WeedClub" 
-              width={18} 
-              height={18} 
+              width={20} 
+              height={20} 
             />
           </button>
         </div>
 
         {/* Top Center Nav (City) */}
-        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10">
-          <div className="flex items-center gap-1 bg-white px-2.5 py-1 rounded-full text-black shadow-sm">
-            <MapPin className="w-[12px] h-[12px]" />
-            <span className="text-[11px] font-medium tracking-wide uppercase">
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 mt-1">
+          <div className="flex items-center gap-1.5 text-white drop-shadow-md">
+            <MapPin className="w-[14px] h-[14px]" />
+            <span className="text-[12px] font-semibold tracking-wide uppercase">
               {club.city}
             </span>
           </div>
         </div>
 
         {/* Top Right Nav */}
-        <div className="absolute top-4 right-4 flex items-center gap-2.5 z-10">
-          <button className="flex items-center justify-center bg-white w-[34px] h-[34px] rounded-full text-black hover:bg-gray-100 transition-all shadow-sm">
-            <Share2 className="w-4 h-4" />
+        <div className="absolute top-4 right-4 flex items-center gap-3 z-10">
+          <button className="text-white hover:text-white/80 transition-all drop-shadow-md p-1">
+            <Share2 className="w-5 h-5" />
           </button>
-          <button className="flex items-center justify-center bg-white w-[34px] h-[34px] rounded-full text-black hover:bg-gray-100 transition-all shadow-sm">
-            <Bookmark className="w-4 h-4" />
+          <button className="text-white hover:text-white/80 transition-all drop-shadow-md p-1">
+            <Bookmark className="w-5 h-5" />
           </button>
         </div>
       </div>
