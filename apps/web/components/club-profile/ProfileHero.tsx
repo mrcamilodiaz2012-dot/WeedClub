@@ -31,7 +31,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-transparent"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
         
-        {/* Name, Handle & Meta (Integrated in cover) */}
+        {/* Name & Meta (Integrated in cover) */}
         <div className="absolute bottom-0 left-0 right-0 p-5 md:p-8 pb-10 md:pb-12 z-20 flex flex-col">
           <div className="flex items-center gap-2">
             <h1 className="text-[40px] md:text-[52px] font-light tracking-tight text-white leading-none drop-shadow-md">
@@ -39,22 +39,19 @@ export function ProfileHero({ club }: ProfileHeroProps) {
             </h1>
             <BadgeCheck className="w-[24px] h-[24px] text-[#00C853] shrink-0" fill="currentColor" stroke="white" strokeWidth={1.5} />
           </div>
-          <span className="text-[15px] text-white/80 font-medium mt-1 drop-shadow-sm">
-            @{club.slug || club.name.toLowerCase().replace(/\s+/g, '')}
-          </span>
 
           {/* Meta Info Integrated */}
-          <div className="flex flex-wrap items-center gap-x-2.5 gap-y-2 text-[13px] text-white/90 leading-tight mt-4 drop-shadow-sm">
-            <div className="flex items-center gap-1.5 bg-black/20 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[13px] text-white/90 leading-tight mt-2.5 drop-shadow-sm">
+            <div className="flex items-center gap-1.5">
               <Clock className="w-[14px] h-[14px]" />
               <span className="font-semibold text-white">Cerrado</span>
               <span className="text-white/70">⋅ Abre 8:00</span>
             </div>
-            <div className="flex items-center gap-1.5 bg-black/20 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">
+            <div className="flex items-center gap-1.5">
               <Phone className="w-[14px] h-[14px]" />
               <span>+34 600 000 000</span>
             </div>
-            <div className="flex items-center gap-1.5 bg-black/20 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">
+            <div className="flex items-center gap-1.5">
               <MapPin className="w-[14px] h-[14px]" />
               <a 
                 href={`https://maps.google.com/?q=${club.address || "Calle de Ejemplo 123"}, ${club.city}`} 
