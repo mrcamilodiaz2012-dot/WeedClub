@@ -19,7 +19,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
   return (
     <div className="relative w-full bg-white">
       {/* 1. Cover Image (Edge to edge) */}
-      <div className="w-full h-[216px] md:h-[288px] relative overflow-hidden bg-gray-200 z-10">
+      <div className="w-full h-[280px] md:h-[360px] relative overflow-hidden bg-gray-200 z-10">
         <Image
           src={coverUrl}
           alt={`${club.name} cover`}
@@ -31,7 +31,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-transparent"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
         
-        {/* Name & Handle (Integrated in cover) */}
+        {/* Name, Handle & Meta (Integrated in cover) */}
         <div className="absolute bottom-0 left-0 right-0 p-5 md:p-8 pb-10 md:pb-12 z-20 flex flex-col">
           <div className="flex items-center gap-2">
             <h1 className="text-[40px] md:text-[52px] font-light tracking-tight text-white leading-none drop-shadow-md">
@@ -39,9 +39,33 @@ export function ProfileHero({ club }: ProfileHeroProps) {
             </h1>
             <BadgeCheck className="w-[24px] h-[24px] text-[#00C853] shrink-0" fill="currentColor" stroke="white" strokeWidth={1.5} />
           </div>
-          <span className="text-[15px] text-white/80 font-medium mt-0.5 drop-shadow-sm">
+          <span className="text-[15px] text-white/80 font-medium mt-1 drop-shadow-sm">
             @{club.slug || club.name.toLowerCase().replace(/\s+/g, '')}
           </span>
+
+          {/* Meta Info Integrated */}
+          <div className="flex flex-wrap items-center gap-x-2.5 gap-y-2 text-[13px] text-white/90 leading-tight mt-4 drop-shadow-sm">
+            <div className="flex items-center gap-1.5 bg-black/20 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">
+              <Clock className="w-[14px] h-[14px]" />
+              <span className="font-semibold text-white">Cerrado</span>
+              <span className="text-white/70">⋅ Abre 8:00</span>
+            </div>
+            <div className="flex items-center gap-1.5 bg-black/20 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">
+              <Phone className="w-[14px] h-[14px]" />
+              <span>+34 600 000 000</span>
+            </div>
+            <div className="flex items-center gap-1.5 bg-black/20 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">
+              <MapPin className="w-[14px] h-[14px]" />
+              <a 
+                href={`https://maps.google.com/?q=${club.address || "Calle de Ejemplo 123"}, ${club.city}`} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hover:underline cursor-pointer"
+              >
+                {club.address || "Calle de Ejemplo 123"}, {club.city}
+              </a>
+            </div>
+          </div>
         </div>
         
         {/* Top Left Nav */}
@@ -72,36 +96,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
       </div>
 
       {/* 2. White Container, negative margin to tuck under cover */}
-      <div className="relative bg-white rounded-t-[32px] -mt-6 px-4 md:px-8 pt-8 pb-6 z-20 shadow-[0_-4px_24px_rgba(0,0,0,0.06)]">
-
-        {/* Bio */}
-        <p className="text-[15px] text-[#0F1419] leading-[20px] mt-4 mb-5 whitespace-pre-wrap break-words">
-          {club.description || "Club social privado con un ambiente relajado y acceso exclusivo para socios. Un espacio seguro y confortable para compartir y disfrutar en comunidad."}
-        </p>
-
-        {/* Meta Info (Inline flow like X) */}
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[15px] text-[#536471] leading-[20px] mb-5">
-          <div className="flex items-center gap-1">
-            <Clock className="w-[18px] h-[18px]" />
-            <span className="text-[#0F1419] font-medium">Cerrado</span>
-            <span>⋅ Abre a las 8:00</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <Phone className="w-[18px] h-[18px]" />
-            <span>+34 600 000 000</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <MapPin className="w-[18px] h-[18px]" />
-            <a 
-              href={`https://maps.google.com/?q=${club.address || "Calle de Ejemplo 123"}, ${club.city}`} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="hover:underline cursor-pointer"
-            >
-              {club.address || "Calle de Ejemplo 123"}, {club.city}
-            </a>
-          </div>
-        </div>
+      <div className="relative bg-white rounded-t-[32px] -mt-6 px-4 md:px-8 pt-6 pb-6 z-20 shadow-[0_-4px_24px_rgba(0,0,0,0.06)]">
 
         {/* Action Buttons */}
         <div className="flex w-full items-center gap-2.5">
