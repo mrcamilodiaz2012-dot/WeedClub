@@ -27,9 +27,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
           className="object-cover"
           priority
         />
-        {/* Dark Gradient Overlay for readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/30 z-10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+        {/* Removed Dark Gradient Overlay as requested */}
         
         {/* Name & Meta (Integrated in cover) */}
         <div className="absolute bottom-0 left-0 right-0 p-5 md:p-8 pb-10 md:pb-12 z-20 flex flex-col">
