@@ -19,7 +19,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
   return (
     <div className="relative w-full bg-white">
       {/* 1. Cover Image (Edge to edge) */}
-      <div className="w-full h-[160px] md:h-[220px] relative overflow-hidden bg-gray-200">
+      <div className="w-full h-[192px] md:h-[264px] relative overflow-hidden bg-gray-200 rounded-b-[32px] z-20 shadow-[0_4px_24px_rgba(0,0,0,0.06)]">
         <Image
           src={coverUrl}
           alt={`${club.name} cover`}
@@ -57,8 +57,8 @@ export function ProfileHero({ club }: ProfileHeroProps) {
         </div>
       </div>
 
-      {/* 2. White Container with rounded top, negative margin to overlap cover */}
-      <div className="relative bg-white rounded-t-[28px] -mt-5 px-4 pt-4 pb-6 z-20 shadow-[0_-4px_24px_rgba(0,0,0,0.06)]">
+      {/* 2. White Container, negative margin to tuck under cover */}
+      <div className="relative bg-white -mt-6 px-4 pt-10 pb-6 z-10">
         
         {/* Top Block: Name & Handle */}
         <div className="flex flex-col pt-3">
