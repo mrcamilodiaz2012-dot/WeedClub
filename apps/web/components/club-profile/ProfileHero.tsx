@@ -40,17 +40,17 @@ export function ProfileHero({ club }: ProfileHeroProps) {
           </div>
 
           {/* Meta Info Integrated */}
-          <div className="inline-flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[13px] text-white/80 leading-tight mt-2.5 drop-shadow-sm backdrop-blur-[6px] py-1.5 px-2 -ml-2 rounded-lg">
-            <div className="flex items-center gap-1.5">
+          <div className="flex flex-wrap items-center gap-x-2.5 gap-y-2 text-[13px] text-white/80 leading-tight mt-2 drop-shadow-sm">
+            <div className="flex items-center gap-1.5 backdrop-blur-[6px] bg-black/10 px-2 py-1 rounded-md">
               <Clock className="w-[14px] h-[14px]" />
               <span className="font-semibold text-white/80">Cerrado</span>
               <span className="text-white/60">⋅ Abre 8:00</span>
             </div>
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1.5 backdrop-blur-[6px] bg-black/10 px-2 py-1 rounded-md">
               <Phone className="w-[14px] h-[14px]" />
               <span>+34 600 000 000</span>
             </div>
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1.5 backdrop-blur-[6px] bg-black/10 px-2 py-1 rounded-md">
               <MapPin className="w-[14px] h-[14px]" />
               <a 
                 href={`https://maps.google.com/?q=${club.address || "Calle de Ejemplo 123"}, ${club.city}`} 
