@@ -36,7 +36,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
             <h1 className="text-[48px] md:text-[68px] font-black tracking-tighter text-white leading-[0.9]">
               {club.name}
             </h1>
-            <BadgeCheck className="w-[28px] h-[28px] text-[#1ed760] shrink-0 drop-shadow-md" fill="currentColor" stroke="black" strokeWidth={1.5} />
+            <BadgeCheck className="w-[28px] h-[28px] text-[#1ed760] shrink-0 drop-shadow-md" fill="currentColor" stroke="white" strokeWidth={1.5} />
           </div>
 
           {/* Meta Info Integrated */}
