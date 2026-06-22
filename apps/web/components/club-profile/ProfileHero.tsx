@@ -30,37 +30,35 @@ export function ProfileHero({ club }: ProfileHeroProps) {
         {/* Removed Dark Gradient Overlay as requested */}
         
         {/* Name & Meta (Integrated in cover) */}
-        <div className="absolute bottom-6 md:bottom-8 left-4 right-4 md:left-8 md:right-8 z-20 flex flex-col items-start">
-          <div className="backdrop-blur-md bg-black/30 p-4 md:p-5 rounded-2xl border border-white/10 shadow-2xl max-w-full">
-            <div className="flex items-center gap-2 mb-1">
-              <h1 className="text-[48px] md:text-[68px] font-black tracking-tighter text-white leading-[0.9] drop-shadow-xl truncate">
-                {club.name}
-              </h1>
-              <BadgeCheck className="w-[28px] h-[28px] text-[#1ed760] shrink-0 drop-shadow-md" fill="currentColor" stroke="black" strokeWidth={1.5} />
-            </div>
+        <div className="absolute bottom-0 left-0 right-0 p-5 md:p-8 pb-10 md:pb-12 z-20 flex flex-col">
+          <div className="flex items-center gap-2 mb-1">
+            <h1 className="text-[48px] md:text-[68px] font-black tracking-tighter text-white leading-[0.9] drop-shadow-xl">
+              {club.name}
+            </h1>
+            <BadgeCheck className="w-[28px] h-[28px] text-[#1ed760] shrink-0 drop-shadow-md" fill="currentColor" stroke="black" strokeWidth={1.5} />
+          </div>
 
-            {/* Meta Info Integrated */}
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[13px] text-white/90 leading-tight mt-2.5 drop-shadow-sm">
-              <div className="flex items-center gap-1.5">
-                <Clock className="w-[14px] h-[14px]" />
-                <span className="font-semibold text-white">Cerrado</span>
-                <span className="text-white/70">⋅ Abre 8:00</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <Phone className="w-[14px] h-[14px]" />
-                <span>+34 600 000 000</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <MapPin className="w-[14px] h-[14px]" />
-                <a 
-                  href={`https://maps.google.com/?q=${club.address || "Calle de Ejemplo 123"}, ${club.city}`} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="hover:underline cursor-pointer truncate max-w-[200px] md:max-w-none"
-                >
-                  {club.address || "Calle de Ejemplo 123"}, {club.city}
-                </a>
-              </div>
+          {/* Meta Info Integrated */}
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[13px] text-white/90 leading-tight mt-2.5 drop-shadow-sm">
+            <div className="flex items-center gap-1.5">
+              <Clock className="w-[14px] h-[14px]" />
+              <span className="font-semibold text-white">Cerrado</span>
+              <span className="text-white/70">⋅ Abre 8:00</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <Phone className="w-[14px] h-[14px]" />
+              <span>+34 600 000 000</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <MapPin className="w-[14px] h-[14px]" />
+              <a 
+                href={`https://maps.google.com/?q=${club.address || "Calle de Ejemplo 123"}, ${club.city}`} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hover:underline cursor-pointer"
+              >
+                {club.address || "Calle de Ejemplo 123"}, {club.city}
+              </a>
             </div>
           </div>
         </div>
