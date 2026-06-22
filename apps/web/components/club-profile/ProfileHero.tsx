@@ -19,7 +19,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
   return (
     <div className="relative w-full bg-white">
       {/* 1. Cover Image (Edge to edge) */}
-      <div className="w-full h-[216px] md:h-[288px] relative overflow-hidden bg-gray-200 rounded-b-[32px] z-20 shadow-[0_4px_24px_rgba(0,0,0,0.06)]">
+      <div className="w-full h-[216px] md:h-[288px] relative overflow-hidden bg-gray-200 z-10">
         <Image
           src={coverUrl}
           alt={`${club.name} cover`}
@@ -32,9 +32,9 @@ export function ProfileHero({ club }: ProfileHeroProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
         
         {/* Name & Handle (Integrated in cover) */}
-        <div className="absolute bottom-0 left-0 right-0 p-5 md:p-8 pb-8 md:pb-10 z-10 flex flex-col">
+        <div className="absolute bottom-0 left-0 right-0 p-5 md:p-8 pb-10 md:pb-12 z-20 flex flex-col">
           <div className="flex items-center gap-2">
-            <h1 className="text-[32px] md:text-[42px] font-black tracking-tighter text-white leading-tight drop-shadow-md">
+            <h1 className="text-[40px] md:text-[52px] font-light tracking-tight text-white leading-none drop-shadow-md">
               {club.name}
             </h1>
             <BadgeCheck className="w-[24px] h-[24px] text-[#00C853] shrink-0" fill="currentColor" stroke="white" strokeWidth={1.5} />
@@ -72,7 +72,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
       </div>
 
       {/* 2. White Container, negative margin to tuck under cover */}
-      <div className="relative bg-white -mt-6 px-4 md:px-8 pt-10 pb-6 z-10">
+      <div className="relative bg-white rounded-t-[32px] -mt-6 px-4 md:px-8 pt-8 pb-6 z-20 shadow-[0_-4px_24px_rgba(0,0,0,0.06)]">
 
         {/* Bio */}
         <p className="text-[15px] text-[#0F1419] leading-[20px] mt-4 mb-5 whitespace-pre-wrap break-words">
