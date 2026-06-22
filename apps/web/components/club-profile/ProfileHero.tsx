@@ -69,7 +69,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
         <div className="absolute top-4 left-4 z-10">
           <button 
             onClick={() => router.back()}
-            className="flex items-center gap-1.5 bg-black/20 backdrop-blur-md px-3 py-1.5 rounded-full text-white hover:bg-black/30 transition-all border border-white/20"
+            className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-full text-black hover:bg-gray-100 transition-all shadow-sm"
           >
             <ArrowLeft className="w-4 h-4" />
             <Image 
@@ -83,7 +83,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
 
         {/* Top Center Nav (City) */}
         <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10">
-          <div className="flex items-center gap-1 bg-black/20 backdrop-blur-md px-2.5 py-1 rounded-full text-white/90 border border-white/20 shadow-sm">
+          <div className="flex items-center gap-1 bg-white px-2.5 py-1 rounded-full text-black shadow-sm">
             <MapPin className="w-[12px] h-[12px]" />
             <span className="text-[11px] font-medium tracking-wide uppercase">
               {club.city}
@@ -93,10 +93,10 @@ export function ProfileHero({ club }: ProfileHeroProps) {
 
         {/* Top Right Nav */}
         <div className="absolute top-4 right-4 flex items-center gap-2.5 z-10">
-          <button className="flex items-center justify-center bg-black/20 backdrop-blur-md w-[34px] h-[34px] rounded-full text-white hover:bg-black/30 transition-all border border-white/20">
+          <button className="flex items-center justify-center bg-white w-[34px] h-[34px] rounded-full text-black hover:bg-gray-100 transition-all shadow-sm">
             <Share2 className="w-4 h-4" />
           </button>
-          <button className="flex items-center justify-center bg-black/20 backdrop-blur-md w-[34px] h-[34px] rounded-full text-white hover:bg-black/30 transition-all border border-white/20">
+          <button className="flex items-center justify-center bg-white w-[34px] h-[34px] rounded-full text-black hover:bg-gray-100 transition-all shadow-sm">
             <Bookmark className="w-4 h-4" />
           </button>
         </div>
