@@ -83,8 +83,9 @@ export function ProfileHero({ club }: ProfileHeroProps) {
 
         {/* Top Center Nav (City) */}
         <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10">
-          <div className="bg-black/20 backdrop-blur-md px-3 py-1.5 rounded-full text-white/90 border border-white/20 shadow-sm">
-            <span className="text-[13px] font-medium tracking-wide uppercase">
+          <div className="flex items-center gap-1 bg-black/20 backdrop-blur-md px-2.5 py-1 rounded-full text-white/90 border border-white/20 shadow-sm">
+            <MapPin className="w-[12px] h-[12px]" />
+            <span className="text-[11px] font-medium tracking-wide uppercase">
               {club.city}
             </span>
           </div>
