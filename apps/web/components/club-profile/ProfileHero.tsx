@@ -105,11 +105,11 @@ export function ProfileHero({ club }: ProfileHeroProps) {
       <div className="relative bg-white rounded-t-[32px] -mt-6 px-4 md:px-8 pt-5 pb-2 z-20 shadow-[0_-4px_24px_rgba(0,0,0,0.06)] flex items-center justify-between">
         
         {/* Left Side: Map Icon */}
-        <button className="h-[36px] w-[36px] rounded-full border border-gray-300 text-black flex items-center justify-center hover:bg-gray-50 transition-colors">
+        <button className="text-black hover:text-gray-600 transition-colors flex items-center justify-center p-1">
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
-            width="18" 
-            height="18" 
+            width="20" 
+            height="20" 
             viewBox="0 0 24 24" 
             fill="none" 
             stroke="currentColor" 
@@ -124,18 +124,18 @@ export function ProfileHero({ club }: ProfileHeroProps) {
         </button>
 
         {/* Right Side: Actions */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-4">
           {/* WhatsApp Action Button (X Style) */}
           <a 
             href="https://wa.me/34600000000"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-[36px] h-[36px] rounded-full border border-gray-300 text-black flex items-center justify-center hover:bg-gray-50 transition-colors"
+            className="text-black hover:text-gray-600 transition-colors flex items-center justify-center p-1"
           >
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
-              width="18" 
-              height="18" 
+              width="20" 
+              height="20" 
               viewBox="0 0 24 24" 
               fill="currentColor"
             >
