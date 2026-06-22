@@ -32,7 +32,7 @@ export default async function ClubDetailPage({ params }: { params: Promise<{ slu
         slug: `mock-club-${resolvedParams.slug}`,
         description: `Bienvenido al Club ${resolvedParams.slug}. Este es un perfil generado dinámicamente para probar la nueva arquitectura de perfil.`,
         logo_url: `https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=200&auto=format&fit=crop&sig=${resolvedParams.slug}`,
-        cover_image_url: '/portadas/portada3.jpg',
+        cover_image_url: '/portadas/portada3.png',
         lat: 40.4168,
         lng: -3.7038,
         address: 'Calle Falsa 123',
