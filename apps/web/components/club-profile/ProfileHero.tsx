@@ -33,18 +33,18 @@ export function ProfileHero({ club }: ProfileHeroProps) {
         {/* Name & Meta (Integrated in cover) */}
         <div className="absolute bottom-0 left-0 right-0 p-5 md:p-8 pb-10 md:pb-12 z-20 flex flex-col">
           <div className="flex items-center gap-2 mb-1">
-            <h1 className="text-[48px] md:text-[68px] font-black tracking-tighter text-white leading-[0.9] drop-shadow-xl">
+            <h1 className="text-[48px] md:text-[68px] font-black tracking-tighter text-white leading-[0.9]">
               {club.name}
             </h1>
             <BadgeCheck className="w-[28px] h-[28px] text-[#1ed760] shrink-0 drop-shadow-md" fill="currentColor" stroke="black" strokeWidth={1.5} />
           </div>
 
           {/* Meta Info Integrated */}
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[13px] text-white/90 leading-tight mt-2.5 drop-shadow-sm">
+          <div className="inline-flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[13px] text-white/80 leading-tight mt-2.5 drop-shadow-sm backdrop-blur-[6px] py-1.5 px-2 -ml-2 rounded-lg">
             <div className="flex items-center gap-1.5">
               <Clock className="w-[14px] h-[14px]" />
-              <span className="font-semibold text-white">Cerrado</span>
-              <span className="text-white/70">⋅ Abre 8:00</span>
+              <span className="font-semibold text-white/80">Cerrado</span>
+              <span className="text-white/60">⋅ Abre 8:00</span>
             </div>
             <div className="flex items-center gap-1.5">
               <Phone className="w-[14px] h-[14px]" />
