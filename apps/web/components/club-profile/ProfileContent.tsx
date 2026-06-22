@@ -21,20 +21,23 @@ export function ProfileContent({ club }: ProfileContentProps) {
   return (
     <div className="w-full pb-20 relative">
       {/* Tabs Carousel */}
-      <div className="w-full sticky top-0 bg-white/95 backdrop-blur-md z-30 pt-2 pb-4 border-b border-gray-100/50">
+      <div className="w-full border-b border-gray-100 sticky top-0 bg-white/95 backdrop-blur-md z-30 pt-1">
         <div className="max-w-4xl mx-auto px-5 md:px-8">
-          <div className="flex overflow-x-auto hide-scrollbar gap-2.5 items-center">
+          <div className="flex overflow-x-auto hide-scrollbar gap-6 items-center">
             {tabs.map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-4 py-2 text-[14px] font-semibold whitespace-nowrap rounded-full transition-all duration-300 ${
+                className={`py-4 text-[15px] font-bold whitespace-nowrap relative transition-colors duration-300 ${
                   activeTab === tab 
-                    ? 'bg-black text-white shadow-md' 
-                    : 'bg-gray-100/80 text-gray-600 hover:bg-gray-200'
+                    ? 'text-black' 
+                    : 'text-gray-500 hover:text-gray-800'
                 }`}
               >
                 {tab}
+                {activeTab === tab && (
+                  <span className="absolute bottom-0 left-0 w-full h-[3px] bg-[#1ed760] rounded-t-full"></span>
+                )}
               </button>
             ))}
           </div>
