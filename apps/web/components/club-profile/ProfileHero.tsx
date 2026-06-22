@@ -19,7 +19,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
   return (
     <div className="relative w-full bg-white">
       {/* 1. Cover Image (Edge to edge) */}
-      <div className="w-full h-[280px] md:h-[360px] relative overflow-hidden bg-gray-200 z-10">
+      <div className="w-full h-[340px] md:h-[430px] relative overflow-hidden bg-gray-200 z-10">
         <Image
           src={coverUrl}
           alt={`${club.name} cover`}
@@ -27,9 +27,8 @@ export function ProfileHero({ club }: ProfileHeroProps) {
           className="object-cover"
           priority
         />
-        {/* Dark Gradient Overlay for readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/30 z-10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+        {/* Dark Gradient Overlay only at the bottom for readability */}
+        <div className="absolute bottom-0 left-0 right-0 h-[60%] bg-gradient-to-t from-black/90 via-black/50 to-transparent z-10" />
         
         {/* Name & Meta (Integrated in cover) */}
         <div className="absolute bottom-0 left-0 right-0 p-5 md:p-8 pb-10 md:pb-12 z-20 flex flex-col">
