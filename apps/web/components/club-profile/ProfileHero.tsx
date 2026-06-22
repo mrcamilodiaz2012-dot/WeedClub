@@ -105,11 +105,11 @@ export function ProfileHero({ club }: ProfileHeroProps) {
       <div className="relative bg-white rounded-t-[32px] -mt-6 px-4 md:px-8 pt-5 pb-2 z-20 shadow-[0_-4px_24px_rgba(0,0,0,0.06)] flex items-center justify-between">
         
         {/* Left Side: Map Icon */}
-        <button className="text-black hover:text-gray-600 transition-colors flex items-center justify-center p-1">
+        <button className="text-black hover:text-gray-600 transition-colors flex items-center justify-center p-1.5">
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
-            width="20" 
-            height="20" 
+            width="24" 
+            height="24" 
             viewBox="0 0 24 24" 
             fill="none" 
             stroke="currentColor" 
@@ -130,12 +130,12 @@ export function ProfileHero({ club }: ProfileHeroProps) {
             href="https://wa.me/34600000000"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-black hover:text-gray-600 transition-colors flex items-center justify-center p-1"
+            className="text-black hover:text-gray-600 transition-colors flex items-center justify-center p-1.5"
           >
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
-              width="20" 
-              height="20" 
+              width="24" 
+              height="24" 
               viewBox="0 0 24 24" 
               fill="currentColor"
             >
