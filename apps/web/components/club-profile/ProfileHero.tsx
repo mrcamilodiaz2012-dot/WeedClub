@@ -108,8 +108,8 @@ export function ProfileHero({ club }: ProfileHeroProps) {
         <button className="text-black hover:text-gray-600 transition-colors flex items-center justify-center p-1.5">
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
-            width="24" 
-            height="24" 
+            width="28" 
+            height="28" 
             viewBox="0 0 24 24" 
             fill="none" 
             stroke="currentColor" 
@@ -124,7 +124,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
         </button>
 
         {/* Right Side: Actions */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
           {/* WhatsApp Action Button (X Style) */}
           <a 
             href="https://wa.me/34600000000"
