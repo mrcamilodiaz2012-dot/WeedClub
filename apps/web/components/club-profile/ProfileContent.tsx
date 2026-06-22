@@ -21,23 +21,23 @@ export function ProfileContent({ club }: ProfileContentProps) {
   return (
     <div className="w-full pb-20 relative">
       {/* Tabs Carousel */}
-      <div className="w-full border-b border-gray-100 sticky top-0 bg-white/95 backdrop-blur-md z-30 pt-1">
-        <div className="max-w-4xl mx-auto px-5 md:px-8">
-          <div className="flex overflow-x-auto hide-scrollbar gap-6 items-center">
+      <div className="w-full border-b border-gray-200 sticky top-0 bg-white/95 backdrop-blur-md z-30 pt-0">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex overflow-x-auto hide-scrollbar w-full">
             {tabs.map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`py-4 text-[15px] font-bold whitespace-nowrap relative transition-colors duration-300 ${
-                  activeTab === tab 
-                    ? 'text-black' 
-                    : 'text-gray-500 hover:text-gray-800'
-                }`}
+                className="flex-1 min-w-[80px] hover:bg-gray-200/50 transition-colors flex justify-center pt-4"
               >
-                {tab}
-                {activeTab === tab && (
-                  <span className="absolute bottom-0 left-0 w-full h-[3px] bg-[#1ed760] rounded-t-full"></span>
-                )}
+                <div className="relative pb-4 flex flex-col items-center justify-center">
+                  <span className={`text-[15px] ${activeTab === tab ? 'font-bold text-black' : 'font-medium text-gray-500'}`}>
+                    {tab}
+                  </span>
+                  {activeTab === tab && (
+                    <div className="absolute bottom-0 left-0 w-full h-[4px] bg-black rounded-full"></div>
+                  )}
+                </div>
               </button>
             ))}
           </div>
