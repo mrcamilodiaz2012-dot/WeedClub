@@ -19,7 +19,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
   return (
     <div className="relative w-full bg-white">
       {/* 1. Cover Image (Edge to edge) */}
-      <div className="w-full h-[192px] md:h-[264px] relative overflow-hidden bg-gray-200 rounded-b-[32px] z-20 shadow-[0_4px_24px_rgba(0,0,0,0.06)]">
+      <div className="w-full h-[240px] md:h-[320px] relative overflow-hidden bg-gray-200 rounded-b-[32px] z-20 shadow-[0_4px_24px_rgba(0,0,0,0.06)]">
         <Image
           src={coverUrl}
           alt={`${club.name} cover`}
@@ -27,8 +27,22 @@ export function ProfileHero({ club }: ProfileHeroProps) {
           className="object-cover"
           priority
         />
-        {/* Shadow overlay for top nav */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent"></div>
+        {/* Gradient overlays for nav and text legibility */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+        
+        {/* Name & Handle (Integrated in cover) */}
+        <div className="absolute bottom-0 left-0 right-0 p-5 md:p-8 pb-8 md:pb-10 z-10 flex flex-col">
+          <div className="flex items-center gap-2">
+            <h1 className="text-[32px] md:text-[42px] font-black tracking-tighter text-white leading-tight drop-shadow-md">
+              {club.name}
+            </h1>
+            <BadgeCheck className="w-[24px] h-[24px] text-[#00C853] shrink-0" fill="currentColor" stroke="white" strokeWidth={1.5} />
+          </div>
+          <span className="text-[15px] text-white/80 font-medium mt-0.5 drop-shadow-sm">
+            @{club.slug || club.name.toLowerCase().replace(/\s+/g, '')}
+          </span>
+        </div>
         
         {/* Top Left Nav */}
         <div className="absolute top-4 left-4 z-10">
@@ -58,20 +72,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
       </div>
 
       {/* 2. White Container, negative margin to tuck under cover */}
-      <div className="relative bg-white -mt-6 px-4 pt-10 pb-6 z-10">
-        
-        {/* Top Block: Name & Handle */}
-        <div className="flex flex-col pt-3">
-          <div className="flex items-center gap-2">
-            <h1 className="text-[32px] md:text-[42px] font-black tracking-tighter text-gray-900 leading-tight">
-              {club.name}
-            </h1>
-            <BadgeCheck className="w-[22px] h-[22px] text-[#00C853] shrink-0" fill="currentColor" stroke="white" strokeWidth={1.5} />
-          </div>
-          <span className="text-[15px] text-gray-500 font-medium mt-0.5">
-            @{club.slug || club.name.toLowerCase().replace(/\s+/g, '')}
-          </span>
-        </div>
+      <div className="relative bg-white -mt-6 px-4 md:px-8 pt-10 pb-6 z-10">
 
         {/* Bio */}
         <p className="text-[15px] text-[#0F1419] leading-[20px] mt-4 mb-5 whitespace-pre-wrap break-words">
