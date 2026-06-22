@@ -21,17 +21,18 @@ export function ProfileContent({ club }: ProfileContentProps) {
   return (
     <div className="w-full pb-20 relative">
       {/* Tabs Carousel */}
-      <div className="w-full sticky top-0 bg-white/95 backdrop-blur-md z-30 pt-2 pb-4 border-b border-gray-100/50">
-        <div className="max-w-4xl mx-auto px-5 md:px-8">
-          <div className="flex overflow-x-auto hide-scrollbar gap-2.5 items-center">
+      <div className="w-full sticky top-0 z-30 pt-1 pb-4 bg-white/90 backdrop-blur-xl border-b border-gray-100/50">
+        <div className="max-w-4xl mx-auto px-4 md:px-8">
+          {/* Segmented Control Container */}
+          <div className="flex overflow-x-auto hide-scrollbar items-center bg-gray-100/80 p-1.5 rounded-[20px]">
             {tabs.map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-4 py-2 text-[14px] font-semibold whitespace-nowrap rounded-full transition-all duration-300 ${
+                className={`flex-1 min-w-[90px] px-4 py-2 text-[14px] font-semibold whitespace-nowrap rounded-[14px] transition-all duration-300 ${
                   activeTab === tab 
-                    ? 'bg-black text-white shadow-md' 
-                    : 'bg-gray-100/80 text-gray-600 hover:bg-gray-200'
+                    ? 'bg-white text-black shadow-[0_2px_8px_rgba(0,0,0,0.08)]' 
+                    : 'text-gray-500 hover:text-gray-900'
                 }`}
               >
                 {tab}
