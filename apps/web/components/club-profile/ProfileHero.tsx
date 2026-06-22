@@ -15,8 +15,6 @@ export function ProfileHero({ club }: ProfileHeroProps) {
 
   // Default images if none provided
   const coverUrl = club.cover_image_url || 'https://images.unsplash.com/photo-1576085898323-218337e3e43c?auto=format&fit=crop&q=80';
-  const logoUrl = club.logo_url || 'https://api.dicebear.com/7.x/shapes/svg?seed=' + club.id;
-  const isPremium = club.subscription_tier === 'premium';
   
   return (
     <div className="relative w-full bg-white">
@@ -62,30 +60,17 @@ export function ProfileHero({ club }: ProfileHeroProps) {
       {/* 2. White Container with rounded top, negative margin to overlap cover */}
       <div className="relative bg-white rounded-t-[28px] -mt-5 px-4 pt-4 pb-6 z-20 shadow-[0_-4px_24px_rgba(0,0,0,0.06)]">
         
-        {/* Top Block: Avatar (Left) + Name & Handle (Right) */}
-        <div className="flex flex-row items-center gap-3">
-          {/* Avatar (Sticks out above the white container) */}
-          <div className="relative w-[86px] h-[86px] md:w-[110px] md:h-[110px] rounded-full border-[4px] border-white shadow-sm overflow-hidden bg-white shrink-0 -mt-10">
-            <Image
-              src={logoUrl}
-              alt={`${club.name} logo`}
-              fill
-              className="object-cover"
-            />
+        {/* Top Block: Name & Handle */}
+        <div className="flex flex-col pt-3">
+          <div className="flex items-center gap-2">
+            <h1 className="text-[32px] md:text-[42px] font-black tracking-tighter text-gray-900 leading-tight">
+              {club.name}
+            </h1>
+            <BadgeCheck className="w-[22px] h-[22px] text-[#00C853] shrink-0" fill="currentColor" stroke="white" strokeWidth={1.5} />
           </div>
-
-          {/* Name & Handle */}
-          <div className="flex flex-col pt-1">
-            <div className="flex items-center gap-1">
-              <h1 className="text-[22px] md:text-[26px] font-bold text-gray-900 leading-tight">
-                {club.name}
-              </h1>
-              <BadgeCheck className="w-[18px] h-[18px] text-[#00C853] shrink-0" fill="currentColor" stroke="white" strokeWidth={1.5} />
-            </div>
-            <span className="text-[14px] text-gray-500 font-normal">
-              @{club.slug || club.name.toLowerCase().replace(/\s+/g, '')}
-            </span>
-          </div>
+          <span className="text-[15px] text-gray-500 font-medium mt-0.5">
+            @{club.slug || club.name.toLowerCase().replace(/\s+/g, '')}
+          </span>
         </div>
 
         {/* Bio */}
