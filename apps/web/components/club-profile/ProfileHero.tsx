@@ -103,7 +103,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
       </div>
 
       {/* 2. White Container, negative margin to tuck under cover */}
-      <div className="relative bg-white rounded-t-[32px] -mt-6 px-4 md:px-8 pt-6 pb-6 z-20 shadow-[0_-4px_24px_rgba(0,0,0,0.06)]">
+      <div className="relative bg-white rounded-t-[32px] -mt-6 px-4 md:px-8 pt-6 pb-3 z-20 shadow-[0_-4px_24px_rgba(0,0,0,0.06)]">
 
         {/* Action Buttons */}
         <div className="flex w-full items-center gap-2.5">
