@@ -71,12 +71,12 @@ export function ProfileHero({ club }: ProfileHeroProps) {
             onClick={() => router.back()}
             className="flex items-center gap-2 text-white hover:text-white/80 transition-all drop-shadow-md p-1"
           >
-            <ArrowLeft className="w-5 h-5" />
+            <ArrowLeft className="w-6 h-6" />
             <Image 
               src="/logos/logo2.svg" 
               alt="WeedClub" 
-              width={20} 
-              height={20} 
+              width={24} 
+              height={24} 
             />
           </button>
         </div>
@@ -84,8 +84,8 @@ export function ProfileHero({ club }: ProfileHeroProps) {
         {/* Top Center Nav (City) */}
         <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 mt-1">
           <div className="flex items-center gap-1.5 text-white drop-shadow-md">
-            <MapPin className="w-[14px] h-[14px]" />
-            <span className="text-[12px] font-semibold tracking-wide uppercase">
+            <MapPin className="w-5 h-5" />
+            <span className="text-[14px] font-semibold tracking-wide uppercase">
               {club.city}
             </span>
           </div>
@@ -94,10 +94,10 @@ export function ProfileHero({ club }: ProfileHeroProps) {
         {/* Top Right Nav */}
         <div className="absolute top-4 right-4 flex items-center gap-3 z-10">
           <button className="text-white hover:text-white/80 transition-all drop-shadow-md p-1">
-            <Share2 className="w-5 h-5" />
+            <Share2 className="w-6 h-6" />
           </button>
           <button className="text-white hover:text-white/80 transition-all drop-shadow-md p-1">
-            <Bookmark className="w-5 h-5" />
+            <Bookmark className="w-6 h-6" />
           </button>
         </div>
       </div>
