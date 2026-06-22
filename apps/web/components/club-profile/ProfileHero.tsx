@@ -81,6 +81,15 @@ export function ProfileHero({ club }: ProfileHeroProps) {
           </button>
         </div>
 
+        {/* Top Center Nav (City) */}
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10">
+          <div className="bg-black/20 backdrop-blur-md px-3 py-1.5 rounded-full text-white/90 border border-white/20 shadow-sm">
+            <span className="text-[13px] font-medium tracking-wide uppercase">
+              {club.city}
+            </span>
+          </div>
+        </div>
+
         {/* Top Right Nav */}
         <div className="absolute top-4 right-4 flex items-center gap-2.5 z-10">
           <button className="flex items-center justify-center bg-black/20 backdrop-blur-md w-[34px] h-[34px] rounded-full text-white hover:bg-black/30 transition-all border border-white/20">
