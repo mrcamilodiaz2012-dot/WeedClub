@@ -107,7 +107,7 @@ export function AppStoreHome() {
         {filteredClubs.length > 0 ? filteredClubs.map((club) => (
           <Link key={club.id} href={`/clubs/${club.id}`} className="w-[200px] shrink-0 snap-start block">
             <div className="w-full h-[250px] bg-background-secondary rounded-2xl overflow-hidden mb-3 relative group">
-               <img src={`https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=600&auto=format&fit=crop&sig=${club.imgSig}`} className="w-full h-full object-cover group-active:scale-105 transition-transform duration-500" alt="" />
+               <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="w-full h-full object-cover group-active:scale-105 transition-transform duration-500" alt="" />
                <div className="absolute top-2 left-2 bg-black/60 backdrop-blur-md text-white text-[10px] font-bold px-2 py-1 rounded-full flex items-center gap-1">
                  <MapIcon size={10} /> 1.2 km
                </div>
@@ -161,7 +161,7 @@ export function AppStoreHome() {
           {featuredClubs.length > 0 ? featuredClubs.map((club) => (
             <Link key={club.id} href={`/clubs/${club.id}`} className="w-full group cursor-pointer active:scale-[0.98] transition-transform block">
               <div className="w-full aspect-video bg-background-secondary rounded-2xl overflow-hidden mb-3 relative">
-                 <img src={`https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=800&auto=format&fit=crop&sig=${club.imgSig + 10}`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="" />
+                 <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="" />
                  <div className="absolute top-3 right-3 bg-brand-accent text-white text-[10px] uppercase tracking-wider font-bold px-2.5 py-1.5 rounded-md shadow-md">
                    Destacado
                  </div>
