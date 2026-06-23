@@ -19,7 +19,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
   return (
     <div className="relative w-full bg-white">
       {/* 1. Cover Image (Edge to edge) */}
-      <div className="w-full h-[340px] md:h-[430px] relative overflow-hidden bg-gray-200 z-10">
+      <div className="w-full h-[350px] md:h-[440px] relative overflow-hidden bg-gray-200 z-10">
         <Image
           src={coverUrl}
           alt={`${club.name} cover`}
@@ -31,7 +31,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
         <div className="absolute bottom-0 left-0 right-0 h-[60%] bg-gradient-to-t from-black/80 via-black/40 to-transparent backdrop-blur-[8px] [mask-image:linear-gradient(to_top,black_10%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_top,black_10%,transparent_100%)] z-10" />
         
         {/* Name & Meta (Integrated in cover) */}
-        <div className="absolute bottom-0 left-0 right-0 p-5 md:p-8 pb-10 md:pb-12 z-20 flex flex-col">
+        <div className="absolute bottom-0 left-0 right-0 p-5 md:p-8 pb-12 md:pb-14 z-20 flex flex-col">
           <div className="flex items-center gap-2 mb-1">
             <h1 className="text-[48px] md:text-[68px] font-black tracking-tighter text-white leading-[0.9]">
               {club.name}
@@ -102,7 +102,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
       </div>
 
       {/* 2. White Container, negative margin to tuck under cover */}
-      <div className="relative bg-white rounded-t-[32px] -mt-6 px-4 md:px-8 pt-5 pb-2 z-20 shadow-[0_-4px_24px_rgba(0,0,0,0.06)] flex items-center justify-between">
+      <div className="relative bg-white rounded-t-[32px] -mt-8 px-4 md:px-8 pt-5 pb-2 z-20 shadow-[0_-4px_24px_rgba(0,0,0,0.06)] flex items-center justify-between">
         
         {/* Left Side: Map Icon */}
         <button className="text-black hover:text-gray-600 transition-colors flex items-center justify-center p-1.5">
