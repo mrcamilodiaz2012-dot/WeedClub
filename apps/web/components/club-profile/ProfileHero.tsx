@@ -109,10 +109,10 @@ export function ProfileHero({ club }: ProfileHeroProps) {
           href={`https://maps.google.com/?q=${club.address || "Calle de Ejemplo 123"}, ${club.city}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[#007AFF] hover:text-[#0056b3] transition-colors flex items-center justify-center p-1.5"
+          className="text-black hover:text-gray-600 transition-colors flex items-center justify-center p-1.5"
           title="Ir"
         >
-          <Navigation size={28} fill="currentColor" className="transform rotate-45 -mt-1" />
+          <Navigation size={26} fill="currentColor" />
         </a>
 
         {/* Right Side: Actions */}
