@@ -104,15 +104,16 @@ export function ProfileHero({ club }: ProfileHeroProps) {
       {/* 2. White Container, negative margin to tuck under cover */}
       <div className="relative bg-white rounded-t-[32px] -mt-8 px-4 md:px-8 pt-5 pb-2 z-20 shadow-[0_-4px_24px_rgba(0,0,0,0.06)] flex items-center justify-between">
         
-        {/* Left Side: Map Icon */}
+        {/* Left Side: Map Button */}
         <a 
           href={`https://maps.google.com/?q=${club.address || "Calle de Ejemplo 123"}, ${club.city}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-black hover:text-gray-600 transition-colors flex items-center justify-center p-1.5"
+          className="h-[36px] px-4 rounded-full bg-black text-white font-bold text-[14px] flex items-center justify-center gap-1.5 hover:bg-gray-900 transition-colors"
           title="Ir"
         >
-          <Navigation size={26} fill="currentColor" />
+          <Navigation size={16} fill="currentColor" />
+          <span>Ir</span>
         </a>
 
         {/* Right Side: Actions */}
