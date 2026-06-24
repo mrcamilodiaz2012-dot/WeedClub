@@ -15,8 +15,8 @@ export function ProfileContent({ club }: ProfileContentProps) {
     zoom: 14
   });
 
-  const tabs = ['Flores', 'Mapa', 'Contacto', 'Reglas'];
-  const [activeTab, setActiveTab] = useState('Flores');
+  const tabs = ['🌿 Flores', '📍 Club', '📸 Fotos', '📞 Contacto'];
+  const [activeTab, setActiveTab] = useState('🌿 Flores');
 
   return (
     <div className="w-full pb-20 relative">
