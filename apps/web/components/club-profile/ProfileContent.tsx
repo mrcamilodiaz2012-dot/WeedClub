@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import type { Club } from '@/types';
 import Image from 'next/image';
 import { InteractiveMap } from '../map/InteractiveMap';
-
+import { Leaf, MapPin, Camera, Phone } from 'lucide-react';
 interface ProfileContentProps {
   club: Club;
 }
@@ -15,8 +15,13 @@ export function ProfileContent({ club }: ProfileContentProps) {
     zoom: 14
   });
 
-  const tabs = ['🌿 Flores', '📍 Club', '📸 Fotos', '📞 Contacto'];
-  const [activeTab, setActiveTab] = useState('🌿 Flores');
+  const tabs = [
+    { id: 'flores', label: 'Flores', icon: Leaf },
+    { id: 'club', label: 'Club', icon: MapPin },
+    { id: 'fotos', label: 'Fotos', icon: Camera },
+    { id: 'contacto', label: 'Contacto', icon: Phone }
+  ];
+  const [activeTab, setActiveTab] = useState('flores');
 
   return (
     <div className="w-full pb-20 relative">
@@ -24,22 +29,27 @@ export function ProfileContent({ club }: ProfileContentProps) {
       <div className="w-full border-b border-gray-200 sticky top-0 bg-white/95 backdrop-blur-md z-30 pt-0">
         <div className="max-w-4xl mx-auto">
           <div className="flex overflow-x-auto hide-scrollbar w-full">
-            {tabs.map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className="flex-1 min-w-[80px] hover:bg-gray-200/50 transition-colors flex justify-center pt-4"
-              >
-                <div className="relative pb-4 flex flex-col items-center justify-center">
-                  <span className={`text-[15px] ${activeTab === tab ? 'font-bold text-black' : 'font-medium text-gray-500'}`}>
-                    {tab}
-                  </span>
-                  {activeTab === tab && (
-                    <div className="absolute bottom-0 left-0 w-full h-[4px] bg-black rounded-full"></div>
-                  )}
-                </div>
-              </button>
-            ))}
+            {tabs.map((tab) => {
+              const Icon = tab.icon;
+              const isActive = activeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className="flex-1 min-w-[80px] hover:bg-gray-200/50 transition-colors flex justify-center pt-4"
+                >
+                  <div className="relative pb-4 flex items-center justify-center gap-2">
+                    <Icon className={`w-4 h-4 ${isActive ? 'text-black' : 'text-gray-500'}`} strokeWidth={isActive ? 2.5 : 2} />
+                    <span className={`text-[15px] ${isActive ? 'font-bold text-black' : 'font-medium text-gray-500'}`}>
+                      {tab.label}
+                    </span>
+                    {isActive && (
+                      <div className="absolute bottom-0 left-0 w-full h-[4px] bg-black rounded-full"></div>
+                    )}
+                  </div>
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>
