@@ -71,12 +71,7 @@ export function ProfileHero({ club }: ProfileHeroProps) {
             className="flex items-center gap-2 text-white hover:text-white/80 transition-all drop-shadow-md p-1"
           >
             <ArrowLeft className="w-6 h-6" />
-            <Image 
-              src="/logos/logo2.svg" 
-              alt="WeedClub" 
-              width={24} 
-              height={24} 
-            />
+            <span className="font-bold text-[16px]">Clubs</span>
           </button>
         </div>
 
