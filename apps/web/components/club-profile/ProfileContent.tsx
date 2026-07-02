@@ -5,13 +5,14 @@ import Image from 'next/image';
 import { InteractiveMap } from '../map/InteractiveMap';
 import { TabInfo } from './tabs/TabInfo';
 import { TabPhotos } from './tabs/TabPhotos';
-import { TabDiscover } from './tabs/TabDiscover';
+import { TabRules } from './tabs/TabRules';
+import { TabMembership } from './tabs/TabMembership';
 
 interface ProfileContentProps {
   club: Club;
 }
 
-const TABS = ['Flores', 'Club', 'Fotos', 'Descubrir'];
+const TABS = ['Flores', 'Club', 'Fotos', 'Reglas', 'Membresía'];
 
 export function ProfileContent({ club }: ProfileContentProps) {
   const [viewport, setViewport] = useState({
@@ -191,10 +192,27 @@ export function ProfileContent({ club }: ProfileContentProps) {
           </section>
         </div>
 
-        {/* Descubrir Section */}
-        <div id="descubrir" className="pt-4">
+        {/* Reglas Section */}
+        <div id="reglas" className="pt-4">
           <section>
-            <TabDiscover club={club} />
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">
+                Normativa
+              </h2>
+            </div>
+            <TabRules club={club} />
+          </section>
+        </div>
+
+        {/* Membresía Section */}
+        <div id="membresía" className="pt-4">
+          <section>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">
+                Membresía
+              </h2>
+            </div>
+            <TabMembership club={club} />
           </section>
         </div>
 
