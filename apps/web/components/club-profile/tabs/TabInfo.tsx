@@ -5,31 +5,6 @@ import { MapPin, Clock, Globe, Camera, Phone, Gamepad2, Coffee, Wifi } from 'luc
 export function TabInfo({ club }: { club: Club }) {
   return (
     <div className="space-y-10">
-      {/* Location */}
-      <section>
-        <h3 className="text-lg font-bold text-gray-900 mb-4">Ubicación</h3>
-        <div className="bg-gray-50 rounded-2xl p-5 md:p-6 flex flex-col md:flex-row gap-6">
-          {/* Map Placeholder */}
-          <div className="w-full md:w-1/2 h-48 bg-gray-200 rounded-xl overflow-hidden relative">
-            <div className="absolute inset-0 flex items-center justify-center text-gray-400">
-              [Mapa Interactivo]
-            </div>
-          </div>
-          <div className="flex-1 flex flex-col justify-center">
-            <div className="flex items-start gap-3 text-gray-700 mb-4">
-              <MapPin className="w-5 h-5 shrink-0 mt-0.5" />
-              <div>
-                <p className="font-medium">{club.address}</p>
-                <p className="text-gray-500 text-sm">{club.city}, {club.province}</p>
-              </div>
-            </div>
-            <button className="bg-white border border-gray-200 px-4 py-2.5 rounded-xl font-semibold text-sm hover:bg-gray-50 transition-colors w-fit">
-              Cómo llegar
-            </button>
-          </div>
-        </div>
-      </section>
-
       {/* Hours */}
       <section>
         <h3 className="text-lg font-bold text-gray-900 mb-4">Horarios</h3>
