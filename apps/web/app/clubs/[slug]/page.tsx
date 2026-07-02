@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 // Nuevos componentes de la arquitectura Premium
 import { ProfileHero } from '@/components/club-profile/ProfileHero';
 import { ProfileContent } from '@/components/club-profile/ProfileContent';
-import { SimilarClubs } from '@/components/club-profile/SimilarClubs';
+
 import { ClaimClubBanner } from '@/components/club-profile/ClaimClubBanner';
 
 export const revalidate = 3600;
@@ -57,8 +57,6 @@ export default async function ClubDetailPage({ params }: { params: Promise<{ slu
       {/* 2. Sticky Navigation y Contenido de Tabs */}
       <ProfileContent club={club} />
 
-      {/* 6. Clubes Similares (Carrusel) */}
-      <SimilarClubs />
 
       {/* 7. Call to Action: Reclamar Club (Solo si no está reclamado) */}
       {!isClaimed && <ClaimClubBanner />}
