@@ -37,6 +37,7 @@ export function ProfileContent({ club }: ProfileContentProps) {
       
       for (let i = TABS.length - 1; i >= 0; i--) {
         const tab = TABS[i];
+        if (!tab) continue;
         const element = document.getElementById(tab.toLowerCase());
         if (element && element.offsetTop <= scrollPosition) {
           setActiveTab(tab);
