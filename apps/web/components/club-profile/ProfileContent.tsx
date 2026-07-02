@@ -128,6 +128,16 @@ export function ProfileContent({ club }: ProfileContentProps) {
               </div>
             </section>
 
+            {/* Fotos Section */}
+            <section>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">
+                  Galería
+                </h2>
+              </div>
+              <TabPhotos club={club} />
+            </section>
+
             {/* Mapa Section */}
             <section>
               <div className="flex items-center justify-between mb-6">
