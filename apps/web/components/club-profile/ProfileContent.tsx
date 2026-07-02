@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { Club } from '@/types';
 import Image from 'next/image';
 import { InteractiveMap } from '../map/InteractiveMap';
@@ -11,6 +11,8 @@ interface ProfileContentProps {
   club: Club;
 }
 
+const TABS = ['Flores', 'Club', 'Fotos', 'Descubrir'];
+
 export function ProfileContent({ club }: ProfileContentProps) {
   const [viewport, setViewport] = useState({
     latitude: club.lat || 40.4168,
@@ -18,7 +20,6 @@ export function ProfileContent({ club }: ProfileContentProps) {
     zoom: 14
   });
 
-  const tabs = ['Flores', 'Club', 'Fotos', 'Descubrir'];
   const [activeTab, setActiveTab] = useState('Flores');
 
   const handleTabClick = (tab: string) => {
@@ -30,13 +31,31 @@ export function ProfileContent({ club }: ProfileContentProps) {
     }
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 150; // offset for the sticky header
+      
+      for (let i = TABS.length - 1; i >= 0; i--) {
+        const tab = TABS[i];
+        const element = document.getElementById(tab.toLowerCase());
+        if (element && element.offsetTop <= scrollPosition) {
+          setActiveTab(tab);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="w-full pb-20 relative">
       {/* Tabs Carousel */}
       <div className="w-full border-b border-gray-200 sticky top-0 bg-white/95 backdrop-blur-md z-30 pt-0">
         <div className="max-w-4xl mx-auto">
           <div className="flex overflow-x-auto hide-scrollbar w-full">
-            {tabs.map((tab) => (
+            {TABS.map((tab) => (
               <button
                 key={tab}
                 onClick={() => handleTabClick(tab)}
