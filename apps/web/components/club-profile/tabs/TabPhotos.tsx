@@ -20,7 +20,7 @@ export function TabPhotos({ club }: { club: Club }) {
   return (
     <div className="w-full">
       {/* Featured Large Image */}
-      <div className="relative w-full aspect-[4/3] md:aspect-video rounded-3xl overflow-hidden mb-3 bg-gray-100 shadow-sm">
+      <div className="relative w-full aspect-square rounded-3xl overflow-hidden mb-3 bg-gray-100">
         {photos.map((url, i) => (
           <Image
             key={i}
@@ -33,9 +33,8 @@ export function TabPhotos({ club }: { club: Club }) {
             priority={i === 0}
           />
         ))}
-        {/* Gradient and Counter */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none z-20" />
-        <div className="absolute bottom-4 right-4 bg-black/50 backdrop-blur-md px-3 py-1.5 rounded-full text-white text-[11px] font-bold tracking-widest z-20">
+        {/* Counter */}
+        <div className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full text-white text-[11px] font-bold tracking-widest z-20 shadow-sm">
           {currentIndex + 1} / {photos.length}
         </div>
       </div>
