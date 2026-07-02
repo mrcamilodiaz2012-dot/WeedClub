@@ -21,6 +21,15 @@ export function ProfileContent({ club }: ProfileContentProps) {
   const tabs = ['Flores', 'Club', 'Fotos', 'Descubrir'];
   const [activeTab, setActiveTab] = useState('Flores');
 
+  const handleTabClick = (tab: string) => {
+    setActiveTab(tab);
+    const element = document.getElementById(tab.toLowerCase());
+    if (element) {
+      const y = element.getBoundingClientRect().top + window.scrollY - 120;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="w-full pb-20 relative">
       {/* Tabs Carousel */}
@@ -30,7 +39,7 @@ export function ProfileContent({ club }: ProfileContentProps) {
             {tabs.map((tab) => (
               <button
                 key={tab}
-                onClick={() => setActiveTab(tab)}
+                onClick={() => handleTabClick(tab)}
                 className="flex-1 min-w-[80px] hover:bg-gray-200/50 transition-colors flex justify-center pt-4"
               >
                 <div className="relative pb-4 flex flex-col items-center justify-center">
@@ -50,7 +59,7 @@ export function ProfileContent({ club }: ProfileContentProps) {
       <div className="max-w-4xl mx-auto px-5 md:px-8 py-6 flex flex-col gap-10">
         
         {/* Variedades Disponibles Section */}
-        {activeTab === 'Flores' && (
+        <div id="flores">
           <section>
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">
@@ -123,48 +132,51 @@ export function ProfileContent({ club }: ProfileContentProps) {
               ))}
             </div>
           </section>
-        )}
+        </div>
 
         {/* Club Section */}
-        {activeTab === 'Club' && (
-          <div className="space-y-10">
-            <section>
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">
-                  Ubicación
-                </h2>
-              </div>
-              <div className="w-full h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-black/[0.04] relative">
-                <InteractiveMap 
-                  clubs={[club]} 
-                  selectedClubId={club.id}
-                  hoveredClubId={null}
-                  onSelectClub={() => {}}
-                  onHoverClub={() => {}}
-                  viewport={viewport}
-                  onViewportChange={setViewport}
-                />
-                {/* Subtle inner shadow overlay */}
-                <div className="absolute inset-0 pointer-events-none rounded-3xl shadow-[inset_0_0_0_1px_rgba(0,0,0,0.06)]" />
-              </div>
-            </section>
-            <TabInfo club={club} />
-          </div>
-        )}
+        <div id="club" className="space-y-10 pt-4">
+          <section>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">
+                Ubicación
+              </h2>
+            </div>
+            <div className="w-full h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-black/[0.04] relative">
+              <InteractiveMap 
+                clubs={[club]} 
+                selectedClubId={club.id}
+                hoveredClubId={null}
+                onSelectClub={() => {}}
+                onHoverClub={() => {}}
+                viewport={viewport}
+                onViewportChange={setViewport}
+              />
+              {/* Subtle inner shadow overlay */}
+              <div className="absolute inset-0 pointer-events-none rounded-3xl shadow-[inset_0_0_0_1px_rgba(0,0,0,0.06)]" />
+            </div>
+          </section>
+          <TabInfo club={club} />
+        </div>
 
         {/* Fotos Section */}
-        {activeTab === 'Fotos' && (
+        <div id="fotos" className="pt-4">
           <section>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">
+                Galería
+              </h2>
+            </div>
             <TabPhotos club={club} />
           </section>
-        )}
+        </div>
 
         {/* Descubrir Section */}
-        {activeTab === 'Descubrir' && (
+        <div id="descubrir" className="pt-4">
           <section>
             <TabDiscover club={club} />
           </section>
-        )}
+        </div>
 
       </div>
     </div>
