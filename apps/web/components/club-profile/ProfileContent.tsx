@@ -160,6 +160,48 @@ export function ProfileContent({ club }: ProfileContentProps) {
               </div>
             </section>
 
+            {/* Reseñas de Google Maps Section */}
+            <section>
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">
+                    Reseñas
+                  </h2>
+                  <div className="flex items-center gap-2 mt-1">
+                    <div className="flex text-yellow-400">
+                      {[1, 2, 3, 4, 5].map(star => <Star key={star} className="w-4 h-4 fill-current" />)}
+                    </div>
+                    <span className="font-bold text-gray-900 text-sm">4.8</span>
+                    <span className="text-gray-500 text-sm">de 124 opiniones</span>
+                  </div>
+                </div>
+                <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center font-bold text-blue-600">G</div>
+              </div>
+              <div className="flex overflow-x-auto hide-scrollbar gap-4 pb-6 -mx-5 px-5 md:mx-0 md:px-0">
+                {[
+                  { name: "Carlos M.", text: "El mejor ambiente de la ciudad, música chill y calidad top. Recomendado 100%.", time: "hace 2 semanas" },
+                  { name: "Laura G.", text: "Sitio súper acogedor para trabajar con el portátil. El staff es súper amable.", time: "hace 1 mes" },
+                  { name: "David R.", text: "Gran variedad de flores y extracciones. El local está increíblemente diseñado.", time: "hace 2 meses" },
+                ].map((review, i) => (
+                  <div key={i} className="w-[280px] shrink-0 bg-gray-50 rounded-2xl p-5 border border-gray-100">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center font-bold text-sm">
+                        {review.name[0]}
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-gray-900 text-sm">{review.name}</h4>
+                        <p className="text-xs text-gray-500">{review.time}</p>
+                      </div>
+                    </div>
+                    <div className="flex text-yellow-400 mb-2">
+                      {[1, 2, 3, 4, 5].map(star => <Star key={star} className="w-3 h-3 fill-current" />)}
+                    </div>
+                    <p className="text-sm text-gray-600 leading-relaxed">"{review.text}"</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
             {/* Otros clubs en la zona Section */}
             <section>
               <div className="flex items-center justify-between mb-6">
