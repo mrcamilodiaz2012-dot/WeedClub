@@ -14,7 +14,7 @@ interface ProfileContentProps {
   club: Club;
 }
 
-const TABS = ['Flores', 'Club', 'Fotos', 'Reglas', 'Membresía'];
+const TABS = ['Flores', 'Club', 'Fotos', 'Membresía'];
 
 export function ProfileContent({ club }: ProfileContentProps) {
   const [viewport, setViewport] = useState({
@@ -245,18 +245,22 @@ export function ProfileContent({ club }: ProfileContentProps) {
           </section>
         )}
 
-        {/* Reglas Section */}
-        {activeTab === 'Reglas' && (
-          <section>
-            <TabRules club={club} />
-          </section>
-        )}
-
-        {/* Membresía Section */}
+        {/* Membresía (y Reglas) Section */}
         {activeTab === 'Membresía' && (
-          <section>
-            <TabMembership club={club} />
-          </section>
+          <div className="space-y-10">
+            <section>
+              <TabMembership club={club} />
+            </section>
+            
+            <section>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">
+                  Normas del Club
+                </h2>
+              </div>
+              <TabRules club={club} />
+            </section>
+          </div>
         )}
 
       </div>
