@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Club } from '@/types';
-import { ShieldAlert, Fingerprint, SmartphoneOff, Backpack, UserCheck, CheckCircle2 } from 'lucide-react';
+import { ShieldAlert, Fingerprint, Smartphone, Backpack, UserCheck, CheckCircle2 } from 'lucide-react';
 
 export function TabRules({ club }: { club: Club }) {
   // Mapping rules to specific icons for a more visual, modern look
@@ -8,7 +8,7 @@ export function TabRules({ club }: { club: Club }) {
     { text: "Prohibida la entrada a menores de 21 años", icon: ShieldAlert },
     { text: "Uso exclusivo para socios registrados", icon: UserCheck },
     { text: "No se permite sacar productos del club", icon: Backpack },
-    { text: "Prohibido el uso de móviles en dispensario", icon: SmartphoneOff },
+    { text: "Prohibido el uso de móviles en dispensario", icon: Smartphone },
     { text: "Comportamiento respetuoso con otros socios", icon: CheckCircle2 },
     { text: "Obligatorio presentar DNI y carnet al entrar", icon: Fingerprint }
   ];
