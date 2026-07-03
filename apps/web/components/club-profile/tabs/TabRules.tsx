@@ -1,43 +1,44 @@
 import React from 'react';
 import type { Club } from '@/types';
-import { Shield, AlertTriangle, CheckCircle2 } from 'lucide-react';
+import { ShieldAlert, Fingerprint, SmartphoneOff, Backpack, UserCheck, CheckCircle2 } from 'lucide-react';
 
 export function TabRules({ club }: { club: Club }) {
+  // Mapping rules to specific icons for a more visual, modern look
   const rules = [
-    "Prohibida la entrada a menores de 21 años",
-    "Uso exclusivo para socios registrados",
-    "No se permite sacar productos del club",
-    "Prohibido el uso de teléfonos móviles en la zona de dispensario",
-    "Mantener un comportamiento respetuoso con el resto de socios",
-    "Obligatorio presentar documento de identidad y carnet de socio al entrar"
+    { text: "Prohibida la entrada a menores de 21 años", icon: ShieldAlert },
+    { text: "Uso exclusivo para socios registrados", icon: UserCheck },
+    { text: "No se permite sacar productos del club", icon: Backpack },
+    { text: "Prohibido el uso de móviles en dispensario", icon: SmartphoneOff },
+    { text: "Comportamiento respetuoso con otros socios", icon: CheckCircle2 },
+    { text: "Obligatorio presentar DNI y carnet al entrar", icon: Fingerprint }
   ];
 
   return (
     <div className="space-y-6">
-      <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100">
-        <div className="flex items-start gap-4">
-          <Shield className="w-8 h-8 text-indigo-600 shrink-0" />
-          <div>
-            <h3 className="font-bold text-gray-900 mb-2">Normativa del Club</h3>
-            <p className="text-sm text-gray-600 leading-relaxed mb-6">
-              Para garantizar un entorno seguro y agradable para todos nuestros socios, es imprescindible cumplir con las siguientes normas del establecimiento.
-            </p>
-            <ul className="space-y-3">
-              {rules.map((rule, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-indigo-500 shrink-0 mt-0.5" />
-                  <span className="text-sm font-medium text-gray-700">{rule}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+      <p className="text-[15px] text-gray-600 leading-relaxed max-w-2xl">
+        Para garantizar un entorno seguro y agradable para todos nuestros socios, es imprescindible cumplir con las siguientes normas del establecimiento.
+      </p>
+
+      {/* Modern Grid Layout for Rules */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+        {rules.map((rule, i) => {
+          const Icon = rule.icon;
+          return (
+            <div key={i} className="flex items-start gap-3 p-4 rounded-[20px] bg-white border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_20px_rgba(0,0,0,0.06)] transition-shadow">
+              <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center shrink-0">
+                <Icon className="w-4 h-4 text-gray-900" strokeWidth={2.5} />
+              </div>
+              <p className="text-[14px] font-semibold text-gray-800 pt-2.5 leading-snug">{rule.text}</p>
+            </div>
+          );
+        })}
       </div>
       
-      <div className="bg-amber-50 rounded-2xl p-5 border border-amber-100 flex items-start gap-3">
-        <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-        <p className="text-sm text-amber-800 leading-relaxed">
-          <strong>Aviso importante:</strong> El incumplimiento reiterado de las normas del club puede resultar en la suspensión temporal o permanente de la condición de socio.
+      {/* Clean Warning Banner */}
+      <div className="mt-8 flex items-start gap-3 p-4 rounded-2xl bg-red-50/50 border border-red-100/50">
+        <ShieldAlert className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
+        <p className="text-[13px] text-red-900/80 leading-relaxed">
+          <strong className="font-bold text-red-900">Aviso:</strong> El incumplimiento reiterado de las normas puede resultar en la suspensión temporal o permanente de la condición de socio.
         </p>
       </div>
     </div>
