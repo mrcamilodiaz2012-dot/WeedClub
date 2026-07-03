@@ -233,25 +233,10 @@ export function ProfileContent({ club }: ProfileContentProps) {
 
         {/* Club Section */}
         {activeTab === 'Club' && (
-          <section>
-            <TabInfo club={club} />
-          </section>
-        )}
-
-        {/* Fotos Section */}
-        {activeTab === 'Fotos' && (
-          <section>
-            <TabPhotos club={club} />
-          </section>
-        )}
-
-        {/* Membresía (y Reglas) Section */}
-        {activeTab === 'Membresía' && (
           <div className="space-y-10">
             <section>
-              <TabMembership club={club} />
+              <TabInfo club={club} />
             </section>
-            
             <section>
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">
@@ -261,6 +246,20 @@ export function ProfileContent({ club }: ProfileContentProps) {
               <TabRules club={club} />
             </section>
           </div>
+        )}
+
+        {/* Fotos Section */}
+        {activeTab === 'Fotos' && (
+          <section>
+            <TabPhotos club={club} />
+          </section>
+        )}
+
+        {/* Membresía Section */}
+        {activeTab === 'Membresía' && (
+          <section>
+            <TabMembership club={club} />
+          </section>
         )}
 
       </div>
