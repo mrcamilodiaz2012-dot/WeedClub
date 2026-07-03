@@ -47,8 +47,8 @@ export function TabPhotos({ club }: { club: Club }) {
             onClick={() => setCurrentIndex(i)}
             className={`relative w-[72px] h-[72px] shrink-0 rounded-[16px] overflow-hidden transition-all duration-300 ${
               i === currentIndex 
-                ? 'ring-2 ring-black ring-offset-2 scale-[0.95]' 
-                : 'scale-100 hover:scale-[0.98] ring-0'
+                ? 'ring-2 ring-black ring-offset-2 scale-[0.95] blur-none' 
+                : 'scale-100 hover:scale-[0.98] ring-0 blur-[1.5px]'
             }`}
           >
             <Image
