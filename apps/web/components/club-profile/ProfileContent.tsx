@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { InteractiveMap } from '../map/InteractiveMap';
 import { TabInfo } from './tabs/TabInfo';
 import { TabPhotos } from './tabs/TabPhotos';
+import { TabPhotosCarousel } from './tabs/TabPhotosCarousel';
 import { TabRules } from './tabs/TabRules';
 import { TabMembership } from './tabs/TabMembership';
 import { MapPin, Star } from 'lucide-react';
@@ -135,7 +136,7 @@ export function ProfileContent({ club }: ProfileContentProps) {
                   Galería
                 </h2>
               </div>
-              <TabPhotos club={club} />
+              <TabPhotosCarousel club={club} />
             </section>
 
             {/* Mapa Section */}
