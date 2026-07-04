@@ -493,7 +493,7 @@ export function ProfileContent({ club }: ProfileContentProps) {
           </div>
           
           {/* Pagination Dots */}
-          <div className="absolute bottom-8 left-0 right-0 flex justify-center gap-2 z-10 pointer-events-none">
+          <div className="absolute bottom-12 md:bottom-16 left-0 right-0 flex justify-center gap-2.5 z-10 pointer-events-none">
             {FLOWERS_DATA.map((flower) => (
               <div 
                 key={flower.id}
