@@ -35,6 +35,16 @@ export function ProfileContent({ club }: ProfileContentProps) {
 
   const [activeTab, setActiveTab] = useState('Todo');
   const [selectedFlowerId, setSelectedFlowerId] = useState<number | null>(null);
+  const [activeModalId, setActiveModalId] = useState<number | null>(null);
+
+  // When modal opens, set the active ID
+  useEffect(() => {
+    if (selectedFlowerId !== null) {
+      setActiveModalId(selectedFlowerId);
+    } else {
+      setActiveModalId(null);
+    }
+  }, [selectedFlowerId]);
 
   // Prevent background scroll when modal is open
   useEffect(() => {
@@ -404,65 +414,82 @@ export function ProfileContent({ club }: ProfileContentProps) {
           </button>
 
           {/* Carousel Container */}
-          <div className="w-full relative z-10 overflow-x-auto snap-x snap-mandatory hide-scrollbar flex items-center px-[10vw] md:px-[30vw] py-10 gap-6">
-            {FLOWERS_DATA.map((flower, idx) => (
-              <div 
-                key={flower.id} 
-                id={`flower-modal-${flower.id}`}
-                className="w-[80vw] md:w-[400px] shrink-0 snap-center bg-white rounded-[32px] shadow-2xl overflow-hidden relative opacity-100 transition-all duration-300"
-              >
-                {/* Modal Image Header */}
-                <div className="w-full h-[280px] bg-gradient-to-b from-gray-50 to-white relative flex items-center justify-center">
-                  <Image 
-                    src="/iconos/flor.webp" 
-                    alt={flower.name} 
-                    width={200} 
-                    height={200} 
-                    className="object-contain drop-shadow-[0_25px_25px_rgba(0,0,0,0.25)] animate-float-slow" 
-                  />
-                  <div className="absolute top-5 left-5 flex items-center gap-2">
-                    <span className={`bg-white/90 backdrop-blur-md text-xs uppercase tracking-wider font-bold px-3 py-1.5 rounded-full shadow-sm ${flower.color}`}>
-                      {flower.type}
-                    </span>
-                    <span className="bg-white/90 backdrop-blur-md text-xs font-bold text-gray-700 px-3 py-1.5 rounded-full shadow-sm">
-                      ★ {flower.rating}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Modal Content */}
-                <div className="p-6 md:p-8">
-                  <h3 className="font-display font-bold text-3xl text-gray-900 mb-6">
-                    {flower.name}
-                  </h3>
-                  
-                  <div className="space-y-5">
-                    <div className="bg-gray-50 rounded-2xl p-4 flex items-center justify-around border border-gray-100">
-                      <div className="flex flex-col items-center gap-1">
-                        <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">THC</span>
-                        <span className="text-lg font-bold text-gray-900">{flower.thc}</span>
-                      </div>
-                      <div className="w-px h-8 bg-gray-200" />
-                      <div className="flex flex-col items-center gap-1">
-                        <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">CBD</span>
-                        <span className="text-lg font-bold text-gray-900">{flower.cbd}</span>
-                      </div>
-                    </div>
-
-                    <div className="space-y-3">
-                      <div className="flex items-start gap-3 p-4 rounded-2xl bg-white border border-gray-100 shadow-sm">
-                        <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider w-16 pt-0.5 shrink-0">Sabor</span>
-                        <p className="text-sm font-medium text-gray-800">{flower.flavor}</p>
-                      </div>
-                      <div className="flex items-start gap-3 p-4 rounded-2xl bg-white border border-gray-100 shadow-sm">
-                        <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider w-16 pt-0.5 shrink-0">Efecto</span>
-                        <p className="text-sm font-medium text-gray-800">{flower.effect}</p>
-                      </div>
+          <div 
+            className="w-full relative z-10 overflow-x-auto snap-x snap-mandatory hide-scrollbar flex items-center px-[10vw] md:px-[30vw] py-10 gap-4 md:gap-6"
+            onScroll={(e) => {
+              const container = e.currentTarget;
+              const scrollLeft = container.scrollLeft;
+              const itemWidth = container.scrollWidth / FLOWERS_DATA.length;
+              const newIndex = Math.round(scrollLeft / itemWidth);
+              const activeFlower = FLOWERS_DATA[newIndex];
+              if (activeFlower && activeFlower.id !== activeModalId) {
+                setActiveModalId(activeFlower.id);
+              }
+            }}
+          >
+            {FLOWERS_DATA.map((flower, idx) => {
+              const isActive = flower.id === activeModalId;
+              return (
+                <div 
+                  key={flower.id} 
+                  id={`flower-modal-${flower.id}`}
+                  className={`w-[80vw] md:w-[400px] shrink-0 snap-center bg-white rounded-[32px] overflow-hidden relative transition-all duration-300 ${
+                    isActive ? 'scale-100 opacity-100 shadow-2xl' : 'scale-90 opacity-40 shadow-none'
+                  }`}
+                >
+                  {/* Modal Image Header */}
+                  <div className="w-full h-[280px] bg-gradient-to-b from-gray-50 to-white relative flex items-center justify-center">
+                    <Image 
+                      src="/iconos/flor.webp" 
+                      alt={flower.name} 
+                      width={200} 
+                      height={200} 
+                      className={`object-contain transition-all duration-500 ${isActive ? 'drop-shadow-[0_25px_25px_rgba(0,0,0,0.25)] animate-float-slow' : 'drop-shadow-none'}`} 
+                    />
+                    <div className="absolute top-5 left-5 flex items-center gap-2">
+                      <span className={`bg-white/90 backdrop-blur-md text-xs uppercase tracking-wider font-bold px-3 py-1.5 rounded-full shadow-sm ${flower.color}`}>
+                        {flower.type}
+                      </span>
+                      <span className="bg-white/90 backdrop-blur-md text-xs font-bold text-gray-700 px-3 py-1.5 rounded-full shadow-sm">
+                        ★ {flower.rating}
+                      </span>
                     </div>
                   </div>
+
+                  {/* Modal Content */}
+                  <div className="p-6 md:p-8">
+                    <h3 className="font-display font-bold text-3xl text-gray-900 mb-6">
+                      {flower.name}
+                    </h3>
+                    
+                    <div className="space-y-5">
+                      <div className="bg-gray-50 rounded-2xl p-4 flex items-center justify-around border border-gray-100">
+                        <div className="flex flex-col items-center gap-1">
+                          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">THC</span>
+                          <span className="text-lg font-bold text-gray-900">{flower.thc}</span>
+                        </div>
+                        <div className="w-px h-8 bg-gray-200" />
+                        <div className="flex flex-col items-center gap-1">
+                          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">CBD</span>
+                          <span className="text-lg font-bold text-gray-900">{flower.cbd}</span>
+                        </div>
+                      </div>
+
+                      <div className="space-y-3">
+                        <div className="flex items-start gap-3 p-4 rounded-2xl bg-white border border-gray-100 shadow-sm">
+                          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider w-16 pt-0.5 shrink-0">Sabor</span>
+                          <p className="text-sm font-medium text-gray-800">{flower.flavor}</p>
+                        </div>
+                        <div className="flex items-start gap-3 p-4 rounded-2xl bg-white border border-gray-100 shadow-sm">
+                          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider w-16 pt-0.5 shrink-0">Efecto</span>
+                          <p className="text-sm font-medium text-gray-800">{flower.effect}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
           
           {/* Pagination Dots */}
@@ -471,7 +498,7 @@ export function ProfileContent({ club }: ProfileContentProps) {
               <div 
                 key={flower.id}
                 className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  flower.id === selectedFlowerId ? 'bg-white scale-125' : 'bg-white/40'
+                  flower.id === activeModalId ? 'bg-white scale-125' : 'bg-white/40'
                 }`}
               />
             ))}
