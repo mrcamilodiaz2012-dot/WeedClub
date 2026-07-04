@@ -433,8 +433,16 @@ export function ProfileContent({ club }: ProfileContentProps) {
                 <div 
                   key={flower.id} 
                   id={`flower-modal-${flower.id}`}
+                  onClick={() => {
+                    if (!isActive) {
+                      const el = document.getElementById(`flower-modal-${flower.id}`);
+                      if (el) {
+                        el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                      }
+                    }
+                  }}
                   className={`w-[80vw] md:w-[400px] shrink-0 snap-center bg-white rounded-[32px] overflow-hidden relative transition-all duration-300 ${
-                    isActive ? 'scale-100 opacity-100 shadow-2xl' : 'scale-90 opacity-40 shadow-none'
+                    isActive ? 'scale-100 opacity-100 shadow-2xl' : 'scale-90 opacity-40 shadow-none cursor-pointer hover:opacity-60'
                   }`}
                 >
                   {/* Modal Image Header */}
