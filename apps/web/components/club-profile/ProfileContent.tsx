@@ -218,16 +218,21 @@ export function ProfileContent({ club }: ProfileContentProps) {
                 </h2>
                 <button className="text-sm font-semibold text-gray-500 hover:text-gray-900">Ver todos</button>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {[1, 2].map((i) => (
-                  <div key={i} className="flex gap-4 p-4 bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow cursor-pointer">
-                    <div className="w-20 h-20 bg-gray-200 rounded-xl shrink-0"></div>
-                    <div className="flex flex-col justify-center">
-                      <h4 className="font-bold text-gray-900">Green Valley Club {i}</h4>
-                      <p className="text-sm text-gray-500 mt-1">A {0.5 * i} km de distancia</p>
+              <div className="flex overflow-x-auto hide-scrollbar gap-4 pb-6 -mx-5 px-5 md:mx-0 md:px-0">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="w-[160px] shrink-0 flex flex-col gap-3 p-3 bg-white border border-gray-100 rounded-[20px] shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+                    <div className="w-full h-[120px] bg-gray-200 rounded-[14px] shrink-0 relative overflow-hidden">
+                      {/* Image placeholder */}
+                      <div className="absolute inset-0 bg-gray-200 flex items-center justify-center text-gray-400">
+                        <MapPin className="w-6 h-6 opacity-50" />
+                      </div>
+                    </div>
+                    <div className="flex flex-col px-1">
+                      <h4 className="font-bold text-gray-900 text-[15px] leading-tight truncate">Club Local {i}</h4>
+                      <p className="text-[12px] text-gray-500 mt-1">A {(0.5 * i).toFixed(1)} km</p>
                       <div className="flex items-center gap-1 mt-2">
                         <Star className="w-3.5 h-3.5 text-yellow-500 fill-yellow-500" />
-                        <span className="text-xs font-bold text-gray-700">4.{9 - i}</span>
+                        <span className="text-[12px] font-bold text-gray-700">4.{9 - i}</span>
                       </div>
                     </div>
                   </div>
