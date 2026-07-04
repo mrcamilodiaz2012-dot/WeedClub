@@ -34,11 +34,11 @@ export function ProfileContent({ club }: ProfileContentProps) {
   });
 
   const [activeTab, setActiveTab] = useState('Todo');
-  const [selectedFlower, setSelectedFlower] = useState<any>(null);
+  const [selectedFlowerId, setSelectedFlowerId] = useState<number | null>(null);
 
   // Prevent background scroll when modal is open
   useEffect(() => {
-    if (selectedFlower) {
+    if (selectedFlowerId !== null) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
@@ -46,7 +46,17 @@ export function ProfileContent({ club }: ProfileContentProps) {
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [selectedFlower]);
+  }, [selectedFlowerId]);
+
+  // Scroll to selected flower when modal opens
+  useEffect(() => {
+    if (selectedFlowerId !== null) {
+      const el = document.getElementById(`flower-modal-${selectedFlowerId}`);
+      if (el) {
+        el.scrollIntoView({ behavior: 'instant', block: 'nearest', inline: 'center' });
+      }
+    }
+  }, [selectedFlowerId]);
 
   return (
     <div className="w-full pb-20 relative">
@@ -95,7 +105,7 @@ export function ProfileContent({ club }: ProfileContentProps) {
                 {FLOWERS_DATA.slice(0, 5).map((varie) => (
                   <div 
                     key={varie.id} 
-                    onClick={() => setSelectedFlower(varie)}
+                    onClick={() => setSelectedFlowerId(varie.id)}
                     className="w-[220px] shrink-0 bg-white rounded-[24px] border border-black/[0.04] shadow-[0_4px_20px_rgba(0,0,0,0.04)] overflow-hidden group cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300"
                   >
                     <div className="w-full h-[170px] flex items-center justify-center pt-4 relative bg-gradient-to-b from-gray-50/50 to-white">
@@ -277,7 +287,7 @@ export function ProfileContent({ club }: ProfileContentProps) {
               {FLOWERS_DATA.map((varie) => (
                 <div 
                   key={varie.id} 
-                  onClick={() => setSelectedFlower(varie)}
+                  onClick={() => setSelectedFlowerId(varie.id)}
                   className="w-full bg-white rounded-[24px] border border-black/[0.04] shadow-[0_4px_20px_rgba(0,0,0,0.04)] overflow-hidden group cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300"
                 >
                   <div className="w-full h-[200px] flex items-center justify-center pt-4 relative bg-gradient-to-b from-gray-50/50 to-white">
@@ -378,72 +388,93 @@ export function ProfileContent({ club }: ProfileContentProps) {
 
       </div>
 
-      {/* Flower Details Modal */}
-      {selectedFlower && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm">
+      {/* Flower Details Modal Carousel */}
+      {selectedFlowerId !== null && (
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex flex-col justify-center animate-in fade-in duration-300">
           <div 
             className="absolute inset-0" 
-            onClick={() => setSelectedFlower(null)}
+            onClick={() => setSelectedFlowerId(null)}
           />
-          <div className="relative w-full max-w-md bg-white rounded-[32px] shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
-            {/* Close Button */}
-            <button 
-              onClick={() => setSelectedFlower(null)}
-              className="absolute top-4 right-4 z-10 w-10 h-10 bg-black/5 hover:bg-black/10 backdrop-blur-md rounded-full flex items-center justify-center transition-colors"
-            >
-              <X className="w-5 h-5 text-gray-900" />
-            </button>
+          {/* Close Button */}
+          <button 
+            onClick={() => setSelectedFlowerId(null)}
+            className="absolute top-4 right-4 md:top-8 md:right-8 z-10 w-12 h-12 bg-black/40 hover:bg-black/60 backdrop-blur-lg rounded-full flex items-center justify-center transition-colors"
+          >
+            <X className="w-6 h-6 text-white" />
+          </button>
 
-            {/* Modal Image Header */}
-            <div className="w-full h-[280px] bg-gradient-to-b from-gray-50 to-white relative flex items-center justify-center">
-              <Image 
-                src="/iconos/flor.webp" 
-                alt={selectedFlower.name} 
-                width={200} 
-                height={200} 
-                className="object-contain drop-shadow-[0_25px_25px_rgba(0,0,0,0.25)] animate-float-slow" 
+          {/* Carousel Container */}
+          <div className="w-full relative z-10 overflow-x-auto snap-x snap-mandatory hide-scrollbar flex items-center px-[10vw] md:px-[30vw] py-10 gap-6">
+            {FLOWERS_DATA.map((flower, idx) => (
+              <div 
+                key={flower.id} 
+                id={`flower-modal-${flower.id}`}
+                className="w-[80vw] md:w-[400px] shrink-0 snap-center bg-white rounded-[32px] shadow-2xl overflow-hidden relative opacity-100 transition-all duration-300"
+              >
+                {/* Modal Image Header */}
+                <div className="w-full h-[280px] bg-gradient-to-b from-gray-50 to-white relative flex items-center justify-center">
+                  <Image 
+                    src="/iconos/flor.webp" 
+                    alt={flower.name} 
+                    width={200} 
+                    height={200} 
+                    className="object-contain drop-shadow-[0_25px_25px_rgba(0,0,0,0.25)] animate-float-slow" 
+                  />
+                  <div className="absolute top-5 left-5 flex items-center gap-2">
+                    <span className={`bg-white/90 backdrop-blur-md text-xs uppercase tracking-wider font-bold px-3 py-1.5 rounded-full shadow-sm ${flower.color}`}>
+                      {flower.type}
+                    </span>
+                    <span className="bg-white/90 backdrop-blur-md text-xs font-bold text-gray-700 px-3 py-1.5 rounded-full shadow-sm">
+                      ★ {flower.rating}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Modal Content */}
+                <div className="p-6 md:p-8">
+                  <h3 className="font-display font-bold text-3xl text-gray-900 mb-6">
+                    {flower.name}
+                  </h3>
+                  
+                  <div className="space-y-5">
+                    <div className="bg-gray-50 rounded-2xl p-4 flex items-center justify-around border border-gray-100">
+                      <div className="flex flex-col items-center gap-1">
+                        <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">THC</span>
+                        <span className="text-lg font-bold text-gray-900">{flower.thc}</span>
+                      </div>
+                      <div className="w-px h-8 bg-gray-200" />
+                      <div className="flex flex-col items-center gap-1">
+                        <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">CBD</span>
+                        <span className="text-lg font-bold text-gray-900">{flower.cbd}</span>
+                      </div>
+                    </div>
+
+                    <div className="space-y-3">
+                      <div className="flex items-start gap-3 p-4 rounded-2xl bg-white border border-gray-100 shadow-sm">
+                        <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider w-16 pt-0.5 shrink-0">Sabor</span>
+                        <p className="text-sm font-medium text-gray-800">{flower.flavor}</p>
+                      </div>
+                      <div className="flex items-start gap-3 p-4 rounded-2xl bg-white border border-gray-100 shadow-sm">
+                        <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider w-16 pt-0.5 shrink-0">Efecto</span>
+                        <p className="text-sm font-medium text-gray-800">{flower.effect}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Pagination Dots */}
+          <div className="absolute bottom-8 left-0 right-0 flex justify-center gap-2 z-10 pointer-events-none">
+            {FLOWERS_DATA.map((flower) => (
+              <div 
+                key={flower.id}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  flower.id === selectedFlowerId ? 'bg-white scale-125' : 'bg-white/40'
+                }`}
               />
-              <div className="absolute top-5 left-5 flex items-center gap-2">
-                <span className={`bg-white/90 backdrop-blur-md text-xs uppercase tracking-wider font-bold px-3 py-1.5 rounded-full shadow-sm ${selectedFlower.color}`}>
-                  {selectedFlower.type}
-                </span>
-                <span className="bg-white/90 backdrop-blur-md text-xs font-bold text-gray-700 px-3 py-1.5 rounded-full shadow-sm">
-                  ★ {selectedFlower.rating}
-                </span>
-              </div>
-            </div>
-
-            {/* Modal Content */}
-            <div className="p-6 md:p-8">
-              <h3 className="font-display font-bold text-3xl text-gray-900 mb-6">
-                {selectedFlower.name}
-              </h3>
-              
-              <div className="space-y-5">
-                <div className="bg-gray-50 rounded-2xl p-4 flex items-center justify-around border border-gray-100">
-                  <div className="flex flex-col items-center gap-1">
-                    <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">THC</span>
-                    <span className="text-lg font-bold text-gray-900">{selectedFlower.thc}</span>
-                  </div>
-                  <div className="w-px h-8 bg-gray-200" />
-                  <div className="flex flex-col items-center gap-1">
-                    <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">CBD</span>
-                    <span className="text-lg font-bold text-gray-900">{selectedFlower.cbd}</span>
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  <div className="flex items-start gap-3 p-4 rounded-2xl bg-white border border-gray-100 shadow-sm">
-                    <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider w-16 pt-0.5 shrink-0">Sabor</span>
-                    <p className="text-sm font-medium text-gray-800">{selectedFlower.flavor}</p>
-                  </div>
-                  <div className="flex items-start gap-3 p-4 rounded-2xl bg-white border border-gray-100 shadow-sm">
-                    <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider w-16 pt-0.5 shrink-0">Efecto</span>
-                    <p className="text-sm font-medium text-gray-800">{selectedFlower.effect}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       )}
