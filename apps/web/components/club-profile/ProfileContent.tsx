@@ -14,7 +14,7 @@ interface ProfileContentProps {
   club: Club;
 }
 
-const TABS = ['Flores', 'Club', 'Fotos', 'Membresía'];
+const TABS = ['Todo', 'Flores', 'Club', 'Fotos', 'Membresía'];
 
 export function ProfileContent({ club }: ProfileContentProps) {
   const [viewport, setViewport] = useState({
@@ -23,7 +23,7 @@ export function ProfileContent({ club }: ProfileContentProps) {
     zoom: 14
   });
 
-  const [activeTab, setActiveTab] = useState('Flores');
+  const [activeTab, setActiveTab] = useState('Todo');
 
   return (
     <div className="w-full pb-20 relative">
@@ -53,81 +53,8 @@ export function ProfileContent({ club }: ProfileContentProps) {
 
       <div className="max-w-4xl mx-auto px-5 md:px-8 py-6 flex flex-col gap-10">
         
-        {activeTab === 'Flores' && (
+        {activeTab === 'Todo' && (
           <div className="space-y-10">
-            {/* Variedades Disponibles Section */}
-            <section>
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">
-                  Variedades disponibles
-                </h2>
-                <button className="text-sm font-semibold text-gray-500 hover:text-gray-900 transition-colors">Ver todas</button>
-              </div>
-              <div className="flex overflow-x-auto hide-scrollbar gap-4 pb-6 -mx-5 px-5 md:mx-0 md:px-0">
-                {[
-                  { id: 1, name: "Gelato 41", type: "Híbrida", thc: "24%", cbd: "0.2%", price: "12€/g", flavor: "Dulce, Afrutado", effect: "Creativo", rating: "4.9", color: "text-purple-600" },
-                  { id: 2, name: "Amnesia Haze", type: "Sativa", thc: "21%", cbd: "0.5%", price: "10€/g", flavor: "Limón, Cítrico", effect: "Energético", rating: "4.8", color: "text-amber-600" },
-                  { id: 3, name: "OG Kush", type: "Índica", thc: "22%", cbd: "1.2%", price: "11€/g", flavor: "Pino, Terroso", effect: "Relajante", rating: "4.7", color: "text-emerald-600" },
-                  { id: 4, name: "Gorilla Glue", type: "Híbrida", thc: "26%", cbd: "0.1%", price: "14€/g", flavor: "Pino, Químico", effect: "Eufórico", rating: "5.0", color: "text-purple-600" },
-                  { id: 5, name: "Lemon Skunk", type: "Sativa", thc: "18%", cbd: "2%", price: "9€/g", flavor: "Limón, Ácido", effect: "Cerebral", rating: "4.6", color: "text-amber-600" },
-                ].map((varie) => (
-                  <div key={varie.id} className="w-[220px] shrink-0 bg-white rounded-[24px] border border-black/[0.04] shadow-[0_4px_20px_rgba(0,0,0,0.04)] overflow-hidden group cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300">
-                    <div className="w-full h-[170px] flex items-center justify-center pt-4 relative bg-gradient-to-b from-gray-50/50 to-white">
-                      <Image 
-                        src="/iconos/flor.webp" 
-                        alt={varie.name} 
-                        width={112} 
-                        height={112} 
-                        className="object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-500" 
-                      />
-                      <div className="absolute top-3 left-3">
-                        <span className={`bg-white/90 backdrop-blur-md text-[10px] uppercase tracking-wider font-bold px-2.5 py-1 rounded-full shadow-sm ${varie.color}`}>
-                          {varie.type}
-                        </span>
-                      </div>
-                      <div className="absolute top-3 right-3 flex items-center gap-1 bg-white/90 backdrop-blur-md px-2 py-1 rounded-full shadow-sm">
-                        <span className="text-[10px] font-bold text-gray-700">★ {varie.rating}</span>
-                      </div>
-                    </div>
-                    <div className="p-4 pt-2 flex flex-col gap-2">
-                      <div className="flex justify-between items-start">
-                        <h3 className="font-display font-bold text-gray-900 text-[19px] leading-tight truncate">{varie.name}</h3>
-                      </div>
-                      
-                      {/* Stats Row 1: THC/CBD */}
-                      <div className="flex items-center gap-2">
-                        <div className="flex items-center gap-1 bg-gray-100 rounded-md px-1.5 py-0.5">
-                          <span className="text-[10px] font-bold text-gray-500">THC</span>
-                          <span className="text-xs font-bold text-gray-900">{varie.thc}</span>
-                        </div>
-                        <div className="flex items-center gap-1 bg-gray-100 rounded-md px-1.5 py-0.5">
-                          <span className="text-[10px] font-bold text-gray-500">CBD</span>
-                          <span className="text-xs font-bold text-gray-900">{varie.cbd}</span>
-                        </div>
-                      </div>
-                      
-                      {/* Stats Row 2: Flavor and Effect */}
-                      <div className="flex flex-col gap-1 mt-1">
-                        <div className="flex items-center gap-1.5 text-xs text-gray-600">
-                           <span className="opacity-60 text-[10px] uppercase tracking-wider font-bold w-12">Sabor</span>
-                           <span className="font-medium truncate">{varie.flavor}</span>
-                        </div>
-                        <div className="flex items-center gap-1.5 text-xs text-gray-600">
-                           <span className="opacity-60 text-[10px] uppercase tracking-wider font-bold w-12">Efecto</span>
-                           <span className="font-medium truncate">{varie.effect}</span>
-                        </div>
-                      </div>
-
-                      {/* Price */}
-                      <div className="flex items-center justify-between mt-2 pt-3 border-t border-gray-100">
-                        <span className="text-[13px] font-semibold text-gray-500">Aportación</span>
-                        <span className="text-[15px] font-bold text-[#34C759]">{varie.price}</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
 
             {/* Fotos Section */}
             <section>
@@ -229,6 +156,80 @@ export function ProfileContent({ club }: ProfileContentProps) {
               </div>
             </section>
           </div>
+        )}
+
+        {/* Flores Section */}
+        {activeTab === 'Flores' && (
+          <section>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">
+                Variedades disponibles
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                { id: 1, name: "Gelato 41", type: "Híbrida", thc: "24%", cbd: "0.2%", price: "12€/g", flavor: "Dulce, Afrutado", effect: "Creativo", rating: "4.9", color: "text-purple-600" },
+                { id: 2, name: "Amnesia Haze", type: "Sativa", thc: "21%", cbd: "0.5%", price: "10€/g", flavor: "Limón, Cítrico", effect: "Energético", rating: "4.8", color: "text-amber-600" },
+                { id: 3, name: "OG Kush", type: "Índica", thc: "22%", cbd: "1.2%", price: "11€/g", flavor: "Pino, Terroso", effect: "Relajante", rating: "4.7", color: "text-emerald-600" },
+                { id: 4, name: "Gorilla Glue", type: "Híbrida", thc: "26%", cbd: "0.1%", price: "14€/g", flavor: "Pino, Químico", effect: "Eufórico", rating: "5.0", color: "text-purple-600" },
+                { id: 5, name: "Lemon Skunk", type: "Sativa", thc: "18%", cbd: "2%", price: "9€/g", flavor: "Limón, Ácido", effect: "Cerebral", rating: "4.6", color: "text-amber-600" },
+                { id: 6, name: "Wedding Cake", type: "Híbrida", thc: "25%", cbd: "0.3%", price: "13€/g", flavor: "Vainilla, Dulce", effect: "Relajante", rating: "4.9", color: "text-purple-600" },
+              ].map((varie) => (
+                <div key={varie.id} className="w-full bg-white rounded-[24px] border border-black/[0.04] shadow-[0_4px_20px_rgba(0,0,0,0.04)] overflow-hidden group cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300">
+                  <div className="w-full h-[200px] flex items-center justify-center pt-4 relative bg-gradient-to-b from-gray-50/50 to-white">
+                    <Image 
+                      src="/iconos/flor.webp" 
+                      alt={varie.name} 
+                      width={140} 
+                      height={140} 
+                      className="object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-500" 
+                    />
+                    <div className="absolute top-4 left-4">
+                      <span className={`bg-white/90 backdrop-blur-md text-[11px] uppercase tracking-wider font-bold px-3 py-1.5 rounded-full shadow-sm ${varie.color}`}>
+                        {varie.type}
+                      </span>
+                    </div>
+                    <div className="absolute top-4 right-4 flex items-center gap-1 bg-white/90 backdrop-blur-md px-2.5 py-1.5 rounded-full shadow-sm">
+                      <span className="text-[11px] font-bold text-gray-700">★ {varie.rating}</span>
+                    </div>
+                  </div>
+                  <div className="p-5 pt-3 flex flex-col gap-3">
+                    <div className="flex justify-between items-start">
+                      <h3 className="font-display font-bold text-gray-900 text-xl leading-tight truncate">{varie.name}</h3>
+                    </div>
+                    
+                    {/* Stats */}
+                    <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1.5 bg-gray-100 rounded-md px-2 py-1">
+                        <span className="text-[11px] font-bold text-gray-500">THC</span>
+                        <span className="text-sm font-bold text-gray-900">{varie.thc}</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 bg-gray-100 rounded-md px-2 py-1">
+                        <span className="text-[11px] font-bold text-gray-500">CBD</span>
+                        <span className="text-sm font-bold text-gray-900">{varie.cbd}</span>
+                      </div>
+                    </div>
+                    
+                    <div className="flex flex-col gap-1.5 mt-1">
+                      <div className="flex items-center gap-2 text-sm text-gray-600">
+                         <span className="opacity-60 text-[11px] uppercase tracking-wider font-bold w-14">Sabor</span>
+                         <span className="font-medium truncate">{varie.flavor}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-gray-600">
+                         <span className="opacity-60 text-[11px] uppercase tracking-wider font-bold w-14">Efecto</span>
+                         <span className="font-medium truncate">{varie.effect}</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between mt-3 pt-4 border-t border-gray-100">
+                      <span className="text-sm font-semibold text-gray-500">Aportación</span>
+                      <span className="text-lg font-bold text-[#34C759]">{varie.price}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
         )}
 
         {/* Club Section */}
