@@ -8,13 +8,14 @@ import { TabPhotos } from './tabs/TabPhotos';
 import { TabPhotosCarousel } from './tabs/TabPhotosCarousel';
 import { TabRules } from './tabs/TabRules';
 import { TabMembership } from './tabs/TabMembership';
+import { TabReviews } from './tabs/TabReviews';
 import { MapPin, Star } from 'lucide-react';
 
 interface ProfileContentProps {
   club: Club;
 }
 
-const TABS = ['Todo', 'Flores', 'Club', 'Fotos', 'Membresía'];
+const TABS = ['Todo', 'Flores', 'Club', 'Fotos', 'Reseñas'];
 
 export function ProfileContent({ club }: ProfileContentProps) {
   const [viewport, setViewport] = useState({
@@ -319,6 +320,14 @@ export function ProfileContent({ club }: ProfileContentProps) {
             <section>
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">
+                  Membresía
+                </h2>
+              </div>
+              <TabMembership club={club} />
+            </section>
+            <section>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">
                   Normas Generales de Clubs
                 </h2>
               </div>
@@ -334,10 +343,15 @@ export function ProfileContent({ club }: ProfileContentProps) {
           </section>
         )}
 
-        {/* Membresía Section */}
-        {activeTab === 'Membresía' && (
+        {/* Reseñas Section */}
+        {activeTab === 'Reseñas' && (
           <section>
-            <TabMembership club={club} />
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">
+                Reseñas y Opiniones
+              </h2>
+            </div>
+            <TabReviews club={club} />
           </section>
         )}
 
