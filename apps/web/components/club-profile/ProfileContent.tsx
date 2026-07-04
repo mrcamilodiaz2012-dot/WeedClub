@@ -220,12 +220,19 @@ export function ProfileContent({ club }: ProfileContentProps) {
               </div>
               <div className="flex overflow-x-auto hide-scrollbar gap-4 pb-6 -mx-5 px-5 md:mx-0 md:px-0">
                 {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="w-[160px] shrink-0 flex flex-col gap-3 p-3 bg-white border border-gray-100 rounded-[20px] shadow-sm hover:shadow-md transition-shadow cursor-pointer">
-                    <div className="w-full h-[120px] bg-gray-200 rounded-[14px] shrink-0 relative overflow-hidden">
-                      {/* Image placeholder */}
-                      <div className="absolute inset-0 bg-gray-200 flex items-center justify-center text-gray-400">
-                        <MapPin className="w-6 h-6 opacity-50" />
-                      </div>
+                  <div key={i} className="w-[160px] shrink-0 flex flex-col gap-3 p-3 bg-white border border-gray-100 rounded-[20px] shadow-sm hover:shadow-md transition-shadow cursor-pointer group">
+                    <div className="w-full h-[120px] bg-gray-100 rounded-[14px] shrink-0 relative overflow-hidden">
+                      <Image 
+                        src={`/portadas/portada${i === 1 ? '1' : '1'}.jpg`} // Fallback to portada1 for mock
+                        alt={`Club ${i}`}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        onError={(e) => {
+                          // Fallback in case local image doesn't exist
+                          e.currentTarget.src = `https://images.unsplash.com/photo-1576085898323-218337e3e43c?auto=format&fit=crop&q=80&w=400&h=300&random=${i + 20}`;
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-500" />
                     </div>
                     <div className="flex flex-col px-1">
                       <h4 className="font-bold text-gray-900 text-[15px] leading-tight truncate">Club Local {i}</h4>
