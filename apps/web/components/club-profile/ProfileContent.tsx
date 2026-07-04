@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { Club } from '@/types';
 import Image from 'next/image';
 import { InteractiveMap } from '../map/InteractiveMap';
@@ -35,6 +35,18 @@ export function ProfileContent({ club }: ProfileContentProps) {
 
   const [activeTab, setActiveTab] = useState('Todo');
   const [selectedFlower, setSelectedFlower] = useState<any>(null);
+
+  // Prevent background scroll when modal is open
+  useEffect(() => {
+    if (selectedFlower) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedFlower]);
 
   return (
     <div className="w-full pb-20 relative">
