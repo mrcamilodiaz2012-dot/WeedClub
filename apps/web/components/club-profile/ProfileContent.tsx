@@ -429,7 +429,7 @@ export function ProfileContent({ club }: ProfileContentProps) {
           >
             {FLOWERS_DATA.map((flower, idx) => {
               const isActive = flower.id === activeModalId;
-              const glowColor = flower.type === 'Sativa' ? 'bg-amber-500' : flower.type === 'Índica' ? 'bg-emerald-500' : 'bg-purple-500';
+              const glowColor = flower.type === 'Sativa' ? 'bg-amber-400' : flower.type === 'Índica' ? 'bg-emerald-400' : 'bg-purple-400';
               
               return (
                 <div 
@@ -444,27 +444,27 @@ export function ProfileContent({ club }: ProfileContentProps) {
                     }
                   }}
                   className={`w-[80vw] md:w-[400px] shrink-0 snap-center rounded-[32px] overflow-hidden relative transition-all duration-500 ${
-                    isActive ? 'scale-100 opacity-100 shadow-[0_20px_80px_rgba(0,0,0,0.6)]' : 'scale-90 opacity-40 shadow-none cursor-pointer hover:opacity-60'
+                    isActive ? 'scale-100 opacity-100 shadow-[0_20px_60px_rgba(0,0,0,0.1)]' : 'scale-90 opacity-40 shadow-none cursor-pointer hover:opacity-60'
                   }`}
                 >
-                  {/* Premium Dark Background */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#1C1C1E] via-[#121212] to-[#000000]" />
+                  {/* Premium Light Background */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white via-[#fafafa] to-[#f4f4f5]" />
                   
                   {/* Atmospheric Glow */}
-                  <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 rounded-full blur-[100px] opacity-40 mix-blend-screen transition-colors duration-700 ${glowColor}`} />
+                  <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 rounded-full blur-[80px] opacity-25 transition-colors duration-700 ${glowColor}`} />
                   
                   {/* Content */}
                   <div className="relative z-10 flex flex-col h-full">
                     {/* Header Tags */}
                     <div className="absolute top-6 left-6 right-6 flex items-center justify-between z-20">
                       <div className="flex items-center gap-2">
-                        <span className="bg-white/10 border border-white/20 backdrop-blur-md text-white text-[10px] uppercase tracking-[0.2em] font-bold px-3 py-1.5 rounded-full shadow-lg">
+                        <span className={`bg-white/80 border border-black/5 backdrop-blur-md text-[10px] uppercase tracking-[0.2em] font-bold px-3 py-1.5 rounded-full shadow-sm ${flower.color}`}>
                           {flower.type}
                         </span>
                       </div>
-                      <div className="bg-white/10 border border-white/20 backdrop-blur-md px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1.5">
-                        <Star className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" />
-                        <span className="text-white text-[11px] font-bold">{flower.rating}</span>
+                      <div className="bg-white/80 border border-black/5 backdrop-blur-md px-3 py-1.5 rounded-full shadow-sm flex items-center gap-1.5">
+                        <Star className="w-3.5 h-3.5 text-yellow-500 fill-yellow-500" />
+                        <span className="text-gray-700 text-[11px] font-bold">{flower.rating}</span>
                       </div>
                     </div>
 
@@ -475,39 +475,39 @@ export function ProfileContent({ club }: ProfileContentProps) {
                         alt={flower.name} 
                         width={240} 
                         height={240} 
-                        className={`object-contain transition-all duration-700 ease-out ${isActive ? 'drop-shadow-[0_30px_40px_rgba(0,0,0,0.5)] animate-float-slow scale-110' : 'drop-shadow-none scale-90'}`} 
+                        className={`object-contain transition-all duration-700 ease-out ${isActive ? 'drop-shadow-[0_30px_40px_rgba(0,0,0,0.15)] animate-float-slow scale-110' : 'drop-shadow-none scale-90'}`} 
                       />
                     </div>
 
                     {/* Modal Content */}
                     <div className="p-6 md:p-8 pt-0 flex-1 flex flex-col">
-                      <h3 className="font-display font-bold text-3xl text-white mb-6 tracking-tight">
+                      <h3 className="font-display font-bold text-3xl text-gray-900 mb-6 tracking-tight">
                         {flower.name}
                       </h3>
                       
                       <div className="space-y-4">
                         {/* THC / CBD Glass Panel */}
-                        <div className="bg-white/5 border border-white/10 backdrop-blur-xl rounded-[24px] p-5 flex items-center justify-around shadow-inner">
+                        <div className="bg-white/60 border border-white/80 backdrop-blur-xl rounded-[24px] p-5 flex items-center justify-around shadow-[0_4px_24px_rgba(0,0,0,0.03)]">
                           <div className="flex flex-col items-center gap-1.5">
                             <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">THC</span>
-                            <span className="text-xl font-display font-bold text-white">{flower.thc}</span>
+                            <span className="text-xl font-display font-bold text-gray-900">{flower.thc}</span>
                           </div>
-                          <div className="w-px h-10 bg-white/10" />
+                          <div className="w-px h-10 bg-gray-200" />
                           <div className="flex flex-col items-center gap-1.5">
                             <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">CBD</span>
-                            <span className="text-xl font-display font-bold text-white">{flower.cbd}</span>
+                            <span className="text-xl font-display font-bold text-gray-900">{flower.cbd}</span>
                           </div>
                         </div>
 
                         {/* Flavor / Effect Panels */}
                         <div className="grid grid-cols-2 gap-4">
-                          <div className="bg-white/[0.03] border border-white/5 hover:bg-white/[0.08] transition-colors rounded-[20px] p-4 flex flex-col gap-1">
+                          <div className="bg-gray-50/80 border border-gray-100 hover:bg-gray-100/80 transition-colors rounded-[20px] p-4 flex flex-col gap-1 shadow-sm">
                             <span className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.15em]">Sabor</span>
-                            <span className="text-sm font-medium text-gray-200">{flower.flavor}</span>
+                            <span className="text-sm font-medium text-gray-800">{flower.flavor}</span>
                           </div>
-                          <div className="bg-white/[0.03] border border-white/5 hover:bg-white/[0.08] transition-colors rounded-[20px] p-4 flex flex-col gap-1">
+                          <div className="bg-gray-50/80 border border-gray-100 hover:bg-gray-100/80 transition-colors rounded-[20px] p-4 flex flex-col gap-1 shadow-sm">
                             <span className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.15em]">Efecto</span>
-                            <span className="text-sm font-medium text-gray-200">{flower.effect}</span>
+                            <span className="text-sm font-medium text-gray-800">{flower.effect}</span>
                           </div>
                         </div>
                       </div>
