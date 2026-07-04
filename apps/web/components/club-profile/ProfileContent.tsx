@@ -9,13 +9,22 @@ import { TabPhotosCarousel } from './tabs/TabPhotosCarousel';
 import { TabRules } from './tabs/TabRules';
 import { TabMembership } from './tabs/TabMembership';
 import { TabReviews } from './tabs/TabReviews';
-import { MapPin, Star } from 'lucide-react';
+import { MapPin, Star, X } from 'lucide-react';
 
 interface ProfileContentProps {
   club: Club;
 }
 
 const TABS = ['Todo', 'Flores', 'Club', 'Fotos', 'Reseñas'];
+
+const FLOWERS_DATA = [
+  { id: 1, name: "Gelato 41", type: "Híbrida", thc: "24%", cbd: "0.2%", flavor: "Dulce, Afrutado", effect: "Creativo", rating: "4.9", color: "text-purple-600" },
+  { id: 2, name: "Amnesia Haze", type: "Sativa", thc: "21%", cbd: "0.5%", flavor: "Limón, Cítrico", effect: "Energético", rating: "4.8", color: "text-amber-600" },
+  { id: 3, name: "OG Kush", type: "Índica", thc: "22%", cbd: "1.2%", flavor: "Pino, Terroso", effect: "Relajante", rating: "4.7", color: "text-emerald-600" },
+  { id: 4, name: "Gorilla Glue", type: "Híbrida", thc: "26%", cbd: "0.1%", flavor: "Pino, Químico", effect: "Eufórico", rating: "5.0", color: "text-purple-600" },
+  { id: 5, name: "Lemon Skunk", type: "Sativa", thc: "18%", cbd: "2%", flavor: "Limón, Ácido", effect: "Cerebral", rating: "4.6", color: "text-amber-600" },
+  { id: 6, name: "Wedding Cake", type: "Híbrida", thc: "25%", cbd: "0.3%", flavor: "Vainilla, Dulce", effect: "Relajante", rating: "4.9", color: "text-purple-600" },
+];
 
 export function ProfileContent({ club }: ProfileContentProps) {
   const [viewport, setViewport] = useState({
@@ -25,6 +34,7 @@ export function ProfileContent({ club }: ProfileContentProps) {
   });
 
   const [activeTab, setActiveTab] = useState('Todo');
+  const [selectedFlower, setSelectedFlower] = useState<any>(null);
 
   return (
     <div className="w-full pb-20 relative">
@@ -70,14 +80,12 @@ export function ProfileContent({ club }: ProfileContentProps) {
                 </button>
               </div>
               <div className="flex overflow-x-auto hide-scrollbar gap-4 pb-6 -mx-5 px-5 md:mx-0 md:px-0">
-                {[
-                  { id: 1, name: "Gelato 41", type: "Híbrida", thc: "24%", cbd: "0.2%", price: "12€/g", flavor: "Dulce, Afrutado", effect: "Creativo", rating: "4.9", color: "text-purple-600" },
-                  { id: 2, name: "Amnesia Haze", type: "Sativa", thc: "21%", cbd: "0.5%", price: "10€/g", flavor: "Limón, Cítrico", effect: "Energético", rating: "4.8", color: "text-amber-600" },
-                  { id: 3, name: "OG Kush", type: "Índica", thc: "22%", cbd: "1.2%", price: "11€/g", flavor: "Pino, Terroso", effect: "Relajante", rating: "4.7", color: "text-emerald-600" },
-                  { id: 4, name: "Gorilla Glue", type: "Híbrida", thc: "26%", cbd: "0.1%", price: "14€/g", flavor: "Pino, Químico", effect: "Eufórico", rating: "5.0", color: "text-purple-600" },
-                  { id: 5, name: "Lemon Skunk", type: "Sativa", thc: "18%", cbd: "2%", price: "9€/g", flavor: "Limón, Ácido", effect: "Cerebral", rating: "4.6", color: "text-amber-600" },
-                ].map((varie) => (
-                  <div key={varie.id} className="w-[220px] shrink-0 bg-white rounded-[24px] border border-black/[0.04] shadow-[0_4px_20px_rgba(0,0,0,0.04)] overflow-hidden group cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300">
+                {FLOWERS_DATA.slice(0, 5).map((varie) => (
+                  <div 
+                    key={varie.id} 
+                    onClick={() => setSelectedFlower(varie)}
+                    className="w-[220px] shrink-0 bg-white rounded-[24px] border border-black/[0.04] shadow-[0_4px_20px_rgba(0,0,0,0.04)] overflow-hidden group cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300"
+                  >
                     <div className="w-full h-[170px] flex items-center justify-center pt-4 relative bg-gradient-to-b from-gray-50/50 to-white">
                       <Image 
                         src="/iconos/flor.webp" 
@@ -254,15 +262,12 @@ export function ProfileContent({ club }: ProfileContentProps) {
               </h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
-                { id: 1, name: "Gelato 41", type: "Híbrida", thc: "24%", cbd: "0.2%", price: "12€/g", flavor: "Dulce, Afrutado", effect: "Creativo", rating: "4.9", color: "text-purple-600" },
-                { id: 2, name: "Amnesia Haze", type: "Sativa", thc: "21%", cbd: "0.5%", price: "10€/g", flavor: "Limón, Cítrico", effect: "Energético", rating: "4.8", color: "text-amber-600" },
-                { id: 3, name: "OG Kush", type: "Índica", thc: "22%", cbd: "1.2%", price: "11€/g", flavor: "Pino, Terroso", effect: "Relajante", rating: "4.7", color: "text-emerald-600" },
-                { id: 4, name: "Gorilla Glue", type: "Híbrida", thc: "26%", cbd: "0.1%", price: "14€/g", flavor: "Pino, Químico", effect: "Eufórico", rating: "5.0", color: "text-purple-600" },
-                { id: 5, name: "Lemon Skunk", type: "Sativa", thc: "18%", cbd: "2%", price: "9€/g", flavor: "Limón, Ácido", effect: "Cerebral", rating: "4.6", color: "text-amber-600" },
-                { id: 6, name: "Wedding Cake", type: "Híbrida", thc: "25%", cbd: "0.3%", price: "13€/g", flavor: "Vainilla, Dulce", effect: "Relajante", rating: "4.9", color: "text-purple-600" },
-              ].map((varie) => (
-                <div key={varie.id} className="w-full bg-white rounded-[24px] border border-black/[0.04] shadow-[0_4px_20px_rgba(0,0,0,0.04)] overflow-hidden group cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300">
+              {FLOWERS_DATA.map((varie) => (
+                <div 
+                  key={varie.id} 
+                  onClick={() => setSelectedFlower(varie)}
+                  className="w-full bg-white rounded-[24px] border border-black/[0.04] shadow-[0_4px_20px_rgba(0,0,0,0.04)] overflow-hidden group cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300"
+                >
                   <div className="w-full h-[200px] flex items-center justify-center pt-4 relative bg-gradient-to-b from-gray-50/50 to-white">
                     <Image 
                       src="/iconos/flor.webp" 
@@ -360,6 +365,76 @@ export function ProfileContent({ club }: ProfileContentProps) {
         )}
 
       </div>
+
+      {/* Flower Details Modal */}
+      {selectedFlower && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm">
+          <div 
+            className="absolute inset-0" 
+            onClick={() => setSelectedFlower(null)}
+          />
+          <div className="relative w-full max-w-md bg-white rounded-[32px] shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
+            {/* Close Button */}
+            <button 
+              onClick={() => setSelectedFlower(null)}
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-black/5 hover:bg-black/10 backdrop-blur-md rounded-full flex items-center justify-center transition-colors"
+            >
+              <X className="w-5 h-5 text-gray-900" />
+            </button>
+
+            {/* Modal Image Header */}
+            <div className="w-full h-[280px] bg-gradient-to-b from-gray-50 to-white relative flex items-center justify-center">
+              <Image 
+                src="/iconos/flor.webp" 
+                alt={selectedFlower.name} 
+                width={200} 
+                height={200} 
+                className="object-contain drop-shadow-[0_25px_25px_rgba(0,0,0,0.25)] animate-float-slow" 
+              />
+              <div className="absolute top-5 left-5 flex items-center gap-2">
+                <span className={`bg-white/90 backdrop-blur-md text-xs uppercase tracking-wider font-bold px-3 py-1.5 rounded-full shadow-sm ${selectedFlower.color}`}>
+                  {selectedFlower.type}
+                </span>
+                <span className="bg-white/90 backdrop-blur-md text-xs font-bold text-gray-700 px-3 py-1.5 rounded-full shadow-sm">
+                  ★ {selectedFlower.rating}
+                </span>
+              </div>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6 md:p-8">
+              <h3 className="font-display font-bold text-3xl text-gray-900 mb-6">
+                {selectedFlower.name}
+              </h3>
+              
+              <div className="space-y-5">
+                <div className="bg-gray-50 rounded-2xl p-4 flex items-center justify-around border border-gray-100">
+                  <div className="flex flex-col items-center gap-1">
+                    <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">THC</span>
+                    <span className="text-lg font-bold text-gray-900">{selectedFlower.thc}</span>
+                  </div>
+                  <div className="w-px h-8 bg-gray-200" />
+                  <div className="flex flex-col items-center gap-1">
+                    <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">CBD</span>
+                    <span className="text-lg font-bold text-gray-900">{selectedFlower.cbd}</span>
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3 p-4 rounded-2xl bg-white border border-gray-100 shadow-sm">
+                    <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider w-16 pt-0.5 shrink-0">Sabor</span>
+                    <p className="text-sm font-medium text-gray-800">{selectedFlower.flavor}</p>
+                  </div>
+                  <div className="flex items-start gap-3 p-4 rounded-2xl bg-white border border-gray-100 shadow-sm">
+                    <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider w-16 pt-0.5 shrink-0">Efecto</span>
+                    <p className="text-sm font-medium text-gray-800">{selectedFlower.effect}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
