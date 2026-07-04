@@ -415,7 +415,7 @@ export function ProfileContent({ club }: ProfileContentProps) {
 
           {/* Carousel Container */}
           <div 
-            className="w-full relative z-10 overflow-x-auto snap-x snap-mandatory hide-scrollbar flex items-center px-[10vw] md:px-[30vw] py-10 gap-4 md:gap-6"
+            className="w-full relative z-10 overflow-x-auto snap-x snap-mandatory hide-scrollbar flex items-center px-[15vw] md:px-[30vw] py-10 gap-3 md:gap-6"
             onScroll={(e) => {
               const container = e.currentTarget;
               const scrollLeft = container.scrollLeft;
@@ -441,8 +441,8 @@ export function ProfileContent({ club }: ProfileContentProps) {
                       }
                     }
                   }}
-                  className={`w-[80vw] md:w-[400px] shrink-0 snap-center bg-white rounded-[32px] overflow-hidden relative transition-all duration-300 ${
-                    isActive ? 'scale-100 opacity-100 shadow-2xl' : 'scale-90 opacity-40 shadow-none cursor-pointer hover:opacity-60'
+                  className={`w-[70vw] md:w-[400px] shrink-0 snap-center bg-white rounded-[32px] overflow-hidden relative transition-all duration-300 ${
+                    isActive ? 'scale-100 opacity-100 shadow-2xl' : 'scale-85 opacity-40 shadow-none cursor-pointer hover:opacity-60'
                   }`}
                 >
                   {/* Modal Image Header */}
