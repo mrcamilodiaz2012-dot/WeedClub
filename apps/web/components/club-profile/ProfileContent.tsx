@@ -429,6 +429,8 @@ export function ProfileContent({ club }: ProfileContentProps) {
           >
             {FLOWERS_DATA.map((flower, idx) => {
               const isActive = flower.id === activeModalId;
+              const glowColor = flower.type === 'Sativa' ? 'bg-amber-500' : flower.type === 'Índica' ? 'bg-emerald-500' : 'bg-purple-500';
+              
               return (
                 <div 
                   key={flower.id} 
@@ -441,56 +443,72 @@ export function ProfileContent({ club }: ProfileContentProps) {
                       }
                     }
                   }}
-                  className={`w-[80vw] md:w-[400px] shrink-0 snap-center bg-white rounded-[32px] overflow-hidden relative transition-all duration-300 ${
-                    isActive ? 'scale-100 opacity-100 shadow-2xl' : 'scale-90 opacity-40 shadow-none cursor-pointer hover:opacity-60'
+                  className={`w-[80vw] md:w-[400px] shrink-0 snap-center rounded-[32px] overflow-hidden relative transition-all duration-500 ${
+                    isActive ? 'scale-100 opacity-100 shadow-[0_20px_80px_rgba(0,0,0,0.6)]' : 'scale-90 opacity-40 shadow-none cursor-pointer hover:opacity-60'
                   }`}
                 >
-                  {/* Modal Image Header */}
-                  <div className="w-full h-[280px] bg-gradient-to-b from-gray-50 to-white relative flex items-center justify-center">
-                    <Image 
-                      src="/iconos/flor.webp" 
-                      alt={flower.name} 
-                      width={200} 
-                      height={200} 
-                      className={`object-contain transition-all duration-500 ${isActive ? 'drop-shadow-[0_25px_25px_rgba(0,0,0,0.25)] animate-float-slow' : 'drop-shadow-none'}`} 
-                    />
-                    <div className="absolute top-5 left-5 flex items-center gap-2">
-                      <span className={`bg-white/90 backdrop-blur-md text-xs uppercase tracking-wider font-bold px-3 py-1.5 rounded-full shadow-sm ${flower.color}`}>
-                        {flower.type}
-                      </span>
-                      <span className="bg-white/90 backdrop-blur-md text-xs font-bold text-gray-700 px-3 py-1.5 rounded-full shadow-sm">
-                        ★ {flower.rating}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Modal Content */}
-                  <div className="p-6 md:p-8">
-                    <h3 className="font-display font-bold text-3xl text-gray-900 mb-6">
-                      {flower.name}
-                    </h3>
-                    
-                    <div className="space-y-5">
-                      <div className="bg-gray-50 rounded-2xl p-4 flex items-center justify-around border border-gray-100">
-                        <div className="flex flex-col items-center gap-1">
-                          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">THC</span>
-                          <span className="text-lg font-bold text-gray-900">{flower.thc}</span>
-                        </div>
-                        <div className="w-px h-8 bg-gray-200" />
-                        <div className="flex flex-col items-center gap-1">
-                          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">CBD</span>
-                          <span className="text-lg font-bold text-gray-900">{flower.cbd}</span>
-                        </div>
+                  {/* Premium Dark Background */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#1C1C1E] via-[#121212] to-[#000000]" />
+                  
+                  {/* Atmospheric Glow */}
+                  <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 rounded-full blur-[100px] opacity-40 mix-blend-screen transition-colors duration-700 ${glowColor}`} />
+                  
+                  {/* Content */}
+                  <div className="relative z-10 flex flex-col h-full">
+                    {/* Header Tags */}
+                    <div className="absolute top-6 left-6 right-6 flex items-center justify-between z-20">
+                      <div className="flex items-center gap-2">
+                        <span className="bg-white/10 border border-white/20 backdrop-blur-md text-white text-[10px] uppercase tracking-[0.2em] font-bold px-3 py-1.5 rounded-full shadow-lg">
+                          {flower.type}
+                        </span>
                       </div>
+                      <div className="bg-white/10 border border-white/20 backdrop-blur-md px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1.5">
+                        <Star className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" />
+                        <span className="text-white text-[11px] font-bold">{flower.rating}</span>
+                      </div>
+                    </div>
 
-                      <div className="space-y-3">
-                        <div className="flex items-start gap-3 p-4 rounded-2xl bg-white border border-gray-100 shadow-sm">
-                          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider w-16 pt-0.5 shrink-0">Sabor</span>
-                          <p className="text-sm font-medium text-gray-800">{flower.flavor}</p>
+                    {/* Modal Image Header */}
+                    <div className="w-full h-[320px] relative flex items-center justify-center pt-8">
+                      <Image 
+                        src="/iconos/flor.webp" 
+                        alt={flower.name} 
+                        width={240} 
+                        height={240} 
+                        className={`object-contain transition-all duration-700 ease-out ${isActive ? 'drop-shadow-[0_30px_40px_rgba(0,0,0,0.5)] animate-float-slow scale-110' : 'drop-shadow-none scale-90'}`} 
+                      />
+                    </div>
+
+                    {/* Modal Content */}
+                    <div className="p-6 md:p-8 pt-0 flex-1 flex flex-col">
+                      <h3 className="font-display font-bold text-3xl text-white mb-6 tracking-tight">
+                        {flower.name}
+                      </h3>
+                      
+                      <div className="space-y-4">
+                        {/* THC / CBD Glass Panel */}
+                        <div className="bg-white/5 border border-white/10 backdrop-blur-xl rounded-[24px] p-5 flex items-center justify-around shadow-inner">
+                          <div className="flex flex-col items-center gap-1.5">
+                            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">THC</span>
+                            <span className="text-xl font-display font-bold text-white">{flower.thc}</span>
+                          </div>
+                          <div className="w-px h-10 bg-white/10" />
+                          <div className="flex flex-col items-center gap-1.5">
+                            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">CBD</span>
+                            <span className="text-xl font-display font-bold text-white">{flower.cbd}</span>
+                          </div>
                         </div>
-                        <div className="flex items-start gap-3 p-4 rounded-2xl bg-white border border-gray-100 shadow-sm">
-                          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider w-16 pt-0.5 shrink-0">Efecto</span>
-                          <p className="text-sm font-medium text-gray-800">{flower.effect}</p>
+
+                        {/* Flavor / Effect Panels */}
+                        <div className="grid grid-cols-2 gap-4">
+                          <div className="bg-white/[0.03] border border-white/5 hover:bg-white/[0.08] transition-colors rounded-[20px] p-4 flex flex-col gap-1">
+                            <span className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.15em]">Sabor</span>
+                            <span className="text-sm font-medium text-gray-200">{flower.flavor}</span>
+                          </div>
+                          <div className="bg-white/[0.03] border border-white/5 hover:bg-white/[0.08] transition-colors rounded-[20px] p-4 flex flex-col gap-1">
+                            <span className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.15em]">Efecto</span>
+                            <span className="text-sm font-medium text-gray-200">{flower.effect}</span>
+                          </div>
                         </div>
                       </div>
                     </div>
