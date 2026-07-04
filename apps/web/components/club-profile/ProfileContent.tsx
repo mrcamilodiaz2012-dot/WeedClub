@@ -400,7 +400,7 @@ export function ProfileContent({ club }: ProfileContentProps) {
 
       {/* Flower Details Modal Carousel */}
       {selectedFlowerId !== null && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex flex-col justify-center animate-in fade-in duration-300">
+        <div className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-md flex flex-col justify-center animate-in fade-in duration-300">
           <div 
             className="absolute inset-0" 
             onClick={() => setSelectedFlowerId(null)}
