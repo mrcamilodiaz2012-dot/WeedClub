@@ -36,6 +36,17 @@ export function ProfileContent({ club }: ProfileContentProps) {
   const [activeTab, setActiveTab] = useState('Todo');
   const [selectedFlowerId, setSelectedFlowerId] = useState<number | null>(null);
   const [activeModalId, setActiveModalId] = useState<number | null>(null);
+  const [likedFlowers, setLikedFlowers] = useState<Set<number>>(new Set());
+
+  const toggleLike = (e: React.MouseEvent, id: number) => {
+    e.stopPropagation();
+    setLikedFlowers(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
 
   // When modal opens, set the active ID
   useEffect(() => {
@@ -462,10 +473,16 @@ export function ProfileContent({ club }: ProfileContentProps) {
                           {flower.type}
                         </span>
                       </div>
-                      <div className="bg-white/80 border border-black/5 backdrop-blur-md px-3 py-1.5 rounded-full shadow-sm flex items-center gap-1.5">
-                        <Star className="w-3.5 h-3.5 text-yellow-500 fill-yellow-500" />
-                        <span className="text-gray-700 text-[11px] font-bold">{flower.rating}</span>
-                      </div>
+                      <button 
+                        onClick={(e) => toggleLike(e, flower.id)}
+                        className="bg-white/80 border border-black/5 backdrop-blur-md w-8 h-8 rounded-full shadow-sm flex items-center justify-center hover:scale-110 active:scale-95 transition-all"
+                      >
+                        <Heart 
+                          className={`w-4 h-4 transition-colors ${
+                            likedFlowers.has(flower.id) ? 'text-red-500 fill-red-500' : 'text-gray-400'
+                          }`} 
+                        />
+                      </button>
                     </div>
 
                     {/* Modal Image Header */}
