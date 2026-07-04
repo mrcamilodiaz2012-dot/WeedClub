@@ -124,11 +124,6 @@ export function ProfileContent({ club }: ProfileContentProps) {
                         </div>
                       </div>
 
-                      {/* Price */}
-                      <div className="flex items-center justify-between mt-2 pt-3 border-t border-gray-100">
-                        <span className="text-[13px] font-semibold text-gray-500">Aportación</span>
-                        <span className="text-[15px] font-bold text-[#34C759]">{varie.price}</span>
-                      </div>
                     </div>
                   </div>
                 ))}
@@ -313,10 +308,6 @@ export function ProfileContent({ club }: ProfileContentProps) {
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between mt-3 pt-4 border-t border-gray-100">
-                      <span className="text-sm font-semibold text-gray-500">Aportación</span>
-                      <span className="text-lg font-bold text-[#34C759]">{varie.price}</span>
-                    </div>
                   </div>
                 </div>
               ))}
