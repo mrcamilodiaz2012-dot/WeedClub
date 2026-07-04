@@ -82,9 +82,9 @@ export function ProfileContent({ club }: ProfileContentProps) {
                       <Image 
                         src="/iconos/flor.webp" 
                         alt={varie.name} 
-                        width={112} 
-                        height={112} 
-                        className="object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-500" 
+                        width={120} 
+                        height={120} 
+                        className="object-contain drop-shadow-[0_15px_15px_rgba(0,0,0,0.25)] group-hover:-translate-y-3 group-hover:scale-110 group-hover:drop-shadow-[0_25px_25px_rgba(0,0,0,0.4)] transition-all duration-500" 
                       />
                       <div className="absolute top-3 left-3">
                         <span className={`bg-white/90 backdrop-blur-md text-[10px] uppercase tracking-wider font-bold px-2.5 py-1 rounded-full shadow-sm ${varie.color}`}>
@@ -267,9 +267,9 @@ export function ProfileContent({ club }: ProfileContentProps) {
                     <Image 
                       src="/iconos/flor.webp" 
                       alt={varie.name} 
-                      width={140} 
-                      height={140} 
-                      className="object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-500" 
+                      width={150} 
+                      height={150} 
+                      className="object-contain drop-shadow-[0_20px_20px_rgba(0,0,0,0.25)] group-hover:-translate-y-3 group-hover:scale-110 group-hover:drop-shadow-[0_30px_30px_rgba(0,0,0,0.4)] transition-all duration-500" 
                     />
                     <div className="absolute top-4 left-4">
                       <span className={`bg-white/90 backdrop-blur-md text-[11px] uppercase tracking-wider font-bold px-3 py-1.5 rounded-full shadow-sm ${varie.color}`}>
