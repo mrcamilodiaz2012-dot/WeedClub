@@ -220,26 +220,27 @@ export function ProfileContent({ club }: ProfileContentProps) {
               </div>
               <div className="flex overflow-x-auto hide-scrollbar gap-4 pb-6 -mx-5 px-5 md:mx-0 md:px-0">
                 {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="w-[160px] shrink-0 flex flex-col gap-3 p-3 bg-white border border-gray-100 rounded-[20px] shadow-sm hover:shadow-md transition-shadow cursor-pointer group">
-                    <div className="w-full h-[120px] bg-gray-100 rounded-[14px] shrink-0 relative overflow-hidden">
+                  <div key={i} className="w-[240px] shrink-0 flex items-center gap-3.5 p-3.5 bg-white border border-gray-100 rounded-[20px] shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_20px_rgba(0,0,0,0.06)] transition-all cursor-pointer group">
+                    <div className="w-[56px] h-[56px] bg-gray-100 rounded-[14px] shrink-0 relative overflow-hidden shadow-sm">
                       <Image 
                         src={`/portadas/portada${i === 1 ? '1' : '1'}.jpg`} // Fallback to portada1 for mock
                         alt={`Club ${i}`}
                         fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
                         onError={(e) => {
-                          // Fallback in case local image doesn't exist
                           e.currentTarget.src = `https://images.unsplash.com/photo-1576085898323-218337e3e43c?auto=format&fit=crop&q=80&w=400&h=300&random=${i + 20}`;
                         }}
                       />
-                      <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-500" />
+                      <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors duration-500" />
                     </div>
-                    <div className="flex flex-col px-1">
-                      <h4 className="font-bold text-gray-900 text-[15px] leading-tight truncate">Club Local {i}</h4>
-                      <p className="text-[12px] text-gray-500 mt-1">A {(0.5 * i).toFixed(1)} km</p>
-                      <div className="flex items-center gap-1 mt-2">
-                        <Star className="w-3.5 h-3.5 text-yellow-500 fill-yellow-500" />
-                        <span className="text-[12px] font-bold text-gray-700">4.{9 - i}</span>
+                    <div className="flex flex-col flex-1 min-w-0">
+                      <h4 className="font-display font-bold text-gray-900 text-[16px] leading-tight truncate group-hover:text-black transition-colors">Club Local {i}</h4>
+                      <div className="flex items-center justify-between mt-1.5">
+                        <p className="text-[12px] font-medium text-gray-500">A {(0.5 * i).toFixed(1)} km</p>
+                        <div className="flex items-center gap-1 bg-gray-50 px-1.5 py-0.5 rounded-md">
+                          <Star className="w-3 h-3 text-yellow-500 fill-yellow-500" />
+                          <span className="text-[11px] font-bold text-gray-700">4.{9 - i}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
