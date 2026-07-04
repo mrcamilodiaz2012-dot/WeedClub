@@ -9,7 +9,7 @@ import { TabPhotosCarousel } from './tabs/TabPhotosCarousel';
 import { TabRules } from './tabs/TabRules';
 import { TabMembership } from './tabs/TabMembership';
 import { TabReviews } from './tabs/TabReviews';
-import { MapPin, Star, X } from 'lucide-react';
+import { MapPin, Star, X, Heart } from 'lucide-react';
 
 interface ProfileContentProps {
   club: Club;
