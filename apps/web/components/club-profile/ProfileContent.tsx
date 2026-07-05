@@ -308,10 +308,7 @@ export function ProfileContent({ club }: ProfileContentProps) {
               {FLOWERS_DATA.map((varie) => (
                 <div 
                   key={varie.id} 
-                  onClick={() => {
-                    setSelectedFlowerId(varie.id);
-                    requestOrientationPermission();
-                  }}
+                  onClick={() => setSelectedFlowerId(varie.id)}
                   className="w-full bg-white rounded-[20px] md:rounded-[24px] border border-black/[0.04] shadow-[0_4px_16px_rgba(0,0,0,0.03)] overflow-hidden group cursor-pointer hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300 flex flex-col"
                 >
                   <div className="w-full h-[140px] md:h-[180px] flex items-center justify-center pt-2 relative bg-gradient-to-b from-gray-50/80 to-white">
