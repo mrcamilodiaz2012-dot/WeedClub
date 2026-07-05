@@ -304,58 +304,49 @@ export function ProfileContent({ club }: ProfileContentProps) {
                 Variedades disponibles
               </h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
               {FLOWERS_DATA.map((varie) => (
                 <div 
                   key={varie.id} 
-                  onClick={() => setSelectedFlowerId(varie.id)}
-                  className="w-full bg-white rounded-[24px] border border-black/[0.04] shadow-[0_4px_20px_rgba(0,0,0,0.04)] overflow-hidden group cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300"
+                  onClick={() => {
+                    setSelectedFlowerId(varie.id);
+                    requestOrientationPermission();
+                  }}
+                  className="w-full bg-white rounded-[20px] md:rounded-[24px] border border-black/[0.04] shadow-[0_4px_16px_rgba(0,0,0,0.03)] overflow-hidden group cursor-pointer hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300 flex flex-col"
                 >
-                  <div className="w-full h-[200px] flex items-center justify-center pt-4 relative bg-gradient-to-b from-gray-50/50 to-white">
+                  <div className="w-full h-[140px] md:h-[180px] flex items-center justify-center pt-2 relative bg-gradient-to-b from-gray-50/80 to-white">
                     <Image 
                       src="/iconos/flor.webp" 
                       alt={varie.name} 
-                      width={150} 
-                      height={150} 
-                      className="object-contain drop-shadow-[0_20px_20px_rgba(0,0,0,0.25)] animate-float-slow group-hover:scale-110 group-hover:drop-shadow-[0_30px_30px_rgba(0,0,0,0.4)] transition-all duration-500" 
+                      width={120} 
+                      height={120} 
+                      className="object-contain drop-shadow-[0_12px_16px_rgba(0,0,0,0.15)] group-hover:scale-110 group-hover:drop-shadow-[0_20px_20px_rgba(0,0,0,0.25)] transition-all duration-500 w-[100px] md:w-[130px]" 
                     />
-                    <div className="absolute top-4 left-4">
-                      <span className={`bg-white/90 backdrop-blur-md text-[11px] uppercase tracking-wider font-bold px-3 py-1.5 rounded-full shadow-sm ${varie.color}`}>
+                    <div className="absolute top-3 left-3">
+                      <span className={`bg-white/90 backdrop-blur-md text-[8px] md:text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-md shadow-sm ${varie.color}`}>
                         {varie.type}
                       </span>
                     </div>
-                    <div className="absolute top-4 right-4 flex items-center gap-1 bg-white/90 backdrop-blur-md px-2.5 py-1.5 rounded-full shadow-sm">
-                      <span className="text-[11px] font-bold text-gray-700">★ {varie.rating}</span>
+                    <div className="absolute top-3 right-3 flex items-center gap-0.5 bg-white/90 backdrop-blur-md px-1.5 py-1 rounded-md shadow-sm">
+                      <span className="text-[9px] md:text-[11px] font-bold text-gray-700 flex items-center gap-0.5">
+                        <Star className="w-2.5 h-2.5 md:w-3 md:h-3 text-yellow-500 fill-yellow-500" />
+                        {varie.rating}
+                      </span>
                     </div>
                   </div>
-                  <div className="p-5 pt-3 flex flex-col gap-3">
-                    <div className="flex justify-between items-start">
-                      <h3 className="font-display font-bold text-gray-900 text-xl leading-tight truncate">{varie.name}</h3>
-                    </div>
+                  <div className="p-3 md:p-5 pt-2 flex flex-col gap-2 flex-1 justify-between border-t border-gray-50/50">
+                    <h3 className="font-display font-bold text-gray-900 text-sm md:text-lg leading-tight line-clamp-1">{varie.name}</h3>
                     
-                    {/* Stats */}
-                    <div className="flex items-center gap-2">
-                      <div className="flex items-center gap-1.5 bg-gray-100 rounded-md px-2 py-1">
-                        <span className="text-[11px] font-bold text-gray-500">THC</span>
-                        <span className="text-sm font-bold text-gray-900">{varie.thc}</span>
+                    <div className="flex items-center gap-1.5 md:gap-2">
+                      <div className="flex items-center gap-1 bg-gray-50 rounded px-1.5 py-0.5 md:px-2 md:py-1">
+                        <span className="text-[8px] md:text-[10px] font-bold text-gray-400">THC</span>
+                        <span className="text-[10px] md:text-xs font-bold text-gray-800">{varie.thc}</span>
                       </div>
-                      <div className="flex items-center gap-1.5 bg-gray-100 rounded-md px-2 py-1">
-                        <span className="text-[11px] font-bold text-gray-500">CBD</span>
-                        <span className="text-sm font-bold text-gray-900">{varie.cbd}</span>
-                      </div>
-                    </div>
-                    
-                    <div className="flex flex-col gap-1.5 mt-1">
-                      <div className="flex items-center gap-2 text-sm text-gray-600">
-                         <span className="opacity-60 text-[11px] uppercase tracking-wider font-bold w-14">Sabor</span>
-                         <span className="font-medium truncate">{varie.flavor}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-sm text-gray-600">
-                         <span className="opacity-60 text-[11px] uppercase tracking-wider font-bold w-14">Efecto</span>
-                         <span className="font-medium truncate">{varie.effect}</span>
+                      <div className="flex items-center gap-1 bg-gray-50 rounded px-1.5 py-0.5 md:px-2 md:py-1">
+                        <span className="text-[8px] md:text-[10px] font-bold text-gray-400">CBD</span>
+                        <span className="text-[10px] md:text-xs font-bold text-gray-800">{varie.cbd}</span>
                       </div>
                     </div>
-
                   </div>
                 </div>
               ))}
