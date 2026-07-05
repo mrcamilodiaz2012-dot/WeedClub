@@ -37,40 +37,6 @@ export function ProfileContent({ club }: ProfileContentProps) {
   const [selectedFlowerId, setSelectedFlowerId] = useState<number | null>(null);
   const [activeModalId, setActiveModalId] = useState<number | null>(null);
   const [likedFlowers, setLikedFlowers] = useState<Set<number>>(new Set());
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleOrientation = (e: DeviceOrientationEvent) => {
-      let gamma = e.gamma;
-      let beta = e.beta;
-      
-      if (gamma !== null && beta !== null) {
-        const x = Math.max(-25, Math.min(25, gamma));
-        const y = Math.max(-25, Math.min(25, beta - 45));
-        setTilt({ x, y });
-      }
-    };
-
-    if (typeof window !== 'undefined' && window.DeviceOrientationEvent) {
-      window.addEventListener('deviceorientation', handleOrientation);
-    }
-    
-    return () => {
-      if (typeof window !== 'undefined' && window.DeviceOrientationEvent) {
-        window.removeEventListener('deviceorientation', handleOrientation);
-      }
-    };
-  }, []);
-
-  const requestOrientationPermission = async () => {
-    if (typeof window !== 'undefined' && typeof (window as any).DeviceOrientationEvent?.requestPermission === 'function') {
-      try {
-        await (window as any).DeviceOrientationEvent.requestPermission();
-      } catch (err) {
-        console.error('Permission for device orientation denied', err);
-      }
-    }
-  };
 
   const toggleLike = (e: React.MouseEvent, id: number) => {
     e.stopPropagation();
@@ -160,10 +126,7 @@ export function ProfileContent({ club }: ProfileContentProps) {
                 {FLOWERS_DATA.slice(0, 5).map((varie) => (
                   <div 
                     key={varie.id} 
-                    onClick={() => {
-                      setSelectedFlowerId(varie.id);
-                      requestOrientationPermission();
-                    }}
+                    onClick={() => setSelectedFlowerId(varie.id)}
                     className="w-[220px] shrink-0 bg-white rounded-[24px] border border-black/[0.04] shadow-[0_4px_20px_rgba(0,0,0,0.04)] overflow-hidden group cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300"
                   >
                     <div className="w-full h-[170px] flex items-center justify-center pt-4 relative bg-gradient-to-b from-gray-50/50 to-white">
@@ -345,10 +308,7 @@ export function ProfileContent({ club }: ProfileContentProps) {
               {FLOWERS_DATA.map((varie) => (
                 <div 
                   key={varie.id} 
-                  onClick={() => {
-                    setSelectedFlowerId(varie.id);
-                    requestOrientationPermission();
-                  }}
+                  onClick={() => setSelectedFlowerId(varie.id)}
                   className="w-full bg-white rounded-[24px] border border-black/[0.04] shadow-[0_4px_20px_rgba(0,0,0,0.04)] overflow-hidden group cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300"
                 >
                   <div className="w-full h-[200px] flex items-center justify-center pt-4 relative bg-gradient-to-b from-gray-50/50 to-white">
@@ -526,22 +486,14 @@ export function ProfileContent({ club }: ProfileContentProps) {
                     </div>
 
                     {/* Modal Image Header */}
-                    <div className="w-full h-[320px] relative flex items-center justify-center pt-8" style={{ perspective: '1000px' }}>
-                      <div 
-                        className="relative flex items-center justify-center w-full h-full"
-                        style={{
-                          transform: isActive ? `rotateX(${tilt.y * -1}deg) rotateY(${tilt.x}deg)` : 'none',
-                          transition: 'transform 0.1s ease-out'
-                        }}
-                      >
-                        <Image 
-                          src="/iconos/flor.webp" 
-                          alt={flower.name} 
-                          width={240} 
-                          height={240} 
-                          className={`object-contain transition-all duration-700 ease-out ${isActive ? 'drop-shadow-[0_30px_40px_rgba(0,0,0,0.15)] animate-float-slow scale-110' : 'drop-shadow-none scale-90'}`} 
-                        />
-                      </div>
+                    <div className="w-full h-[320px] relative flex items-center justify-center pt-8">
+                      <Image 
+                        src="/iconos/flor.webp" 
+                        alt={flower.name} 
+                        width={240} 
+                        height={240} 
+                        className={`object-contain transition-all duration-700 ease-out ${isActive ? 'drop-shadow-[0_30px_40px_rgba(0,0,0,0.15)] animate-float-slow scale-110' : 'drop-shadow-none scale-90'}`} 
+                      />
                     </div>
 
                     {/* Modal Content */}
