@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Mail, Lock, User, ArrowRight, Github } from 'lucide-react';
+import { Mail, Lock, User, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { AuthLayout } from '@/components/layout/AuthLayout';
 
