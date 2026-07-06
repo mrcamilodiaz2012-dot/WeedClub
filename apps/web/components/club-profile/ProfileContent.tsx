@@ -18,12 +18,18 @@ interface ProfileContentProps {
 const TABS = ['Todo', 'Flores', 'Club', 'Fotos', 'Reseñas'];
 
 const FLOWERS_DATA = [
-  { id: 1, name: "Gelato 41", type: "Híbrida", thc: "24%", cbd: "0.2%", flavor: "Dulce, Afrutado", effect: "Creativo", rating: "4.9", color: "text-purple-600" },
-  { id: 2, name: "Amnesia Haze", type: "Sativa", thc: "21%", cbd: "0.5%", flavor: "Limón, Cítrico", effect: "Energético", rating: "4.8", color: "text-amber-600" },
-  { id: 3, name: "OG Kush", type: "Índica", thc: "22%", cbd: "1.2%", flavor: "Pino, Terroso", effect: "Relajante", rating: "4.7", color: "text-emerald-600" },
-  { id: 4, name: "Gorilla Glue", type: "Híbrida", thc: "26%", cbd: "0.1%", flavor: "Pino, Químico", effect: "Eufórico", rating: "5.0", color: "text-purple-600" },
-  { id: 5, name: "Lemon Skunk", type: "Sativa", thc: "18%", cbd: "2%", flavor: "Limón, Ácido", effect: "Cerebral", rating: "4.6", color: "text-amber-600" },
-  { id: 6, name: "Wedding Cake", type: "Híbrida", thc: "25%", cbd: "0.3%", flavor: "Vainilla, Dulce", effect: "Relajante", rating: "4.9", color: "text-purple-600" },
+  { id: 1, name: "Verde Lima", type: "Sativa", thc: "22%", cbd: "0.1%", flavor: "Cítrico, Fresco", effect: "Energético", rating: "4.8", color: "text-amber-500", image: "/cannabis/02 - Verde Lima.png" },
+  { id: 2, name: "Purple Clásico", type: "Índica", thc: "19%", cbd: "0.5%", flavor: "Uva, Dulce", effect: "Relajante", rating: "4.7", color: "text-purple-600", image: "/cannabis/06 - Purple Clásico.png" },
+  { id: 3, name: "White Frost", type: "Híbrida", thc: "24%", cbd: "1.2%", flavor: "Pino, Terroso", effect: "Creativo", rating: "4.9", color: "text-emerald-600", image: "/cannabis/11 - White Frost.png" },
+  { id: 4, name: "Blue Dream", type: "Híbrida", thc: "21%", cbd: "0.2%", flavor: "Arándano, Dulce", effect: "Eufórico", rating: "4.8", color: "text-purple-600", image: "/cannabis/22 - Blue Dream.png" },
+  { id: 5, name: "Amarillo Encendido", type: "Sativa", thc: "25%", cbd: "0.1%", flavor: "Limón, Tropical", effect: "Activo", rating: "4.9", color: "text-amber-500", image: "/cannabis/amarillo encendio.png" },
+  { id: 6, name: "Red Dragon", type: "Híbrida", thc: "20%", cbd: "0.8%", flavor: "Frutos Rojos, Picante", effect: "Equilibrado", rating: "4.6", color: "text-rose-500", image: "/cannabis/rojo.png" },
+  { id: 7, name: "Black Widow", type: "Índica", thc: "23%", cbd: "1.5%", flavor: "Amaderado, Fuerte", effect: "Sedante", rating: "4.7", color: "text-gray-800", image: "/cannabis/negra.png" },
+  { id: 8, name: "Pink Kush", type: "Híbrida", thc: "22%", cbd: "0.3%", flavor: "Vainilla, Dulce", effect: "Felicidad", rating: "4.9", color: "text-pink-500", image: "/cannabis/rosado.png" },
+  { id: 9, name: "Orange Bud", type: "Sativa", thc: "18%", cbd: "0.5%", flavor: "Naranja, Skunk", effect: "Creativo", rating: "4.5", color: "text-orange-500", image: "/cannabis/naranja.png" },
+  { id: 10, name: "Premium Kush", type: "Índica", thc: "26%", cbd: "0.1%", flavor: "Pino, Diesel", effect: "Relajante", rating: "5.0", color: "text-emerald-600", image: "/cannabis/premium 3.png" },
+  { id: 11, name: "Silver Haze", type: "Sativa", thc: "21%", cbd: "0.2%", flavor: "Terroso, Cítrico", effect: "Energético", rating: "4.7", color: "text-gray-600", image: "/cannabis/gris.png" },
+  { id: 12, name: "Chocolate Chunk", type: "Índica", thc: "19%", cbd: "1.0%", flavor: "Cacao, Café", effect: "Relajante", rating: "4.4", color: "text-amber-800", image: "/cannabis/marron.png" },
 ];
 
 export function ProfileContent({ club }: ProfileContentProps) {
@@ -131,7 +137,7 @@ export function ProfileContent({ club }: ProfileContentProps) {
                   >
                     <div className="w-full h-[170px] flex items-center justify-center pt-4 relative bg-gradient-to-b from-gray-50/50 to-white">
                       <Image 
-                        src="/iconos/flor.webp" 
+                        src={varie.image} 
                         alt={varie.name} 
                         width={120} 
                         height={120} 
@@ -313,7 +319,7 @@ export function ProfileContent({ club }: ProfileContentProps) {
                 >
                   <div className="w-full h-[140px] md:h-[180px] flex items-center justify-center pt-2 relative bg-gradient-to-b from-gray-50/80 to-white">
                     <Image 
-                      src="/iconos/flor.webp" 
+                      src={varie.image} 
                       alt={varie.name} 
                       width={120} 
                       height={120} 
@@ -476,7 +482,7 @@ export function ProfileContent({ club }: ProfileContentProps) {
                     {/* Modal Image Header */}
                     <div className="w-full h-[320px] relative flex items-center justify-center pt-8">
                       <Image 
-                        src="/iconos/flor.webp" 
+                        src={flower.image} 
                         alt={flower.name} 
                         width={240} 
                         height={240} 
