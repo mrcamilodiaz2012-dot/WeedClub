@@ -151,9 +151,16 @@ export function ProfileContent({ club }: ProfileContentProps) {
                           {varie.type}
                         </span>
                       </div>
-                      <div className="absolute top-3 right-3 flex items-center gap-1 bg-white/90 backdrop-blur-md px-2 py-1 rounded-full shadow-sm">
-                        <span className="text-[10px] font-bold text-gray-700">★ {varie.rating}</span>
-                      </div>
+                      <button 
+                        onClick={(e) => toggleLike(e, varie.id)}
+                        className="absolute top-3 right-3 bg-white/90 border border-black/5 backdrop-blur-md w-7 h-7 rounded-full shadow-sm flex items-center justify-center hover:scale-110 active:scale-95 transition-all"
+                      >
+                        <Heart 
+                          className={`w-3.5 h-3.5 transition-colors ${
+                            likedFlowers.has(varie.id) ? 'text-red-500 fill-red-500' : 'text-gray-400'
+                          }`} 
+                        />
+                      </button>
                     </div>
                     <div className="p-4 pt-2 flex flex-col gap-2">
                       <div className="flex justify-between items-start">
@@ -333,12 +340,16 @@ export function ProfileContent({ club }: ProfileContentProps) {
                         {varie.type}
                       </span>
                     </div>
-                    <div className="absolute top-3 right-3 flex items-center gap-0.5 bg-white/90 backdrop-blur-md px-1.5 py-1 rounded-md shadow-sm">
-                      <span className="text-[9px] md:text-[11px] font-bold text-gray-700 flex items-center gap-0.5">
-                        <Star className="w-2.5 h-2.5 md:w-3 md:h-3 text-yellow-500 fill-yellow-500" />
-                        {varie.rating}
-                      </span>
-                    </div>
+                    <button 
+                      onClick={(e) => toggleLike(e, varie.id)}
+                      className="absolute top-3 right-3 bg-white/90 border border-black/5 backdrop-blur-md w-6 h-6 md:w-7 md:h-7 rounded-full shadow-sm flex items-center justify-center hover:scale-110 active:scale-95 transition-all"
+                    >
+                      <Heart 
+                        className={`w-3 h-3 md:w-3.5 md:h-3.5 transition-colors ${
+                          likedFlowers.has(varie.id) ? 'text-red-500 fill-red-500' : 'text-gray-400'
+                        }`} 
+                      />
+                    </button>
                   </div>
                   <div className="p-3 md:p-5 pt-2 flex flex-col gap-2 flex-1 justify-between border-t border-gray-50/50">
                     <h3 className="font-display font-bold text-gray-900 text-sm md:text-lg leading-tight line-clamp-1">{varie.name}</h3>
