@@ -18,18 +18,21 @@ interface ProfileContentProps {
 const TABS = ['Todo', 'Flores', 'Club', 'Fotos', 'Reseñas'];
 
 const FLOWERS_DATA = [
-  { id: 1, name: "Verde Lima", type: "Sativa", thc: "22%", cbd: "0.1%", flavor: "Cítrico, Fresco", effect: "Energético", rating: "4.8", color: "text-amber-500", image: "/cannabis/02 - Verde Lima.png" },
-  { id: 2, name: "Purple Clásico", type: "Índica", thc: "19%", cbd: "0.5%", flavor: "Uva, Dulce", effect: "Relajante", rating: "4.7", color: "text-purple-600", image: "/cannabis/06 - Purple Clásico.png" },
-  { id: 3, name: "White Frost", type: "Híbrida", thc: "24%", cbd: "1.2%", flavor: "Pino, Terroso", effect: "Creativo", rating: "4.9", color: "text-emerald-600", image: "/cannabis/11 - White Frost.png" },
-  { id: 4, name: "Blue Dream", type: "Híbrida", thc: "21%", cbd: "0.2%", flavor: "Arándano, Dulce", effect: "Eufórico", rating: "4.8", color: "text-purple-600", image: "/cannabis/22 - Blue Dream.png" },
-  { id: 5, name: "Amarillo Encendido", type: "Sativa", thc: "25%", cbd: "0.1%", flavor: "Limón, Tropical", effect: "Activo", rating: "4.9", color: "text-amber-500", image: "/cannabis/amarillo encendio.png" },
-  { id: 6, name: "Red Dragon", type: "Híbrida", thc: "20%", cbd: "0.8%", flavor: "Frutos Rojos, Picante", effect: "Equilibrado", rating: "4.6", color: "text-rose-500", image: "/cannabis/rojo.png" },
-  { id: 7, name: "Black Widow", type: "Índica", thc: "23%", cbd: "1.5%", flavor: "Amaderado, Fuerte", effect: "Sedante", rating: "4.7", color: "text-gray-800", image: "/cannabis/negra.png" },
-  { id: 8, name: "Pink Kush", type: "Híbrida", thc: "22%", cbd: "0.3%", flavor: "Vainilla, Dulce", effect: "Felicidad", rating: "4.9", color: "text-pink-500", image: "/cannabis/rosado.png" },
-  { id: 9, name: "Orange Bud", type: "Sativa", thc: "18%", cbd: "0.5%", flavor: "Naranja, Skunk", effect: "Creativo", rating: "4.5", color: "text-orange-500", image: "/cannabis/naranja.png" },
-  { id: 10, name: "Premium Kush", type: "Índica", thc: "26%", cbd: "0.1%", flavor: "Pino, Diesel", effect: "Relajante", rating: "5.0", color: "text-emerald-600", image: "/cannabis/premium 3.png" },
-  { id: 11, name: "Silver Haze", type: "Sativa", thc: "21%", cbd: "0.2%", flavor: "Terroso, Cítrico", effect: "Energético", rating: "4.7", color: "text-gray-600", image: "/cannabis/gris.png" },
-  { id: 12, name: "Chocolate Chunk", type: "Índica", thc: "19%", cbd: "1.0%", flavor: "Cacao, Café", effect: "Relajante", rating: "4.4", color: "text-amber-800", image: "/cannabis/marron.png" },
+  // Exóticas
+  { id: 1, name: "Purple Exotica 1", type: "Índica", thc: "24%", cbd: "0.2%", flavor: "Uva, Dulce", effect: "Relajante", rating: "4.9", color: "text-purple-600", image: "/weed/Colores%20Exoticos/E1.webp" },
+  { id: 2, name: "Neon Sativa 2", type: "Sativa", thc: "26%", cbd: "0.1%", flavor: "Tropical", effect: "Energético", rating: "4.8", color: "text-amber-500", image: "/weed/Colores%20Exoticos/E2.webp" },
+  { id: 3, name: "Exotic Hybrid 3", type: "Híbrida", thc: "22%", cbd: "0.5%", flavor: "Cítrico, Pino", effect: "Creativo", rating: "4.7", color: "text-emerald-600", image: "/weed/Colores%20Exoticos/E3.webp" },
+  { id: 4, name: "Pink Fantasy 4", type: "Híbrida", thc: "21%", cbd: "0.8%", flavor: "Fresa, Vainilla", effect: "Felicidad", rating: "4.9", color: "text-pink-500", image: "/weed/Colores%20Exoticos/E4.webp" },
+  { id: 5, name: "Dark Magic 5", type: "Índica", thc: "25%", cbd: "1.2%", flavor: "Amaderado, Fuerte", effect: "Sedante", rating: "4.8", color: "text-gray-800", image: "/weed/Colores%20Exoticos/E5.webp" },
+  { id: 6, name: "Amber Glow 6", type: "Sativa", thc: "20%", cbd: "0.5%", flavor: "Limón, Miel", effect: "Eufórico", rating: "4.6", color: "text-orange-500", image: "/weed/Colores%20Exoticos/E6.webp" },
+  
+  // Naturales
+  { id: 7, name: "Natural Green 1", type: "Híbrida", thc: "18%", cbd: "2.0%", flavor: "Pino, Terroso", effect: "Equilibrado", rating: "4.5", color: "text-emerald-600", image: "/weed/Colores%20Naturales/N1.webp" },
+  { id: 8, name: "Classic Skunk 2", type: "Sativa", thc: "19%", cbd: "0.5%", flavor: "Skunk, Cítrico", effect: "Cerebral", rating: "4.7", color: "text-amber-600", image: "/weed/Colores%20Naturales/N2.webp" },
+  { id: 9, name: "Earthy Kush 3", type: "Índica", thc: "22%", cbd: "1.0%", flavor: "Tierra, Café", effect: "Relajante", rating: "4.8", color: "text-emerald-700", image: "/weed/Colores%20Naturales/N3.webp" },
+  { id: 10, name: "Natural Frost 4", type: "Híbrida", thc: "20%", cbd: "0.3%", flavor: "Menta, Fresco", effect: "Creativo", rating: "4.6", color: "text-emerald-500", image: "/weed/Colores%20Naturales/N4.webp" },
+  { id: 11, name: "Pure Sativa 5", type: "Sativa", thc: "21%", cbd: "0.1%", flavor: "Cítrico, Dulce", effect: "Activo", rating: "4.9", color: "text-amber-500", image: "/weed/Colores%20Naturales/N5.webp" },
+  { id: 12, name: "Deep Forest 6", type: "Índica", thc: "24%", cbd: "0.8%", flavor: "Pino, Madera", effect: "Sedante", rating: "4.8", color: "text-emerald-800", image: "/weed/Colores%20Naturales/N6.webp" },
 ];
 
 export function ProfileContent({ club }: ProfileContentProps) {
