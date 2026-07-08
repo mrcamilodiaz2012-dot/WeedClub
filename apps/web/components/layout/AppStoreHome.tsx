@@ -104,8 +104,8 @@ export function AppStoreHome() {
       {/* 2. Cerca de Ti (Rectángulos Verticales 4:5) */}
       <Carousel title="Cerca de Ti">
         {filteredClubs.length > 0 ? filteredClubs.map((club) => (
-          <Link key={club.id} href={`/clubs/${club.id}`} className="w-[260px] shrink-0 snap-start block">
-            <div className="w-full h-[340px] bg-background-secondary rounded-2xl overflow-hidden relative group">
+          <Link key={club.id} href={`/clubs/${club.id}`} className="w-[280px] shrink-0 snap-start block">
+            <div className="w-full aspect-square bg-background-secondary rounded-2xl overflow-hidden relative group">
                <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="w-full h-full object-cover group-active:scale-105 transition-transform duration-500" alt="" />
                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
                
@@ -114,15 +114,28 @@ export function AppStoreHome() {
                </div>
 
                <div className="absolute bottom-4 left-4 right-4 flex flex-col z-10">
-                 <span className="text-[20px] font-display font-bold text-white leading-tight mb-1 drop-shadow-md">{club.name}</span>
-                 <span className="text-[14px] font-medium text-white/90 drop-shadow-md mb-3">
+                 <span className="text-[20px] font-display font-bold text-white leading-tight mb-0.5 drop-shadow-md">{club.name}</span>
+                 <span className="text-[13px] font-medium text-white/90 drop-shadow-md mb-3">
                    {club.city}
                  </span>
                  
-                 <div className="flex items-center gap-2 overflow-x-auto hide-scrollbar pb-1">
-                    <div className="bg-white/20 backdrop-blur-md text-white text-[11px] font-semibold px-2.5 py-1 rounded-lg shrink-0 border border-white/10">🌿 Amnesia Haze</div>
-                    <div className="bg-white/20 backdrop-blur-md text-white text-[11px] font-semibold px-2.5 py-1 rounded-lg shrink-0 border border-white/10">🔥 Gelato 33</div>
-                    <div className="bg-white/20 backdrop-blur-md text-white text-[11px] font-semibold px-2.5 py-1 rounded-lg shrink-0 border border-white/10">🍋 Lemon Haze</div>
+                 {/* Mini Tarjeta Integrada */}
+                 <div className="w-full bg-white rounded-xl p-2.5 flex items-center gap-3 shadow-lg">
+                    <div className="w-12 h-12 bg-background-base rounded-lg flex items-center justify-center p-1 shrink-0">
+                       <img src="/iconos/flor.webp" className="w-full h-full object-contain drop-shadow-sm" alt="Flor" />
+                    </div>
+                    
+                    <div className="flex flex-col flex-1 overflow-hidden">
+                       <span className="text-[13px] font-bold text-text-primary truncate">Purple Exotica 1</span>
+                       <div className="flex gap-1.5 mt-1">
+                         <span className="bg-background-secondary text-text-primary text-[9px] font-bold px-1.5 py-0.5 rounded-md">THC 24%</span>
+                         <span className="bg-background-secondary text-text-primary text-[9px] font-bold px-1.5 py-0.5 rounded-md">ÍNDICA</span>
+                       </div>
+                    </div>
+
+                    <div className="w-7 h-7 rounded-full bg-background-secondary flex items-center justify-center text-text-secondary shrink-0">
+                       <ChevronRight size={14} />
+                    </div>
                  </div>
                </div>
             </div>
