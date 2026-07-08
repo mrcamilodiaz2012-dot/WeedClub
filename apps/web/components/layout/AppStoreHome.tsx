@@ -126,11 +126,11 @@ export function AppStoreHome() {
                       { id: 2, name: "Neon Sativa 2" },
                       { id: 3, name: "Amnesia Haze" }
                     ].map((flower) => (
-                      <div key={flower.id} className="pr-4 shrink-0 snap-start bg-white rounded-xl p-1.5 flex items-center gap-2.5 shadow-lg">
-                        <div className="w-8 h-8 bg-background-base rounded-lg flex items-center justify-center p-1 shrink-0">
+                      <div key={flower.id} className="w-[90px] shrink-0 snap-start bg-white rounded-[14px] p-1.5 flex flex-col items-center gap-1.5 shadow-lg">
+                        <div className="w-full aspect-square bg-background-base rounded-[10px] flex items-center justify-center p-1.5 shrink-0">
                            <img src="/iconos/flor.webp" className="w-full h-full object-contain drop-shadow-sm" alt="Flor" />
                         </div>
-                        <span className="text-[13px] font-bold text-text-primary whitespace-nowrap">{flower.name}</span>
+                        <span className="text-[11px] font-bold text-text-primary text-center leading-tight truncate w-full px-0.5">{flower.name}</span>
                       </div>
                     ))}
                  </div>
