@@ -16,6 +16,9 @@ export function ProfileHero({ club }: ProfileHeroProps) {
   // Default images if none provided
   const coverUrl = club.cover_image_url || 'https://images.unsplash.com/photo-1576085898323-218337e3e43c?auto=format&fit=crop&q=80';
   
+  // Use club status to determine if open
+  const isOpen = club.status === 'active';
+  
   return (
     <div className="relative w-full bg-white">
       {/* 1. Cover Image (Edge to edge) */}
@@ -42,9 +45,11 @@ export function ProfileHero({ club }: ProfileHeroProps) {
           {/* Meta Info Integrated */}
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[14px] text-white/90 leading-tight mt-2 drop-shadow-sm">
             <div className="flex items-center gap-1">
-              <Clock className="w-[15px] h-[15px]" />
-              <span className="font-semibold text-white">Cerrado</span>
-              <span className="text-white/80">⋅ Abre 8:00</span>
+              <Clock className={`w-[15px] h-[15px] ${isOpen ? 'text-emerald-400' : 'text-red-400'}`} />
+              <span className={`font-semibold ${isOpen ? 'text-emerald-400' : 'text-red-400'}`}>
+                {isOpen ? 'Abierto' : 'Cerrado'}
+              </span>
+              <span className="text-white/80">⋅ {isOpen ? 'Cierra 22:00' : 'Abre 8:00'}</span>
             </div>
             <div className="flex items-center gap-1">
               <Phone className="w-[15px] h-[15px]" />
