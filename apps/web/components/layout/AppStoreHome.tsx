@@ -105,7 +105,7 @@ export function AppStoreHome() {
       <Carousel title="Cerca de Ti">
         {filteredClubs.length > 0 ? filteredClubs.map((club) => (
           <Link key={club.id} href={`/clubs/${club.id}`} className="w-[280px] shrink-0 snap-start block">
-            <div className="w-full h-[360px] bg-background-secondary rounded-[24px] overflow-hidden relative group shadow-sm border border-border-subtle/50">
+            <div className="w-full aspect-square bg-background-secondary rounded-[24px] overflow-hidden relative group shadow-sm border border-border-subtle/50">
                <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="w-full h-full object-cover group-active:scale-105 transition-transform duration-700" alt="" />
                
                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/5"></div>
@@ -122,18 +122,19 @@ export function AppStoreHome() {
                    </span>
                  </div>
                  
-                 {/* Carrusel de Productos Glassmorphism Premium */}
-                 <div className="flex gap-2.5 overflow-x-auto hide-scrollbar snap-x snap-mandatory px-5 pb-1">
+                 {/* Carrusel Estilo Apple Dock Icons */}
+                 <div className="flex gap-3 overflow-x-auto hide-scrollbar snap-x snap-mandatory px-5 pb-1">
                     {[
                       { id: 1, name: "Purple Exotica" },
                       { id: 2, name: "Neon Sativa" },
-                      { id: 3, name: "Amnesia Haze" }
+                      { id: 3, name: "Amnesia Haze" },
+                      { id: 4, name: "Lemon Skunk" }
                     ].map((flower) => (
-                      <div key={flower.id} className="pr-4 shrink-0 snap-start bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-1.5 flex items-center gap-3 shadow-lg">
-                        <div className="w-10 h-10 bg-black/20 rounded-xl flex items-center justify-center p-1.5 shrink-0">
+                      <div key={flower.id} className="flex flex-col items-center gap-1.5 shrink-0 w-[64px] snap-start group/icon cursor-pointer">
+                        <div className="w-14 h-14 bg-white/10 backdrop-blur-xl border border-white/20 rounded-[16px] flex items-center justify-center p-2 shadow-lg group-active/icon:scale-95 transition-transform">
                            <img src="/iconos/flor.webp" className="w-full h-full object-contain drop-shadow-md opacity-90" alt="Flor" />
                         </div>
-                        <span className="text-[13px] font-medium text-white whitespace-nowrap tracking-wide">{flower.name}</span>
+                        <span className="text-[10px] font-medium text-white/90 text-center leading-tight truncate w-full px-0.5 tracking-wide">{flower.name}</span>
                       </div>
                     ))}
                  </div>
