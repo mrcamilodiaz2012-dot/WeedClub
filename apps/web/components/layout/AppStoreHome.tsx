@@ -112,12 +112,12 @@ export function AppStoreHome() {
                  <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="w-full h-full object-cover group-active:scale-105 transition-transform duration-700" alt="" />
                  <div className="absolute inset-0 bg-black/10"></div>
                  
-                 <div className="absolute top-3 left-3 bg-black/30 backdrop-blur-md text-white text-[10px] font-medium px-2 py-1 rounded-full flex items-center gap-1">
-                   <MapIcon size={10} /> 1.2 km
+                 <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-text-primary text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">
+                   <MapIcon size={11} strokeWidth={2.5} /> 1.2 km
                  </div>
 
-                 <button className="absolute top-3 right-3 bg-black/30 backdrop-blur-md text-white p-1.5 rounded-full hover:bg-black/40 active:scale-95 transition-all">
-                   <Heart size={12} />
+                 <button className="absolute top-3 right-3 bg-white/90 backdrop-blur-md text-text-primary p-1.5 rounded-full shadow-sm hover:scale-105 active:scale-95 transition-all">
+                   <Heart size={13} strokeWidth={2.5} />
                  </button>
 
                  {/* Soft Blur Overlay */}
