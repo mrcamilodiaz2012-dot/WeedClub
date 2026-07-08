@@ -195,6 +195,47 @@ export function AppStoreHome() {
         ))}
       </Carousel>
 
+      {/* 4. Flores Populares */}
+      <Carousel title="Flores Populares">
+        {[
+          { id: 1, name: "Purple Exotica 1", type: "ÍNDICA", thc: "24%", cbd: "0.2%", color: "text-purple-600", bg: "bg-purple-50 border border-purple-100", image: "/weed/Colores%20Exoticos/E1.webp" },
+          { id: 2, name: "Neon Sativa 2", type: "SATIVA", thc: "26%", cbd: "0.1%", color: "text-orange-500", bg: "bg-orange-50 border border-orange-100", image: "/weed/Colores%20Exoticos/E2.webp" },
+          { id: 3, name: "Amnesia Haze", type: "HÍBRIDA", thc: "22%", cbd: "0.5%", color: "text-emerald-600", bg: "bg-emerald-50 border border-emerald-100", image: "/weed/Colores%20Naturales/N3.webp" },
+          { id: 4, name: "Gelato 33", type: "ÍNDICA", thc: "25%", cbd: "0.1%", color: "text-purple-600", bg: "bg-purple-50 border border-purple-100", image: "/weed/Colores%20Exoticos/E3.webp" }
+        ].map((flower) => (
+          <div key={flower.id} className="w-[180px] shrink-0 snap-start">
+            <div className="w-full bg-white border border-border-subtle/60 rounded-[20px] p-3 relative flex flex-col shadow-sm">
+              <div className="flex justify-between items-start z-10">
+                <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full ${flower.color} ${flower.bg}`}>{flower.type}</span>
+                <button className="w-7 h-7 rounded-full border border-border-subtle/60 flex items-center justify-center text-text-secondary hover:text-red-500 hover:border-red-500 transition-colors bg-white">
+                  <Heart size={14} />
+                </button>
+              </div>
+              
+              {/* Product Image */}
+              <div className="w-full aspect-square flex justify-center items-center py-2 -mt-2">
+                <img src={flower.image} alt={flower.name} className="h-[120%] object-contain drop-shadow-xl hover:scale-110 transition-transform duration-500" />
+              </div>
+              
+              {/* Product Info */}
+              <div className="flex flex-col gap-1.5 mt-2">
+                <h4 className="font-display font-bold text-[16px] text-text-primary leading-tight truncate">{flower.name}</h4>
+                <div className="flex gap-1.5">
+                  <div className="bg-background-secondary rounded-md px-1.5 py-1 flex gap-1 items-center">
+                    <span className="text-[10px] font-semibold text-text-secondary">THC</span>
+                    <span className="text-[11px] font-black text-text-primary">{flower.thc}</span>
+                  </div>
+                  <div className="bg-background-secondary rounded-md px-1.5 py-1 flex gap-1 items-center">
+                    <span className="text-[10px] font-semibold text-text-secondary">CBD</span>
+                    <span className="text-[11px] font-black text-text-primary">{flower.cbd}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </Carousel>
+
       {/* 4. Banner para Propietarios (Edge-to-edge Pattern Breaker) */}
       <div className="w-full bg-brand-primary text-white mt-8 mb-10 py-10 px-6 relative overflow-hidden">
         <div className="absolute -right-10 -top-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
