@@ -220,19 +220,22 @@ export function AppStoreHome() {
           { name: "Valencia", img: "https://images.unsplash.com/photo-1558642084-fd28399589d9?q=80&w=400&auto=format&fit=crop" },
           { name: "Alicante", img: "https://images.unsplash.com/photo-1562922151-51ee6e16fdf0?q=80&w=400&auto=format&fit=crop" }
         ].map((city, idx) => (
-          <div key={idx} className="w-[150px] shrink-0 snap-start cursor-pointer group active:scale-[0.98] transition-transform">
+          <div key={idx} className="w-[165px] shrink-0 snap-start cursor-pointer group active:scale-[0.98] transition-transform">
             <div className="w-full aspect-square bg-background-secondary rounded-full overflow-hidden relative shadow-md shadow-black/5 ring-1 ring-border-subtle group-hover:ring-brand-accent/50 transition-all duration-300">
                <img src={city.img} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={city.name} />
                
-               {/* Ligero blur y capa oscura */}
-               <div className="absolute inset-0 bg-black/30 backdrop-blur-[3px] group-hover:bg-black/40 transition-colors duration-300 pointer-events-none" />
+               {/* Blur muy ligero y sutil capa negra */}
+               <div className="absolute inset-0 bg-black/10 backdrop-blur-[1px] group-hover:backdrop-blur-[2px] transition-all duration-300 pointer-events-none" />
+               
+               {/* Gradiente radial central para hacer legible el texto sin oscurecer los bordes */}
+               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.4)_0%,transparent_70%)] pointer-events-none"></div>
                
                {/* Sombra interior 3D */}
-               <div className="absolute inset-0 rounded-full shadow-[inset_0_0_24px_rgba(0,0,0,0.4)] pointer-events-none"></div>
+               <div className="absolute inset-0 rounded-full shadow-[inset_0_0_24px_rgba(0,0,0,0.2)] pointer-events-none"></div>
                
                {/* Nombre de la Ciudad en el Centro */}
                <div className="absolute inset-0 flex items-center justify-center p-4 z-20">
-                 <span className="text-white font-display font-bold text-[22px] tracking-wide leading-tight drop-shadow-lg text-center">{city.name}</span>
+                 <span className="text-white font-display font-bold text-[24px] tracking-wide leading-tight drop-shadow-md text-center">{city.name}</span>
                </div>
             </div>
           </div>
