@@ -105,15 +105,20 @@ export function AppStoreHome() {
       <Carousel title="Cerca de Ti">
         {filteredClubs.length > 0 ? filteredClubs.map((club) => (
           <Link key={club.id} href={`/clubs/${club.id}`} className="w-[200px] shrink-0 snap-start block">
-            <div className="w-full h-[250px] bg-background-secondary rounded-2xl overflow-hidden mb-3 relative group">
+            <div className="w-full h-[280px] bg-background-secondary rounded-2xl overflow-hidden relative group">
                <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="w-full h-full object-cover group-active:scale-105 transition-transform duration-500" alt="" />
-               <div className="absolute top-2 left-2 bg-black/60 backdrop-blur-md text-white text-[10px] font-bold px-2 py-1 rounded-full flex items-center gap-1">
-                 <MapIcon size={10} /> 1.2 km
+               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+               
+               <div className="absolute top-3 left-3 bg-black/60 backdrop-blur-md text-white text-[11px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1.5">
+                 <MapIcon size={12} /> 1.2 km
                </div>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-[15px] font-bold text-text-primary leading-tight mb-1">{club.name}</span>
-              <span className="text-[13px] text-text-secondary">{club.city}</span>
+
+               <div className="absolute bottom-4 left-4 right-4 flex flex-col z-10">
+                 <span className="text-[18px] font-display font-bold text-white leading-tight mb-1 drop-shadow-md">{club.name}</span>
+                 <span className="text-[13px] font-medium text-white/90 drop-shadow-md flex items-center gap-1">
+                   {club.city}
+                 </span>
+               </div>
             </div>
           </Link>
         )) : (
