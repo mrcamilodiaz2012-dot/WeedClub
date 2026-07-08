@@ -120,8 +120,11 @@ export function AppStoreHome() {
                    <Heart size={16} />
                  </button>
 
-                 {/* Blur Footer */}
-                 <div className="absolute bottom-0 left-0 right-0 p-4 bg-black/40 backdrop-blur-md flex flex-col">
+                 {/* Soft Blur Overlay */}
+                 <div className="absolute bottom-0 left-0 right-0 h-[70%] bg-gradient-to-t from-black/80 via-black/40 to-transparent backdrop-blur-[8px] [mask-image:linear-gradient(to_top,black_10%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_top,black_10%,transparent_100%)] z-10" />
+                 
+                 {/* Name & Location */}
+                 <div className="absolute bottom-0 left-0 right-0 p-4 z-20 flex flex-col">
                    <span className="text-[20px] font-black tracking-tighter text-white leading-tight mb-0.5">{club.name}</span>
                    <span className="text-[13px] text-white/90 flex items-center gap-1.5 font-medium">
                      <MapPin size={14} className="opacity-90" /> {club.city}
