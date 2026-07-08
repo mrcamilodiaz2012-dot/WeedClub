@@ -291,35 +291,25 @@ export function AppStoreHome() {
         </div>
       </div>
 
-      {/* 5. Clubes Destacados (Cuadrícula 2 columnas) */}
-      <div className="px-5 mt-2 mb-8">
-        <div className="flex items-end justify-between mb-5">
-          <h2 className="text-2xl font-display font-bold text-text-primary">
-            Clubes Destacados
-          </h2>
-        </div>
-        <div className="grid grid-cols-2 gap-4">
-          {filteredClubs.length > 0 ? filteredClubs.slice(0, 4).map((club) => (
-            <Link key={club.id} href={`/clubs/${club.id}`} className="w-full group cursor-pointer active:scale-[0.98] transition-transform block">
-              <div className="w-full aspect-video bg-background-secondary rounded-2xl overflow-hidden mb-2.5 relative">
-                 <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="" />
-                 <div className="absolute top-2 right-2 bg-brand-accent text-white text-[9px] uppercase tracking-wider font-bold px-2 py-1 rounded-md shadow-md">
-                   Destacado
-                 </div>
-              </div>
-              <div className="flex items-start justify-between px-1">
-                 <div className="flex flex-col min-w-0 pr-2">
-                   <span className="text-[15px] font-black tracking-tighter text-text-primary mb-0.5 truncate">{club.name}</span>
-                   <span className="text-[11px] text-text-secondary truncate">Privado • {club.city}</span>
-                 </div>
-                 <div className="w-6 h-6 shrink-0 rounded-full bg-background-secondary flex items-center justify-center mt-0.5">
-                   <ChevronRight size={14} className="text-text-secondary" />
-                 </div>
-              </div>
-            </Link>
-          )) : null}
-        </div>
-      </div>
+      {/* 5. Clubes Destacados (Carrusel circular) */}
+      <Carousel title="Clubes Destacados">
+        {filteredClubs.length > 0 ? filteredClubs.map((club) => (
+          <Link key={club.id} href={`/clubs/${club.id}`} className="w-[110px] shrink-0 snap-start flex flex-col items-center group cursor-pointer active:scale-[0.98] transition-transform">
+            <div className="w-[100px] h-[100px] rounded-full overflow-hidden mb-2.5 relative shadow-sm ring-[3px] ring-transparent group-hover:ring-brand-accent/30 transition-all duration-300">
+               <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={club.name} />
+               <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 bg-brand-accent/90 backdrop-blur-md text-white text-[8px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-full shadow-sm z-10 pointer-events-none">
+                 Top
+               </div>
+               {/* Sutil sombra interior para profundidad */}
+               <div className="absolute inset-0 rounded-full shadow-[inset_0_2px_10px_rgba(0,0,0,0.1)] pointer-events-none"></div>
+            </div>
+            <div className="flex flex-col items-center px-1 text-center w-full mt-1">
+              <span className="text-[13px] font-black tracking-tight text-text-primary mb-0.5 leading-tight truncate w-full">{club.name}</span>
+              <span className="text-[10px] text-text-secondary truncate w-full">Privado • {club.city}</span>
+            </div>
+          </Link>
+        )) : null}
+      </Carousel>
 
       {/* 6. Mejor valorados (Listado denso) */}
       <div className="px-5 mt-10 mb-8">
