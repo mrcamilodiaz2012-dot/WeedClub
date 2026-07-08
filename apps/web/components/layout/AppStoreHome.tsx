@@ -105,34 +105,35 @@ export function AppStoreHome() {
       <Carousel title="Cerca de Ti">
         {filteredClubs.length > 0 ? filteredClubs.map((club) => (
           <Link key={club.id} href={`/clubs/${club.id}`} className="w-[280px] shrink-0 snap-start block">
-            <div className="w-full aspect-square bg-background-secondary rounded-2xl overflow-hidden relative group">
-               <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="w-full h-full object-cover group-active:scale-105 transition-transform duration-500" alt="" />
-               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+            <div className="w-full h-[360px] bg-background-secondary rounded-[24px] overflow-hidden relative group shadow-sm border border-border-subtle/50">
+               <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="w-full h-full object-cover group-active:scale-105 transition-transform duration-700" alt="" />
                
-               <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-text-primary text-[12px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm">
+               <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/5"></div>
+               
+               <div className="absolute top-4 left-4 bg-black/40 backdrop-blur-md text-white text-[12px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 border border-white/10 shadow-sm">
                  <MapIcon size={12} /> 1.2 km
                </div>
 
-               <div className="absolute bottom-0 left-0 right-0 flex flex-col z-10 pb-4">
-                 <div className="px-4 flex flex-col">
-                   <span className="text-[20px] font-display font-bold text-white leading-tight mb-0.5 drop-shadow-md">{club.name}</span>
-                   <span className="text-[13px] font-medium text-white/90 drop-shadow-md mb-3">
-                     {club.city}
+               <div className="absolute bottom-0 left-0 right-0 flex flex-col z-10 pb-5">
+                 <div className="px-5 flex flex-col">
+                   <span className="text-[22px] font-display font-bold text-white leading-tight mb-1">{club.name}</span>
+                   <span className="text-[14px] text-white/80 mb-4 flex items-center gap-1.5">
+                     <MapIcon size={14} className="opacity-80" /> {club.city}
                    </span>
                  </div>
                  
-                 {/* Carrusel de Mini Tarjetas Integrado */}
-                 <div className="flex gap-2 overflow-x-auto hide-scrollbar snap-x snap-mandatory px-4 pb-2">
+                 {/* Carrusel de Productos Glassmorphism Premium */}
+                 <div className="flex gap-2.5 overflow-x-auto hide-scrollbar snap-x snap-mandatory px-5 pb-1">
                     {[
-                      { id: 1, name: "Purple Exotica 1" },
-                      { id: 2, name: "Neon Sativa 2" },
+                      { id: 1, name: "Purple Exotica" },
+                      { id: 2, name: "Neon Sativa" },
                       { id: 3, name: "Amnesia Haze" }
                     ].map((flower) => (
-                      <div key={flower.id} className="w-[95px] shrink-0 snap-start bg-white rounded-2xl p-2.5 flex flex-col gap-2 shadow-lg mb-1">
-                        <div className="w-full aspect-square flex items-center justify-center shrink-0">
-                           <img src="/iconos/flor.webp" className="w-full h-full object-contain drop-shadow-md" alt="Flor" />
+                      <div key={flower.id} className="pr-4 shrink-0 snap-start bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-1.5 flex items-center gap-3 shadow-lg">
+                        <div className="w-10 h-10 bg-black/20 rounded-xl flex items-center justify-center p-1.5 shrink-0">
+                           <img src="/iconos/flor.webp" className="w-full h-full object-contain drop-shadow-md opacity-90" alt="Flor" />
                         </div>
-                        <span className="text-[11px] font-bold text-text-primary leading-tight line-clamp-2">{flower.name}</span>
+                        <span className="text-[13px] font-medium text-white whitespace-nowrap tracking-wide">{flower.name}</span>
                       </div>
                     ))}
                  </div>
