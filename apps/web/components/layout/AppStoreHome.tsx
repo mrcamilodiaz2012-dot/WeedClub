@@ -105,28 +105,32 @@ export function AppStoreHome() {
       <Carousel title="Cerca de Ti">
         {filteredClubs.length > 0 ? filteredClubs.map((club) => (
           <Link key={club.id} href={`/clubs/${club.id}`} className="w-[280px] shrink-0 snap-start block">
-            <div className="w-full aspect-square bg-background-secondary rounded-[24px] overflow-hidden relative group shadow-sm border border-border-subtle/50">
-               <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="w-full h-full object-cover group-active:scale-105 transition-transform duration-700" alt="" />
+            <div className="w-full flex flex-col bg-white rounded-[24px] overflow-hidden shadow-lg shadow-black/5 border border-border-subtle/40">
                
-               <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/5"></div>
-               
-               <div className="absolute top-4 left-4 bg-black/40 backdrop-blur-md text-white text-[12px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 border border-white/10 shadow-sm">
-                 <MapIcon size={12} /> 1.2 km
+               {/* Mitad Superior: Imagen */}
+               <div className="w-full h-[170px] relative overflow-hidden group">
+                 <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="w-full h-full object-cover group-active:scale-105 transition-transform duration-700" alt="" />
+                 <div className="absolute inset-0 bg-black/10"></div>
+                 
+                 <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md text-text-primary text-[12px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm">
+                   <MapIcon size={12} /> 1.2 km
+                 </div>
                </div>
 
-               <div className="absolute bottom-0 left-0 right-0 flex flex-col z-10 pb-5">
+               {/* Mitad Inferior: Sección Blanca */}
+               <div className="w-full flex flex-col pt-4 pb-5 bg-white relative">
                  <div className="px-5 flex flex-col mb-4">
-                   <span className="text-[22px] font-display font-bold text-white leading-tight mb-1">{club.name}</span>
-                   <span className="text-[14px] text-white/80 flex items-center gap-1.5">
-                     <MapIcon size={14} className="opacity-80" /> {club.city}
+                   <span className="text-[20px] font-display font-bold text-text-primary leading-tight mb-1">{club.name}</span>
+                   <span className="text-[13px] text-text-secondary flex items-center gap-1.5 font-medium">
+                     <MapIcon size={14} className="opacity-70" /> {club.city}
                    </span>
                  </div>
                  
-                 <div className="px-5 mb-2.5">
-                   <span className="text-[11px] font-bold text-white/90 uppercase tracking-wider">Disponibles hoy</span>
+                 <div className="px-5 mb-3">
+                   <span className="text-[11px] font-bold text-text-secondary uppercase tracking-wider">En Stock</span>
                  </div>
 
-                 {/* Carrusel Estilo Colección */}
+                 {/* Carrusel de Productos en Fondo Blanco */}
                  <div className="flex gap-3 overflow-x-auto hide-scrollbar snap-x snap-mandatory px-5 pb-1">
                     {[
                       { id: 1, name: "Purple Exotica", image: "/weed/Colores%20Exoticos/E1.webp" },
@@ -134,18 +138,18 @@ export function AppStoreHome() {
                       { id: 3, name: "Amnesia Haze", image: "/weed/Colores%20Naturales/N3.webp" }
                     ].map((flower) => (
                       <div key={flower.id} className="flex flex-col items-center gap-1.5 shrink-0 w-[56px] snap-start group/icon cursor-pointer">
-                        <div className="w-14 h-14 bg-white/10 backdrop-blur-xl border border-white/20 rounded-[16px] flex items-center justify-center p-2 shadow-lg group-active/icon:scale-95 transition-transform">
-                           <img src={flower.image} className="w-full h-full object-contain drop-shadow-md opacity-90" alt={flower.name} />
+                        <div className="w-14 h-14 bg-background-base rounded-[16px] flex items-center justify-center p-2 shadow-sm border border-border-subtle group-active/icon:scale-95 transition-transform">
+                           <img src={flower.image} className="w-full h-full object-contain drop-shadow-sm opacity-90" alt={flower.name} />
                         </div>
-                        <span className="text-[10px] font-medium text-white/90 text-center leading-tight truncate w-full px-0.5 tracking-wide">{flower.name}</span>
+                        <span className="text-[10px] font-medium text-text-primary text-center leading-tight truncate w-full px-0.5 tracking-wide">{flower.name}</span>
                       </div>
                     ))}
                     
                     <div className="flex flex-col items-center gap-1.5 shrink-0 w-[56px] snap-start group/icon cursor-pointer">
-                      <div className="w-14 h-14 bg-white/5 backdrop-blur-xl border border-white/10 rounded-[16px] flex items-center justify-center shadow-lg group-active/icon:scale-95 transition-transform">
-                         <span className="text-[15px] font-bold text-white">+12</span>
+                      <div className="w-14 h-14 bg-background-secondary rounded-[16px] flex items-center justify-center border border-border-subtle group-active/icon:scale-95 transition-transform">
+                         <span className="text-[15px] font-bold text-text-primary">+12</span>
                       </div>
-                      <span className="text-[10px] font-medium text-white/50 text-center leading-tight w-full px-0.5 tracking-wide">Ver más</span>
+                      <span className="text-[10px] font-medium text-text-secondary text-center leading-tight w-full px-0.5 tracking-wide">Ver más</span>
                     </div>
                  </div>
                </div>
