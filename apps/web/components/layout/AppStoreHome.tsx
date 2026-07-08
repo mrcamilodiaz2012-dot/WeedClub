@@ -294,18 +294,26 @@ export function AppStoreHome() {
       {/* 5. Clubes Destacados (Carrusel circular) */}
       <Carousel title="Clubes Destacados">
         {filteredClubs.length > 0 ? filteredClubs.map((club) => (
-          <Link key={club.id} href={`/clubs/${club.id}`} className="w-[110px] shrink-0 snap-start flex flex-col items-center group cursor-pointer active:scale-[0.98] transition-transform">
-            <div className="w-[100px] h-[100px] rounded-full overflow-hidden mb-2.5 relative shadow-sm ring-[3px] ring-transparent group-hover:ring-brand-accent/30 transition-all duration-300">
-               <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={club.name} />
-               <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 bg-brand-accent/90 backdrop-blur-md text-white text-[8px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-full shadow-sm z-10 pointer-events-none">
+          <Link key={club.id} href={`/clubs/${club.id}`} className="w-[180px] shrink-0 snap-start flex flex-col items-center group cursor-pointer active:scale-[0.98] transition-transform">
+            <div className="w-[170px] h-[170px] rounded-full overflow-hidden relative shadow-md ring-[3px] ring-transparent group-hover:ring-brand-accent/30 transition-all duration-300 flex items-center justify-center">
+               <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={club.name} />
+               
+               {/* Dark overlay for text readability */}
+               <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-300 pointer-events-none"></div>
+               
+               {/* Sutil sombra interior para profundidad */}
+               <div className="absolute inset-0 rounded-full shadow-[inset_0_4px_20px_rgba(0,0,0,0.4)] pointer-events-none"></div>
+
+               {/* Center Text inside circle */}
+               <div className="relative z-10 flex flex-col items-center px-4 text-center w-full mt-[-8px]">
+                 <span className="text-[17px] font-black tracking-tight text-white mb-1 leading-tight line-clamp-2 drop-shadow-lg">{club.name}</span>
+                 <span className="text-[11px] font-medium text-white/90 truncate w-full drop-shadow-md">{club.city}</span>
+               </div>
+               
+               {/* Top Badge */}
+               <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-brand-accent/90 backdrop-blur-md text-white text-[9px] uppercase tracking-wider font-bold px-2.5 py-1 rounded-full shadow-sm z-10 pointer-events-none">
                  Top
                </div>
-               {/* Sutil sombra interior para profundidad */}
-               <div className="absolute inset-0 rounded-full shadow-[inset_0_2px_10px_rgba(0,0,0,0.1)] pointer-events-none"></div>
-            </div>
-            <div className="flex flex-col items-center px-1 text-center w-full mt-1">
-              <span className="text-[13px] font-black tracking-tight text-text-primary mb-0.5 leading-tight truncate w-full">{club.name}</span>
-              <span className="text-[10px] text-text-secondary truncate w-full">Privado • {club.city}</span>
             </div>
           </Link>
         )) : null}
