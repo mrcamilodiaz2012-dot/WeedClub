@@ -174,11 +174,17 @@ export function AppStoreHome() {
       {/* 3. Ciudades Populares (Cuadrados 1:1) */}
       <Carousel title="Ciudades Populares">
         {["Barcelona", "Madrid", "Valencia", "Alicante"].map((city, idx) => (
-          <div key={idx} className="w-[140px] shrink-0 snap-start">
-            <div className="w-full aspect-square bg-background-secondary rounded-2xl overflow-hidden relative">
-               <img src={`https://images.unsplash.com/photo-1559815024-11f81dfca8d4?q=80&w=400&auto=format&fit=crop&sig=${idx}`} className="w-full h-full object-cover transition-transform duration-700 hover:scale-110" alt={city} />
-               <div className="absolute inset-0 bg-black/30" />
-               <span className="absolute inset-0 flex items-center justify-center text-white font-bold text-[17px] tracking-wide">{city}</span>
+          <div key={idx} className="w-[200px] shrink-0 snap-start">
+            <div className="w-full aspect-square bg-background-secondary rounded-2xl overflow-hidden relative group">
+               <img src={`https://images.unsplash.com/photo-1559815024-11f81dfca8d4?q=80&w=400&auto=format&fit=crop&sig=${idx}`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={city} />
+               
+               {/* Soft Blur Overlay at bottom */}
+               <div className="absolute bottom-0 left-0 right-0 h-[60%] bg-gradient-to-t from-black/80 via-black/40 to-transparent backdrop-blur-[8px] [mask-image:linear-gradient(to_top,black_10%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_top,black_10%,transparent_100%)] z-10" />
+               
+               {/* City Name */}
+               <div className="absolute bottom-0 left-0 right-0 p-5 z-20 flex items-end">
+                 <span className="text-white font-display font-bold text-[22px] tracking-wide leading-tight drop-shadow-md">{city}</span>
+               </div>
             </div>
           </div>
         ))}
