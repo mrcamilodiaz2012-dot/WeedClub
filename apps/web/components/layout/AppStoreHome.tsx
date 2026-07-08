@@ -124,7 +124,7 @@ export function AppStoreHome() {
                {/* Mitad Inferior: Sección Blanca */}
                <div className="w-full flex flex-col pt-5 pb-5 bg-white relative">
                  <div className="px-6 flex flex-col mb-3">
-                   <span className="text-[20px] font-display font-bold text-text-primary leading-tight mb-0.5">{club.name}</span>
+                   <span className="text-[20px] font-black tracking-tighter text-text-primary leading-tight mb-0.5">{club.name}</span>
                    <span className="text-[13px] text-text-secondary flex items-center gap-1.5 font-medium">
                      <MapPin size={14} className="opacity-70" /> {club.city}
                    </span>
@@ -210,7 +210,7 @@ export function AppStoreHome() {
               </div>
               <div className="flex items-start justify-between px-1">
                  <div className="flex flex-col">
-                   <span className="text-lg font-bold text-text-primary mb-0.5">{club.name}</span>
+                   <span className="text-lg font-black tracking-tighter text-text-primary mb-0.5">{club.name}</span>
                    <span className="text-[13px] text-text-secondary">Club Social Privado • {club.city}</span>
                  </div>
                  <div className="w-8 h-8 rounded-full bg-background-secondary flex items-center justify-center">

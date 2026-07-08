@@ -35,7 +35,7 @@ export function AppListItem({
       <div className="flex flex-col flex-1 h-full justify-center border-b border-border-subtle/30 pb-3">
         <div className="flex items-center justify-between w-full">
           <div className="flex flex-col">
-            <span className="text-text-primary font-semibold text-base">
+            <span className="text-text-primary font-black tracking-tighter text-base">
               {title}
             </span>
             <span className="text-text-secondary text-xs">

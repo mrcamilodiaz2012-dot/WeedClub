@@ -55,7 +55,7 @@ export function HeroCard({
           )}
         </div>
         <div className="flex flex-col flex-1">
-          <span className="text-white font-semibold text-sm leading-tight">{clubName}</span>
+          <span className="text-white font-black tracking-tighter text-sm leading-tight">{clubName}</span>
           <span className="text-white/70 text-xs">{clubSubtitle}</span>
         </div>
         <button className="bg-white/20 backdrop-blur-md hover:bg-white/30 text-white font-bold text-sm px-4 py-1.5 rounded-full uppercase tracking-wide">
