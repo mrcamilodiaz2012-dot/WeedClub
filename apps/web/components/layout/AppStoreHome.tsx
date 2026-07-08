@@ -5,14 +5,55 @@ import Link from "next/link";
 
 import { Carousel } from "@/components/ui/Carousel";
 import { AppListItem } from "@/components/ui/AppListItem";
-import { Search, Map as MapIcon, MapPin, Heart, ChevronRight, ChevronDown, Bell, UserCircle } from "lucide-react";
-import { useState } from "react";
+import { Search, Map as MapIcon, MapPin, Heart, ChevronRight, ChevronDown, Bell, UserCircle, X } from "lucide-react";
+import { useState, useEffect } from "react";
 import { type Location } from "@/components/ui/LocationSearch";
 import { LocationModal } from "@/components/ui/LocationModal";
+import Image from "next/image";
 
 export function AppStoreHome() {
   const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
+  const [selectedFlowerId, setSelectedFlowerId] = useState<number | null>(null);
+  const [activeModalId, setActiveModalId] = useState<number | null>(null);
+  const [likedFlowers, setLikedFlowers] = useState<Set<number>>(new Set());
+
+  const toggleLike = (e: React.MouseEvent, id: number) => {
+    e.stopPropagation();
+    setLikedFlowers(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
+
+  useEffect(() => {
+    if (selectedFlowerId !== null) {
+      setActiveModalId(selectedFlowerId);
+      document.body.style.overflow = 'hidden';
+      // Scroll to selected flower
+      setTimeout(() => {
+        const el = document.getElementById(`home-flower-modal-${selectedFlowerId}`);
+        if (el) {
+          el.scrollIntoView({ behavior: 'instant', block: 'nearest', inline: 'center' });
+        }
+      }, 10);
+    } else {
+      setActiveModalId(null);
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedFlowerId]);
+
+  const POPULAR_FLOWERS = [
+    { id: 1, name: "Purple Exotica 1", type: "ÍNDICA", thc: "24%", cbd: "0.2%", flavor: "Uva, Dulce", effect: "Relajante", color: "text-purple-600", bg: "bg-purple-50 border border-purple-100", image: "/weed/Colores%20Exoticos/E1.webp" },
+    { id: 2, name: "Neon Sativa 2", type: "SATIVA", thc: "26%", cbd: "0.1%", flavor: "Tropical", effect: "Energético", color: "text-orange-500", bg: "bg-orange-50 border border-orange-100", image: "/weed/Colores%20Exoticos/E2.webp" },
+    { id: 3, name: "Amnesia Haze", type: "HÍBRIDA", thc: "22%", cbd: "0.5%", flavor: "Cítrico, Pino", effect: "Creativo", color: "text-emerald-600", bg: "bg-emerald-50 border border-emerald-100", image: "/weed/Colores%20Naturales/N3.webp" },
+    { id: 4, name: "Gelato 33", type: "ÍNDICA", thc: "25%", cbd: "0.1%", flavor: "Fresa, Vainilla", effect: "Felicidad", color: "text-purple-600", bg: "bg-purple-50 border border-purple-100", image: "/weed/Colores%20Exoticos/E3.webp" }
+  ];
 
   const MOCK_CLUBS = [
     { id: 1, name: "Green Leaf Club 1", city: "Madrid", imgSig: 1 },
@@ -197,28 +238,29 @@ export function AppStoreHome() {
 
       {/* 4. Flores Populares */}
       <Carousel title="Flores Populares">
-        {[
-          { id: 1, name: "Purple Exotica 1", type: "ÍNDICA", thc: "24%", cbd: "0.2%", color: "text-purple-600", bg: "bg-purple-50 border border-purple-100", image: "/weed/Colores%20Exoticos/E1.webp" },
-          { id: 2, name: "Neon Sativa 2", type: "SATIVA", thc: "26%", cbd: "0.1%", color: "text-orange-500", bg: "bg-orange-50 border border-orange-100", image: "/weed/Colores%20Exoticos/E2.webp" },
-          { id: 3, name: "Amnesia Haze", type: "HÍBRIDA", thc: "22%", cbd: "0.5%", color: "text-emerald-600", bg: "bg-emerald-50 border border-emerald-100", image: "/weed/Colores%20Naturales/N3.webp" },
-          { id: 4, name: "Gelato 33", type: "ÍNDICA", thc: "25%", cbd: "0.1%", color: "text-purple-600", bg: "bg-purple-50 border border-purple-100", image: "/weed/Colores%20Exoticos/E3.webp" }
-        ].map((flower) => (
+        {POPULAR_FLOWERS.map((flower) => (
           <div key={flower.id} className="w-[180px] shrink-0 snap-start">
-            <div className="w-full bg-white border border-border-subtle/60 rounded-[20px] p-3 relative flex flex-col shadow-sm">
+            <div 
+              className="w-full bg-white border border-border-subtle/60 rounded-[20px] p-3 relative flex flex-col shadow-sm cursor-pointer hover:shadow-md transition-shadow"
+              onClick={() => setSelectedFlowerId(flower.id)}
+            >
               <div className="flex justify-between items-start z-10">
                 <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full ${flower.color} ${flower.bg}`}>{flower.type}</span>
-                <button className="w-7 h-7 rounded-full border border-border-subtle/60 flex items-center justify-center text-text-secondary hover:text-red-500 hover:border-red-500 transition-colors bg-white">
-                  <Heart size={14} />
+                <button 
+                  onClick={(e) => toggleLike(e, flower.id)}
+                  className="w-7 h-7 rounded-full border border-border-subtle/60 flex items-center justify-center text-text-secondary hover:text-red-500 hover:border-red-500 transition-colors bg-white z-20"
+                >
+                  <Heart className={likedFlowers.has(flower.id) ? 'text-red-500 fill-red-500' : ''} size={14} />
                 </button>
               </div>
               
               {/* Product Image */}
-              <div className="w-full aspect-square flex justify-center items-center py-2 -mt-2">
+              <div className="w-full aspect-square flex justify-center items-center py-2 -mt-2 pointer-events-none">
                 <img src={flower.image} alt={flower.name} className="h-[120%] object-contain drop-shadow-xl hover:scale-110 transition-transform duration-500" />
               </div>
               
               {/* Product Info */}
-              <div className="flex flex-col gap-1.5 mt-2">
+              <div className="flex flex-col gap-1.5 mt-2 pointer-events-none">
                 <h4 className="font-display font-bold text-[16px] text-text-primary leading-tight truncate">{flower.name}</h4>
                 <div className="flex gap-1.5">
                   <div className="bg-background-secondary rounded-md px-1.5 py-1 flex gap-1 items-center">
@@ -305,6 +347,146 @@ export function AppStoreHome() {
         selectedLocation={selectedLocation}
         onLocationSelect={setSelectedLocation}
       />
+
+      {/* Flower Details Modal Carousel */}
+      {selectedFlowerId !== null && (
+        <div className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-md flex flex-col justify-center animate-in fade-in duration-300">
+          <div 
+            className="absolute inset-0" 
+            onClick={() => setSelectedFlowerId(null)}
+          />
+          {/* Close Button */}
+          <button 
+            onClick={() => setSelectedFlowerId(null)}
+            className="absolute top-4 right-4 md:top-8 md:right-8 z-10 w-12 h-12 bg-black/40 hover:bg-black/60 backdrop-blur-lg rounded-full flex items-center justify-center transition-colors"
+          >
+            <X className="w-6 h-6 text-white" />
+          </button>
+
+          {/* Carousel Container */}
+          <div 
+            className="w-full relative z-10 overflow-x-auto snap-x snap-mandatory hide-scrollbar flex items-center px-[10vw] md:px-[30vw] py-10 gap-4 md:gap-6"
+            onScroll={(e) => {
+              const container = e.currentTarget;
+              const scrollLeft = container.scrollLeft;
+              const itemWidth = container.scrollWidth / POPULAR_FLOWERS.length;
+              const newIndex = Math.round(scrollLeft / itemWidth);
+              const activeFlower = POPULAR_FLOWERS[newIndex];
+              if (activeFlower && activeFlower.id !== activeModalId) {
+                setActiveModalId(activeFlower.id);
+              }
+            }}
+          >
+            {POPULAR_FLOWERS.map((flower, idx) => {
+              const isActive = flower.id === activeModalId;
+              const glowColor = flower.type === 'SATIVA' ? 'bg-amber-400' : flower.type === 'ÍNDICA' ? 'bg-purple-400' : 'bg-emerald-400';
+              
+              return (
+                <div 
+                  key={flower.id} 
+                  id={`home-flower-modal-${flower.id}`}
+                  onClick={() => {
+                    if (!isActive) {
+                      const el = document.getElementById(`home-flower-modal-${flower.id}`);
+                      if (el) {
+                        el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                      }
+                    }
+                  }}
+                  className={`w-[80vw] md:w-[400px] shrink-0 snap-center rounded-[32px] overflow-hidden relative transition-all duration-500 ${
+                    isActive ? 'scale-100 opacity-100 shadow-[0_20px_60px_rgba(0,0,0,0.1)]' : 'scale-90 opacity-40 shadow-none cursor-pointer hover:opacity-60'
+                  }`}
+                >
+                  {/* Premium Light Background */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white via-[#fafafa] to-[#f4f4f5]" />
+                  
+                  {/* Atmospheric Glow */}
+                  <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 rounded-full blur-[80px] opacity-25 transition-colors duration-700 ${glowColor}`} />
+                  
+                  {/* Content */}
+                  <div className="relative z-10 flex flex-col h-full">
+                    {/* Header Tags */}
+                    <div className="absolute top-6 left-6 right-6 flex items-center justify-between z-20">
+                      <div className="flex items-center gap-2">
+                        <span className={`bg-white/80 border border-black/5 backdrop-blur-md text-[10px] uppercase tracking-[0.2em] font-bold px-3 py-1.5 rounded-full shadow-sm ${flower.color}`}>
+                          {flower.type}
+                        </span>
+                      </div>
+                      <button 
+                        onClick={(e) => toggleLike(e, flower.id)}
+                        className="bg-white/80 border border-black/5 backdrop-blur-md w-8 h-8 rounded-full shadow-sm flex items-center justify-center hover:scale-110 active:scale-95 transition-all"
+                      >
+                        <Heart 
+                          className={`w-4 h-4 transition-colors ${
+                            likedFlowers.has(flower.id) ? 'text-red-500 fill-red-500' : 'text-gray-400'
+                          }`} 
+                        />
+                      </button>
+                    </div>
+
+                    {/* Modal Image Header */}
+                    <div className="w-full h-[320px] relative flex items-center justify-center pt-8">
+                      <Image 
+                        src={flower.image} 
+                        alt={flower.name} 
+                        width={240} 
+                        height={240} 
+                        className={`object-contain transition-all duration-700 ease-out ${isActive ? 'drop-shadow-[0_30px_40px_rgba(0,0,0,0.15)] animate-float-slow scale-110' : 'drop-shadow-none scale-90'}`} 
+                      />
+                    </div>
+
+                    {/* Modal Content */}
+                    <div className="p-6 md:p-8 pt-0 flex-1 flex flex-col">
+                      <h3 className="font-display font-bold text-3xl text-gray-900 mb-6 tracking-tight">
+                        {flower.name}
+                      </h3>
+                      
+                      <div className="space-y-4">
+                        {/* THC / CBD Glass Panel */}
+                        <div className="bg-white/60 border border-white/80 backdrop-blur-xl rounded-[24px] p-5 flex items-center justify-around shadow-[0_4px_24px_rgba(0,0,0,0.03)]">
+                          <div className="flex flex-col items-center gap-1.5">
+                            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">THC</span>
+                            <span className="text-xl font-display font-bold text-gray-900">{flower.thc}</span>
+                          </div>
+                          <div className="w-px h-10 bg-gray-200" />
+                          <div className="flex flex-col items-center gap-1.5">
+                            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">CBD</span>
+                            <span className="text-xl font-display font-bold text-gray-900">{flower.cbd}</span>
+                          </div>
+                        </div>
+
+                        {/* Flavor / Effect Panels */}
+                        <div className="grid grid-cols-2 gap-4">
+                          <div className="bg-gray-50/80 border border-gray-100 hover:bg-gray-100/80 transition-colors rounded-[20px] p-4 flex flex-col gap-1 shadow-sm">
+                            <span className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.15em]">Sabor</span>
+                            <span className="text-sm font-medium text-gray-800">{flower.flavor}</span>
+                          </div>
+                          <div className="bg-gray-50/80 border border-gray-100 hover:bg-gray-100/80 transition-colors rounded-[20px] p-4 flex flex-col gap-1 shadow-sm">
+                            <span className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.15em]">Efecto</span>
+                            <span className="text-sm font-medium text-gray-800">{flower.effect}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          
+          {/* Pagination Dots */}
+          <div className="absolute bottom-12 md:bottom-16 left-0 right-0 flex justify-center gap-2.5 z-10 pointer-events-none">
+            {POPULAR_FLOWERS.map((flower) => (
+              <div 
+                key={flower.id}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  flower.id === activeModalId ? 'bg-white scale-125' : 'bg-white/40'
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
