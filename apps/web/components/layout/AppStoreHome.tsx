@@ -119,16 +119,18 @@ export function AppStoreHome() {
                  <button className="absolute top-4 right-4 bg-white/90 backdrop-blur-md text-text-primary p-2 rounded-full shadow-sm hover:scale-105 active:scale-95 transition-all">
                    <Heart size={16} />
                  </button>
+
+                 {/* Blur Footer */}
+                 <div className="absolute bottom-0 left-0 right-0 p-4 bg-black/40 backdrop-blur-md flex flex-col">
+                   <span className="text-[20px] font-black tracking-tighter text-white leading-tight mb-0.5">{club.name}</span>
+                   <span className="text-[13px] text-white/90 flex items-center gap-1.5 font-medium">
+                     <MapPin size={14} className="opacity-90" /> {club.city}
+                   </span>
+                 </div>
                </div>
 
                {/* Mitad Inferior: Sección Blanca */}
-               <div className="w-full flex flex-col pt-5 pb-5 bg-white relative">
-                 <div className="px-6 flex flex-col mb-3">
-                   <span className="text-[20px] font-black tracking-tighter text-text-primary leading-tight mb-0.5">{club.name}</span>
-                   <span className="text-[13px] text-text-secondary flex items-center gap-1.5 font-medium">
-                     <MapPin size={14} className="opacity-70" /> {club.city}
-                   </span>
-                 </div>
+               <div className="w-full flex flex-col pt-4 pb-5 bg-white relative">
                  
                  <div className="px-6 mb-2">
                    <span className="text-[11px] font-bold text-text-secondary uppercase tracking-wider">En Stock</span>
