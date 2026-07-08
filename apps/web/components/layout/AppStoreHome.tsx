@@ -104,21 +104,17 @@ export function AppStoreHome() {
       {/* 2. Cerca de Ti (Rectángulos Verticales 4:5) */}
       <Carousel title="Cerca de Ti">
         {filteredClubs.length > 0 ? filteredClubs.map((club) => (
-          <Link key={club.id} href={`/clubs/${club.id}`} className="w-[140px] shrink-0 snap-start block">
-            <div className="w-full h-[180px] bg-background-secondary rounded-2xl overflow-hidden relative group">
+          <Link key={club.id} href={`/clubs/${club.id}`} className="w-[260px] shrink-0 snap-start block">
+            <div className="w-full aspect-square bg-background-secondary rounded-2xl overflow-hidden relative group">
                <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="w-full h-full object-cover group-active:scale-105 transition-transform duration-500" alt="" />
-               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
                
-               <div className="absolute top-2 left-2 bg-black/60 backdrop-blur-md text-white text-[10px] font-bold px-2 py-1 rounded-full flex items-center gap-1">
-                 <MapIcon size={10} /> 1.2 km
+               <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-text-primary text-[12px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm">
+                 <MapIcon size={12} /> 1.2 km
                </div>
-
-               <div className="absolute bottom-3 left-3 right-3 flex flex-col z-10">
-                 <span className="text-[14px] font-display font-bold text-white leading-tight mb-0.5 drop-shadow-md">{club.name}</span>
-                 <span className="text-[11px] font-medium text-white/90 drop-shadow-md flex items-center gap-1">
-                   {club.city}
-                 </span>
-               </div>
+            </div>
+            <div className="flex flex-col mt-3 px-1">
+              <span className="text-[16px] font-bold text-text-primary leading-tight">{club.name}</span>
+              <span className="text-[14px] text-text-secondary mt-0.5">{club.city}</span>
             </div>
           </Link>
         )) : (
