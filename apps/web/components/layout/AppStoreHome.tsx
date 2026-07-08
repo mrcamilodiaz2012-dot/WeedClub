@@ -301,17 +301,20 @@ export function AppStoreHome() {
         <div className="grid grid-cols-2 gap-4">
           {filteredClubs.length > 0 ? filteredClubs.slice(0, 4).map((club) => (
             <Link key={club.id} href={`/clubs/${club.id}`} className="w-full group cursor-pointer active:scale-[0.98] transition-transform block">
-              <div className="w-full aspect-square bg-background-secondary rounded-[20px] overflow-hidden mb-2.5 relative shadow-sm">
+              <div className="w-full aspect-video bg-background-secondary rounded-2xl overflow-hidden mb-2.5 relative">
                  <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="" />
-                 <div className="absolute top-2 right-2 bg-brand-accent/90 backdrop-blur-md text-white text-[9px] uppercase tracking-wider font-bold px-2 py-1 rounded shadow-sm">
+                 <div className="absolute top-2 right-2 bg-brand-accent text-white text-[9px] uppercase tracking-wider font-bold px-2 py-1 rounded-md shadow-md">
                    Destacado
                  </div>
-                 {/* Gradiente suave inferior */}
-                 <div className="absolute bottom-0 left-0 right-0 h-[40%] bg-gradient-to-t from-black/40 to-transparent"></div>
               </div>
-              <div className="flex flex-col px-1">
-                <span className="text-[15px] font-black tracking-tight text-text-primary mb-0.5 leading-tight truncate">{club.name}</span>
-                <span className="text-[12px] text-text-secondary truncate">Privado • {club.city}</span>
+              <div className="flex items-start justify-between px-1">
+                 <div className="flex flex-col min-w-0 pr-2">
+                   <span className="text-[15px] font-black tracking-tighter text-text-primary mb-0.5 truncate">{club.name}</span>
+                   <span className="text-[11px] text-text-secondary truncate">Privado • {club.city}</span>
+                 </div>
+                 <div className="w-6 h-6 shrink-0 rounded-full bg-background-secondary flex items-center justify-center mt-0.5">
+                   <ChevronRight size={14} className="text-text-secondary" />
+                 </div>
               </div>
             </Link>
           )) : null}
