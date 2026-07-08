@@ -288,7 +288,7 @@ export function AppStoreHome() {
         <Carousel title="Clubes Destacados">
           {filteredClubs.length > 0 ? filteredClubs.map((club) => (
             <Link key={club.id} href={`/clubs/${club.id}`} className="w-[160px] shrink-0 snap-start block group cursor-pointer active:scale-[0.98] transition-transform">
-              <div className="w-full aspect-[4/5] rounded-[24px] overflow-hidden relative shadow-md shadow-black/5 border border-border-subtle/50 bg-background-secondary">
+              <div className="w-full aspect-square rounded-[24px] overflow-hidden relative shadow-md shadow-black/5 border border-border-subtle/50 bg-background-secondary">
                  <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt={club.name} />
                  
                  {/* Gradiente elegante inferior */}
