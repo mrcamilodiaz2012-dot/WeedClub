@@ -119,23 +119,20 @@ export function AppStoreHome() {
                    {club.city}
                  </span>
                  
-                 {/* Mini Tarjeta Integrada */}
-                 <div className="w-full bg-white rounded-xl p-2.5 flex items-center gap-3 shadow-lg">
-                    <div className="w-12 h-12 bg-background-base rounded-lg flex items-center justify-center p-1 shrink-0">
-                       <img src="/iconos/flor.webp" className="w-full h-full object-contain drop-shadow-sm" alt="Flor" />
-                    </div>
-                    
-                    <div className="flex flex-col flex-1 overflow-hidden">
-                       <span className="text-[13px] font-bold text-text-primary truncate">Purple Exotica 1</span>
-                       <div className="flex gap-1.5 mt-1">
-                         <span className="bg-background-secondary text-text-primary text-[9px] font-bold px-1.5 py-0.5 rounded-md">THC 24%</span>
-                         <span className="bg-background-secondary text-text-primary text-[9px] font-bold px-1.5 py-0.5 rounded-md">ÍNDICA</span>
-                       </div>
-                    </div>
-
-                    <div className="w-7 h-7 rounded-full bg-background-secondary flex items-center justify-center text-text-secondary shrink-0">
-                       <ChevronRight size={14} />
-                    </div>
+                 {/* Carrusel de Mini Tarjetas Integrado */}
+                 <div className="flex gap-2 overflow-x-auto hide-scrollbar snap-x snap-mandatory pb-1">
+                    {[
+                      { id: 1, name: "Purple Exotica 1" },
+                      { id: 2, name: "Neon Sativa 2" },
+                      { id: 3, name: "Amnesia Haze" }
+                    ].map((flower) => (
+                      <div key={flower.id} className="pr-4 shrink-0 snap-start bg-white rounded-xl p-1.5 flex items-center gap-2.5 shadow-lg">
+                        <div className="w-8 h-8 bg-background-base rounded-lg flex items-center justify-center p-1 shrink-0">
+                           <img src="/iconos/flor.webp" className="w-full h-full object-contain drop-shadow-sm" alt="Flor" />
+                        </div>
+                        <span className="text-[13px] font-bold text-text-primary whitespace-nowrap">{flower.name}</span>
+                      </div>
+                    ))}
                  </div>
                </div>
             </div>
