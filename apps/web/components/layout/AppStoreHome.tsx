@@ -278,49 +278,40 @@ export function AppStoreHome() {
         ))}
       </Carousel>
 
-      {/* 4. Banner para Propietarios (Edge-to-edge Pattern Breaker) */}
-      <div className="w-full bg-brand-primary text-white mt-8 mb-10 py-10 px-6 relative overflow-hidden">
-        <div className="absolute -right-10 -top-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
-        <div className="absolute -left-10 -bottom-10 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
-        <div className="relative z-10 flex flex-col items-start gap-3">
-          <h3 className="text-[22px] font-display font-bold leading-tight">¿Tienes un<br/>Club Cannábico?</h3>
-          <p className="text-white/90 text-[13px] max-w-[220px] mb-2 leading-relaxed">Únete a WeedClub y llega a miles de usuarios activos en tu ciudad de forma segura.</p>
-          <button className="bg-white text-brand-primary font-bold text-sm px-6 py-3 rounded-full shadow-lg active:scale-95 transition-transform">
-            Dar de alta mi club
-          </button>
-        </div>
+
+
+      {/* 5. Clubes Destacados (Posters Verticales) */}
+      <div className="mt-8">
+        <Carousel title="Clubes Destacados">
+          {filteredClubs.length > 0 ? filteredClubs.map((club) => (
+            <Link key={club.id} href={`/clubs/${club.id}`} className="w-[160px] shrink-0 snap-start block group cursor-pointer active:scale-[0.98] transition-transform">
+              <div className="w-full aspect-[4/5] rounded-[24px] overflow-hidden relative shadow-md shadow-black/5 border border-border-subtle/50 bg-background-secondary">
+                 <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt={club.name} />
+                 
+                 {/* Gradiente elegante inferior */}
+                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none"></div>
+                 
+                 {/* Top Badge */}
+                 <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md text-text-primary text-[9px] uppercase tracking-wider font-bold px-2.5 py-1 rounded-md shadow-sm z-10 flex items-center gap-1">
+                   <img src="/iconos/fuego.webp" className="w-2.5 h-2.5" alt="hot" />
+                   Top
+                 </div>
+
+                 {/* Contenido inferior */}
+                 <div className="absolute bottom-0 left-0 right-0 p-4 z-10 flex flex-col">
+                   <span className="text-[18px] font-black tracking-tight text-white mb-1 leading-tight line-clamp-2 drop-shadow-md">{club.name}</span>
+                   <span className="text-[12px] font-medium text-white/90 flex items-center gap-1.5 drop-shadow-sm">
+                     <MapPin size={12} className="opacity-80" /> {club.city}
+                   </span>
+                 </div>
+                 
+                 {/* Sutil brillo interior para realzar premiumness */}
+                 <div className="absolute inset-0 rounded-[24px] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15)] pointer-events-none"></div>
+              </div>
+            </Link>
+          )) : null}
+        </Carousel>
       </div>
-
-      {/* 5. Clubes Destacados (Carrusel circular) */}
-      <Carousel title="Clubes Destacados">
-        {filteredClubs.length > 0 ? filteredClubs.map((club) => (
-          <Link key={club.id} href={`/clubs/${club.id}`} className="w-[180px] shrink-0 snap-start flex flex-col items-center group cursor-pointer active:scale-[0.98] transition-transform">
-            <div className="w-[170px] h-[170px] rounded-full overflow-hidden relative shadow-lg shadow-black/5 ring-1 ring-border-subtle group-hover:ring-brand-accent/50 transition-all duration-500">
-               <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={club.name} />
-               
-               {/* Vignette para enmarcar la imagen */}
-               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(0,0,0,0.5)_100%)] pointer-events-none transition-opacity duration-300"></div>
-
-               {/* Top Badge (Estilo Premium) */}
-               <div className="absolute top-3 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-md text-text-primary text-[9px] uppercase tracking-[0.1em] font-black px-3 py-1.5 rounded-full shadow-md z-10 pointer-events-none flex items-center gap-1">
-                 <img src="/iconos/fuego.webp" className="w-2.5 h-2.5" alt="hot" />
-                 Top
-               </div>
-
-               {/* Center Glass Pill para el texto */}
-               <div className="absolute inset-x-3 top-1/2 -translate-y-1/2 flex flex-col items-center bg-black/40 backdrop-blur-md border border-white/20 rounded-[20px] py-3.5 px-3 text-center shadow-[0_8px_32px_rgba(0,0,0,0.3)] z-10 pointer-events-none transform transition-transform duration-500 group-hover:scale-105">
-                 <span className="text-[15px] font-black tracking-tight text-white mb-0.5 leading-tight truncate w-full drop-shadow-md">{club.name}</span>
-                 <span className="text-[10px] font-semibold text-white/90 truncate w-full flex items-center justify-center gap-1 drop-shadow-sm">
-                   <MapPin size={10} className="opacity-90" /> {club.city}
-                 </span>
-               </div>
-               
-               {/* Inner shadow para efecto esfera 3D */}
-               <div className="absolute inset-0 rounded-full shadow-[inset_0_0_24px_rgba(0,0,0,0.2)] pointer-events-none"></div>
-            </div>
-          </Link>
-        )) : null}
-      </Carousel>
 
       {/* 6. Mejor valorados (Listado denso) */}
       <div className="px-5 mt-10 mb-8">
