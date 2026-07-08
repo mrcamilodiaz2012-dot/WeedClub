@@ -173,17 +173,22 @@ export function AppStoreHome() {
 
       {/* 3. Ciudades Populares (Cuadrados 1:1) */}
       <Carousel title="Ciudades Populares">
-        {["Barcelona", "Madrid", "Valencia", "Alicante"].map((city, idx) => (
+        {[
+          { name: "Barcelona", img: "https://images.unsplash.com/photo-1583422409516-2895a77efded?q=80&w=400&auto=format&fit=crop" },
+          { name: "Madrid", img: "https://images.unsplash.com/photo-1539037116277-4db20d075e40?q=80&w=400&auto=format&fit=crop" },
+          { name: "Valencia", img: "https://images.unsplash.com/photo-1558642084-fd28399589d9?q=80&w=400&auto=format&fit=crop" },
+          { name: "Alicante", img: "https://images.unsplash.com/photo-1562922151-51ee6e16fdf0?q=80&w=400&auto=format&fit=crop" }
+        ].map((city, idx) => (
           <div key={idx} className="w-[200px] shrink-0 snap-start">
             <div className="w-full aspect-square bg-background-secondary rounded-2xl overflow-hidden relative group">
-               <img src={`https://images.unsplash.com/photo-1559815024-11f81dfca8d4?q=80&w=400&auto=format&fit=crop&sig=${idx}`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={city} />
+               <img src={city.img} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={city.name} />
                
                {/* Soft Blur Overlay at bottom */}
                <div className="absolute bottom-0 left-0 right-0 h-[60%] bg-gradient-to-t from-black/80 via-black/40 to-transparent backdrop-blur-[8px] [mask-image:linear-gradient(to_top,black_10%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_top,black_10%,transparent_100%)] z-10" />
                
                {/* City Name */}
                <div className="absolute bottom-0 left-0 right-0 p-5 z-20 flex items-end">
-                 <span className="text-white font-display font-bold text-[22px] tracking-wide leading-tight drop-shadow-md">{city}</span>
+                 <span className="text-white font-display font-bold text-[22px] tracking-wide leading-tight drop-shadow-md">{city.name}</span>
                </div>
             </div>
           </div>
