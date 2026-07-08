@@ -224,11 +224,8 @@ export function AppStoreHome() {
             <div className="w-full aspect-square bg-background-secondary rounded-full overflow-hidden relative shadow-md shadow-black/5 ring-1 ring-border-subtle group-hover:ring-brand-accent/50 transition-all duration-300">
                <img src={city.img} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={city.name} />
                
-               {/* Blur súper ligero y casi transparente */}
-               <div className="absolute inset-0 bg-black/5 backdrop-blur-[0.5px] group-hover:backdrop-blur-[1px] transition-all duration-300 pointer-events-none" />
-               
-               {/* Gradiente radial suavizado */}
-               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.25)_0%,transparent_60%)] pointer-events-none"></div>
+               {/* Pequeña opacidad oscura para que resalte el texto sin usar blur */}
+               <div className="absolute inset-0 bg-black/25 group-hover:bg-black/35 transition-colors duration-300 pointer-events-none" />
                
                {/* Sombra interior 3D */}
                <div className="absolute inset-0 rounded-full shadow-[inset_0_0_24px_rgba(0,0,0,0.2)] pointer-events-none"></div>
