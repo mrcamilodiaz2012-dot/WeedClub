@@ -134,23 +134,23 @@ export function AppStoreHome() {
                    <span className="text-[11px] font-bold text-text-secondary uppercase tracking-wider">En Stock</span>
                  </div>
 
-                 {/* Carrusel de Productos en Fondo Blanco */}
-                 <div className="flex gap-3 overflow-x-auto hide-scrollbar snap-x snap-mandatory px-6 pb-1">
+                 {/* Productos en Stock (Distribución Estática) */}
+                 <div className="flex justify-between w-full px-6 pb-1">
                     {[
                       { id: 1, name: "Purple Exotica", image: "/weed/Colores%20Exoticos/E1.webp" },
                       { id: 2, name: "Neon Sativa", image: "/weed/Colores%20Exoticos/E2.webp" },
                       { id: 3, name: "Amnesia Haze", image: "/weed/Colores%20Naturales/N3.webp" }
                     ].map((flower) => (
-                      <div key={flower.id} className="flex flex-col items-center gap-1.5 shrink-0 w-[56px] snap-start group/icon cursor-pointer">
-                        <div className="w-14 h-14 bg-background-base rounded-[16px] flex items-center justify-center p-1 shadow-sm border border-border-subtle group-active/icon:scale-95 transition-transform overflow-hidden">
+                      <div key={flower.id} className="flex flex-col items-center gap-1.5 shrink-0 w-[52px] group/icon cursor-pointer">
+                        <div className="w-[52px] h-[52px] bg-background-base rounded-[16px] flex items-center justify-center p-1 shadow-sm border border-border-subtle group-active/icon:scale-95 transition-transform overflow-hidden">
                            <img src={flower.image} className="w-full h-full object-contain drop-shadow-sm scale-[1.15]" alt={flower.name} />
                         </div>
                         <span className="text-[10px] font-medium text-text-primary text-center leading-tight truncate w-full px-0.5 tracking-wide">{flower.name}</span>
                       </div>
                     ))}
                     
-                    <div className="flex flex-col items-center gap-1.5 shrink-0 w-[56px] snap-start group/icon cursor-pointer">
-                      <div className="w-14 h-14 bg-background-secondary rounded-[16px] flex items-center justify-center border border-border-subtle group-active/icon:scale-95 transition-transform">
+                    <div className="flex flex-col items-center gap-1.5 shrink-0 w-[52px] group/icon cursor-pointer">
+                      <div className="w-[52px] h-[52px] bg-background-secondary rounded-[16px] flex items-center justify-center border border-border-subtle group-active/icon:scale-95 transition-transform">
                          <span className="text-[15px] font-bold text-text-primary">+12</span>
                       </div>
                       <span className="text-[10px] font-medium text-text-secondary text-center leading-tight w-full px-0.5 tracking-wide">Ver más</span>
