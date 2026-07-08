@@ -108,7 +108,7 @@ export function AppStoreHome() {
             <div className="w-full flex flex-col bg-white rounded-[24px] overflow-hidden shadow-lg shadow-black/5 border border-border-subtle/40">
                
                {/* Mitad Superior: Imagen */}
-               <div className="w-full h-[170px] relative overflow-hidden group">
+               <div className="w-full h-[150px] relative overflow-hidden group">
                  <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="w-full h-full object-cover group-active:scale-105 transition-transform duration-700" alt="" />
                  <div className="absolute inset-0 bg-black/10"></div>
                  
@@ -118,20 +118,20 @@ export function AppStoreHome() {
                </div>
 
                {/* Mitad Inferior: Sección Blanca */}
-               <div className="w-full flex flex-col pt-4 pb-5 bg-white relative">
-                 <div className="px-5 flex flex-col mb-4">
-                   <span className="text-[20px] font-display font-bold text-text-primary leading-tight mb-1">{club.name}</span>
+               <div className="w-full flex flex-col pt-5 pb-5 bg-white relative">
+                 <div className="px-6 flex flex-col mb-3">
+                   <span className="text-[20px] font-display font-bold text-text-primary leading-tight mb-0.5">{club.name}</span>
                    <span className="text-[13px] text-text-secondary flex items-center gap-1.5 font-medium">
                      <MapIcon size={14} className="opacity-70" /> {club.city}
                    </span>
                  </div>
                  
-                 <div className="px-5 mb-3">
+                 <div className="px-6 mb-2">
                    <span className="text-[11px] font-bold text-text-secondary uppercase tracking-wider">En Stock</span>
                  </div>
 
                  {/* Carrusel de Productos en Fondo Blanco */}
-                 <div className="flex gap-3 overflow-x-auto hide-scrollbar snap-x snap-mandatory px-5 pb-1">
+                 <div className="flex gap-3 overflow-x-auto hide-scrollbar snap-x snap-mandatory px-6 pb-1">
                     {[
                       { id: 1, name: "Purple Exotica", image: "/weed/Colores%20Exoticos/E1.webp" },
                       { id: 2, name: "Neon Sativa", image: "/weed/Colores%20Exoticos/E2.webp" },
