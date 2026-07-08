@@ -295,25 +295,28 @@ export function AppStoreHome() {
       <Carousel title="Clubes Destacados">
         {filteredClubs.length > 0 ? filteredClubs.map((club) => (
           <Link key={club.id} href={`/clubs/${club.id}`} className="w-[180px] shrink-0 snap-start flex flex-col items-center group cursor-pointer active:scale-[0.98] transition-transform">
-            <div className="w-[170px] h-[170px] rounded-full overflow-hidden relative shadow-md ring-[3px] ring-transparent group-hover:ring-brand-accent/30 transition-all duration-300 flex items-center justify-center">
+            <div className="w-[170px] h-[170px] rounded-full overflow-hidden relative shadow-lg shadow-black/5 ring-1 ring-border-subtle group-hover:ring-brand-accent/50 transition-all duration-500">
                <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={club.name} />
                
-               {/* Dark overlay for text readability */}
-               <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-300 pointer-events-none"></div>
-               
-               {/* Sutil sombra interior para profundidad */}
-               <div className="absolute inset-0 rounded-full shadow-[inset_0_4px_20px_rgba(0,0,0,0.4)] pointer-events-none"></div>
+               {/* Vignette para enmarcar la imagen */}
+               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(0,0,0,0.5)_100%)] pointer-events-none transition-opacity duration-300"></div>
 
-               {/* Center Text inside circle */}
-               <div className="relative z-10 flex flex-col items-center px-4 text-center w-full mt-[-8px]">
-                 <span className="text-[17px] font-black tracking-tight text-white mb-1 leading-tight line-clamp-2 drop-shadow-lg">{club.name}</span>
-                 <span className="text-[11px] font-medium text-white/90 truncate w-full drop-shadow-md">{club.city}</span>
-               </div>
-               
-               {/* Top Badge */}
-               <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-brand-accent/90 backdrop-blur-md text-white text-[9px] uppercase tracking-wider font-bold px-2.5 py-1 rounded-full shadow-sm z-10 pointer-events-none">
+               {/* Top Badge (Estilo Premium) */}
+               <div className="absolute top-3 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-md text-text-primary text-[9px] uppercase tracking-[0.1em] font-black px-3 py-1.5 rounded-full shadow-md z-10 pointer-events-none flex items-center gap-1">
+                 <img src="/iconos/fuego.webp" className="w-2.5 h-2.5" alt="hot" />
                  Top
                </div>
+
+               {/* Center Glass Pill para el texto */}
+               <div className="absolute inset-x-3 top-1/2 -translate-y-1/2 flex flex-col items-center bg-black/40 backdrop-blur-md border border-white/20 rounded-[20px] py-3.5 px-3 text-center shadow-[0_8px_32px_rgba(0,0,0,0.3)] z-10 pointer-events-none transform transition-transform duration-500 group-hover:scale-105">
+                 <span className="text-[15px] font-black tracking-tight text-white mb-0.5 leading-tight truncate w-full drop-shadow-md">{club.name}</span>
+                 <span className="text-[10px] font-semibold text-white/90 truncate w-full flex items-center justify-center gap-1 drop-shadow-sm">
+                   <MapPin size={10} className="opacity-90" /> {club.city}
+                 </span>
+               </div>
+               
+               {/* Inner shadow para efecto esfera 3D */}
+               <div className="absolute inset-0 rounded-full shadow-[inset_0_0_24px_rgba(0,0,0,0.2)] pointer-events-none"></div>
             </div>
           </Link>
         )) : null}
