@@ -83,7 +83,7 @@ export function AppStoreHome() {
   return (
     <div className="w-full h-full pb-32 overflow-y-auto bg-background-base">
       {/* Top Header (Not Sticky) */}
-      <div className="px-5 pt-12 pb-2 bg-background-base flex items-center justify-between relative">
+      <div className="px-5 pt-4 pb-2 bg-background-base flex items-center justify-between relative">
         <div className="flex items-center gap-1.5 z-10">
           <img src="/logo2.svg" alt="WeedClub" className="h-8 w-auto" />
           <span className="text-[25px] font-display font-bold tracking-tight text-text-primary leading-none" style={{ letterSpacing: '-0.03em' }}>Clubs</span>
@@ -145,7 +145,7 @@ export function AppStoreHome() {
       {/* 2. Cerca de Ti (Rectángulos Verticales 4:5) */}
       <Carousel title="Cerca de Ti">
         {filteredClubs.length > 0 ? filteredClubs.map((club) => (
-          <Link key={club.id} href={`/clubs/${club.id}`} className="w-[280px] shrink-0 snap-start block">
+          <Link key={club.id} href={`/clubs/${club.id}`} className="w-[250px] shrink-0 snap-start block">
             <div className="w-full flex flex-col bg-white rounded-[24px] overflow-hidden shadow-lg shadow-black/5 border border-border-subtle/40">
                
                {/* Mitad Superior: Imagen */}
@@ -176,30 +176,30 @@ export function AppStoreHome() {
                {/* Mitad Inferior: Sección Blanca */}
                <div className="w-full flex flex-col pt-4 pb-5 bg-white relative">
                  
-                 <div className="px-6 mb-2">
+                 <div className="px-5 mb-2">
                    <span className="text-[11px] font-bold text-text-secondary uppercase tracking-wider">En Stock</span>
                  </div>
 
                  {/* Productos en Stock (Distribución Estática) */}
-                 <div className="flex justify-between w-full px-6 pb-1">
+                 <div className="flex justify-between w-full px-5 pb-1">
                     {[
                       { id: 1, name: "Purple Exotica", image: "/weed/Colores%20Exoticos/E1.webp" },
                       { id: 2, name: "Neon Sativa", image: "/weed/Colores%20Exoticos/E2.webp" },
                       { id: 3, name: "Amnesia Haze", image: "/weed/Colores%20Naturales/N3.webp" }
                     ].map((flower) => (
-                      <div key={flower.id} className="flex flex-col items-center gap-1.5 shrink-0 w-[52px] group/icon cursor-pointer">
-                        <div className="w-[52px] h-[52px] bg-background-base rounded-[16px] flex items-center justify-center p-1 shadow-sm border border-border-subtle group-active/icon:scale-95 transition-transform overflow-hidden">
+                      <div key={flower.id} className="flex flex-col items-center gap-1.5 shrink-0 w-[48px] group/icon cursor-pointer">
+                        <div className="w-[48px] h-[48px] bg-background-base rounded-[14px] flex items-center justify-center p-1 shadow-sm border border-border-subtle group-active/icon:scale-95 transition-transform overflow-hidden">
                            <img src={flower.image} className="w-full h-full object-contain drop-shadow-sm scale-[1.15]" alt={flower.name} />
                         </div>
-                        <span className="text-[10px] font-medium text-text-primary text-center leading-tight truncate w-full px-0.5 tracking-wide">{flower.name}</span>
+                        <span className="text-[9px] font-medium text-text-primary text-center leading-tight truncate w-full px-0.5 tracking-wide">{flower.name}</span>
                       </div>
                     ))}
                     
-                    <div className="flex flex-col items-center gap-1.5 shrink-0 w-[52px] group/icon cursor-pointer">
-                      <div className="w-[52px] h-[52px] bg-background-secondary rounded-[16px] flex items-center justify-center border border-border-subtle group-active/icon:scale-95 transition-transform">
-                         <span className="text-[15px] font-bold text-text-primary">+12</span>
+                    <div className="flex flex-col items-center gap-1.5 shrink-0 w-[48px] group/icon cursor-pointer">
+                      <div className="w-[48px] h-[48px] bg-background-secondary rounded-[14px] flex items-center justify-center border border-border-subtle group-active/icon:scale-95 transition-transform">
+                         <span className="text-[14px] font-bold text-text-primary">+12</span>
                       </div>
-                      <span className="text-[10px] font-medium text-text-secondary text-center leading-tight w-full px-0.5 tracking-wide">Ver más</span>
+                      <span className="text-[9px] font-medium text-text-secondary text-center leading-tight w-full px-0.5 tracking-wide">Ver más</span>
                     </div>
                  </div>
                </div>
