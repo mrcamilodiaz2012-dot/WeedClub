@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import { Carousel } from "@/components/ui/Carousel";
 import { AppListItem } from "@/components/ui/AppListItem";
-import { Search, Map as MapIcon, ChevronRight, ChevronDown, Bell, UserCircle } from "lucide-react";
+import { Search, Map as MapIcon, MapPin, Heart, ChevronRight, ChevronDown, Bell, UserCircle } from "lucide-react";
 import { useState } from "react";
 import { type Location } from "@/components/ui/LocationSearch";
 import { LocationModal } from "@/components/ui/LocationModal";
@@ -115,6 +115,10 @@ export function AppStoreHome() {
                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md text-text-primary text-[12px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm">
                    <MapIcon size={12} /> 1.2 km
                  </div>
+
+                 <button className="absolute top-4 right-4 bg-white/90 backdrop-blur-md text-text-primary p-2 rounded-full shadow-sm hover:scale-105 active:scale-95 transition-all">
+                   <Heart size={16} />
+                 </button>
                </div>
 
                {/* Mitad Inferior: Sección Blanca */}
@@ -122,7 +126,7 @@ export function AppStoreHome() {
                  <div className="px-6 flex flex-col mb-3">
                    <span className="text-[20px] font-display font-bold text-text-primary leading-tight mb-0.5">{club.name}</span>
                    <span className="text-[13px] text-text-secondary flex items-center gap-1.5 font-medium">
-                     <MapIcon size={14} className="opacity-70" /> {club.city}
+                     <MapPin size={14} className="opacity-70" /> {club.city}
                    </span>
                  </div>
                  
@@ -138,8 +142,8 @@ export function AppStoreHome() {
                       { id: 3, name: "Amnesia Haze", image: "/weed/Colores%20Naturales/N3.webp" }
                     ].map((flower) => (
                       <div key={flower.id} className="flex flex-col items-center gap-1.5 shrink-0 w-[56px] snap-start group/icon cursor-pointer">
-                        <div className="w-14 h-14 bg-background-base rounded-[16px] flex items-center justify-center p-2 shadow-sm border border-border-subtle group-active/icon:scale-95 transition-transform">
-                           <img src={flower.image} className="w-full h-full object-contain drop-shadow-sm opacity-90" alt={flower.name} />
+                        <div className="w-14 h-14 bg-background-base rounded-[16px] flex items-center justify-center p-1 shadow-sm border border-border-subtle group-active/icon:scale-95 transition-transform overflow-hidden">
+                           <img src={flower.image} className="w-full h-full object-contain drop-shadow-sm scale-[1.15]" alt={flower.name} />
                         </div>
                         <span className="text-[10px] font-medium text-text-primary text-center leading-tight truncate w-full px-0.5 tracking-wide">{flower.name}</span>
                       </div>
