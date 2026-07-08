@@ -105,16 +105,26 @@ export function AppStoreHome() {
       <Carousel title="Cerca de Ti">
         {filteredClubs.length > 0 ? filteredClubs.map((club) => (
           <Link key={club.id} href={`/clubs/${club.id}`} className="w-[260px] shrink-0 snap-start block">
-            <div className="w-full aspect-square bg-background-secondary rounded-2xl overflow-hidden relative group">
+            <div className="w-full h-[340px] bg-background-secondary rounded-2xl overflow-hidden relative group">
                <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="w-full h-full object-cover group-active:scale-105 transition-transform duration-500" alt="" />
+               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
                
                <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-text-primary text-[12px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm">
                  <MapIcon size={12} /> 1.2 km
                </div>
-            </div>
-            <div className="flex flex-col mt-3 px-1">
-              <span className="text-[16px] font-bold text-text-primary leading-tight">{club.name}</span>
-              <span className="text-[14px] text-text-secondary mt-0.5">{club.city}</span>
+
+               <div className="absolute bottom-4 left-4 right-4 flex flex-col z-10">
+                 <span className="text-[20px] font-display font-bold text-white leading-tight mb-1 drop-shadow-md">{club.name}</span>
+                 <span className="text-[14px] font-medium text-white/90 drop-shadow-md mb-3">
+                   {club.city}
+                 </span>
+                 
+                 <div className="flex items-center gap-2 overflow-x-auto hide-scrollbar pb-1">
+                    <div className="bg-white/20 backdrop-blur-md text-white text-[11px] font-semibold px-2.5 py-1 rounded-lg shrink-0 border border-white/10">🌿 Amnesia Haze</div>
+                    <div className="bg-white/20 backdrop-blur-md text-white text-[11px] font-semibold px-2.5 py-1 rounded-lg shrink-0 border border-white/10">🔥 Gelato 33</div>
+                    <div className="bg-white/20 backdrop-blur-md text-white text-[11px] font-semibold px-2.5 py-1 rounded-lg shrink-0 border border-white/10">🍋 Lemon Haze</div>
+                 </div>
+               </div>
             </div>
           </Link>
         )) : (
