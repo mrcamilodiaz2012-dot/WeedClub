@@ -291,30 +291,27 @@ export function AppStoreHome() {
         </div>
       </div>
 
-      {/* 5. Clubes Destacados (Billboards 16:9 apilados verticalmente) */}
+      {/* 5. Clubes Destacados (Cuadrícula 2 columnas) */}
       <div className="px-5 mt-2 mb-8">
         <div className="flex items-end justify-between mb-5">
           <h2 className="text-2xl font-display font-bold text-text-primary">
             Clubes Destacados
           </h2>
         </div>
-        <div className="flex flex-col gap-8">
-          {featuredClubs.length > 0 ? featuredClubs.map((club) => (
+        <div className="grid grid-cols-2 gap-4">
+          {filteredClubs.length > 0 ? filteredClubs.slice(0, 4).map((club) => (
             <Link key={club.id} href={`/clubs/${club.id}`} className="w-full group cursor-pointer active:scale-[0.98] transition-transform block">
-              <div className="w-full aspect-video bg-background-secondary rounded-2xl overflow-hidden mb-3 relative">
+              <div className="w-full aspect-square bg-background-secondary rounded-[20px] overflow-hidden mb-2.5 relative shadow-sm">
                  <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="" />
-                 <div className="absolute top-3 right-3 bg-brand-accent text-white text-[10px] uppercase tracking-wider font-bold px-2.5 py-1.5 rounded-md shadow-md">
+                 <div className="absolute top-2 right-2 bg-brand-accent/90 backdrop-blur-md text-white text-[9px] uppercase tracking-wider font-bold px-2 py-1 rounded shadow-sm">
                    Destacado
                  </div>
+                 {/* Gradiente suave inferior */}
+                 <div className="absolute bottom-0 left-0 right-0 h-[40%] bg-gradient-to-t from-black/40 to-transparent"></div>
               </div>
-              <div className="flex items-start justify-between px-1">
-                 <div className="flex flex-col">
-                   <span className="text-lg font-black tracking-tighter text-text-primary mb-0.5">{club.name}</span>
-                   <span className="text-[13px] text-text-secondary">Club Social Privado • {club.city}</span>
-                 </div>
-                 <div className="w-8 h-8 rounded-full bg-background-secondary flex items-center justify-center">
-                   <ChevronRight size={18} className="text-text-secondary" />
-                 </div>
+              <div className="flex flex-col px-1">
+                <span className="text-[15px] font-black tracking-tight text-text-primary mb-0.5 leading-tight truncate">{club.name}</span>
+                <span className="text-[12px] text-text-secondary truncate">Privado • {club.city}</span>
               </div>
             </Link>
           )) : null}
