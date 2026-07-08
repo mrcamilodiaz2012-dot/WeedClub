@@ -113,20 +113,22 @@ export function AppStoreHome() {
                  <MapIcon size={12} /> 1.2 km
                </div>
 
-               <div className="absolute bottom-4 left-4 right-4 flex flex-col z-10">
-                 <span className="text-[20px] font-display font-bold text-white leading-tight mb-0.5 drop-shadow-md">{club.name}</span>
-                 <span className="text-[13px] font-medium text-white/90 drop-shadow-md mb-3">
-                   {club.city}
-                 </span>
+               <div className="absolute bottom-0 left-0 right-0 flex flex-col z-10 pb-4">
+                 <div className="px-4 flex flex-col">
+                   <span className="text-[20px] font-display font-bold text-white leading-tight mb-0.5 drop-shadow-md">{club.name}</span>
+                   <span className="text-[13px] font-medium text-white/90 drop-shadow-md mb-3">
+                     {club.city}
+                   </span>
+                 </div>
                  
                  {/* Carrusel de Mini Tarjetas Integrado */}
-                 <div className="flex gap-2 overflow-x-auto hide-scrollbar snap-x snap-mandatory pb-1">
+                 <div className="flex gap-2 overflow-x-auto hide-scrollbar snap-x snap-mandatory px-4 pb-2">
                     {[
                       { id: 1, name: "Purple Exotica 1" },
                       { id: 2, name: "Neon Sativa 2" },
                       { id: 3, name: "Amnesia Haze" }
                     ].map((flower) => (
-                      <div key={flower.id} className="w-[95px] shrink-0 snap-start bg-white rounded-2xl p-2.5 flex flex-col gap-2 shadow-lg">
+                      <div key={flower.id} className="w-[95px] shrink-0 snap-start bg-white rounded-2xl p-2.5 flex flex-col gap-2 shadow-lg mb-1">
                         <div className="w-full aspect-square flex items-center justify-center shrink-0">
                            <img src="/iconos/flor.webp" className="w-full h-full object-contain drop-shadow-md" alt="Flor" />
                         </div>
