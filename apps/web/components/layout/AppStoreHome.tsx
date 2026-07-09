@@ -145,7 +145,7 @@ export function AppStoreHome() {
       {/* 2. Cerca de Ti (Rectángulos Verticales 4:5) */}
       <Carousel title="Cerca de Ti">
         {filteredClubs.length > 0 ? filteredClubs.map((club) => (
-          <Link key={club.id} href={`/clubs/${club.id}`} className="w-[250px] shrink-0 snap-start block">
+          <Link key={club.id} href={`/clubs/${club.id}`} className="w-[236px] shrink-0 snap-start block">
             <div className="w-full flex flex-col bg-white rounded-[24px] overflow-hidden shadow-lg shadow-black/5 border border-border-subtle/40">
                
                {/* Mitad Superior: Imagen */}
