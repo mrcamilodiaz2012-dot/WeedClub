@@ -213,7 +213,7 @@ export function AppStoreHome() {
       </Carousel>
 
       {/* 3. Ciudades Populares (Círculos) */}
-      <Carousel title="🏙️ Ciudades">
+      <Carousel title="🌍 Ciudades">
         {[
           { name: "Barcelona", img: "/portadas-ciudades/barcelona.webp" },
           { name: "Madrid", img: "/portadas-ciudades/madrid.webp" },
