@@ -295,9 +295,9 @@ export function AppStoreHome() {
                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none"></div>
                  
                  {/* Top Badge */}
-                 <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md text-text-primary text-[9px] uppercase tracking-wider font-bold px-2.5 py-1 rounded-md shadow-sm z-10 flex items-center gap-1">
-                   <img src="/iconos/fuego.webp" className="w-2.5 h-2.5" alt="hot" />
-                   Top
+                 <div className="absolute top-3 left-3 bg-gradient-to-r from-orange-500 to-rose-500 text-white text-[10px] font-black uppercase tracking-[0.15em] px-3 py-1 rounded-full shadow-[0_4px_12px_rgba(249,115,22,0.4)] z-10 flex items-center gap-1.5 border border-white/20">
+                   <img src="/iconos/fuego.webp" className="w-3.5 h-3.5 drop-shadow-md brightness-110" alt="hot" />
+                   <span className="mt-[1px] drop-shadow-sm">TOP</span>
                  </div>
 
                  {/* Contenido inferior */}
