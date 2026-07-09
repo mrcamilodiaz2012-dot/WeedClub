@@ -259,7 +259,7 @@ export function AppStoreHome() {
               
               {/* Product Image */}
               <div className="w-full h-[150px] flex justify-center items-center py-2 -mt-2 pointer-events-none">
-                <img src={flower.image} alt={flower.name} className="h-[120%] object-contain drop-shadow-xl hover:scale-110 transition-transform duration-500" />
+                <img src={flower.image} alt={flower.name} className="h-[135%] object-contain drop-shadow-xl hover:scale-110 transition-transform duration-500" />
               </div>
               
               {/* Product Info */}
