@@ -287,8 +287,8 @@ export function AppStoreHome() {
       <div className="mt-8">
         <Carousel title="Clubes Destacados">
           {filteredClubs.length > 0 ? filteredClubs.map((club) => (
-            <Link key={club.id} href={`/clubs/${club.id}`} className="w-[160px] shrink-0 snap-start block group cursor-pointer active:scale-[0.98] transition-transform">
-              <div className="w-full aspect-square rounded-[24px] overflow-hidden relative shadow-md shadow-black/5 border border-border-subtle/50 bg-background-secondary">
+            <Link key={club.id} href={`/clubs/${club.id}`} className="w-[184px] shrink-0 snap-start block group cursor-pointer active:scale-[0.98] transition-transform">
+              <div className="w-full aspect-square rounded-[10px] overflow-hidden relative shadow-md shadow-black/5 border border-border-subtle/50 bg-background-secondary">
                  <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt={club.name} />
                  
                  {/* Gradiente elegante inferior */}
@@ -305,7 +305,7 @@ export function AppStoreHome() {
                  </div>
                  
                  {/* Sutil brillo interior para realzar premiumness */}
-                 <div className="absolute inset-0 rounded-[24px] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15)] pointer-events-none"></div>
+                 <div className="absolute inset-0 rounded-[10px] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15)] pointer-events-none"></div>
               </div>
             </Link>
           )) : null}
