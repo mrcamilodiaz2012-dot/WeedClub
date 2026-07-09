@@ -215,10 +215,10 @@ export function AppStoreHome() {
       {/* 3. Ciudades Populares (Círculos) */}
       <Carousel title="Ciudades">
         {[
-          { name: "Barcelona", img: "/portada ciudades/barcelona.webp" },
-          { name: "Madrid", img: "/portada ciudades/madrid.webp" },
-          { name: "Valencia", img: "/portada ciudades/valencia.webp" },
-          { name: "Alicante", img: "/portada ciudades/alicante.webp" }
+          { name: "Barcelona", img: "/portadas-ciudades/barcelona.webp" },
+          { name: "Madrid", img: "/portadas-ciudades/madrid.webp" },
+          { name: "Valencia", img: "/portadas-ciudades/valencia.webp" },
+          { name: "Alicante", img: "/portadas-ciudades/alicante.webp" }
         ].map((city, idx) => (
           <div key={idx} className="w-[165px] shrink-0 snap-start cursor-pointer group active:scale-[0.98] transition-transform">
             <div className="w-full aspect-square bg-background-secondary rounded-full overflow-hidden relative shadow-md shadow-black/5 ring-1 ring-border-subtle group-hover:ring-brand-accent/50 transition-all duration-300">
