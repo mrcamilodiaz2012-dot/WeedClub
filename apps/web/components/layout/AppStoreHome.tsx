@@ -177,7 +177,7 @@ export function AppStoreHome() {
                <div className="w-full flex flex-col pt-4 pb-5 bg-white relative">
                  
                  <div className="px-3.5 mb-2">
-                   <span className="text-[11px] font-bold text-text-secondary uppercase tracking-wider">Podrías encontrar...</span>
+                   <span className="text-[11px] font-bold text-text-secondary tracking-wider">Podrías encontrar...</span>
                  </div>
 
                  {/* Productos en Stock (Distribución Estática) */}
