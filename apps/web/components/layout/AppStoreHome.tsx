@@ -213,7 +213,7 @@ export function AppStoreHome() {
       </Carousel>
 
       {/* 3. Ciudades Populares (Círculos) */}
-      <Carousel title="Ciudades Populares">
+      <Carousel title="Ciudades">
         {[
           { name: "Barcelona", img: "https://images.unsplash.com/photo-1583422409516-2895a77efded?q=80&w=400&auto=format&fit=crop" },
           { name: "Madrid", img: "https://images.unsplash.com/photo-1539037116277-4db20d075e40?q=80&w=400&auto=format&fit=crop" },
@@ -240,7 +240,7 @@ export function AppStoreHome() {
       </Carousel>
 
       {/* 4. Flores Populares */}
-      <Carousel title="Flores Populares">
+      <Carousel title="🔥 Flores Populares">
         {POPULAR_FLOWERS.map((flower) => (
           <div key={flower.id} className="w-[180px] shrink-0 snap-start">
             <div 
@@ -285,7 +285,7 @@ export function AppStoreHome() {
 
       {/* 5. Clubes Destacados (Posters Verticales) */}
       <div className="mt-8">
-        <Carousel title="Clubes Destacados">
+        <Carousel title="🔝 Clubes Destacados">
           {filteredClubs.length > 0 ? filteredClubs.map((club) => (
             <Link key={club.id} href={`/clubs/${club.id}`} className="w-[184px] shrink-0 snap-start block group cursor-pointer active:scale-[0.98] transition-transform">
               <div className="w-full aspect-square rounded-[10px] overflow-hidden relative shadow-md shadow-black/5 border border-border-subtle/50 bg-background-secondary">
