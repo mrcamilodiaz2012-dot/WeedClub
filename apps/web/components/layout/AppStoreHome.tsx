@@ -247,7 +247,12 @@ export function AppStoreHome() {
               className="w-full bg-white border border-border-subtle/60 rounded-[20px] p-3 relative flex flex-col shadow-sm cursor-pointer hover:shadow-md transition-shadow"
               onClick={() => setSelectedFlowerId(flower.id)}
             >
-              <div className="flex justify-between items-start z-10">
+              {/* Background Glow */}
+              <div className="absolute inset-0 rounded-[20px] overflow-hidden pointer-events-none">
+                <div className={`absolute top-12 left-1/2 -translate-x-1/2 w-32 h-32 rounded-full blur-[35px] opacity-25 transition-colors duration-700 ${flower.type === 'SATIVA' ? 'bg-amber-400' : flower.type === 'ÍNDICA' ? 'bg-purple-400' : 'bg-emerald-400'}`} />
+              </div>
+
+              <div className="flex justify-between items-start z-10 relative">
                 <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full ${flower.color} ${flower.bg}`}>{flower.type}</span>
                 <button 
                   onClick={(e) => toggleLike(e, flower.id)}
