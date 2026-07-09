@@ -124,7 +124,7 @@ export function AppStoreHome() {
 
       {/* 1. Categorías (Stories) */}
       <div className="pt-4 pb-6 w-full overflow-x-auto hide-scrollbar">
-        <div className="flex items-start gap-4 before:content-[''] before:w-1 before:shrink-0 after:content-[''] after:w-1 after:shrink-0">
+        <div className="flex items-start gap-4 px-5 after:content-[''] after:w-[1px] after:shrink-0">
           {[
             { name: "Ciudades", color: "bg-sky-300", icon: <img src="/iconos/Ciudad.webp" alt="Ciudades" className="w-11 h-11 object-contain opacity-90" /> },
             { name: "Top Clubs", color: "bg-orange-300", icon: <img src="/iconos/fuego.webp" alt="Top Clubs" className="w-11 h-11 object-contain opacity-90" /> },
