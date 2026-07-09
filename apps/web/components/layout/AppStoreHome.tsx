@@ -83,24 +83,24 @@ export function AppStoreHome() {
   return (
     <div className="w-full h-full pb-32 overflow-y-auto bg-background-base">
       {/* Top Header (Not Sticky) */}
-      <div className="px-5 pt-4 pb-2 bg-background-base flex items-center justify-between relative">
-        <div className="flex items-center gap-1.5 z-10">
+      <div className="px-5 pt-4 pb-2 bg-background-base grid grid-cols-3 items-center">
+        <div className="flex items-center gap-1.5">
           <img src="/logo2.svg" alt="WeedClub" className="h-8 w-auto" />
           <span className="text-[25px] font-display font-bold tracking-tight text-text-primary leading-none" style={{ letterSpacing: '-0.03em' }}>Clubs</span>
         </div>
 
         {/* Location Selector (Centered) */}
-        <div className="absolute left-0 right-0 top-12 bottom-2 flex items-center justify-center pointer-events-none">
+        <div className="flex items-center justify-center">
           <button 
             onClick={() => setIsLocationModalOpen(true)}
-            className="pointer-events-auto flex items-center gap-1 text-text-primary hover:opacity-80 transition-opacity"
+            className="flex items-center gap-1 text-text-primary hover:opacity-80 transition-opacity"
           >
             <span className="font-bold text-[16px]">{selectedLocation ? selectedLocation.name : "Ubicación"}</span>
             <ChevronDown size={20} className="text-text-primary mt-0.5" />
           </button>
         </div>
 
-        <div className="flex items-center gap-3 z-10">
+        <div className="flex items-center justify-end gap-3">
           <button className="flex items-center justify-center text-text-primary hover:opacity-80 transition-opacity">
             <Bell size={24} strokeWidth={2} />
           </button>
@@ -123,8 +123,8 @@ export function AppStoreHome() {
       </div>
 
       {/* 1. Categorías (Stories) */}
-      <div className="px-5 pt-4 pb-6 w-full overflow-x-auto hide-scrollbar">
-        <div className="flex items-start gap-4 w-max">
+      <div className="pt-4 pb-6 w-full overflow-x-auto hide-scrollbar">
+        <div className="flex items-start gap-4 px-5 after:content-[''] after:w-1 after:shrink-0 w-max">
           {[
             { name: "Ciudades", color: "bg-sky-300", icon: <img src="/iconos/Ciudad.webp" alt="Ciudades" className="w-11 h-11 object-contain opacity-90" /> },
             { name: "Top Clubs", color: "bg-orange-300", icon: <img src="/iconos/fuego.webp" alt="Top Clubs" className="w-11 h-11 object-contain opacity-90" /> },
