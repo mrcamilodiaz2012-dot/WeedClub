@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import { Carousel } from "@/components/ui/Carousel";
 import { AppListItem } from "@/components/ui/AppListItem";
-import { Search, Map as MapIcon, MapPin, Heart, ChevronRight, ChevronDown, Bell, UserCircle, X } from "lucide-react";
+import { Search, Map as MapIcon, MapPin, Heart, ChevronRight, ChevronDown, Bell, UserCircle, X, BadgeCheck, Clock, Navigation } from "lucide-react";
 import { useState, useEffect } from "react";
 import { type Location } from "@/components/ui/LocationSearch";
 import { LocationModal } from "@/components/ui/LocationModal";
@@ -301,12 +301,28 @@ export function AppStoreHome() {
                  
 
 
+                 {/* Top Badge (Distancia) */}
+                 <div className="absolute top-2.5 left-2.5 bg-black/40 backdrop-blur-md border border-white/20 text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-sm z-10 flex items-center gap-1">
+                   <Navigation size={9} className="opacity-90" /> 1.2 km
+                 </div>
+
                  {/* Contenido inferior */}
-                 <div className="absolute bottom-0 left-0 right-0 p-4 z-10 flex flex-col">
-                   <span className="text-[18px] font-black tracking-tight text-white mb-1 leading-tight line-clamp-2 drop-shadow-md">{club.name}</span>
-                   <span className="text-[12px] font-medium text-white/90 flex items-center gap-1.5 drop-shadow-sm">
-                     <MapPin size={12} className="opacity-80" /> {club.city}
-                   </span>
+                 <div className="absolute bottom-0 left-0 right-0 p-3.5 z-10 flex flex-col">
+                   <div className="flex items-center gap-1 mb-1.5">
+                     <span className="text-[16px] font-black tracking-tight text-white leading-tight truncate drop-shadow-md">{club.name}</span>
+                     <BadgeCheck className="w-[14px] h-[14px] text-[#1ed760] shrink-0 drop-shadow-md" fill="currentColor" stroke="white" strokeWidth={1.5} />
+                   </div>
+                   
+                   <div className="flex flex-col gap-1.5">
+                     <div className="flex items-center gap-1.5">
+                       <span className="bg-emerald-500/20 border border-emerald-500/30 backdrop-blur-md text-emerald-400 text-[9px] font-bold px-1.5 py-0.5 rounded flex items-center gap-1">
+                         <Clock size={9} /> ABIERTO
+                       </span>
+                     </div>
+                     <div className="flex items-center gap-1 text-[11px] font-medium text-white/90 drop-shadow-sm">
+                       <MapPin size={11} className="opacity-80" /> {club.city}
+                     </div>
+                   </div>
                  </div>
                  
                  {/* Sutil brillo interior para realzar premiumness */}
