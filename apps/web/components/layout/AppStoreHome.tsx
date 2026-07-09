@@ -69,16 +69,16 @@ export function AppStoreHome() {
     : MOCK_CLUBS;
 
   const featuredClubs = filteredClubs.slice(0, 3);
-  const MOCK_RATED = [
-    { id: 1, title: "The Green House", subtitle: "Asociación Cannábica", verified: true, city: "Barcelona" },
-    { id: 2, title: "CannaClub BCN", subtitle: "Club de fumadores", verified: false, city: "Barcelona" },
-    { id: 3, title: "Weed Lovers Madrid", subtitle: "Asociación Privada", verified: true, city: "Madrid" },
-    { id: 4, title: "High Society", subtitle: "Experiencia Premium", verified: false, city: "Valencia" },
+  const MOCK_GROW_SHOPS = [
+    { id: 101, title: "Green Care GrowShop", subtitle: "Semillas y Cultivo", rating: 4.8, city: "Barcelona", img: "/portadas/cannabis.jpg" },
+    { id: 102, title: "Urban Cultivation", subtitle: "Todo para tu huerto", rating: 4.9, city: "Barcelona", img: "/portadas/cannabis2.jpg" },
+    { id: 103, title: "Seed Point Madrid", subtitle: "Especialistas en genética", rating: 4.7, city: "Madrid", img: "/portadas/cannabis3.jpg" },
+    { id: 104, title: "The Plant Store", subtitle: "Fertilizantes y más", rating: 4.6, city: "Valencia", img: "/portadas/cannabis.jpg" },
   ];
   
-  const filteredRated = selectedLocation
-    ? MOCK_RATED.filter(c => c.city.toLowerCase() === selectedLocation.name.toLowerCase() || c.city.toLowerCase() === selectedLocation.province?.toLowerCase())
-    : MOCK_RATED;
+  const filteredGrowShops = selectedLocation
+    ? MOCK_GROW_SHOPS.filter(c => c.city.toLowerCase() === selectedLocation.name.toLowerCase() || c.city.toLowerCase() === selectedLocation.province?.toLowerCase())
+    : MOCK_GROW_SHOPS;
 
   return (
     <div className="w-full h-full pb-32 overflow-y-auto bg-background-base">
@@ -333,21 +333,46 @@ export function AppStoreHome() {
         </Carousel>
       </div>
 
-      {/* 6. Mejor valorados (Listado denso) */}
+      {/* 6. Grow Shops (Listado mejorado) */}
       <div className="px-5 mt-10 mb-8">
-        <div className="flex items-end justify-between mb-4 border-b border-border-subtle pb-2">
-          <h2 className="text-2xl font-display font-bold text-text-primary">
-            Mejor valorados
+        <div className="flex items-center justify-between mb-4 border-b border-border-subtle pb-2">
+          <h2 className="text-2xl font-display font-black text-text-primary flex items-center gap-2 tracking-tight">
+            🌱 Grow Shops
           </h2>
+          <span className="text-[12px] font-bold text-brand-accent cursor-pointer hover:underline">Ver Todos</span>
         </div>
-        <div className="flex flex-col gap-1">
-          {filteredRated.length > 0 ? filteredRated.map(club => (
-            <Link key={club.id} href={`/clubs/${club.id}`} className="block">
-              <AppListItem title={club.title} subtitle={`${club.subtitle} • ${club.city}`} verified={club.verified} />
+        
+        <div className="flex flex-col gap-3">
+          {filteredGrowShops.length > 0 ? filteredGrowShops.map(shop => (
+            <Link key={shop.id} href={`/shops/${shop.id}`} className="block group active:scale-[0.98] transition-transform">
+              <div className="w-full flex items-center p-3 bg-white border border-border-subtle/50 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300">
+                {/* Img */}
+                <div className="w-[64px] h-[64px] shrink-0 rounded-[12px] overflow-hidden relative shadow-inner bg-background-secondary">
+                  <img src={shop.img} alt={shop.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                  <div className="absolute inset-0 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.05)] pointer-events-none rounded-[12px]"></div>
+                </div>
+                
+                {/* Info */}
+                <div className="ml-3.5 flex flex-col flex-1">
+                  <h3 className="text-[15px] font-black tracking-tight text-text-primary leading-tight mb-0.5">{shop.title}</h3>
+                  <span className="text-[12px] font-medium text-text-secondary line-clamp-1">{shop.subtitle}</span>
+                  <div className="flex items-center gap-3 mt-1.5 text-[11px] font-bold text-text-tertiary">
+                    <span className="flex items-center gap-1 text-amber-500 bg-amber-500/10 px-1.5 py-0.5 rounded-md"><span className="text-[10px]">★</span> {shop.rating}</span>
+                    <span className="flex items-center gap-1"><MapPin size={10} className="text-text-secondary/70" /> {shop.city}</span>
+                  </div>
+                </div>
+                
+                {/* Action button */}
+                <div className="shrink-0 ml-2">
+                  <button className="h-[32px] px-3.5 bg-background-base hover:bg-black hover:text-white transition-colors text-text-primary text-[11px] font-black uppercase tracking-wider rounded-full border border-border-subtle/50 flex items-center justify-center">
+                    Visitar
+                  </button>
+                </div>
+              </div>
             </Link>
           )) : (
-            <div className="w-full text-center py-4 text-text-secondary text-sm">
-              No hay clubes valorados aquí aún.
+            <div className="w-full text-center py-8 text-text-secondary text-[13px] font-medium bg-white rounded-2xl border border-border-subtle/40 shadow-sm">
+              No hay grow shops en tu zona.
             </div>
           )}
         </div>
