@@ -33,7 +33,7 @@ const AMENITY_MAP: Record<string, { label: string; icon: React.ReactNode }> = {
 
 export function TabInfo({ club }: { club: Club }) {
   const hours = club.opening_hours ?? DEFAULT_HOURS;
-  const todayKey = DAYS[new Date().getDay() === 0 ? 6 : new Date().getDay() - 1].key;
+  const todayKey = DAYS[new Date().getDay() === 0 ? 6 : new Date().getDay() - 1]?.key ?? 'lunes';
   const amenities = club.amenities ?? ['gaming', 'cafeteria', 'wifi'];
 
   return (
