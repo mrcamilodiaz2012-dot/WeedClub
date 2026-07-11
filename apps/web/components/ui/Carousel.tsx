@@ -10,7 +10,7 @@ interface CarouselProps {
 
 export function Carousel({ title, subtitle, children }: CarouselProps) {
   return (
-    <div className="mb-8 w-full">
+    <div className="mb-6 w-full">
       {title && (
         <div className="px-5 mb-3 flex items-end justify-between">
           <div>

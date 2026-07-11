@@ -123,7 +123,7 @@ export function AppStoreHome() {
       </div>
 
       {/* 1. Categorías (Stories) */}
-      <div className="pt-4 pb-6 w-full overflow-x-auto hide-scrollbar">
+      <div className="pt-3 pb-4 w-full overflow-x-auto hide-scrollbar">
         <div className="flex items-start gap-4 px-5 after:content-[''] after:w-[1px] after:shrink-0">
           {[
             { name: "Ciudades", color: "bg-sky-300", icon: <img src="/iconos/Ciudad.webp" alt="Ciudades" className="w-11 h-11 object-contain opacity-90" /> },
@@ -289,7 +289,7 @@ export function AppStoreHome() {
 
 
       {/* 5. Clubes Destacados (Posters Verticales) */}
-      <div className="mt-8">
+      <div className="mt-6">
         <Carousel title="🔝 Clubes Destacados">
           {filteredClubs.length > 0 ? filteredClubs.map((club) => (
             <Link key={club.id} href={`/clubs/${club.id}`} className="w-[184px] shrink-0 snap-start block group cursor-pointer active:scale-[0.98] transition-transform">
@@ -334,7 +334,7 @@ export function AppStoreHome() {
       </div>
 
       {/* 6. Grow Shops (Listado mejorado) */}
-      <div className="px-5 mt-10 mb-8">
+      <div className="px-5 mt-8 mb-6">
         <div className="flex items-center justify-between mb-4 border-b border-border-subtle pb-2">
           <h2 className="text-2xl font-display font-black text-text-primary flex items-center gap-2 tracking-tight">
             🌱 Grow Shops
