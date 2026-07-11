@@ -133,7 +133,7 @@ export function AppStoreHome() {
             { name: "Grow Shops", color: "bg-lime-300", icon: <img src="/iconos/grow.webp" alt="Grow Shops" className="w-11 h-11 object-contain opacity-90" /> }
           ].map((cat, i) => (
             <button key={i} className="flex flex-col items-center gap-2 group">
-              <div className={`w-[68px] h-[68px] rounded-full ${cat.color} flex items-center justify-center text-2xl overflow-hidden group-hover:-translate-y-0.5 group-active:scale-95 transition-all duration-300 shadow-[0_4px_14px_rgba(0,0,0,0.08)] group-hover:shadow-[0_6px_20px_rgba(0,0,0,0.12)]`}>
+              <div className={`w-[68px] h-[68px] rounded-full ${cat.color} flex items-center justify-center text-2xl overflow-hidden group-hover:-translate-y-0.5 group-active:scale-95 transition-all duration-300 shadow-[0_4px_14px_rgba(0,0,0,0.02)] group-hover:shadow-[0_6px_20px_rgba(0,0,0,0.04)]`}>
                 {cat.icon}
               </div>
               <span className="text-[12px] font-medium text-text-secondary tracking-tight">{cat.name}</span>
@@ -146,18 +146,18 @@ export function AppStoreHome() {
       <Carousel title="📍 Cerca de Ti">
         {filteredClubs.length > 0 ? filteredClubs.map((club) => (
           <Link key={club.id} href={`/clubs/${club.id}`} className="w-[246px] shrink-0 snap-start block">
-            <div className="w-full flex flex-col bg-[#F5F5F7] rounded-[24px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-shadow duration-300 border border-border-subtle/40">
+            <div className="w-full flex flex-col bg-[#F5F5F7] rounded-[24px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.015)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] transition-shadow duration-300 border border-border-subtle/40">
                
                {/* Mitad Superior: Imagen */}
                <div className="w-full h-[150px] relative overflow-hidden group">
                  <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="w-full h-full object-cover group-active:scale-105 transition-transform duration-700" alt="" />
                  <div className="absolute inset-0 bg-black/10"></div>
                  
-                 <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-text-primary text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">
+                 <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-text-primary text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-[0_2px_8px_rgba(0,0,0,0.02)]">
                    <MapIcon size={11} strokeWidth={2.5} /> 1.2 km
                  </div>
 
-                 <button className="absolute top-3 right-3 w-[32px] h-[32px] bg-white/90 backdrop-blur-md text-text-primary rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.08)] flex items-center justify-center hover:scale-105 active:scale-95 transition-all">
+                 <button className="absolute top-3 right-3 w-[32px] h-[32px] bg-white/90 backdrop-blur-md text-text-primary rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.02)] flex items-center justify-center hover:scale-105 active:scale-95 transition-all">
                    <Heart size={16} strokeWidth={2.5} />
                  </button>
 
@@ -188,7 +188,7 @@ export function AppStoreHome() {
                       { id: 3, name: "Amnesia Haze", image: "/weed/Colores%20Naturales/N3.webp" }
                     ].map((flower) => (
                       <div key={flower.id} className="flex flex-col items-center gap-1.5 shrink-0 w-[52px] group/icon cursor-pointer">
-                        <div className="w-[52px] h-[52px] bg-background-base rounded-[16px] flex items-center justify-center p-1 shadow-sm border border-border-subtle group-active/icon:scale-95 transition-transform overflow-hidden">
+                        <div className="w-[52px] h-[52px] bg-background-base rounded-[16px] flex items-center justify-center p-1 shadow-[0_2px_8px_rgba(0,0,0,0.02)] border border-border-subtle group-active/icon:scale-95 transition-transform overflow-hidden">
                            <img src={flower.image} className="w-full h-full object-contain drop-shadow-sm scale-[1.15]" alt={flower.name} />
                         </div>
                         <span className="text-[9.5px] font-normal text-text-secondary text-center leading-tight truncate w-full px-0.5 tracking-wide">{flower.name}</span>
@@ -221,14 +221,14 @@ export function AppStoreHome() {
           { name: "Alicante", img: "/portadas-ciudades/alicante.webp" }
         ].map((city, idx) => (
           <div key={idx} className="w-[165px] shrink-0 snap-start cursor-pointer group hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300">
-            <div className="w-full aspect-square bg-background-secondary rounded-full overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.04)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] ring-1 ring-border-subtle group-hover:ring-brand-accent/50 transition-all duration-300">
+            <div className="w-full aspect-square bg-background-secondary rounded-full overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.015)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] ring-1 ring-border-subtle group-hover:ring-brand-accent/50 transition-all duration-300">
                <img src={city.img} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={city.name} />
                
                {/* Pequeña opacidad oscura para que resalte el texto sin usar blur */}
                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 pointer-events-none" />
                
                {/* Sombra interior 3D */}
-               <div className="absolute inset-0 rounded-full shadow-[inset_0_0_24px_rgba(0,0,0,0.2)] pointer-events-none"></div>
+               <div className="absolute inset-0 rounded-full shadow-[inset_0_0_24px_rgba(0,0,0,0.08)] pointer-events-none"></div>
                
                {/* Nombre de la Ciudad en el Centro */}
                <div className="absolute inset-0 flex items-center justify-center p-5 z-20">
@@ -244,7 +244,7 @@ export function AppStoreHome() {
         {POPULAR_FLOWERS.map((flower) => (
           <div key={flower.id} className="w-[180px] shrink-0 snap-start">
             <div 
-              className="w-full bg-[#F5F5F7] border border-border-subtle/60 rounded-[20px] p-4 relative flex flex-col shadow-[0_4px_20px_rgba(0,0,0,0.03)] cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:-translate-y-0.5 transition-all duration-300"
+              className="w-full bg-[#F5F5F7] border border-border-subtle/60 rounded-[20px] p-4 relative flex flex-col shadow-[0_4px_20px_rgba(0,0,0,0.01)] cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:-translate-y-0.5 transition-all duration-300"
               onClick={() => setSelectedFlowerId(flower.id)}
             >
               {/* Background Glow */}
@@ -256,7 +256,7 @@ export function AppStoreHome() {
                 <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full ${flower.color} ${flower.bg}`}>{flower.type}</span>
                 <button 
                   onClick={(e) => toggleLike(e, flower.id)}
-                  className="w-[32px] h-[32px] rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-border-subtle/40 flex items-center justify-center text-text-secondary hover:text-red-500 transition-colors z-20"
+                  className="w-[32px] h-[32px] rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.015)] border border-border-subtle/40 flex items-center justify-center text-text-secondary hover:text-red-500 transition-colors z-20"
                 >
                   <Heart className={likedFlowers.has(flower.id) ? 'text-red-500 fill-red-500' : ''} size={16} strokeWidth={2.5} />
                 </button>
@@ -293,7 +293,7 @@ export function AppStoreHome() {
         <Carousel title="🔝 Clubes Destacados">
           {filteredClubs.length > 0 ? filteredClubs.map((club) => (
             <Link key={club.id} href={`/clubs/${club.id}`} className="w-[184px] shrink-0 snap-start block group cursor-pointer hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300">
-              <div className="w-full aspect-square rounded-[10px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.04)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] border border-border-subtle/50 bg-background-secondary transition-shadow duration-300">
+              <div className="w-full aspect-square rounded-[10px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.015)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] border border-border-subtle/50 bg-background-secondary transition-shadow duration-300">
                  <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt={club.name} />
                  
                  {/* Gradiente elegante inferior */}
