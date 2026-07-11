@@ -16,8 +16,8 @@ function getOpenStatus(club: Club): { isOpen: boolean; label: string } {
   if (!club.opening_hours) return { isOpen: true, label: 'Abierto' };
 
   const days = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
-  const today = days[new Date().getDay()];
-  const hours = club.opening_hours[today];
+  const today = days[new Date().getDay()] ?? 'lunes';
+  const hours = club.opening_hours?.[today];
   if (!hours || hours === 'cerrado') return { isOpen: false, label: 'Cerrado hoy' };
 
   const [open, close] = hours.split('-').map((t) => t.trim());
