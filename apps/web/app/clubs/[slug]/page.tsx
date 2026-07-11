@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { createClient } from '@/utils/supabase/server';
 import { notFound } from 'next/navigation';
+import type { Club } from '@/types';
 
-// Nuevos componentes de la arquitectura Premium
 import { ProfileHero } from '@/components/club-profile/ProfileHero';
 import { ProfileContent } from '@/components/club-profile/ProfileContent';
 import { ClaimClubBanner } from '@/components/club-profile/ClaimClubBanner';
@@ -12,21 +12,21 @@ export const revalidate = 3600;
 // Clubs mock para desarrollo — sin tocar Supabase
 const MOCK_IDS = ['1', '2', '3', '4', '5', '6'];
 
-function getMockClub(slug: string) {
+function getMockClub(id: string): Club {
   const cities = ['Madrid', 'Barcelona', 'Valencia', 'Sevilla', 'Bilbao', 'Málaga'];
   const names = ['Green Leaf Club 1', 'Green Leaf Club 2', 'Canna Valencia', 'Canna Sevilla', 'Canna Bilbao', 'Canna Málaga'];
   const covers: Record<string, string> = {
     '1': '/portadas/cannabis2.jpg',
     '3': '/portadas/cannabis3.jpg',
   };
-  const idx = Number(slug) - 1;
+  const idx = Number(id) - 1;
   return {
-    id: slug,
-    name: names[idx] ?? `Club ${slug}`,
-    slug: `mock-club-${slug}`,
-    description: `Bienvenido al Club ${slug}. Este es un perfil generado dinámicamente para probar la nueva arquitectura de perfil.`,
+    id,
+    name: names[idx] ?? `Club ${id}`,
+    slug: `mock-club-${id}`,
+    description: `Bienvenido al Club ${id}. Este es un perfil generado dinámicamente para probar la nueva arquitectura de perfil.`,
     logo_url: '/logo2.svg',
-    cover_image_url: covers[slug] ?? '/portadas/cannabis.jpg',
+    cover_image_url: covers[id] ?? '/portadas/cannabis.jpg',
     lat: 40.4168,
     lng: -3.7038,
     address: 'Calle Falsa 123',
@@ -34,14 +34,25 @@ function getMockClub(slug: string) {
     province: 'Provincia',
     status: 'active',
     subscription_tier: 'premium',
-  } as any;
+    phone: null,
+    whatsapp: null,
+    instagram_url: null,
+    website_url: null,
+    opening_hours: null,
+    photos: null,
+    rating: 4.8,
+    review_count: 124,
+    amenities: ['wifi', 'gaming', 'cafeteria'],
+    membership_standard_price: 20,
+    membership_premium_price: 50,
+  };
 }
 
 export default async function ClubDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
   const slug = resolvedParams.slug;
 
-  // ⚡ Short-circuit para clubs mock — cero llamadas a Supabase
+  // Short-circuit para clubs mock — cero llamadas a Supabase
   if (MOCK_IDS.includes(slug)) {
     const club = getMockClub(slug);
     return (
@@ -52,24 +63,24 @@ export default async function ClubDetailPage({ params }: { params: Promise<{ slu
     );
   }
 
-  // Solo llegamos aquí para clubs reales en la base de datos
+  // Para clubs reales: buscar por slug primero, luego por id (compatibilidad)
   const supabase = createClient();
   const { data: club, error } = await supabase
     .from('clubs')
     .select('*')
-    .eq('id', slug)
+    .or(`slug.eq.${slug},id.eq.${slug}`)
     .single();
 
   if (error || !club) {
     notFound();
   }
 
-  const isClaimed = true;
+  const isClaimed = club.subscription_tier !== 'unclaimed';
 
   return (
     <main className="w-full min-h-screen bg-white">
-      <ProfileHero club={club} />
-      <ProfileContent club={club} />
+      <ProfileHero club={club as Club} />
+      <ProfileContent club={club as Club} />
       {!isClaimed && <ClaimClubBanner />}
     </main>
   );

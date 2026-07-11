@@ -1,13 +1,16 @@
 import React from 'react';
 import type { Club } from '@/types';
-import { CreditCard, Check, Sparkles } from 'lucide-react';
+import { Check, Sparkles } from 'lucide-react';
 
 export function TabMembership({ club }: { club: Club }) {
+  const standardPrice = club.membership_standard_price;
+  const premiumPrice = club.membership_premium_price;
+
   return (
     <div className="space-y-8">
       <div className="text-center max-w-lg mx-auto">
         <p className="text-gray-500 text-sm">
-          Actualmente el club {club.name} acepta nuevos socios bajo las siguientes condiciones.
+          Actualmente {club.name} acepta nuevos socios bajo las siguientes condiciones.
         </p>
       </div>
 
@@ -16,8 +19,14 @@ export function TabMembership({ club }: { club: Club }) {
         <div className="border border-gray-200 rounded-3xl p-6 flex flex-col relative bg-white shadow-sm">
           <h3 className="text-lg font-bold text-gray-900 mb-2">Socio Standard</h3>
           <div className="flex items-baseline gap-1 mb-6">
-            <span className="text-3xl font-black text-gray-900">20€</span>
-            <span className="text-gray-500 font-medium">/ año</span>
+            {standardPrice != null ? (
+              <>
+                <span className="text-3xl font-black text-gray-900">{standardPrice}€</span>
+                <span className="text-gray-500 font-medium">/ año</span>
+              </>
+            ) : (
+              <span className="text-lg font-semibold text-gray-400 italic">Consultar precio</span>
+            )}
           </div>
           <ul className="space-y-4 mb-8 flex-1">
             <li className="flex items-center gap-3 text-sm text-gray-600">
@@ -38,15 +47,21 @@ export function TabMembership({ club }: { club: Club }) {
           </button>
         </div>
 
-        {/* Cuota VIP */}
+        {/* Cuota Premium */}
         <div className="border border-black rounded-3xl p-6 flex flex-col relative bg-black text-white shadow-xl">
           <div className="absolute -top-3 -right-3 bg-gradient-to-r from-amber-400 to-amber-600 text-white text-[10px] uppercase font-black tracking-wider px-3 py-1.5 rounded-full flex items-center gap-1 shadow-lg">
             <Sparkles className="w-3 h-3" /> Popular
           </div>
           <h3 className="text-lg font-bold text-white mb-2">Socio Premium</h3>
           <div className="flex items-baseline gap-1 mb-6">
-            <span className="text-3xl font-black text-white">50€</span>
-            <span className="text-gray-400 font-medium">/ año</span>
+            {premiumPrice != null ? (
+              <>
+                <span className="text-3xl font-black text-white">{premiumPrice}€</span>
+                <span className="text-gray-400 font-medium">/ año</span>
+              </>
+            ) : (
+              <span className="text-lg font-semibold text-gray-400 italic">Consultar precio</span>
+            )}
           </div>
           <ul className="space-y-4 mb-8 flex-1">
             <li className="flex items-center gap-3 text-sm text-gray-300">

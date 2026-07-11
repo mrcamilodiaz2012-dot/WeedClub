@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import type { Club } from '@/types';
 
-// Local photos — no external HTTP requests on mount
-const LOCAL_PHOTOS = [
-  '/portadas/cannabis.jpg',
-  '/portadas/cannabis2.jpg',
-  '/portadas/cannabis3.jpg',
+// Fotos locales de fallback (cuando el club aún no tiene galería)
+const FALLBACK_PHOTOS = [
   '/portadas/cannabis.jpg',
   '/portadas/cannabis2.jpg',
   '/portadas/cannabis3.jpg',
 ];
 
 export function TabPhotosCarousel({ club }: { club: Club }) {
+  // Usar fotos reales del club si existen, si no fallback local
+  const photos =
+    club.photos && club.photos.length > 0 ? club.photos : FALLBACK_PHOTOS;
+
   const [currentIndex, setCurrentIndex] = useState(0);
-  const photos = LOCAL_PHOTOS;
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -31,7 +31,7 @@ export function TabPhotosCarousel({ club }: { club: Club }) {
           <img
             key={i}
             src={url}
-            alt={`Gallery image ${i + 1}`}
+            alt={`Foto ${i + 1} de ${club.name}`}
             loading={i === 0 ? 'eager' : 'lazy'}
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
               i === currentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
@@ -59,7 +59,7 @@ export function TabPhotosCarousel({ club }: { club: Club }) {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={url}
-              alt={`Thumbnail ${i + 1}`}
+              alt={`Miniatura ${i + 1}`}
               loading="lazy"
               className="w-full h-full object-cover"
             />

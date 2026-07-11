@@ -2,16 +2,21 @@
 
 import React from "react";
 import Link from "next/link";
+import type { Club } from "@/types";
 
 import { Carousel } from "@/components/ui/Carousel";
 import { AppListItem } from "@/components/ui/AppListItem";
-import { Search, Map as MapIcon, MapPin, Heart, ChevronRight, ChevronDown, Bell, UserCircle, X, BadgeCheck, Clock, Navigation } from "lucide-react";
+import { Search, Map as MapIcon, MapPin, Heart, ChevronDown, Bell, UserCircle, X, BadgeCheck, Clock, Navigation } from "lucide-react";
 import { useState, useEffect } from "react";
 import { type Location } from "@/components/ui/LocationSearch";
 import { LocationModal } from "@/components/ui/LocationModal";
 import Image from "next/image";
 
-export function AppStoreHome() {
+interface AppStoreHomeProps {
+  clubs: Club[];
+}
+
+export function AppStoreHome({ clubs }: AppStoreHomeProps) {
   const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   const [selectedFlowerId, setSelectedFlowerId] = useState<number | null>(null);
@@ -55,20 +60,13 @@ export function AppStoreHome() {
     { id: 4, name: "Gelato 33", type: "ÍNDICA", thc: "25%", cbd: "0.1%", flavor: "Fresa, Vainilla", effect: "Felicidad", color: "text-purple-600", bg: "bg-purple-50 border border-purple-100", image: "/weed/Colores%20Exoticos/E3.webp" }
   ];
 
-  const MOCK_CLUBS = [
-    { id: 1, name: "Green Leaf Club 1", city: "Madrid", imgSig: 1 },
-    { id: 2, name: "Green Leaf Club 2", city: "Barcelona", imgSig: 2 },
-    { id: 3, name: "Green Leaf Club 3", city: "Valencia", imgSig: 3 },
-    { id: 4, name: "Canna 4", city: "Madrid", imgSig: 4 },
-    { id: 5, name: "Canna 5", city: "Sevilla", imgSig: 5 },
-    { id: 6, name: "Canna 6", city: "Barcelona", imgSig: 6 },
-  ];
+  const filteredClubs = selectedLocation
+    ? clubs.filter(c =>
+        c.city?.toLowerCase() === selectedLocation.name.toLowerCase() ||
+        c.city?.toLowerCase() === selectedLocation.province?.toLowerCase()
+      )
+    : clubs;
 
-  const filteredClubs = selectedLocation 
-    ? MOCK_CLUBS.filter(c => c.city.toLowerCase() === selectedLocation.name.toLowerCase() || c.city.toLowerCase() === selectedLocation.province?.toLowerCase())
-    : MOCK_CLUBS;
-
-  const featuredClubs = filteredClubs.slice(0, 3);
   const MOCK_GROW_SHOPS = [
     { id: 101, title: "Green Care GrowShop", subtitle: "Semillas y Cultivo", rating: 4.8, city: "Barcelona", img: "/portadas/cannabis.jpg" },
     { id: 102, title: "Urban Cultivation", subtitle: "Todo para tu huerto", rating: 4.9, city: "Barcelona", img: "/portadas/cannabis2.jpg" },
@@ -146,12 +144,12 @@ export function AppStoreHome() {
       {/* 2. Cerca de Ti (Rectángulos Verticales 4:5) */}
       <Carousel title="📍 Cerca de Ti">
         {filteredClubs.length > 0 ? filteredClubs.map((club) => (
-          <Link key={club.id} href={`/clubs/${club.id}`} prefetch={true} className="w-[246px] shrink-0 snap-start block h-full">
+          <Link key={club.id} href={`/clubs/${club.slug || club.id}`} prefetch={true} className="w-[246px] shrink-0 snap-start block h-full">
             <div className="w-full h-full flex flex-col bg-[#F5F5F7] rounded-[24px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.015)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] transition-shadow duration-300 border border-border-subtle/40">
                
                {/* Mitad Superior: Imagen */}
                <div className="w-full h-[150px] relative overflow-hidden group">
-                 <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="w-full h-full object-cover group-active:scale-105 transition-transform duration-700" alt="" />
+                 <img src={club.cover_image_url ?? '/portadas/cannabis.jpg'} className="w-full h-full object-cover group-active:scale-105 transition-transform duration-700" alt={club.name} />
                  <div className="absolute inset-0 bg-black/10"></div>
                  
                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md text-text-primary text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-[0_2px_8px_rgba(0,0,0,0.02)]">
@@ -294,9 +292,9 @@ export function AppStoreHome() {
       <div>
         <Carousel title="🔝 Clubes Destacados">
           {filteredClubs.length > 0 ? filteredClubs.map((club) => (
-            <Link key={club.id} href={`/clubs/${club.id}`} prefetch={true} className="w-[184px] shrink-0 snap-start block group cursor-pointer hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 h-full">
+            <Link key={club.id} href={`/clubs/${club.slug || club.id}`} prefetch={true} className="w-[184px] shrink-0 snap-start block group cursor-pointer hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 h-full">
               <div className="w-full h-full aspect-[4/5] bg-background-secondary rounded-[24px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.015)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] border border-border-subtle/40 transition-shadow duration-300">
-                 <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt={club.name} />
+                 <img src={club.cover_image_url ?? '/portadas/cannabis.jpg'} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt={club.name} />
                  
                  {/* Gradiente elegante inferior */}
                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent/10 pointer-events-none"></div>
