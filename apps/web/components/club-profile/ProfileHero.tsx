@@ -52,10 +52,10 @@ export function ProfileHero({ club }: ProfileHeroProps) {
         {/* Name & Meta */}
         <div className="absolute bottom-0 left-0 right-0 p-5 md:p-8 pb-12 md:pb-14 z-20 flex flex-col">
           <div className="flex items-center gap-2 mb-1">
-            <h1 className="text-[42px] md:text-[62px] font-black tracking-tighter text-white leading-[0.9]">
+            <h1 className="text-[32px] md:text-[48px] font-black tracking-tighter text-white leading-[1.0] drop-shadow-lg">
               {club.name}
             </h1>
-            <BadgeCheck className="w-[26px] h-[26px] text-[#1ed760] shrink-0 drop-shadow-md" fill="currentColor" stroke="white" strokeWidth={1.5} />
+            <BadgeCheck className="w-[22px] h-[22px] md:w-[26px] md:h-[26px] text-[#1ed760] shrink-0 drop-shadow-md" fill="currentColor" stroke="white" strokeWidth={1.5} />
           </div>
 
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[14px] text-white/90 leading-tight mt-2 drop-shadow-sm">
