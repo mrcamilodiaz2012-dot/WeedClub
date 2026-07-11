@@ -25,7 +25,7 @@ function LazyMount({ children, height = 400, className = '' }: { children: React
   useEffect(() => {
     if (!ref.current) return;
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect(); } },
+      (entries) => { if (entries[0]?.isIntersecting) { setVisible(true); observer.disconnect(); } },
       { rootMargin: '200px' }
     );
     observer.observe(ref.current);
