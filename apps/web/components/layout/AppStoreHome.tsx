@@ -49,10 +49,10 @@ export function AppStoreHome() {
   }, [selectedFlowerId]);
 
   const POPULAR_FLOWERS = [
-    { id: 1, name: "Purple Exotica 1", type: "ÍNDICA", thc: "24%", cbd: "0.2%", flavor: "Uva, Dulce", effect: "Relajante", color: "text-[#7B858B]", bg: "bg-[#7B858B]/10 border border-[#7B858B]/20", image: "/weed/Colores%20Exoticos/E1.webp" },
-    { id: 2, name: "Neon Sativa 2", type: "SATIVA", thc: "26%", cbd: "0.1%", flavor: "Tropical", effect: "Energético", color: "text-[#8BA08D]", bg: "bg-[#8BA08D]/10 border border-[#8BA08D]/20", image: "/weed/Colores%20Exoticos/E2.webp" },
-    { id: 3, name: "Amnesia Haze", type: "HÍBRIDA", thc: "22%", cbd: "0.5%", flavor: "Cítrico, Pino", effect: "Creativo", color: "text-[#959C88]", bg: "bg-[#959C88]/10 border border-[#959C88]/20", image: "/weed/Colores%20Naturales/N3.webp" },
-    { id: 4, name: "Gelato 33", type: "ÍNDICA", thc: "25%", cbd: "0.1%", flavor: "Fresa, Vainilla", effect: "Felicidad", color: "text-[#7B858B]", bg: "bg-[#7B858B]/10 border border-[#7B858B]/20", image: "/weed/Colores%20Exoticos/E3.webp" }
+    { id: 1, name: "Purple Exotica 1", type: "ÍNDICA", thc: "24%", cbd: "0.2%", flavor: "Uva, Dulce", effect: "Relajante", color: "text-purple-600", bg: "bg-purple-50 border border-purple-100", image: "/weed/Colores%20Exoticos/E1.webp" },
+    { id: 2, name: "Neon Sativa 2", type: "SATIVA", thc: "26%", cbd: "0.1%", flavor: "Tropical", effect: "Energético", color: "text-orange-500", bg: "bg-orange-50 border border-orange-100", image: "/weed/Colores%20Exoticos/E2.webp" },
+    { id: 3, name: "Amnesia Haze", type: "HÍBRIDA", thc: "22%", cbd: "0.5%", flavor: "Cítrico, Pino", effect: "Creativo", color: "text-emerald-600", bg: "bg-emerald-50 border border-emerald-100", image: "/weed/Colores%20Naturales/N3.webp" },
+    { id: 4, name: "Gelato 33", type: "ÍNDICA", thc: "25%", cbd: "0.1%", flavor: "Fresa, Vainilla", effect: "Felicidad", color: "text-purple-600", bg: "bg-purple-50 border border-purple-100", image: "/weed/Colores%20Exoticos/E3.webp" }
   ];
 
   const MOCK_CLUBS = [
@@ -252,7 +252,7 @@ export function AppStoreHome() {
             >
               {/* Background Glow */}
               <div className="absolute inset-0 rounded-[24px] overflow-hidden pointer-events-none">
-                <div className={`absolute top-12 left-1/2 -translate-x-1/2 w-32 h-32 rounded-full blur-[35px] opacity-20 transition-colors duration-700 ${flower.type === 'SATIVA' ? 'bg-[#8BA08D]' : flower.type === 'ÍNDICA' ? 'bg-[#7B858B]' : 'bg-[#959C88]'}`} />
+                <div className={`absolute top-12 left-1/2 -translate-x-1/2 w-32 h-32 rounded-full blur-[35px] opacity-25 transition-colors duration-700 ${flower.type === 'SATIVA' ? 'bg-amber-400' : flower.type === 'ÍNDICA' ? 'bg-purple-400' : 'bg-emerald-400'}`} />
               </div>
 
               <div className="flex justify-between items-start z-10 relative">
@@ -419,7 +419,7 @@ export function AppStoreHome() {
           >
             {POPULAR_FLOWERS.map((flower, idx) => {
               const isActive = flower.id === activeModalId;
-              const glowColor = flower.type === 'SATIVA' ? 'bg-[#8BA08D]' : flower.type === 'ÍNDICA' ? 'bg-[#7B858B]' : 'bg-[#959C88]';
+              const glowColor = flower.type === 'SATIVA' ? 'bg-amber-400' : flower.type === 'ÍNDICA' ? 'bg-purple-400' : 'bg-emerald-400';
               
               return (
                 <div 
