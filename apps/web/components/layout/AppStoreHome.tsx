@@ -145,7 +145,7 @@ export function AppStoreHome() {
       {/* 2. Cerca de Ti (Rectángulos Verticales 4:5) */}
       <Carousel title="📍 Cerca de Ti">
         {filteredClubs.length > 0 ? filteredClubs.map((club) => (
-          <Link key={club.id} href={`/clubs/${club.id}`} className="w-[236px] shrink-0 snap-start block">
+          <Link key={club.id} href={`/clubs/${club.id}`} className="w-[246px] shrink-0 snap-start block">
             <div className="w-full flex flex-col bg-[#F5F5F7] rounded-[24px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-shadow duration-300 border border-border-subtle/40">
                
                {/* Mitad Superior: Imagen */}
@@ -165,7 +165,7 @@ export function AppStoreHome() {
                  <div className="absolute bottom-0 left-0 right-0 h-[70%] bg-gradient-to-t from-black/80 via-black/40 to-transparent backdrop-blur-[8px] [mask-image:linear-gradient(to_top,black_10%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_top,black_10%,transparent_100%)] z-10" />
                  
                  {/* Name & Location */}
-                 <div className="absolute bottom-0 left-0 right-0 p-4 z-20 flex flex-col">
+                 <div className="absolute bottom-0 left-0 right-0 p-5 z-20 flex flex-col">
                    <span className="text-[20px] font-black tracking-tighter text-white leading-tight mb-0.5">{club.name}</span>
                    <span className="text-[13px] text-white/90 flex items-center gap-1.5 font-medium">
                      <MapPin size={14} className="opacity-90" /> {club.city}
@@ -174,14 +174,14 @@ export function AppStoreHome() {
                </div>
 
                {/* Mitad Inferior: Sección Blanca */}
-               <div className="w-full flex flex-col pt-4 pb-5 bg-[#F5F5F7] relative">
+               <div className="w-full flex flex-col pt-5 pb-6 bg-[#F5F5F7] relative">
                  
-                 <div className="px-3.5 mb-2">
+                 <div className="px-4.5 mb-2.5">
                    <span className="text-[10px] font-extrabold text-text-secondary/80 uppercase tracking-[0.1em]">Podrías encontrar...</span>
                  </div>
 
                  {/* Productos en Stock (Distribución Estática) */}
-                 <div className="flex justify-between w-full px-3.5 pb-1">
+                 <div className="flex justify-between w-full px-4.5 pb-1">
                     {[
                       { id: 1, name: "Purple Exotica", image: "/weed/Colores%20Exoticos/E1.webp" },
                       { id: 2, name: "Neon Sativa", image: "/weed/Colores%20Exoticos/E2.webp" },
@@ -231,7 +231,7 @@ export function AppStoreHome() {
                <div className="absolute inset-0 rounded-full shadow-[inset_0_0_24px_rgba(0,0,0,0.2)] pointer-events-none"></div>
                
                {/* Nombre de la Ciudad en el Centro */}
-               <div className="absolute inset-0 flex items-center justify-center p-4 z-20">
+               <div className="absolute inset-0 flex items-center justify-center p-5 z-20">
                  <span className="text-white font-display font-bold text-[24px] tracking-wide leading-tight drop-shadow-md text-center">{city.name}</span>
                </div>
             </div>
@@ -244,7 +244,7 @@ export function AppStoreHome() {
         {POPULAR_FLOWERS.map((flower) => (
           <div key={flower.id} className="w-[180px] shrink-0 snap-start">
             <div 
-              className="w-full bg-[#F5F5F7] border border-border-subtle/60 rounded-[20px] p-3 relative flex flex-col shadow-[0_4px_20px_rgba(0,0,0,0.03)] cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:-translate-y-0.5 transition-all duration-300"
+              className="w-full bg-[#F5F5F7] border border-border-subtle/60 rounded-[20px] p-4 relative flex flex-col shadow-[0_4px_20px_rgba(0,0,0,0.03)] cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:-translate-y-0.5 transition-all duration-300"
               onClick={() => setSelectedFlowerId(flower.id)}
             >
               {/* Background Glow */}
@@ -307,10 +307,10 @@ export function AppStoreHome() {
                  </div>
 
                  {/* Contenido inferior */}
-                 <div className="absolute bottom-0 left-0 right-0 p-3.5 z-10 flex flex-col">
-                   <div className="flex items-center gap-1 mb-1.5">
+                 <div className="absolute bottom-0 left-0 right-0 p-4 z-10 flex flex-col">
+                   <div className="flex items-center gap-1.5 mb-1.5">
                      <span className="text-[16px] font-black tracking-tight text-white leading-tight truncate drop-shadow-md">{club.name}</span>
-                     <BadgeCheck className="w-[14px] h-[14px] text-[#1ed760] shrink-0 drop-shadow-md" fill="currentColor" stroke="white" strokeWidth={1.5} />
+                     <BadgeCheck className="w-[11px] h-[11px] text-[#1ed760] shrink-0 drop-shadow-md translate-y-[0.5px]" fill="currentColor" stroke="white" strokeWidth={2} />
                    </div>
                    
                    <div className="flex flex-col gap-1.5">
@@ -345,7 +345,7 @@ export function AppStoreHome() {
         <div className="flex flex-col gap-3">
           {filteredGrowShops.length > 0 ? filteredGrowShops.map(shop => (
             <Link key={shop.id} href={`/shops/${shop.id}`} className="block group active:scale-[0.98] transition-transform">
-              <div className="w-full flex items-center p-3 bg-[#F5F5F7] border border-border-subtle/50 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] group-hover:-translate-y-0.5 transition-all duration-300">
+              <div className="w-full flex items-center p-4 bg-[#F5F5F7] border border-border-subtle/50 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] group-hover:-translate-y-0.5 transition-all duration-300">
                 {/* Img */}
                 <div className="w-[64px] h-[64px] shrink-0 rounded-[12px] overflow-hidden relative shadow-inner bg-background-secondary">
                   <img src={shop.img} alt={shop.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
