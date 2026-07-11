@@ -96,16 +96,16 @@ export function AppStoreHome() {
             className="h-[32px] px-3.5 bg-black/5 hover:bg-black/10 transition-colors rounded-full flex items-center gap-1.5 text-text-primary"
           >
             <span className="font-bold text-[14px]">{selectedLocation ? selectedLocation.name : "Ubicación"}</span>
-            <ChevronDown size={16} strokeWidth={2.5} className="text-text-primary" />
+            <ChevronDown size={16} strokeWidth={2} className="text-text-primary" />
           </button>
         </div>
 
         <div className="flex items-center justify-end gap-2">
           <button className="w-[32px] h-[32px] rounded-full bg-black/5 hover:bg-black/10 transition-colors flex items-center justify-center text-text-primary">
-            <Bell size={16} strokeWidth={2.5} />
+            <Bell size={16} strokeWidth={2} />
           </button>
           <button className="w-[32px] h-[32px] rounded-full bg-black/5 hover:bg-black/10 transition-colors flex items-center justify-center text-text-primary">
-            <UserCircle size={18} strokeWidth={2.5} />
+            <UserCircle size={18} strokeWidth={2} />
           </button>
         </div>
       </div>
@@ -142,6 +142,8 @@ export function AppStoreHome() {
         </div>
       </div>
 
+      <div className="h-px bg-black/[0.04] mx-5 my-6" />
+
       {/* 2. Cerca de Ti (Rectángulos Verticales 4:5) */}
       <Carousel title="📍 Cerca de Ti">
         {filteredClubs.length > 0 ? filteredClubs.map((club) => (
@@ -154,11 +156,11 @@ export function AppStoreHome() {
                  <div className="absolute inset-0 bg-black/10"></div>
                  
                  <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-text-primary text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-[0_2px_8px_rgba(0,0,0,0.02)]">
-                   <MapIcon size={11} strokeWidth={2.5} /> 1.2 km
+                   <MapIcon size={11} strokeWidth={2} /> 1.2 km
                  </div>
 
                  <button className="absolute top-3 right-3 w-[32px] h-[32px] bg-white/90 backdrop-blur-md text-text-primary rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.02)] flex items-center justify-center hover:scale-105 active:scale-95 transition-all">
-                   <Heart size={16} strokeWidth={2.5} />
+                   <Heart size={16} strokeWidth={2} />
                  </button>
 
                  {/* Soft Blur Overlay */}
@@ -212,6 +214,8 @@ export function AppStoreHome() {
         )}
       </Carousel>
 
+      <div className="h-px bg-black/[0.04] mx-5 my-6" />
+
       {/* 3. Ciudades Populares (Círculos) */}
       <Carousel title="🌍 Ciudades">
         {[
@@ -239,6 +243,8 @@ export function AppStoreHome() {
         ))}
       </Carousel>
 
+      <div className="h-px bg-black/[0.04] mx-5 my-6" />
+
       {/* 4. Flores Populares */}
       <Carousel title="🔥 Flores Populares">
         {POPULAR_FLOWERS.map((flower) => (
@@ -258,7 +264,7 @@ export function AppStoreHome() {
                   onClick={(e) => toggleLike(e, flower.id)}
                   className="w-[32px] h-[32px] rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.015)] border border-border-subtle/40 flex items-center justify-center text-text-secondary hover:text-red-500 transition-colors z-20"
                 >
-                  <Heart className={likedFlowers.has(flower.id) ? 'text-red-500 fill-red-500' : ''} size={16} strokeWidth={2.5} />
+                  <Heart className={likedFlowers.has(flower.id) ? 'text-red-500 fill-red-500' : ''} size={16} strokeWidth={2} />
                 </button>
               </div>
               
@@ -286,10 +292,10 @@ export function AppStoreHome() {
         ))}
       </Carousel>
 
-
+      <div className="h-px bg-black/[0.04] mx-5 my-6" />
 
       {/* 5. Clubes Destacados (Posters Verticales) */}
-      <div className="mt-6">
+      <div>
         <Carousel title="🔝 Clubes Destacados">
           {filteredClubs.length > 0 ? filteredClubs.map((club) => (
             <Link key={club.id} href={`/clubs/${club.id}`} className="w-[184px] shrink-0 snap-start block group cursor-pointer hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 h-full">
@@ -333,8 +339,10 @@ export function AppStoreHome() {
         </Carousel>
       </div>
 
+      <div className="h-px bg-black/[0.04] mx-5 my-6" />
+
       {/* 6. Grow Shops (Listado mejorado) */}
-      <div className="px-5 mt-8 mb-6">
+      <div className="px-5 mb-6">
         <div className="flex items-center justify-between mb-4 border-b border-border-subtle pb-2">
           <h2 className="text-[26px] font-display font-black text-text-primary flex items-center gap-2 tracking-tight leading-none">
             🌱 Grow Shops
@@ -451,9 +459,10 @@ export function AppStoreHome() {
                       </div>
                       <button 
                         onClick={(e) => toggleLike(e, flower.id)}
-                        className="bg-white/80 border border-black/5 backdrop-blur-md w-8 h-8 rounded-full shadow-sm flex items-center justify-center hover:scale-110 active:scale-95 transition-all"
+                        className="bg-white/80 border border-black/5 backdrop-blur-md w-8 h-8 rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.02)] flex items-center justify-center hover:scale-110 active:scale-95 transition-all"
                       >
                         <Heart 
+                          strokeWidth={2}
                           className={`w-4 h-4 transition-colors ${
                             likedFlowers.has(flower.id) ? 'text-red-500 fill-red-500' : 'text-gray-400'
                           }`} 
