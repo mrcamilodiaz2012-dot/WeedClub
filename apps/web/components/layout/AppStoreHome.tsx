@@ -269,21 +269,21 @@ export function AppStoreHome() {
               </div>
               
               {/* Product Image */}
-              <div className="w-full h-[150px] flex justify-center items-center py-2 -mt-2 pointer-events-none">
-                <img src={flower.image} alt={flower.name} className="h-[135%] object-contain drop-shadow-xl hover:scale-110 transition-transform duration-500" />
+              <div className="w-full h-[170px] flex justify-center items-center py-2 -mt-2 pointer-events-none">
+                <img src={flower.image} alt={flower.name} className="h-[145%] object-contain drop-shadow-xl hover:scale-110 transition-transform duration-500" />
               </div>
               
               {/* Product Info */}
               <div className="flex flex-col gap-1.5 mt-2 pointer-events-none">
                 <h4 className="font-display font-black text-[18px] tracking-tight text-text-primary leading-tight truncate">{flower.name}</h4>
                 <div className="flex gap-1.5">
-                  <div className="bg-background-secondary rounded-md px-1.5 py-1 flex gap-1 items-center">
-                    <span className="text-[10px] font-medium text-text-tertiary">THC</span>
-                    <span className="text-[11px] font-black text-text-primary">{flower.thc}</span>
+                  <div className="bg-transparent border border-border-subtle/50 rounded-md px-1.5 py-0.5 flex gap-1 items-center">
+                    <span className="text-[9px] font-medium text-text-tertiary">THC</span>
+                    <span className="text-[10px] font-bold text-text-secondary">{flower.thc}</span>
                   </div>
-                  <div className="bg-background-secondary rounded-md px-1.5 py-1 flex gap-1 items-center">
-                    <span className="text-[10px] font-medium text-text-tertiary">CBD</span>
-                    <span className="text-[11px] font-black text-text-primary">{flower.cbd}</span>
+                  <div className="bg-transparent border border-border-subtle/50 rounded-md px-1.5 py-0.5 flex gap-1 items-center">
+                    <span className="text-[9px] font-medium text-text-tertiary">CBD</span>
+                    <span className="text-[10px] font-bold text-text-secondary">{flower.cbd}</span>
                   </div>
                 </div>
               </div>
@@ -299,11 +299,11 @@ export function AppStoreHome() {
         <Carousel title="🔝 Clubes Destacados">
           {filteredClubs.length > 0 ? filteredClubs.map((club) => (
             <Link key={club.id} href={`/clubs/${club.id}`} className="w-[184px] shrink-0 snap-start block group cursor-pointer hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 h-full">
-              <div className="w-full h-full aspect-square rounded-[24px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.015)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] border border-border-subtle/50 bg-background-secondary transition-shadow duration-300">
+              <div className="w-full h-full aspect-[4/5] rounded-[24px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.015)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] border border-border-subtle/50 bg-background-secondary transition-shadow duration-300">
                  <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt={club.name} />
                  
                  {/* Gradiente elegante inferior */}
-                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none"></div>
+                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent/10 pointer-events-none"></div>
                  
 
 
