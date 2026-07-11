@@ -126,11 +126,11 @@ export function AppStoreHome() {
       <div className="pt-4 pb-4 w-full overflow-x-auto hide-scrollbar">
         <div className="flex items-start gap-4 px-4 after:content-[''] after:w-[1px] after:shrink-0">
           {[
-            { name: "Ciudades", color: "bg-[#EAECEB]", icon: <img src="/iconos/Ciudad.webp" alt="Ciudades" className="w-11 h-11 object-contain opacity-90" /> },
-            { name: "Top Clubs", color: "bg-[#EAEBE8]", icon: <img src="/iconos/fuego.webp" alt="Top Clubs" className="w-11 h-11 object-contain opacity-90" /> },
-            { name: "Flores", color: "bg-[#E5EAE6]", icon: <img src="/iconos/flor.webp" alt="Flores" className="w-11 h-11 object-contain opacity-90" /> },
-            { name: "Eventos", color: "bg-[#ECEAE8]", icon: <img src="/iconos/eventos.webp" alt="Eventos" className="w-11 h-11 object-contain opacity-90" /> },
-            { name: "Grow Shops", color: "bg-[#E6EAE6]", icon: <img src="/iconos/grow.webp" alt="Grow Shops" className="w-11 h-11 object-contain opacity-90" /> }
+            { name: "Ciudades", color: "bg-sky-300", icon: <img src="/iconos/Ciudad.webp" alt="Ciudades" className="w-11 h-11 object-contain opacity-90" /> },
+            { name: "Top Clubs", color: "bg-orange-300", icon: <img src="/iconos/fuego.webp" alt="Top Clubs" className="w-11 h-11 object-contain opacity-90" /> },
+            { name: "Flores", color: "bg-emerald-300", icon: <img src="/iconos/flor.webp" alt="Flores" className="w-11 h-11 object-contain opacity-90" /> },
+            { name: "Eventos", color: "bg-purple-300", icon: <img src="/iconos/eventos.webp" alt="Eventos" className="w-11 h-11 object-contain opacity-90" /> },
+            { name: "Grow Shops", color: "bg-lime-300", icon: <img src="/iconos/grow.webp" alt="Grow Shops" className="w-11 h-11 object-contain opacity-90" /> }
           ].map((cat, i) => (
             <button key={i} className="flex flex-col items-center gap-2 group">
               <div className={`w-[68px] h-[68px] rounded-full ${cat.color} flex items-center justify-center text-2xl overflow-hidden group-hover:-translate-y-0.5 group-active:scale-95 transition-all duration-300 shadow-[0_4px_14px_rgba(0,0,0,0.02)] group-hover:shadow-[0_6px_20px_rgba(0,0,0,0.04)]`}>
@@ -142,7 +142,6 @@ export function AppStoreHome() {
         </div>
       </div>
 
-      <div className="h-px bg-black/[0.04] mx-4 my-8" />
 
       {/* 2. Cerca de Ti (Rectángulos Verticales 4:5) */}
       <Carousel title="📍 Cerca de Ti">
@@ -214,7 +213,6 @@ export function AppStoreHome() {
         )}
       </Carousel>
 
-      <div className="h-px bg-black/[0.04] mx-4 my-8" />
 
       {/* 3. Ciudades Populares (Círculos) */}
       <Carousel title="🌍 Ciudades">
@@ -243,7 +241,6 @@ export function AppStoreHome() {
         ))}
       </Carousel>
 
-      <div className="h-px bg-black/[0.04] mx-4 my-8" />
 
       {/* 4. Flores Populares */}
       <Carousel title="🔥 Flores Populares">
@@ -292,7 +289,6 @@ export function AppStoreHome() {
         ))}
       </Carousel>
 
-      <div className="h-px bg-black/[0.04] mx-4 my-8" />
 
       {/* 5. Clubes Destacados (Posters Verticales) */}
       <div>
@@ -339,7 +335,6 @@ export function AppStoreHome() {
         </Carousel>
       </div>
 
-      <div className="h-px bg-black/[0.04] mx-4 my-8" />
 
       {/* 6. Grow Shops (Listado mejorado) */}
       <div className="px-4 mb-8">
