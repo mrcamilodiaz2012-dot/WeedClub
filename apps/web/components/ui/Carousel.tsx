@@ -12,7 +12,7 @@ export function Carousel({ title, subtitle, children }: CarouselProps) {
   return (
     <div className="mb-6 w-full">
       {title && (
-        <div className="px-5 mb-3 flex items-end justify-between">
+        <div className="px-4 mb-3 flex items-end justify-between">
           <div>
             <h2 className="text-[26px] font-display font-black tracking-tight text-text-primary leading-none">
               {title}
@@ -21,8 +21,8 @@ export function Carousel({ title, subtitle, children }: CarouselProps) {
           <button className="text-[#00E676] font-semibold text-sm hover:opacity-80 transition-opacity">Ver Todos</button>
         </div>
       )}
-      <div className="w-full overflow-x-auto snap-x snap-mandatory scroll-px-5 scrollbar-hide pb-4 px-5">
-        <div className="flex items-stretch gap-4 w-max after:content-[''] after:w-[1px] after:shrink-0">
+      <div className="w-full overflow-x-auto snap-x snap-mandatory scroll-pl-4 scrollbar-hide pb-4">
+        <div className="flex items-stretch gap-4 px-4 w-max after:content-[''] after:w-[1px] after:shrink-0">
           {children}
         </div>
       </div>
