@@ -21,8 +21,8 @@ export function Carousel({ title, subtitle, children }: CarouselProps) {
           <button className="text-[#00E676] font-semibold text-sm hover:opacity-80 transition-opacity">Ver Todos</button>
         </div>
       )}
-      <div className="w-full overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4">
-        <div className="flex items-stretch gap-4 px-5 after:content-[''] after:w-[1px] after:shrink-0">
+      <div className="w-full overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 px-5">
+        <div className="flex items-stretch gap-4 after:content-[''] after:w-[1px] after:shrink-0">
           {children}
         </div>
       </div>
