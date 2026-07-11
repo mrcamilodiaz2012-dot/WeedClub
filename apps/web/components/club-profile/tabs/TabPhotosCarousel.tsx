@@ -1,20 +1,40 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import type { Club } from '@/types';
-import Image from 'next/image';
+
+// Local photos — no external HTTP requests
+const LOCAL_PHOTOS = [
+  '/portadas/cannabis.jpg',
+  '/portadas/cannabis2.jpg',
+  '/portadas/cannabis3.jpg',
+  '/portadas/cannabis.jpg',
+  '/portadas/cannabis2.jpg',
+  '/portadas/cannabis3.jpg',
+];
 
 export function TabPhotosCarousel({ club }: { club: Club }) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const photos = LOCAL_PHOTOS;
+  const requestRef = useRef<number>();
+  const previousTimeRef = useRef<number>();
 
-  // Mock data for gallery
-  const photos = Array.from({ length: 6 }).map((_, i) => (
-    `https://images.unsplash.com/photo-1576085898323-218337e3e43c?auto=format&fit=crop&q=80&w=800&h=600&random=${i + 10}`
-  ));
+  const animate = (time: number) => {
+    if (previousTimeRef.current !== undefined) {
+      const deltaTime = time - previousTimeRef.current;
+      if (deltaTime >= 4000) {
+        setCurrentIndex((prev) => (prev + 1) % photos.length);
+        previousTimeRef.current = time;
+      }
+    } else {
+      previousTimeRef.current = time;
+    }
+    requestRef.current = requestAnimationFrame(animate);
+  };
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % photos.length);
-    }, 4000);
-    return () => clearInterval(timer);
+    requestRef.current = requestAnimationFrame(animate);
+    return () => {
+      if (requestRef.current) cancelAnimationFrame(requestRef.current);
+    };
   }, [photos.length]);
 
   return (
@@ -22,16 +42,15 @@ export function TabPhotosCarousel({ club }: { club: Club }) {
       {/* Featured Large Image */}
       <div className="relative w-full aspect-square rounded-3xl overflow-hidden mb-3 bg-gray-100">
         {photos.map((url, i) => (
-          <Image
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
             key={i}
             src={url}
             alt={`Gallery image ${i + 1}`}
-            fill
-            className={`object-cover transition-opacity duration-1000 ease-in-out ${
-              i === currentIndex ? 'opacity-100 relative z-10' : 'opacity-0 absolute inset-0 z-0'
+            loading={i === 0 ? 'eager' : 'lazy'}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
+              i === currentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
             }`}
-            priority={i === 0}
-            sizes="(max-width: 768px) 100vw, 800px"
           />
         ))}
         {/* Counter */}
@@ -52,12 +71,12 @@ export function TabPhotosCarousel({ club }: { club: Club }) {
                 : 'scale-100 hover:scale-[0.98] ring-0'
             }`}
           >
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={url}
               alt={`Thumbnail ${i + 1}`}
-              fill
-              sizes="72px"
-              className="object-cover"
+              loading="lazy"
+              className="w-full h-full object-cover"
             />
           </button>
         ))}

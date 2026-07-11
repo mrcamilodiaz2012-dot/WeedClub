@@ -30,8 +30,8 @@ export function ProfileHero({ club }: ProfileHeroProps) {
           className="object-cover"
           priority
         />
-        {/* Dark Gradient and Blur Overlay only at the bottom for readability */}
-        <div className="absolute bottom-0 left-0 right-0 h-[60%] bg-gradient-to-t from-black/80 via-black/40 to-transparent backdrop-blur-[8px] [mask-image:linear-gradient(to_top,black_10%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_top,black_10%,transparent_100%)] z-10" />
+        {/* Dark Gradient Overlay — using pure CSS gradient (no backdrop-blur for GPU perf) */}
+        <div className="absolute bottom-0 left-0 right-0 h-[75%] z-10" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 30%, rgba(0,0,0,0.2) 60%, transparent 100%)' }} />
         
         {/* Name & Meta (Integrated in cover) */}
         <div className="absolute bottom-0 left-0 right-0 p-5 md:p-8 pb-12 md:pb-14 z-20 flex flex-col">

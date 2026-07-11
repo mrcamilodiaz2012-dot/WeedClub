@@ -146,7 +146,7 @@ export function AppStoreHome() {
       {/* 2. Cerca de Ti (Rectángulos Verticales 4:5) */}
       <Carousel title="📍 Cerca de Ti">
         {filteredClubs.length > 0 ? filteredClubs.map((club) => (
-          <Link key={club.id} href={`/clubs/${club.id}`} className="w-[246px] shrink-0 snap-start block h-full">
+          <Link key={club.id} href={`/clubs/${club.id}`} prefetch={true} className="w-[246px] shrink-0 snap-start block h-full">
             <div className="w-full h-full flex flex-col bg-[#F5F5F7] rounded-[24px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.015)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] transition-shadow duration-300 border border-border-subtle/40">
                
                {/* Mitad Superior: Imagen */}
@@ -162,8 +162,8 @@ export function AppStoreHome() {
                    <Heart size={16} strokeWidth={2} />
                  </button>
 
-                 {/* Soft Blur Overlay */}
-                 <div className="absolute bottom-0 left-0 right-0 h-[70%] bg-gradient-to-t from-black/80 via-black/40 to-transparent backdrop-blur-[8px] [mask-image:linear-gradient(to_top,black_10%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_top,black_10%,transparent_100%)] z-10" />
+                 {/* Gradient overlay — pure CSS, no blur for perf */}
+                 <div className="absolute bottom-0 left-0 right-0 h-[70%] z-10" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.45) 40%, transparent 100%)' }} />
                  
                  {/* Name & Location */}
                  <div className="absolute bottom-0 left-0 right-0 p-4 z-20 flex flex-col">
@@ -294,7 +294,7 @@ export function AppStoreHome() {
       <div>
         <Carousel title="🔝 Clubes Destacados">
           {filteredClubs.length > 0 ? filteredClubs.map((club) => (
-            <Link key={club.id} href={`/clubs/${club.id}`} className="w-[184px] shrink-0 snap-start block group cursor-pointer hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 h-full">
+            <Link key={club.id} href={`/clubs/${club.id}`} prefetch={true} className="w-[184px] shrink-0 snap-start block group cursor-pointer hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 h-full">
               <div className="w-full h-full aspect-[4/5] bg-background-secondary rounded-[24px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.015)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] border border-border-subtle/40 transition-shadow duration-300">
                  <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt={club.name} />
                  

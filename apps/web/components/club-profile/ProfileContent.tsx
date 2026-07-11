@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import type { Club } from '@/types';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
@@ -12,6 +12,33 @@ const TabRules = dynamic(() => import('./tabs/TabRules').then(mod => mod.TabRule
 const TabMembership = dynamic(() => import('./tabs/TabMembership').then(mod => mod.TabMembership));
 const TabReviews = dynamic(() => import('./tabs/TabReviews').then(mod => mod.TabReviews));
 import { MapPin, Star, X, Heart } from 'lucide-react';
+
+/**
+ * LazyMount: renders children only when the placeholder div
+ * enters the viewport (rootMargin = 200px ahead of viewport).
+ * This keeps Mapbox + Carousel out of the critical render path.
+ */
+function LazyMount({ children, height = 400, className = '' }: { children: React.ReactNode; height?: number; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (!ref.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect(); } },
+      { rootMargin: '200px' }
+    );
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} className={className} style={visible ? undefined : { minHeight: height }}>
+      {visible ? children : <div className="w-full bg-gray-100 animate-pulse rounded-3xl" style={{ height }} />}
+    </div>
+  );
+}
+
 
 interface ProfileContentProps {
   club: Club;
@@ -219,7 +246,9 @@ export function ProfileContent({ club }: ProfileContentProps) {
                   Galería
                 </h2>
               </div>
-              <TabPhotosCarousel club={club} />
+              <LazyMount height={380}>
+                <TabPhotosCarousel club={club} />
+              </LazyMount>
             </section>
 
             {/* Mapa Section */}
@@ -229,19 +258,21 @@ export function ProfileContent({ club }: ProfileContentProps) {
                   Ubicación
                 </h2>
               </div>
-              <div className="w-full h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-black/[0.04] relative">
-                <InteractiveMap 
-                  clubs={[club]} 
-                  selectedClubId={club.id}
-                  hoveredClubId={null}
-                  onSelectClub={() => {}}
-                  onHoverClub={() => {}}
-                  viewport={viewport}
-                  onViewportChange={setViewport}
-                />
-                {/* Subtle inner shadow overlay */}
-                <div className="absolute inset-0 pointer-events-none rounded-3xl shadow-[inset_0_0_0_1px_rgba(0,0,0,0.06)]" />
-              </div>
+              <LazyMount height={400} className="w-full">
+                <div className="w-full h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-black/[0.04] relative">
+                  <InteractiveMap 
+                    clubs={[club]} 
+                    selectedClubId={club.id}
+                    hoveredClubId={null}
+                    onSelectClub={() => {}}
+                    onHoverClub={() => {}}
+                    viewport={viewport}
+                    onViewportChange={setViewport}
+                  />
+                  {/* Subtle inner shadow overlay */}
+                  <div className="absolute inset-0 pointer-events-none rounded-3xl shadow-[inset_0_0_0_1px_rgba(0,0,0,0.06)]" />
+                </div>
+              </LazyMount>
             </section>
 
             {/* Reseñas de Google Maps Section */}
