@@ -14,7 +14,7 @@ export function Carousel({ title, subtitle, children }: CarouselProps) {
       {title && (
         <div className="px-5 mb-3 flex items-end justify-between">
           <div>
-            <h2 className="text-2xl font-display font-bold text-text-primary">
+            <h2 className="text-[26px] font-display font-black tracking-tight text-text-primary leading-none">
               {title}
             </h2>
           </div>

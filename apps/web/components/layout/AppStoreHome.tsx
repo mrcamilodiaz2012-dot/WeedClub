@@ -93,19 +93,19 @@ export function AppStoreHome() {
         <div className="flex items-center justify-center">
           <button 
             onClick={() => setIsLocationModalOpen(true)}
-            className="flex items-center gap-1 text-text-primary hover:opacity-80 transition-opacity"
+            className="h-[32px] px-3.5 bg-black/5 hover:bg-black/10 transition-colors rounded-full flex items-center gap-1.5 text-text-primary"
           >
-            <span className="font-bold text-[16px]">{selectedLocation ? selectedLocation.name : "Ubicación"}</span>
-            <ChevronDown size={20} className="text-text-primary mt-0.5" />
+            <span className="font-bold text-[14px]">{selectedLocation ? selectedLocation.name : "Ubicación"}</span>
+            <ChevronDown size={16} strokeWidth={2.5} className="text-text-primary" />
           </button>
         </div>
 
-        <div className="flex items-center justify-end gap-3">
-          <button className="flex items-center justify-center text-text-primary hover:opacity-80 transition-opacity">
-            <Bell size={24} strokeWidth={2} />
+        <div className="flex items-center justify-end gap-2">
+          <button className="w-[32px] h-[32px] rounded-full bg-black/5 hover:bg-black/10 transition-colors flex items-center justify-center text-text-primary">
+            <Bell size={16} strokeWidth={2.5} />
           </button>
-          <button className="w-8 h-8 rounded-full bg-background-secondary flex items-center justify-center text-text-primary hover:bg-black/10 transition-colors">
-            <UserCircle size={20} strokeWidth={2} />
+          <button className="w-[32px] h-[32px] rounded-full bg-black/5 hover:bg-black/10 transition-colors flex items-center justify-center text-text-primary">
+            <UserCircle size={18} strokeWidth={2.5} />
           </button>
         </div>
       </div>
@@ -136,7 +136,7 @@ export function AppStoreHome() {
               <div className={`w-[68px] h-[68px] rounded-full ${cat.color} flex items-center justify-center text-2xl overflow-hidden group-hover:-translate-y-0.5 group-active:scale-95 transition-all duration-300 shadow-[0_4px_14px_rgba(0,0,0,0.08)] group-hover:shadow-[0_6px_20px_rgba(0,0,0,0.12)]`}>
                 {cat.icon}
               </div>
-              <span className="text-[12px] font-medium text-text-primary">{cat.name}</span>
+              <span className="text-[12px] font-medium text-text-secondary tracking-tight">{cat.name}</span>
             </button>
           ))}
         </div>
@@ -157,8 +157,8 @@ export function AppStoreHome() {
                    <MapIcon size={11} strokeWidth={2.5} /> 1.2 km
                  </div>
 
-                 <button className="absolute top-3 right-3 bg-white/90 backdrop-blur-md text-text-primary p-1.5 rounded-full shadow-sm hover:scale-105 active:scale-95 transition-all">
-                   <Heart size={13} strokeWidth={2.5} />
+                 <button className="absolute top-3 right-3 w-[32px] h-[32px] bg-white/90 backdrop-blur-md text-text-primary rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.08)] flex items-center justify-center hover:scale-105 active:scale-95 transition-all">
+                   <Heart size={16} strokeWidth={2.5} />
                  </button>
 
                  {/* Soft Blur Overlay */}
@@ -166,9 +166,9 @@ export function AppStoreHome() {
                  
                  {/* Name & Location */}
                  <div className="absolute bottom-0 left-0 right-0 p-5 z-20 flex flex-col">
-                   <span className="text-[20px] font-black tracking-tighter text-white leading-tight mb-0.5">{club.name}</span>
-                   <span className="text-[13px] text-white/90 flex items-center gap-1.5 font-medium">
-                     <MapPin size={14} className="opacity-90" /> {club.city}
+                   <span className="text-[22px] font-black tracking-tighter text-white leading-tight mb-0">{club.name}</span>
+                   <span className="text-[13px] text-white/70 flex items-center gap-1.5 font-light">
+                     <MapPin size={14} className="opacity-70" /> {club.city}
                    </span>
                  </div>
                </div>
@@ -177,7 +177,7 @@ export function AppStoreHome() {
                <div className="w-full flex flex-col pt-5 pb-6 bg-[#F5F5F7] relative">
                  
                  <div className="px-4.5 mb-2.5">
-                   <span className="text-[10px] font-extrabold text-text-secondary/80 uppercase tracking-[0.1em]">Podrías encontrar...</span>
+                   <span className="text-[10px] font-bold text-text-tertiary/80 uppercase tracking-[0.15em]">Podrías encontrar...</span>
                  </div>
 
                  {/* Productos en Stock (Distribución Estática) */}
@@ -191,7 +191,7 @@ export function AppStoreHome() {
                         <div className="w-[52px] h-[52px] bg-background-base rounded-[16px] flex items-center justify-center p-1 shadow-sm border border-border-subtle group-active/icon:scale-95 transition-transform overflow-hidden">
                            <img src={flower.image} className="w-full h-full object-contain drop-shadow-sm scale-[1.15]" alt={flower.name} />
                         </div>
-                        <span className="text-[9.5px] font-medium text-text-primary text-center leading-tight truncate w-full px-0.5 tracking-wide">{flower.name}</span>
+                        <span className="text-[9.5px] font-normal text-text-secondary text-center leading-tight truncate w-full px-0.5 tracking-wide">{flower.name}</span>
                       </div>
                     ))}
                     
@@ -199,7 +199,7 @@ export function AppStoreHome() {
                       <div className="w-[52px] h-[52px] bg-background-secondary rounded-[16px] flex items-center justify-center border border-border-subtle group-active/icon:scale-95 transition-transform">
                          <span className="text-[15px] font-bold text-text-primary">+12</span>
                       </div>
-                      <span className="text-[9.5px] font-medium text-text-secondary text-center leading-tight w-full px-0.5 tracking-wide">Ver más</span>
+                      <span className="text-[9.5px] font-normal text-text-tertiary text-center leading-tight w-full px-0.5 tracking-wide">Ver más</span>
                     </div>
                  </div>
                </div>
@@ -256,9 +256,9 @@ export function AppStoreHome() {
                 <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full ${flower.color} ${flower.bg}`}>{flower.type}</span>
                 <button 
                   onClick={(e) => toggleLike(e, flower.id)}
-                  className="w-7 h-7 rounded-full border border-border-subtle/60 flex items-center justify-center text-text-secondary hover:text-red-500 hover:border-red-500 transition-colors bg-white z-20"
+                  className="w-[32px] h-[32px] rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-border-subtle/40 flex items-center justify-center text-text-secondary hover:text-red-500 transition-colors z-20"
                 >
-                  <Heart className={likedFlowers.has(flower.id) ? 'text-red-500 fill-red-500' : ''} size={14} />
+                  <Heart className={likedFlowers.has(flower.id) ? 'text-red-500 fill-red-500' : ''} size={16} strokeWidth={2.5} />
                 </button>
               </div>
               
@@ -269,14 +269,14 @@ export function AppStoreHome() {
               
               {/* Product Info */}
               <div className="flex flex-col gap-1.5 mt-2 pointer-events-none">
-                <h4 className="font-display font-bold text-[16px] text-text-primary leading-tight truncate">{flower.name}</h4>
+                <h4 className="font-display font-black text-[18px] tracking-tight text-text-primary leading-tight truncate">{flower.name}</h4>
                 <div className="flex gap-1.5">
                   <div className="bg-background-secondary rounded-md px-1.5 py-1 flex gap-1 items-center">
-                    <span className="text-[10px] font-semibold text-text-secondary">THC</span>
+                    <span className="text-[10px] font-medium text-text-tertiary">THC</span>
                     <span className="text-[11px] font-black text-text-primary">{flower.thc}</span>
                   </div>
                   <div className="bg-background-secondary rounded-md px-1.5 py-1 flex gap-1 items-center">
-                    <span className="text-[10px] font-semibold text-text-secondary">CBD</span>
+                    <span className="text-[10px] font-medium text-text-tertiary">CBD</span>
                     <span className="text-[11px] font-black text-text-primary">{flower.cbd}</span>
                   </div>
                 </div>
@@ -309,7 +309,7 @@ export function AppStoreHome() {
                  {/* Contenido inferior */}
                  <div className="absolute bottom-0 left-0 right-0 p-4 z-10 flex flex-col">
                    <div className="flex items-center gap-1.5 mb-1.5">
-                     <span className="text-[16px] font-black tracking-tight text-white leading-tight truncate drop-shadow-md">{club.name}</span>
+                     <span className="text-[18px] font-black tracking-tighter text-white leading-tight truncate drop-shadow-md">{club.name}</span>
                      <BadgeCheck className="w-[11px] h-[11px] text-[#1ed760] shrink-0 drop-shadow-md translate-y-[0.5px]" fill="currentColor" stroke="white" strokeWidth={2} />
                    </div>
                    
@@ -319,8 +319,8 @@ export function AppStoreHome() {
                          <Clock size={9} /> ABIERTO
                        </span>
                      </div>
-                     <div className="flex items-center gap-1 text-[11px] font-medium text-white/90 drop-shadow-sm">
-                       <MapPin size={11} className="opacity-80" /> {club.city}
+                     <div className="flex items-center gap-1 text-[11px] font-light text-white/70 drop-shadow-sm">
+                       <MapPin size={11} className="opacity-70" /> {club.city}
                      </div>
                    </div>
                  </div>
@@ -336,10 +336,10 @@ export function AppStoreHome() {
       {/* 6. Grow Shops (Listado mejorado) */}
       <div className="px-5 mt-8 mb-6">
         <div className="flex items-center justify-between mb-4 border-b border-border-subtle pb-2">
-          <h2 className="text-2xl font-display font-black text-text-primary flex items-center gap-2 tracking-tight">
+          <h2 className="text-[26px] font-display font-black text-text-primary flex items-center gap-2 tracking-tight leading-none">
             🌱 Grow Shops
           </h2>
-          <span className="text-[12px] font-bold text-brand-accent cursor-pointer hover:underline">Ver Todos</span>
+          <span className="text-[15px] font-semibold text-brand-accent cursor-pointer hover:opacity-80 transition-opacity">Ver Todos</span>
         </div>
         
         <div className="flex flex-col gap-3">
@@ -354,8 +354,8 @@ export function AppStoreHome() {
                 
                 {/* Info */}
                 <div className="ml-3.5 flex flex-col flex-1">
-                  <h3 className="text-[15px] font-black tracking-tight text-text-primary leading-tight mb-0.5">{shop.title}</h3>
-                  <span className="text-[12px] font-medium text-text-secondary line-clamp-1">{shop.subtitle}</span>
+                  <h3 className="text-[16px] font-black tracking-tighter text-text-primary leading-tight mb-0.5">{shop.title}</h3>
+                  <span className="text-[12px] font-normal text-text-tertiary line-clamp-1">{shop.subtitle}</span>
                   <div className="flex items-center gap-3 mt-1.5 text-[11px] font-bold text-text-tertiary">
                     <span className="flex items-center gap-1 text-amber-500 bg-amber-500/10 px-1.5 py-0.5 rounded-md"><span className="text-[10px]">★</span> {shop.rating}</span>
                     <span className="flex items-center gap-1"><MapPin size={10} className="text-text-secondary/70" /> {shop.city}</span>
@@ -364,7 +364,7 @@ export function AppStoreHome() {
                 
                 {/* Action button */}
                 <div className="shrink-0 ml-2">
-                  <button className="h-[32px] px-3.5 bg-white shadow-[0_2px_8px_rgba(0,0,0,0.04)] group-hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] transition-all duration-300 text-text-primary text-[11px] font-black uppercase tracking-wider rounded-full border border-border-subtle/30 flex items-center justify-center">
+                  <button className="h-[32px] px-4 bg-black/5 hover:bg-black/10 transition-colors duration-300 text-brand-accent text-[14px] font-bold rounded-full flex items-center justify-center">
                     Visitar
                   </button>
                 </div>
