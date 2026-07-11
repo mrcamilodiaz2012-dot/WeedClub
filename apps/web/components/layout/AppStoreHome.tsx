@@ -223,7 +223,7 @@ export function AppStoreHome() {
           { name: "Alicante", img: "/portadas-ciudades/alicante.webp" }
         ].map((city, idx) => (
           <div key={idx} className="w-[165px] shrink-0 snap-start cursor-pointer group hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 h-full">
-            <div className="w-full h-full aspect-square bg-[#F5F5F7] border border-border-subtle/40 rounded-[24px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.015)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] transition-all duration-300">
+            <div className="w-full h-full aspect-square bg-background-secondary border border-border-subtle/40 rounded-[24px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.015)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] transition-all duration-300">
                <img src={city.img} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={city.name} />
                
                {/* Pequeña opacidad oscura para que resalte el texto sin usar blur */}
@@ -295,7 +295,7 @@ export function AppStoreHome() {
         <Carousel title="🔝 Clubes Destacados">
           {filteredClubs.length > 0 ? filteredClubs.map((club) => (
             <Link key={club.id} href={`/clubs/${club.id}`} className="w-[184px] shrink-0 snap-start block group cursor-pointer hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 h-full">
-              <div className="w-full h-full aspect-[4/5] bg-[#F5F5F7] rounded-[24px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.015)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] border border-border-subtle/40 transition-shadow duration-300">
+              <div className="w-full h-full aspect-[4/5] bg-background-secondary rounded-[24px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.015)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] border border-border-subtle/40 transition-shadow duration-300">
                  <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt={club.name} />
                  
                  {/* Gradiente elegante inferior */}
@@ -312,12 +312,12 @@ export function AppStoreHome() {
                  <div className="absolute bottom-0 left-0 right-0 p-4 z-10 flex flex-col">
                    <div className="flex items-center gap-2 mb-2">
                      <span className="text-[18px] font-black tracking-tighter text-white leading-tight truncate drop-shadow-md">{club.name}</span>
-                     <BadgeCheck className="w-[11px] h-[11px] text-[#829986] shrink-0 drop-shadow-md translate-y-[0.5px]" fill="currentColor" stroke="white" strokeWidth={2} />
+                     <BadgeCheck className="w-[11px] h-[11px] text-[#1ed760] shrink-0 drop-shadow-md translate-y-[0.5px]" fill="currentColor" stroke="white" strokeWidth={2} />
                    </div>
                    
                    <div className="flex flex-col gap-2">
                      <div className="flex items-center gap-2">
-                       <span className="bg-[#829986]/20 border border-[#829986]/30 backdrop-blur-md text-[#829986] text-[9px] font-bold px-2 py-1 rounded flex items-center gap-1">
+                       <span className="bg-emerald-500/20 border border-emerald-500/30 backdrop-blur-md text-emerald-400 text-[9px] font-bold px-2 py-1 rounded flex items-center gap-1">
                          <Clock size={9} /> ABIERTO
                        </span>
                      </div>
@@ -360,7 +360,7 @@ export function AppStoreHome() {
                   <h3 className="text-[16px] font-black tracking-tighter text-text-primary leading-tight mb-1">{shop.title}</h3>
                   <span className="text-[12px] font-normal text-text-tertiary line-clamp-1">{shop.subtitle}</span>
                   <div className="flex items-center gap-4 mt-2 text-[11px] font-bold text-text-tertiary">
-                    <span className="flex items-center gap-1 text-[#BBA882] bg-[#BBA882]/15 px-2 py-1 rounded-md"><span className="text-[10px]">★</span> {shop.rating}</span>
+                    <span className="flex items-center gap-1 text-amber-500 bg-amber-500/10 px-2 py-1 rounded-md"><span className="text-[10px]">★</span> {shop.rating}</span>
                     <span className="flex items-center gap-1"><MapPin size={10} className="text-text-secondary/70" /> {shop.city}</span>
                   </div>
                 </div>
