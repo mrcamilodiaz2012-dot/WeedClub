@@ -49,10 +49,10 @@ export function AppStoreHome() {
   }, [selectedFlowerId]);
 
   const POPULAR_FLOWERS = [
-    { id: 1, name: "Purple Exotica 1", type: "ÍNDICA", thc: "24%", cbd: "0.2%", flavor: "Uva, Dulce", effect: "Relajante", color: "text-purple-600", bg: "bg-purple-50 border border-purple-100", image: "/weed/Colores%20Exoticos/E1.webp" },
-    { id: 2, name: "Neon Sativa 2", type: "SATIVA", thc: "26%", cbd: "0.1%", flavor: "Tropical", effect: "Energético", color: "text-orange-500", bg: "bg-orange-50 border border-orange-100", image: "/weed/Colores%20Exoticos/E2.webp" },
-    { id: 3, name: "Amnesia Haze", type: "HÍBRIDA", thc: "22%", cbd: "0.5%", flavor: "Cítrico, Pino", effect: "Creativo", color: "text-emerald-600", bg: "bg-emerald-50 border border-emerald-100", image: "/weed/Colores%20Naturales/N3.webp" },
-    { id: 4, name: "Gelato 33", type: "ÍNDICA", thc: "25%", cbd: "0.1%", flavor: "Fresa, Vainilla", effect: "Felicidad", color: "text-purple-600", bg: "bg-purple-50 border border-purple-100", image: "/weed/Colores%20Exoticos/E3.webp" }
+    { id: 1, name: "Purple Exotica 1", type: "ÍNDICA", thc: "24%", cbd: "0.2%", flavor: "Uva, Dulce", effect: "Relajante", color: "text-[#7B858B]", bg: "bg-[#7B858B]/10 border border-[#7B858B]/20", image: "/weed/Colores%20Exoticos/E1.webp" },
+    { id: 2, name: "Neon Sativa 2", type: "SATIVA", thc: "26%", cbd: "0.1%", flavor: "Tropical", effect: "Energético", color: "text-[#8BA08D]", bg: "bg-[#8BA08D]/10 border border-[#8BA08D]/20", image: "/weed/Colores%20Exoticos/E2.webp" },
+    { id: 3, name: "Amnesia Haze", type: "HÍBRIDA", thc: "22%", cbd: "0.5%", flavor: "Cítrico, Pino", effect: "Creativo", color: "text-[#959C88]", bg: "bg-[#959C88]/10 border border-[#959C88]/20", image: "/weed/Colores%20Naturales/N3.webp" },
+    { id: 4, name: "Gelato 33", type: "ÍNDICA", thc: "25%", cbd: "0.1%", flavor: "Fresa, Vainilla", effect: "Felicidad", color: "text-[#7B858B]", bg: "bg-[#7B858B]/10 border border-[#7B858B]/20", image: "/weed/Colores%20Exoticos/E3.webp" }
   ];
 
   const MOCK_CLUBS = [
@@ -83,8 +83,8 @@ export function AppStoreHome() {
   return (
     <div className="w-full h-full pb-32 overflow-y-auto bg-background-base">
       {/* Top Header (Not Sticky) */}
-      <div className="px-5 pt-4 pb-2 bg-background-base grid grid-cols-3 items-center">
-        <div className="flex items-center gap-1.5">
+      <div className="px-4 pt-4 pb-2 bg-background-base grid grid-cols-3 items-center">
+        <div className="flex items-center gap-2">
           <img src="/logo2.svg" alt="WeedClub" className="h-8 w-auto" />
           <span className="text-[25px] font-display font-bold tracking-tight text-text-primary leading-none" style={{ letterSpacing: '-0.03em' }}>Clubs</span>
         </div>
@@ -93,7 +93,7 @@ export function AppStoreHome() {
         <div className="flex items-center justify-center">
           <button 
             onClick={() => setIsLocationModalOpen(true)}
-            className="h-[32px] px-3.5 bg-black/5 hover:bg-black/10 transition-colors rounded-full flex items-center gap-1.5 text-text-primary"
+            className="h-[32px] px-4 bg-black/5 hover:bg-black/10 transition-colors rounded-full flex items-center gap-2 text-text-primary"
           >
             <span className="font-bold text-[14px]">{selectedLocation ? selectedLocation.name : "Ubicación"}</span>
             <ChevronDown size={16} strokeWidth={2} className="text-text-primary" />
@@ -111,8 +111,8 @@ export function AppStoreHome() {
       </div>
 
       {/* Search Bar (Sticky) */}
-      <div className="px-5 py-3 sticky top-0 bg-background-base z-40">
-        <div className="w-full h-[54px] bg-background-secondary rounded-full flex items-center px-5 gap-3 border border-transparent focus-within:border-border-subtle transition-colors">
+      <div className="px-4 py-4 sticky top-0 bg-background-base z-40">
+        <div className="w-full h-[54px] bg-background-secondary rounded-full flex items-center px-4 gap-4 border border-transparent focus-within:border-border-subtle transition-colors">
           <Search size={22} className="text-text-secondary shrink-0" />
           <input 
             type="text" 
@@ -123,14 +123,14 @@ export function AppStoreHome() {
       </div>
 
       {/* 1. Categorías (Stories) */}
-      <div className="pt-3 pb-4 w-full overflow-x-auto hide-scrollbar">
-        <div className="flex items-start gap-4 px-5 after:content-[''] after:w-[1px] after:shrink-0">
+      <div className="pt-4 pb-4 w-full overflow-x-auto hide-scrollbar">
+        <div className="flex items-start gap-4 px-4 after:content-[''] after:w-[1px] after:shrink-0">
           {[
-            { name: "Ciudades", color: "bg-sky-300", icon: <img src="/iconos/Ciudad.webp" alt="Ciudades" className="w-11 h-11 object-contain opacity-90" /> },
-            { name: "Top Clubs", color: "bg-orange-300", icon: <img src="/iconos/fuego.webp" alt="Top Clubs" className="w-11 h-11 object-contain opacity-90" /> },
-            { name: "Flores", color: "bg-emerald-300", icon: <img src="/iconos/flor.webp" alt="Flores" className="w-11 h-11 object-contain opacity-90" /> },
-            { name: "Eventos", color: "bg-purple-300", icon: <img src="/iconos/eventos.webp" alt="Eventos" className="w-11 h-11 object-contain opacity-90" /> },
-            { name: "Grow Shops", color: "bg-lime-300", icon: <img src="/iconos/grow.webp" alt="Grow Shops" className="w-11 h-11 object-contain opacity-90" /> }
+            { name: "Ciudades", color: "bg-[#EAECEB]", icon: <img src="/iconos/Ciudad.webp" alt="Ciudades" className="w-11 h-11 object-contain opacity-90" /> },
+            { name: "Top Clubs", color: "bg-[#EAEBE8]", icon: <img src="/iconos/fuego.webp" alt="Top Clubs" className="w-11 h-11 object-contain opacity-90" /> },
+            { name: "Flores", color: "bg-[#E5EAE6]", icon: <img src="/iconos/flor.webp" alt="Flores" className="w-11 h-11 object-contain opacity-90" /> },
+            { name: "Eventos", color: "bg-[#ECEAE8]", icon: <img src="/iconos/eventos.webp" alt="Eventos" className="w-11 h-11 object-contain opacity-90" /> },
+            { name: "Grow Shops", color: "bg-[#E6EAE6]", icon: <img src="/iconos/grow.webp" alt="Grow Shops" className="w-11 h-11 object-contain opacity-90" /> }
           ].map((cat, i) => (
             <button key={i} className="flex flex-col items-center gap-2 group">
               <div className={`w-[68px] h-[68px] rounded-full ${cat.color} flex items-center justify-center text-2xl overflow-hidden group-hover:-translate-y-0.5 group-active:scale-95 transition-all duration-300 shadow-[0_4px_14px_rgba(0,0,0,0.02)] group-hover:shadow-[0_6px_20px_rgba(0,0,0,0.04)]`}>
@@ -142,7 +142,7 @@ export function AppStoreHome() {
         </div>
       </div>
 
-      <div className="h-px bg-black/[0.04] mx-5 my-6" />
+      <div className="h-px bg-black/[0.04] mx-4 my-8" />
 
       {/* 2. Cerca de Ti (Rectángulos Verticales 4:5) */}
       <Carousel title="📍 Cerca de Ti">
@@ -155,11 +155,11 @@ export function AppStoreHome() {
                  <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="w-full h-full object-cover group-active:scale-105 transition-transform duration-700" alt="" />
                  <div className="absolute inset-0 bg-black/10"></div>
                  
-                 <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-text-primary text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-[0_2px_8px_rgba(0,0,0,0.02)]">
+                 <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md text-text-primary text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-[0_2px_8px_rgba(0,0,0,0.02)]">
                    <MapIcon size={11} strokeWidth={2} /> 1.2 km
                  </div>
 
-                 <button className="absolute top-3 right-3 w-[32px] h-[32px] bg-white/90 backdrop-blur-md text-text-primary rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.02)] flex items-center justify-center hover:scale-105 active:scale-95 transition-all">
+                 <button className="absolute top-4 right-4 w-[32px] h-[32px] bg-white/90 backdrop-blur-md text-text-primary rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.02)] flex items-center justify-center hover:scale-105 active:scale-95 transition-all">
                    <Heart size={16} strokeWidth={2} />
                  </button>
 
@@ -167,29 +167,29 @@ export function AppStoreHome() {
                  <div className="absolute bottom-0 left-0 right-0 h-[70%] bg-gradient-to-t from-black/80 via-black/40 to-transparent backdrop-blur-[8px] [mask-image:linear-gradient(to_top,black_10%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_top,black_10%,transparent_100%)] z-10" />
                  
                  {/* Name & Location */}
-                 <div className="absolute bottom-0 left-0 right-0 p-5 z-20 flex flex-col">
+                 <div className="absolute bottom-0 left-0 right-0 p-4 z-20 flex flex-col">
                    <span className="text-[22px] font-black tracking-tighter text-white leading-tight mb-0">{club.name}</span>
-                   <span className="text-[13px] text-white/70 flex items-center gap-1.5 font-light">
+                   <span className="text-[13px] text-white/70 flex items-center gap-2 font-light">
                      <MapPin size={14} className="opacity-70" /> {club.city}
                    </span>
                  </div>
                </div>
 
                {/* Mitad Inferior: Sección Blanca */}
-               <div className="w-full flex flex-col pt-5 pb-6 bg-[#F5F5F7] relative">
+               <div className="w-full flex flex-col pt-6 pb-6 bg-[#F5F5F7] relative">
                  
-                 <div className="px-4.5 mb-2.5">
+                 <div className="px-4 mb-2">
                    <span className="text-[10px] font-bold text-text-tertiary/80 uppercase tracking-[0.15em]">Podrías encontrar...</span>
                  </div>
 
                  {/* Productos en Stock (Distribución Estática) */}
-                 <div className="flex justify-between w-full px-4.5 pb-1">
+                 <div className="flex justify-between w-full px-4 pb-2">
                     {[
                       { id: 1, name: "Purple Exotica", image: "/weed/Colores%20Exoticos/E1.webp" },
                       { id: 2, name: "Neon Sativa", image: "/weed/Colores%20Exoticos/E2.webp" },
                       { id: 3, name: "Amnesia Haze", image: "/weed/Colores%20Naturales/N3.webp" }
                     ].map((flower) => (
-                      <div key={flower.id} className="flex flex-col items-center gap-1.5 shrink-0 w-[52px] group/icon cursor-pointer">
+                      <div key={flower.id} className="flex flex-col items-center gap-2 shrink-0 w-[52px] group/icon cursor-pointer">
                         <div className="w-[52px] h-[52px] bg-background-base rounded-[16px] flex items-center justify-center p-1 shadow-[0_2px_8px_rgba(0,0,0,0.02)] border border-border-subtle group-active/icon:scale-95 transition-transform overflow-hidden">
                            <img src={flower.image} className="w-full h-full object-contain drop-shadow-sm scale-[1.15]" alt={flower.name} />
                         </div>
@@ -197,7 +197,7 @@ export function AppStoreHome() {
                       </div>
                     ))}
                     
-                    <div className="flex flex-col items-center gap-1.5 shrink-0 w-[52px] group/icon cursor-pointer">
+                    <div className="flex flex-col items-center gap-2 shrink-0 w-[52px] group/icon cursor-pointer">
                       <div className="w-[52px] h-[52px] bg-background-secondary rounded-[16px] flex items-center justify-center border border-border-subtle group-active/icon:scale-95 transition-transform">
                          <span className="text-[15px] font-bold text-text-primary">+12</span>
                       </div>
@@ -214,7 +214,7 @@ export function AppStoreHome() {
         )}
       </Carousel>
 
-      <div className="h-px bg-black/[0.04] mx-5 my-6" />
+      <div className="h-px bg-black/[0.04] mx-4 my-8" />
 
       {/* 3. Ciudades Populares (Círculos) */}
       <Carousel title="🌍 Ciudades">
@@ -225,7 +225,7 @@ export function AppStoreHome() {
           { name: "Alicante", img: "/portadas-ciudades/alicante.webp" }
         ].map((city, idx) => (
           <div key={idx} className="w-[165px] shrink-0 snap-start cursor-pointer group hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 h-full">
-            <div className="w-full h-full aspect-square bg-background-secondary rounded-[24px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.015)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] ring-1 ring-border-subtle group-hover:ring-brand-accent/50 transition-all duration-300">
+            <div className="w-full h-full aspect-square bg-[#F5F5F7] border border-border-subtle/40 rounded-[24px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.015)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] transition-all duration-300">
                <img src={city.img} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={city.name} />
                
                {/* Pequeña opacidad oscura para que resalte el texto sin usar blur */}
@@ -235,31 +235,31 @@ export function AppStoreHome() {
                <div className="absolute inset-0 rounded-[24px] shadow-[inset_0_0_24px_rgba(0,0,0,0.08)] pointer-events-none"></div>
                
                {/* Nombre de la Ciudad en el Centro */}
-               <div className="absolute inset-0 flex items-center justify-center p-5 z-20">
-                 <span className="text-white font-display font-bold text-[24px] tracking-wide leading-tight drop-shadow-md text-center">{city.name}</span>
+               <div className="absolute inset-0 flex items-center justify-center p-4 z-20">
+                 <span className="text-white font-display font-black tracking-tighter text-[24px] leading-tight drop-shadow-md text-center">{city.name}</span>
                </div>
             </div>
           </div>
         ))}
       </Carousel>
 
-      <div className="h-px bg-black/[0.04] mx-5 my-6" />
+      <div className="h-px bg-black/[0.04] mx-4 my-8" />
 
       {/* 4. Flores Populares */}
       <Carousel title="🔥 Flores Populares">
         {POPULAR_FLOWERS.map((flower) => (
           <div key={flower.id} className="w-[180px] shrink-0 snap-start h-full">
             <div 
-              className="w-full h-full bg-[#F5F5F7] border border-border-subtle/60 rounded-[24px] p-4 relative flex flex-col shadow-[0_4px_20px_rgba(0,0,0,0.01)] cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:-translate-y-0.5 transition-all duration-300"
+              className="w-full h-full bg-[#F5F5F7] border border-border-subtle/40 rounded-[24px] p-4 relative flex flex-col shadow-[0_8px_30px_rgba(0,0,0,0.015)] cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:-translate-y-0.5 transition-all duration-300"
               onClick={() => setSelectedFlowerId(flower.id)}
             >
               {/* Background Glow */}
               <div className="absolute inset-0 rounded-[24px] overflow-hidden pointer-events-none">
-                <div className={`absolute top-12 left-1/2 -translate-x-1/2 w-32 h-32 rounded-full blur-[35px] opacity-25 transition-colors duration-700 ${flower.type === 'SATIVA' ? 'bg-amber-400' : flower.type === 'ÍNDICA' ? 'bg-purple-400' : 'bg-emerald-400'}`} />
+                <div className={`absolute top-12 left-1/2 -translate-x-1/2 w-32 h-32 rounded-full blur-[35px] opacity-20 transition-colors duration-700 ${flower.type === 'SATIVA' ? 'bg-[#8BA08D]' : flower.type === 'ÍNDICA' ? 'bg-[#7B858B]' : 'bg-[#959C88]'}`} />
               </div>
 
               <div className="flex justify-between items-start z-10 relative">
-                <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full ${flower.color} ${flower.bg}`}>{flower.type}</span>
+                <span className={`text-[10px] font-bold px-2 py-1 rounded-full ${flower.color} ${flower.bg}`}>{flower.type}</span>
                 <button 
                   onClick={(e) => toggleLike(e, flower.id)}
                   className="w-[32px] h-[32px] rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.015)] border border-border-subtle/40 flex items-center justify-center text-text-secondary hover:text-red-500 transition-colors z-20"
@@ -274,14 +274,14 @@ export function AppStoreHome() {
               </div>
               
               {/* Product Info */}
-              <div className="flex flex-col gap-1.5 mt-2 pointer-events-none">
-                <h4 className="font-display font-black text-[18px] tracking-tight text-text-primary leading-tight truncate">{flower.name}</h4>
-                <div className="flex gap-1.5">
-                  <div className="bg-transparent border border-border-subtle/50 rounded-md px-1.5 py-0.5 flex gap-1 items-center">
+              <div className="flex flex-col gap-2 mt-2 pointer-events-none">
+                <h4 className="font-display font-black text-[18px] tracking-tighter text-text-primary leading-tight truncate">{flower.name}</h4>
+                <div className="flex gap-2">
+                  <div className="bg-transparent border border-border-subtle/50 rounded-md px-2 py-1 flex gap-1 items-center">
                     <span className="text-[9px] font-medium text-text-tertiary">THC</span>
                     <span className="text-[10px] font-bold text-text-secondary">{flower.thc}</span>
                   </div>
-                  <div className="bg-transparent border border-border-subtle/50 rounded-md px-1.5 py-0.5 flex gap-1 items-center">
+                  <div className="bg-transparent border border-border-subtle/50 rounded-md px-2 py-1 flex gap-1 items-center">
                     <span className="text-[9px] font-medium text-text-tertiary">CBD</span>
                     <span className="text-[10px] font-bold text-text-secondary">{flower.cbd}</span>
                   </div>
@@ -292,14 +292,14 @@ export function AppStoreHome() {
         ))}
       </Carousel>
 
-      <div className="h-px bg-black/[0.04] mx-5 my-6" />
+      <div className="h-px bg-black/[0.04] mx-4 my-8" />
 
       {/* 5. Clubes Destacados (Posters Verticales) */}
       <div>
         <Carousel title="🔝 Clubes Destacados">
           {filteredClubs.length > 0 ? filteredClubs.map((club) => (
             <Link key={club.id} href={`/clubs/${club.id}`} className="w-[184px] shrink-0 snap-start block group cursor-pointer hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 h-full">
-              <div className="w-full h-full aspect-[4/5] rounded-[24px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.015)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] border border-border-subtle/50 bg-background-secondary transition-shadow duration-300">
+              <div className="w-full h-full aspect-[4/5] bg-[#F5F5F7] rounded-[24px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.015)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] border border-border-subtle/40 transition-shadow duration-300">
                  <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt={club.name} />
                  
                  {/* Gradiente elegante inferior */}
@@ -308,20 +308,20 @@ export function AppStoreHome() {
 
 
                  {/* Top Badge (Distancia) */}
-                 <div className="absolute top-2.5 left-2.5 bg-black/40 backdrop-blur-md border border-white/20 text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-sm z-10 flex items-center gap-1">
+                 <div className="absolute top-2 left-2 bg-black/40 backdrop-blur-md border border-white/20 text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-sm z-10 flex items-center gap-1">
                    <Navigation size={9} className="opacity-90" /> 1.2 km
                  </div>
 
                  {/* Contenido inferior */}
                  <div className="absolute bottom-0 left-0 right-0 p-4 z-10 flex flex-col">
-                   <div className="flex items-center gap-1.5 mb-1.5">
+                   <div className="flex items-center gap-2 mb-2">
                      <span className="text-[18px] font-black tracking-tighter text-white leading-tight truncate drop-shadow-md">{club.name}</span>
-                     <BadgeCheck className="w-[11px] h-[11px] text-[#1ed760] shrink-0 drop-shadow-md translate-y-[0.5px]" fill="currentColor" stroke="white" strokeWidth={2} />
+                     <BadgeCheck className="w-[11px] h-[11px] text-[#829986] shrink-0 drop-shadow-md translate-y-[0.5px]" fill="currentColor" stroke="white" strokeWidth={2} />
                    </div>
                    
-                   <div className="flex flex-col gap-1.5">
-                     <div className="flex items-center gap-1.5">
-                       <span className="bg-emerald-500/20 border border-emerald-500/30 backdrop-blur-md text-emerald-400 text-[9px] font-bold px-1.5 py-0.5 rounded flex items-center gap-1">
+                   <div className="flex flex-col gap-2">
+                     <div className="flex items-center gap-2">
+                       <span className="bg-[#829986]/20 border border-[#829986]/30 backdrop-blur-md text-[#829986] text-[9px] font-bold px-2 py-1 rounded flex items-center gap-1">
                          <Clock size={9} /> ABIERTO
                        </span>
                      </div>
@@ -339,10 +339,10 @@ export function AppStoreHome() {
         </Carousel>
       </div>
 
-      <div className="h-px bg-black/[0.04] mx-5 my-6" />
+      <div className="h-px bg-black/[0.04] mx-4 my-8" />
 
       {/* 6. Grow Shops (Listado mejorado) */}
-      <div className="px-5 mb-6">
+      <div className="px-4 mb-8">
         <div className="flex items-center justify-between mb-4 border-b border-border-subtle pb-2">
           <h2 className="text-[26px] font-display font-black text-text-primary flex items-center gap-2 tracking-tight leading-none">
             🌱 Grow Shops
@@ -350,10 +350,10 @@ export function AppStoreHome() {
           <span className="text-[15px] font-semibold text-brand-accent cursor-pointer hover:opacity-80 transition-opacity">Ver Todos</span>
         </div>
         
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-4">
           {filteredGrowShops.length > 0 ? filteredGrowShops.map(shop => (
             <Link key={shop.id} href={`/shops/${shop.id}`} className="block group active:scale-[0.98] transition-transform">
-              <div className="w-full flex items-center p-4 bg-[#F5F5F7] border border-border-subtle/50 rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.01)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] group-hover:-translate-y-0.5 transition-all duration-300">
+              <div className="w-full flex items-center p-4 bg-[#F5F5F7] border border-border-subtle/40 rounded-[24px] shadow-[0_8px_30px_rgba(0,0,0,0.015)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] group-hover:-translate-y-0.5 transition-all duration-300">
                 {/* Img */}
                 <div className="w-[64px] h-[64px] shrink-0 rounded-[12px] overflow-hidden relative shadow-inner bg-background-secondary">
                   <img src={shop.img} alt={shop.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
@@ -361,11 +361,11 @@ export function AppStoreHome() {
                 </div>
                 
                 {/* Info */}
-                <div className="ml-3.5 flex flex-col flex-1">
-                  <h3 className="text-[16px] font-black tracking-tighter text-text-primary leading-tight mb-0.5">{shop.title}</h3>
+                <div className="ml-4 flex flex-col flex-1">
+                  <h3 className="text-[16px] font-black tracking-tighter text-text-primary leading-tight mb-1">{shop.title}</h3>
                   <span className="text-[12px] font-normal text-text-tertiary line-clamp-1">{shop.subtitle}</span>
-                  <div className="flex items-center gap-3 mt-1.5 text-[11px] font-bold text-text-tertiary">
-                    <span className="flex items-center gap-1 text-amber-500 bg-amber-500/10 px-1.5 py-0.5 rounded-md"><span className="text-[10px]">★</span> {shop.rating}</span>
+                  <div className="flex items-center gap-4 mt-2 text-[11px] font-bold text-text-tertiary">
+                    <span className="flex items-center gap-1 text-[#BBA882] bg-[#BBA882]/15 px-2 py-1 rounded-md"><span className="text-[10px]">★</span> {shop.rating}</span>
                     <span className="flex items-center gap-1"><MapPin size={10} className="text-text-secondary/70" /> {shop.city}</span>
                   </div>
                 </div>
@@ -424,7 +424,7 @@ export function AppStoreHome() {
           >
             {POPULAR_FLOWERS.map((flower, idx) => {
               const isActive = flower.id === activeModalId;
-              const glowColor = flower.type === 'SATIVA' ? 'bg-amber-400' : flower.type === 'ÍNDICA' ? 'bg-purple-400' : 'bg-emerald-400';
+              const glowColor = flower.type === 'SATIVA' ? 'bg-[#8BA08D]' : flower.type === 'ÍNDICA' ? 'bg-[#7B858B]' : 'bg-[#959C88]';
               
               return (
                 <div 
@@ -453,7 +453,7 @@ export function AppStoreHome() {
                     {/* Header Tags */}
                     <div className="absolute top-6 left-6 right-6 flex items-center justify-between z-20">
                       <div className="flex items-center gap-2">
-                        <span className={`bg-white/80 border border-black/5 backdrop-blur-md text-[10px] uppercase tracking-[0.2em] font-bold px-3 py-1.5 rounded-full shadow-sm ${flower.color}`}>
+                        <span className={`bg-white/80 border border-black/5 backdrop-blur-md text-[10px] uppercase tracking-[0.2em] font-bold px-4 py-2 rounded-full shadow-sm ${flower.color}`}>
                           {flower.type}
                         </span>
                       </div>
@@ -490,12 +490,12 @@ export function AppStoreHome() {
                       <div className="space-y-4">
                         {/* THC / CBD Glass Panel */}
                         <div className="bg-white/60 border border-white/80 backdrop-blur-xl rounded-[24px] p-5 flex items-center justify-around shadow-[0_4px_24px_rgba(0,0,0,0.03)]">
-                          <div className="flex flex-col items-center gap-1.5">
+                          <div className="flex flex-col items-center gap-2">
                             <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">THC</span>
                             <span className="text-xl font-display font-bold text-gray-900">{flower.thc}</span>
                           </div>
                           <div className="w-px h-10 bg-gray-200" />
-                          <div className="flex flex-col items-center gap-1.5">
+                          <div className="flex flex-col items-center gap-2">
                             <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">CBD</span>
                             <span className="text-xl font-display font-bold text-gray-900">{flower.cbd}</span>
                           </div>
@@ -521,7 +521,7 @@ export function AppStoreHome() {
           </div>
           
           {/* Pagination Dots */}
-          <div className="absolute bottom-12 md:bottom-16 left-0 right-0 flex justify-center gap-2.5 z-10 pointer-events-none">
+          <div className="absolute bottom-12 md:bottom-16 left-0 right-0 flex justify-center gap-2 z-10 pointer-events-none">
             {POPULAR_FLOWERS.map((flower) => (
               <div 
                 key={flower.id}
