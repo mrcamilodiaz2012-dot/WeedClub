@@ -31,6 +31,7 @@ export function TabPhotosCarousel({ club }: { club: Club }) {
               i === currentIndex ? 'opacity-100 relative z-10' : 'opacity-0 absolute inset-0 z-0'
             }`}
             priority={i === 0}
+            sizes="(max-width: 768px) 100vw, 800px"
           />
         ))}
         {/* Counter */}
@@ -55,6 +56,7 @@ export function TabPhotosCarousel({ club }: { club: Club }) {
               src={url}
               alt={`Thumbnail ${i + 1}`}
               fill
+              sizes="72px"
               className="object-cover"
             />
           </button>

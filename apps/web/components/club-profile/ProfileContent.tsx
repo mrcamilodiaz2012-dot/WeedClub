@@ -2,13 +2,15 @@
 import React, { useState, useEffect } from 'react';
 import type { Club } from '@/types';
 import Image from 'next/image';
-import { InteractiveMap } from '../map/InteractiveMap';
-import { TabInfo } from './tabs/TabInfo';
-import { TabPhotos } from './tabs/TabPhotos';
-import { TabPhotosCarousel } from './tabs/TabPhotosCarousel';
-import { TabRules } from './tabs/TabRules';
-import { TabMembership } from './tabs/TabMembership';
-import { TabReviews } from './tabs/TabReviews';
+import dynamic from 'next/dynamic';
+
+const InteractiveMap = dynamic(() => import('../map/InteractiveMap').then(mod => mod.InteractiveMap), { ssr: false, loading: () => <div className="w-full h-full bg-gray-100 animate-pulse rounded-3xl" /> });
+const TabInfo = dynamic(() => import('./tabs/TabInfo').then(mod => mod.TabInfo));
+const TabPhotos = dynamic(() => import('./tabs/TabPhotos').then(mod => mod.TabPhotos));
+const TabPhotosCarousel = dynamic(() => import('./tabs/TabPhotosCarousel').then(mod => mod.TabPhotosCarousel));
+const TabRules = dynamic(() => import('./tabs/TabRules').then(mod => mod.TabRules));
+const TabMembership = dynamic(() => import('./tabs/TabMembership').then(mod => mod.TabMembership));
+const TabReviews = dynamic(() => import('./tabs/TabReviews').then(mod => mod.TabReviews));
 import { MapPin, Star, X, Heart } from 'lucide-react';
 
 interface ProfileContentProps {
@@ -140,24 +142,33 @@ export function ProfileContent({ club }: ProfileContentProps) {
                   >
                     <div className="w-full h-[170px] flex items-center justify-center pt-4 relative">
                       {/* Background Glow */}
-                      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 rounded-full blur-[35px] opacity-25 transition-colors duration-700 ${varie.type === 'Sativa' ? 'bg-amber-400' : varie.type === 'Índica' ? 'bg-purple-400' : 'bg-emerald-400'}`} />
+                      <div className="absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center">
+                        <div 
+                          className="w-40 h-40 transition-colors duration-700" 
+                          style={{
+                            background: varie.type === 'Sativa' 
+                              ? 'radial-gradient(circle, rgba(251,191,36,0.35) 0%, rgba(251,191,36,0) 65%)' 
+                              : varie.type === 'Índica' 
+                                ? 'radial-gradient(circle, rgba(192,132,252,0.35) 0%, rgba(192,132,252,0) 65%)' 
+                                : 'radial-gradient(circle, rgba(52,211,153,0.35) 0%, rgba(52,211,153,0) 65%)'
+                          }} 
+                        />
                       </div>
                       <Image 
                         src={varie.image} 
                         alt={varie.name} 
                         width={120} 
                         height={120} 
-                        className="object-contain drop-shadow-[0_15px_15px_rgba(0,0,0,0.25)] group-hover:scale-110 group-hover:drop-shadow-[0_25px_25px_rgba(0,0,0,0.4)] transition-all duration-500" 
+                        className="object-contain drop-shadow-md group-hover:scale-110 group-hover:drop-shadow-xl transition-all duration-500" 
                       />
                       <div className="absolute top-3 left-3">
-                        <span className={`bg-white/90 backdrop-blur-md text-[10px] uppercase tracking-wider font-bold px-2.5 py-1 rounded-full shadow-sm ${varie.color}`}>
+                        <span className={`bg-white/95 text-[10px] uppercase tracking-wider font-bold px-2.5 py-1 rounded-full shadow-sm ${varie.color}`}>
                           {varie.type}
                         </span>
                       </div>
                       <button 
                         onClick={(e) => toggleLike(e, varie.id)}
-                        className="absolute top-3 right-3 bg-white/90 border border-black/5 backdrop-blur-md w-7 h-7 rounded-full shadow-sm flex items-center justify-center hover:scale-110 active:scale-95 transition-all"
+                        className="absolute top-3 right-3 bg-white/95 border border-black/5 w-7 h-7 rounded-full shadow-sm flex items-center justify-center hover:scale-110 active:scale-95 transition-all"
                       >
                         <Heart 
                           className={`w-3.5 h-3.5 transition-colors ${
@@ -333,24 +344,33 @@ export function ProfileContent({ club }: ProfileContentProps) {
                 >
                   <div className="w-full h-[140px] md:h-[180px] flex items-center justify-center pt-2 relative">
                     {/* Background Glow */}
-                    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                      <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 md:w-32 md:h-32 rounded-full blur-[35px] opacity-25 transition-colors duration-700 ${varie.type === 'Sativa' ? 'bg-amber-400' : varie.type === 'Índica' ? 'bg-purple-400' : 'bg-emerald-400'}`} />
+                    <div className="absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center">
+                      <div 
+                        className="w-32 h-32 md:w-48 md:h-48 transition-colors duration-700" 
+                        style={{
+                          background: varie.type === 'Sativa' 
+                            ? 'radial-gradient(circle, rgba(251,191,36,0.35) 0%, rgba(251,191,36,0) 65%)' 
+                            : varie.type === 'Índica' 
+                              ? 'radial-gradient(circle, rgba(192,132,252,0.35) 0%, rgba(192,132,252,0) 65%)' 
+                              : 'radial-gradient(circle, rgba(52,211,153,0.35) 0%, rgba(52,211,153,0) 65%)'
+                        }} 
+                      />
                     </div>
                     <Image 
                       src={varie.image} 
                       alt={varie.name} 
                       width={120} 
                       height={120} 
-                      className="object-contain drop-shadow-[0_12px_16px_rgba(0,0,0,0.15)] group-hover:scale-110 group-hover:drop-shadow-[0_20px_20px_rgba(0,0,0,0.25)] transition-all duration-500 w-[100px] md:w-[130px]" 
+                      className="object-contain drop-shadow-md group-hover:scale-110 group-hover:drop-shadow-xl transition-all duration-500 w-[100px] md:w-[130px]" 
                     />
                     <div className="absolute top-3 left-3">
-                      <span className={`bg-white/90 backdrop-blur-md text-[8px] md:text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-md shadow-sm ${varie.color}`}>
+                      <span className={`bg-white/95 text-[8px] md:text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-md shadow-sm ${varie.color}`}>
                         {varie.type}
                       </span>
                     </div>
                     <button 
                       onClick={(e) => toggleLike(e, varie.id)}
-                      className="absolute top-3 right-3 bg-white/90 border border-black/5 backdrop-blur-md w-6 h-6 md:w-7 md:h-7 rounded-full shadow-sm flex items-center justify-center hover:scale-110 active:scale-95 transition-all"
+                      className="absolute top-3 right-3 bg-white/95 border border-black/5 w-6 h-6 md:w-7 md:h-7 rounded-full shadow-sm flex items-center justify-center hover:scale-110 active:scale-95 transition-all"
                     >
                       <Heart 
                         className={`w-3 h-3 md:w-3.5 md:h-3.5 transition-colors ${
@@ -456,8 +476,6 @@ export function ProfileContent({ club }: ProfileContentProps) {
           >
             {FLOWERS_DATA.map((flower, idx) => {
               const isActive = flower.id === activeModalId;
-              const glowColor = flower.type === 'Sativa' ? 'bg-amber-400' : flower.type === 'Índica' ? 'bg-emerald-400' : 'bg-purple-400';
-              
               return (
                 <div 
                   key={flower.id} 
@@ -478,20 +496,29 @@ export function ProfileContent({ club }: ProfileContentProps) {
                   <div className="absolute inset-0 bg-gradient-to-br from-white via-[#fafafa] to-[#f4f4f5]" />
                   
                   {/* Atmospheric Glow */}
-                  <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 rounded-full blur-[80px] opacity-25 transition-colors duration-700 ${glowColor}`} />
+                  <div 
+                    className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[400px] transition-colors duration-700 pointer-events-none flex justify-center" 
+                    style={{
+                      background: flower.type === 'Sativa' 
+                        ? 'radial-gradient(ellipse at top, rgba(251,191,36,0.3) 0%, rgba(251,191,36,0) 70%)' 
+                        : flower.type === 'Índica' 
+                          ? 'radial-gradient(ellipse at top, rgba(192,132,252,0.3) 0%, rgba(192,132,252,0) 70%)' 
+                          : 'radial-gradient(ellipse at top, rgba(52,211,153,0.3) 0%, rgba(52,211,153,0) 70%)'
+                    }}
+                  />
                   
                   {/* Content */}
                   <div className="relative z-10 flex flex-col h-full">
                     {/* Header Tags */}
                     <div className="absolute top-6 left-6 right-6 flex items-center justify-between z-20">
                       <div className="flex items-center gap-2">
-                        <span className={`bg-white/80 border border-black/5 backdrop-blur-md text-[10px] uppercase tracking-[0.2em] font-bold px-3 py-1.5 rounded-full shadow-sm ${flower.color}`}>
+                        <span className={`bg-white/90 border border-black/5 text-[10px] uppercase tracking-[0.2em] font-bold px-3 py-1.5 rounded-full shadow-sm ${flower.color}`}>
                           {flower.type}
                         </span>
                       </div>
                       <button 
                         onClick={(e) => toggleLike(e, flower.id)}
-                        className="bg-white/80 border border-black/5 backdrop-blur-md w-8 h-8 rounded-full shadow-sm flex items-center justify-center hover:scale-110 active:scale-95 transition-all"
+                        className="bg-white/90 border border-black/5 w-8 h-8 rounded-full shadow-sm flex items-center justify-center hover:scale-110 active:scale-95 transition-all"
                       >
                         <Heart 
                           className={`w-4 h-4 transition-colors ${
