@@ -136,9 +136,13 @@ export function ProfileContent({ club }: ProfileContentProps) {
                   <div 
                     key={varie.id} 
                     onClick={() => setSelectedFlowerId(varie.id)}
-                    className="w-[220px] shrink-0 bg-white rounded-[24px] border border-black/[0.04] shadow-[0_4px_20px_rgba(0,0,0,0.04)] overflow-hidden group cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300"
+                    className="w-[220px] shrink-0 bg-[#F5F5F7] rounded-[24px] border border-black/[0.04] shadow-[0_8px_30px_rgba(0,0,0,0.015)] overflow-hidden group cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:-translate-y-0.5 transition-all duration-300"
                   >
-                    <div className="w-full h-[170px] flex items-center justify-center pt-4 relative bg-gradient-to-b from-gray-50/50 to-white">
+                    <div className="w-full h-[170px] flex items-center justify-center pt-4 relative">
+                      {/* Background Glow */}
+                      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 rounded-full blur-[35px] opacity-25 transition-colors duration-700 ${varie.type === 'Sativa' ? 'bg-amber-400' : varie.type === 'Índica' ? 'bg-purple-400' : 'bg-emerald-400'}`} />
+                      </div>
                       <Image 
                         src={varie.image} 
                         alt={varie.name} 
@@ -325,9 +329,13 @@ export function ProfileContent({ club }: ProfileContentProps) {
                 <div 
                   key={varie.id} 
                   onClick={() => setSelectedFlowerId(varie.id)}
-                  className="w-full bg-white rounded-[20px] md:rounded-[24px] border border-black/[0.04] shadow-[0_4px_16px_rgba(0,0,0,0.03)] overflow-hidden group cursor-pointer hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300 flex flex-col"
+                  className="w-full bg-[#F5F5F7] rounded-[24px] border border-black/[0.04] shadow-[0_8px_30px_rgba(0,0,0,0.015)] overflow-hidden group cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col"
                 >
-                  <div className="w-full h-[140px] md:h-[180px] flex items-center justify-center pt-2 relative bg-gradient-to-b from-gray-50/80 to-white">
+                  <div className="w-full h-[140px] md:h-[180px] flex items-center justify-center pt-2 relative">
+                    {/* Background Glow */}
+                    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                      <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 md:w-32 md:h-32 rounded-full blur-[35px] opacity-25 transition-colors duration-700 ${varie.type === 'Sativa' ? 'bg-amber-400' : varie.type === 'Índica' ? 'bg-purple-400' : 'bg-emerald-400'}`} />
+                    </div>
                     <Image 
                       src={varie.image} 
                       alt={varie.name} 
@@ -351,7 +359,7 @@ export function ProfileContent({ club }: ProfileContentProps) {
                       />
                     </button>
                   </div>
-                  <div className="p-3 md:p-5 pt-2 flex flex-col gap-2 flex-1 justify-between border-t border-gray-50/50">
+                  <div className="p-3 md:p-5 pt-2 flex flex-col gap-2 flex-1 justify-between">
                     <h3 className="font-display font-bold text-gray-900 text-sm md:text-lg leading-tight line-clamp-1">{varie.name}</h3>
                     
                     <div className="flex items-center gap-1.5 md:gap-2">
