@@ -145,8 +145,8 @@ export function AppStoreHome() {
       {/* 2. Cerca de Ti (Rectángulos Verticales 4:5) */}
       <Carousel title="📍 Cerca de Ti">
         {filteredClubs.length > 0 ? filteredClubs.map((club) => (
-          <Link key={club.id} href={`/clubs/${club.id}`} className="w-[246px] shrink-0 snap-start block">
-            <div className="w-full flex flex-col bg-[#F5F5F7] rounded-[24px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.015)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] transition-shadow duration-300 border border-border-subtle/40">
+          <Link key={club.id} href={`/clubs/${club.id}`} className="w-[246px] shrink-0 snap-start block h-full">
+            <div className="w-full h-full flex flex-col bg-[#F5F5F7] rounded-[24px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.015)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] transition-shadow duration-300 border border-border-subtle/40">
                
                {/* Mitad Superior: Imagen */}
                <div className="w-full h-[150px] relative overflow-hidden group">
@@ -220,15 +220,15 @@ export function AppStoreHome() {
           { name: "Valencia", img: "/portadas-ciudades/valencia.webp" },
           { name: "Alicante", img: "/portadas-ciudades/alicante.webp" }
         ].map((city, idx) => (
-          <div key={idx} className="w-[165px] shrink-0 snap-start cursor-pointer group hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300">
-            <div className="w-full aspect-square bg-background-secondary rounded-full overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.015)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] ring-1 ring-border-subtle group-hover:ring-brand-accent/50 transition-all duration-300">
+          <div key={idx} className="w-[165px] shrink-0 snap-start cursor-pointer group hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 h-full">
+            <div className="w-full h-full aspect-square bg-background-secondary rounded-[24px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.015)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] ring-1 ring-border-subtle group-hover:ring-brand-accent/50 transition-all duration-300">
                <img src={city.img} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={city.name} />
                
                {/* Pequeña opacidad oscura para que resalte el texto sin usar blur */}
                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 pointer-events-none" />
                
                {/* Sombra interior 3D */}
-               <div className="absolute inset-0 rounded-full shadow-[inset_0_0_24px_rgba(0,0,0,0.08)] pointer-events-none"></div>
+               <div className="absolute inset-0 rounded-[24px] shadow-[inset_0_0_24px_rgba(0,0,0,0.08)] pointer-events-none"></div>
                
                {/* Nombre de la Ciudad en el Centro */}
                <div className="absolute inset-0 flex items-center justify-center p-5 z-20">
@@ -242,13 +242,13 @@ export function AppStoreHome() {
       {/* 4. Flores Populares */}
       <Carousel title="🔥 Flores Populares">
         {POPULAR_FLOWERS.map((flower) => (
-          <div key={flower.id} className="w-[180px] shrink-0 snap-start">
+          <div key={flower.id} className="w-[180px] shrink-0 snap-start h-full">
             <div 
-              className="w-full bg-[#F5F5F7] border border-border-subtle/60 rounded-[20px] p-4 relative flex flex-col shadow-[0_4px_20px_rgba(0,0,0,0.01)] cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:-translate-y-0.5 transition-all duration-300"
+              className="w-full h-full bg-[#F5F5F7] border border-border-subtle/60 rounded-[24px] p-4 relative flex flex-col shadow-[0_4px_20px_rgba(0,0,0,0.01)] cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:-translate-y-0.5 transition-all duration-300"
               onClick={() => setSelectedFlowerId(flower.id)}
             >
               {/* Background Glow */}
-              <div className="absolute inset-0 rounded-[20px] overflow-hidden pointer-events-none">
+              <div className="absolute inset-0 rounded-[24px] overflow-hidden pointer-events-none">
                 <div className={`absolute top-12 left-1/2 -translate-x-1/2 w-32 h-32 rounded-full blur-[35px] opacity-25 transition-colors duration-700 ${flower.type === 'SATIVA' ? 'bg-amber-400' : flower.type === 'ÍNDICA' ? 'bg-purple-400' : 'bg-emerald-400'}`} />
               </div>
 
@@ -292,8 +292,8 @@ export function AppStoreHome() {
       <div className="mt-6">
         <Carousel title="🔝 Clubes Destacados">
           {filteredClubs.length > 0 ? filteredClubs.map((club) => (
-            <Link key={club.id} href={`/clubs/${club.id}`} className="w-[184px] shrink-0 snap-start block group cursor-pointer hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300">
-              <div className="w-full aspect-square rounded-[10px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.015)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] border border-border-subtle/50 bg-background-secondary transition-shadow duration-300">
+            <Link key={club.id} href={`/clubs/${club.id}`} className="w-[184px] shrink-0 snap-start block group cursor-pointer hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 h-full">
+              <div className="w-full h-full aspect-square rounded-[24px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.015)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] border border-border-subtle/50 bg-background-secondary transition-shadow duration-300">
                  <img src={club.id === 1 ? `/portadas/cannabis2.jpg` : club.id === 3 ? `/portadas/cannabis3.jpg` : `/portadas/cannabis.jpg`} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt={club.name} />
                  
                  {/* Gradiente elegante inferior */}
@@ -326,7 +326,7 @@ export function AppStoreHome() {
                  </div>
                  
                  {/* Sutil brillo interior para realzar premiumness */}
-                 <div className="absolute inset-0 rounded-[10px] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15)] pointer-events-none"></div>
+                 <div className="absolute inset-0 rounded-[24px] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15)] pointer-events-none"></div>
               </div>
             </Link>
           )) : null}
@@ -345,7 +345,7 @@ export function AppStoreHome() {
         <div className="flex flex-col gap-3">
           {filteredGrowShops.length > 0 ? filteredGrowShops.map(shop => (
             <Link key={shop.id} href={`/shops/${shop.id}`} className="block group active:scale-[0.98] transition-transform">
-              <div className="w-full flex items-center p-4 bg-[#F5F5F7] border border-border-subtle/50 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] group-hover:-translate-y-0.5 transition-all duration-300">
+              <div className="w-full flex items-center p-4 bg-[#F5F5F7] border border-border-subtle/50 rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.01)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] group-hover:-translate-y-0.5 transition-all duration-300">
                 {/* Img */}
                 <div className="w-[64px] h-[64px] shrink-0 rounded-[12px] overflow-hidden relative shadow-inner bg-background-secondary">
                   <img src={shop.img} alt={shop.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />

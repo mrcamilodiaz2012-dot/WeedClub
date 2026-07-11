@@ -22,7 +22,7 @@ export function Carousel({ title, subtitle, children }: CarouselProps) {
         </div>
       )}
       <div className="w-full overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4">
-        <div className="flex gap-4 px-5 after:content-[''] after:w-[1px] after:shrink-0">
+        <div className="flex items-stretch gap-4 px-5 after:content-[''] after:w-[1px] after:shrink-0">
           {children}
         </div>
       </div>
