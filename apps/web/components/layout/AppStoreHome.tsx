@@ -351,30 +351,30 @@ export function AppStoreHome({ clubs }: AppStoreHomeProps) {
         <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
           {filteredGrowShops.length > 0 ? filteredGrowShops.map(shop => (
             <Link key={shop.id} href={`/shops/${shop.id}`} className="block group active:scale-[0.98] transition-transform">
-              <div className="w-full bg-white border border-border-subtle/60 rounded-[20px] overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300 flex flex-col h-full">
+              <div className="w-full bg-white border border-border-subtle/60 rounded-[16px] overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300 flex flex-col h-full">
                 
                 {/* Imagen de la tienda */}
-                <div className="w-full aspect-[4/3] relative overflow-hidden bg-background-secondary">
+                <div className="w-full aspect-[16/9] relative overflow-hidden bg-background-secondary">
                   <img src={shop.img} alt={shop.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                   
                   {/* Etiqueta de tienda */}
-                  <div className="absolute top-2 left-2 bg-white/90 backdrop-blur-md px-2 py-1 rounded-[8px] flex items-center shadow-sm">
-                    <span className="text-[9px] font-bold text-text-primary uppercase tracking-wider">Grow Shop</span>
+                  <div className="absolute top-1.5 left-1.5 bg-white/90 backdrop-blur-md px-1.5 py-0.5 rounded-[6px] flex items-center shadow-sm">
+                    <span className="text-[8px] font-bold text-text-primary uppercase tracking-wider">Grow Shop</span>
                   </div>
                 </div>
                 
                 {/* Info de la tienda */}
-                <div className="p-3 flex flex-col flex-1">
-                  <h3 className="text-[14px] font-display font-bold tracking-tight text-text-primary leading-tight mb-1 line-clamp-1">{shop.title}</h3>
-                  <span className="text-[11px] text-text-secondary mb-2 line-clamp-1">{shop.subtitle}</span>
+                <div className="p-2.5 flex flex-col flex-1">
+                  <h3 className="text-[13px] font-display font-bold tracking-tight text-text-primary leading-tight mb-0.5 line-clamp-1">{shop.title}</h3>
+                  <span className="text-[10px] text-text-secondary mb-2 line-clamp-1">{shop.subtitle}</span>
                   
                   {/* Footer de tarjeta */}
-                  <div className="mt-auto flex items-center justify-between pt-2 border-t border-border-subtle/30">
-                    <div className="flex items-center gap-1 text-[10px] font-semibold text-text-secondary">
-                      <MapPin size={10} className="opacity-70" /> <span className="truncate max-w-[60px]">{shop.city}</span>
+                  <div className="mt-auto flex items-center justify-between pt-1.5 border-t border-border-subtle/30">
+                    <div className="flex items-center gap-1 text-[9px] font-semibold text-text-secondary">
+                      <MapPin size={9} className="opacity-70" /> <span className="truncate max-w-[60px]">{shop.city}</span>
                     </div>
-                    <div className="flex items-center gap-1 text-[11px] font-bold text-text-primary">
-                      <span className="text-amber-500 text-[11px] translate-y-[-0.5px]">★</span> {shop.rating}
+                    <div className="flex items-center gap-1 text-[10px] font-bold text-text-primary">
+                      <span className="text-amber-500 text-[10px] translate-y-[-0.5px]">★</span> {shop.rating}
                     </div>
                   </div>
                 </div>
