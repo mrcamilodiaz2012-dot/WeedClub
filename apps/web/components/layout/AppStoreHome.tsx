@@ -293,34 +293,32 @@ export function AppStoreHome({ clubs }: AppStoreHomeProps) {
         <Carousel title="🔝 Clubes Destacados">
           {filteredClubs.length > 0 ? filteredClubs.map((club) => (
             <Link key={club.id} href={`/clubs/${club.slug || club.id}`} prefetch={true} className="w-[184px] shrink-0 snap-start block group cursor-pointer hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 h-full">
-              <div className="w-full h-full aspect-[4/5] bg-background-secondary rounded-[24px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.015)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] border border-border-subtle/40 transition-shadow duration-300">
+              <div className="w-full h-full aspect-[4/5] bg-background-secondary rounded-[24px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.02)] group-hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] border border-border-subtle/20 transition-all duration-300">
                  <img src={club.cover_image_url ?? '/portadas/cannabis.jpg'} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt={club.name} />
                  
-                 {/* Gradiente elegante inferior */}
-                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent/10 pointer-events-none"></div>
+                 {/* Gradiente sutil inferior (Apple style: deja respirar la imagen) */}
+                 <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"></div>
                  
-
-
-                 {/* Top Badge (Distancia) */}
-                 <div className="absolute top-2 left-2 bg-black/40 backdrop-blur-md border border-white/20 text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-sm z-10 flex items-center gap-1">
-                   <Navigation size={9} className="opacity-90" /> 1.2 km
+                 {/* Top Badge (Distancia) - Glassmorphism minimalista */}
+                 <div className="absolute top-3 left-3 bg-black/20 backdrop-blur-md border border-white/10 text-white text-[10px] font-medium px-2.5 py-1 rounded-full z-10 flex items-center gap-1">
+                   <Navigation size={10} className="opacity-90" /> 1.2 km
                  </div>
 
                  {/* Contenido inferior */}
                  <div className="absolute bottom-0 left-0 right-0 p-4 z-10 flex flex-col">
-                   <div className="flex items-center gap-2 mb-2">
-                     <span className="text-[18px] font-black tracking-tighter text-white leading-tight truncate drop-shadow-md">{club.name}</span>
-                     <BadgeCheck className="w-[11px] h-[11px] text-[#1ed760] shrink-0 drop-shadow-md translate-y-[0.5px]" fill="currentColor" stroke="white" strokeWidth={2} />
+                   <div className="flex items-center gap-1.5 mb-1.5">
+                     <span className="text-[18px] font-display font-bold tracking-tight text-white leading-tight truncate drop-shadow-md">{club.name}</span>
+                     <BadgeCheck className="w-[12px] h-[12px] text-[#1ed760] shrink-0 drop-shadow-md translate-y-[0.5px]" fill="currentColor" stroke="white" strokeWidth={2} />
                    </div>
                    
-                   <div className="flex flex-col gap-2">
-                     <div className="flex items-center gap-2">
-                       <span className="bg-emerald-500/20 border border-emerald-500/30 backdrop-blur-md text-emerald-400 text-[9px] font-bold px-2 py-1 rounded flex items-center gap-1">
-                         <Clock size={9} /> ABIERTO
-                       </span>
+                   <div className="flex items-center gap-2 text-[12px] font-medium text-white/90 drop-shadow-sm">
+                     <div className="flex items-center gap-1.5">
+                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+                       <span className="tracking-wide">Abierto</span>
                      </div>
-                     <div className="flex items-center gap-1 text-[11px] font-light text-white/70 drop-shadow-sm">
-                       <MapPin size={11} className="opacity-70" /> {club.city}
+                     <span className="opacity-40 text-[10px]">•</span>
+                     <div className="flex items-center gap-1">
+                       <span className="tracking-wide">{club.city}</span>
                      </div>
                    </div>
                  </div>
