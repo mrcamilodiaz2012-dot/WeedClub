@@ -1,5 +1,5 @@
 import { AppStoreHome } from '@/components/layout/AppStoreHome';
-import { createClient } from '@/utils/supabase/server';
+import { createClient } from '@supabase/supabase-js';
 import type { Club } from '@/types';
 
 export const revalidate = 300; // Refrescar clubs cada 5 minutos
@@ -45,7 +45,10 @@ export default async function Home() {
   let clubs: Club[] = [];
 
   try {
-    const supabase = createClient();
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    );
     const { data } = await supabase
       .from('clubs')
       .select('*')
