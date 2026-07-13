@@ -293,27 +293,28 @@ export function AppStoreHome({ clubs }: AppStoreHomeProps) {
         <Carousel title="🔝 Clubes Destacados">
           {filteredClubs.length > 0 ? filteredClubs.map((club) => (
             <Link key={club.id} href={`/clubs/${club.slug || club.id}`} prefetch={true} className="w-[200px] shrink-0 snap-start block group cursor-pointer hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 h-full">
-              <div className="w-full h-full aspect-square bg-background-secondary rounded-[24px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.02)] group-hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] border border-border-subtle/20 transition-all duration-300">
-                 <img src={club.cover_image_url ?? '/portadas/cannabis.jpg'} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt={club.name} />
+              <div className="w-full h-full flex flex-col aspect-square bg-white rounded-[24px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.04)] group-hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] border border-border-subtle/40 transition-all duration-300">
                  
-                 {/* Gradiente sutil inferior (Apple style: deja respirar la imagen) */}
-                 <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"></div>
-                 
-                 {/* Top Badge (Distancia) - Glassmorphism minimalista */}
-                 <div className="absolute top-3 left-3 bg-black/20 backdrop-blur-md border border-white/10 text-white text-[10px] font-medium px-2.5 py-1 rounded-full z-10 flex items-center gap-1">
-                   <Navigation size={10} className="opacity-90" /> 1.2 km
+                 {/* Parte Superior: Imagen */}
+                 <div className="relative w-full flex-1 overflow-hidden">
+                   <img src={club.cover_image_url ?? '/portadas/cannabis.jpg'} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt={club.name} />
+                   
+                   {/* Top Badge (Distancia) */}
+                   <div className="absolute top-3 left-3 bg-black/30 backdrop-blur-md border border-white/10 text-white text-[10px] font-medium px-2.5 py-1 rounded-full z-10 flex items-center gap-1">
+                     <Navigation size={10} className="opacity-90" /> 1.2 km
+                   </div>
                  </div>
 
-                 {/* Contenido inferior */}
-                 <div className="absolute bottom-0 left-0 right-0 p-4 z-10 flex flex-col">
+                 {/* Parte Inferior: Contenido en Blanco */}
+                 <div className="w-full bg-white p-3.5 z-10 flex flex-col shrink-0 border-t border-border-subtle/20">
                    <div className="flex items-center gap-1.5 mb-1.5">
-                     <span className="text-[18px] font-display font-bold tracking-tight text-white leading-tight truncate drop-shadow-md">{club.name}</span>
-                     <BadgeCheck className="w-[12px] h-[12px] text-[#1ed760] shrink-0 drop-shadow-md translate-y-[0.5px]" fill="currentColor" stroke="white" strokeWidth={2} />
+                     <span className="text-[16px] font-display font-bold tracking-tight text-text-primary leading-tight truncate">{club.name}</span>
+                     <BadgeCheck className="w-[12px] h-[12px] text-[#1ed760] shrink-0 translate-y-[0.5px]" fill="currentColor" stroke="white" strokeWidth={2} />
                    </div>
                    
-                   <div className="flex items-center gap-2 text-[12px] font-medium text-white/90 drop-shadow-sm">
+                   <div className="flex items-center gap-2 text-[11px] font-medium text-text-secondary">
                      <div className="flex items-center gap-1.5">
-                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.3)]" />
                        <span className="tracking-wide">Abierto</span>
                      </div>
                      <span className="opacity-40 text-[10px]">•</span>
@@ -322,9 +323,6 @@ export function AppStoreHome({ clubs }: AppStoreHomeProps) {
                      </div>
                    </div>
                  </div>
-                 
-                 {/* Sutil brillo interior para realzar premiumness */}
-                 <div className="absolute inset-0 rounded-[24px] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15)] pointer-events-none"></div>
               </div>
             </Link>
           )) : null}
