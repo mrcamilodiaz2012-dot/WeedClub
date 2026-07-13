@@ -30,7 +30,7 @@ function TabItem({ icon, label, href, active = false }: { icon: React.ReactNode;
   });
 
   return (
-    <Link href={href} className={`flex flex-col items-center gap-[3px] w-14 transition-colors ${active ? 'text-[#00C853]' : 'text-gray-700 hover:text-black'}`}>
+    <Link href={href} prefetch={true} className={`flex flex-col items-center gap-[3px] w-14 transition-colors ${active ? 'text-[#00C853]' : 'text-gray-700 hover:text-black'}`}>
       <div className={`transition-transform duration-200 ${active ? 'scale-110' : 'scale-100'}`}>
         {iconWithProps}
       </div>
