@@ -288,41 +288,44 @@ export function AppStoreHome({ clubs }: AppStoreHomeProps) {
       </Carousel>
 
 
-      {/* 5. Clubes Destacados (Posters Verticales) */}
+      {/* 5. Clubes Destacados (Posters Horizontales) */}
       <div>
         <Carousel title="🔝 Clubes Destacados">
           {filteredClubs.length > 0 ? filteredClubs.map((club) => (
-            <Link key={club.id} href={`/clubs/${club.slug || club.id}`} prefetch={true} className="w-[200px] shrink-0 snap-start block group cursor-pointer hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 h-full">
-              <div className="w-full h-full flex flex-col aspect-square bg-white rounded-[24px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.04)] group-hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] border border-border-subtle/40 transition-all duration-300">
+            <Link key={club.id} href={`/clubs/${club.slug || club.id}`} prefetch={true} className="w-[260px] shrink-0 snap-start block group cursor-pointer hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 h-full">
+              <div className="w-full h-full aspect-[4/3] bg-background-secondary rounded-[24px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.04)] group-hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] border border-border-subtle/20 transition-all duration-300">
                  
-                 {/* Parte Superior: Imagen */}
-                 <div className="relative w-full flex-1 overflow-hidden">
-                   <img src={club.cover_image_url ?? '/portadas/cannabis.jpg'} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt={club.name} />
-                   
-                   {/* Top Badge (Distancia) */}
-                   <div className="absolute top-3 left-3 bg-black/30 backdrop-blur-md border border-white/10 text-white text-[10px] font-medium px-2.5 py-1 rounded-full z-10 flex items-center gap-1">
-                     <Navigation size={10} className="opacity-90" /> 1.2 km
-                   </div>
+                 {/* Imagen completa de fondo */}
+                 <img src={club.cover_image_url ?? '/portadas/cannabis.jpg'} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt={club.name} />
+                 
+                 {/* Gradiente oscuro inferior para legibilidad */}
+                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent/10 pointer-events-none"></div>
+                 
+                 {/* Top Badge (Distancia) - Sólido gris claro */}
+                 <div className="absolute top-3 left-3 bg-[#EBEBEB] text-black text-[12px] font-bold px-3 py-1.5 rounded-full z-10 flex items-center gap-1.5 shadow-sm">
+                   <MapIcon size={14} strokeWidth={2.5} /> 1.2 km
                  </div>
 
-                 {/* Parte Inferior: Contenido en Blanco */}
-                 <div className="w-full bg-white p-3.5 z-10 flex flex-col shrink-0 border-t border-border-subtle/20">
-                   <div className="flex items-center gap-1.5 mb-1.5">
-                     <span className="text-[16px] font-display font-bold tracking-tight text-text-primary leading-tight truncate">{club.name}</span>
-                     <BadgeCheck className="w-[12px] h-[12px] text-[#1ed760] shrink-0 translate-y-[0.5px]" fill="currentColor" stroke="white" strokeWidth={2} />
-                   </div>
+                 {/* Botón Heart (Arriba derecha) */}
+                 <div 
+                   onClick={(e) => e.preventDefault()} 
+                   className="absolute top-3 right-3 w-9 h-9 bg-[#EBEBEB] rounded-full flex items-center justify-center z-10 hover:scale-105 transition-transform cursor-pointer shadow-sm"
+                 >
+                   <Heart size={18} color="black" strokeWidth={2} />
+                 </div>
+
+                 {/* Contenido inferior */}
+                 <div className="absolute bottom-0 left-0 right-0 p-4 z-10 flex flex-col">
+                   <span className="text-[24px] font-display font-black tracking-tighter text-white leading-tight truncate drop-shadow-md mb-1.5">{club.name}</span>
                    
-                   <div className="flex items-center gap-2 text-[11px] font-medium text-text-secondary">
-                     <div className="flex items-center gap-1.5">
-                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.3)]" />
-                       <span className="tracking-wide">Abierto</span>
-                     </div>
-                     <span className="opacity-40 text-[10px]">•</span>
-                     <div className="flex items-center gap-1">
-                       <span className="tracking-wide">{club.city}</span>
-                     </div>
+                   <div className="flex items-center gap-1.5 text-[15px] font-light text-white/90 drop-shadow-sm">
+                     <MapPin size={16} className="opacity-80" />
+                     <span className="tracking-wide">{club.city}</span>
                    </div>
                  </div>
+                 
+                 {/* Sutil brillo interior para realzar premiumness */}
+                 <div className="absolute inset-0 rounded-[24px] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15)] pointer-events-none"></div>
               </div>
             </Link>
           )) : null}
