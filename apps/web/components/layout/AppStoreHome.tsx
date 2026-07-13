@@ -292,8 +292,8 @@ export function AppStoreHome({ clubs }: AppStoreHomeProps) {
       <div>
         <Carousel title="🔝 Clubes Destacados">
           {filteredClubs.length > 0 ? filteredClubs.map((club) => (
-            <Link key={club.id} href={`/clubs/${club.slug || club.id}`} prefetch={true} className="w-[184px] shrink-0 snap-start block group cursor-pointer hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 h-full">
-              <div className="w-full h-full aspect-[4/5] bg-background-secondary rounded-[24px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.02)] group-hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] border border-border-subtle/20 transition-all duration-300">
+            <Link key={club.id} href={`/clubs/${club.slug || club.id}`} prefetch={true} className="w-[200px] shrink-0 snap-start block group cursor-pointer hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 h-full">
+              <div className="w-full h-full aspect-square bg-background-secondary rounded-[24px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.02)] group-hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] border border-border-subtle/20 transition-all duration-300">
                  <img src={club.cover_image_url ?? '/portadas/cannabis.jpg'} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt={club.name} />
                  
                  {/* Gradiente sutil inferior (Apple style: deja respirar la imagen) */}
