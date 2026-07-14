@@ -328,28 +328,55 @@ export function ProfileContent({ club }: ProfileContentProps) {
               </div>
               <div className="flex overflow-x-auto hide-scrollbar gap-4 pb-6 -mx-5 px-5 md:mx-0 md:px-0">
                 {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="w-[240px] shrink-0 flex items-center gap-3.5 p-3.5 bg-white border border-gray-100 rounded-[20px] shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:shadow-[0_4px_20px_rgba(0,0,0,0.06)] transition-all cursor-pointer group">
-                    <div className="w-[56px] h-[56px] bg-gray-100 rounded-[14px] shrink-0 relative overflow-hidden shadow-sm">
-                      <Image 
-                        src={`/portadas/portada${i === 1 ? '1' : '1'}.jpg`} // Fallback to portada1 for mock
-                        alt={`Club ${i}`}
-                        fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-500"
-                        onError={(e) => {
-                          e.currentTarget.src = `https://images.unsplash.com/photo-1576085898323-218337e3e43c?auto=format&fit=crop&q=80&w=400&h=300&random=${i + 20}`;
-                        }}
-                      />
-                      <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors duration-500" />
-                    </div>
-                    <div className="flex flex-col flex-1 min-w-0">
-                      <h4 className="font-display font-bold text-gray-900 text-[16px] leading-tight truncate group-hover:text-black transition-colors">Club Local {i}</h4>
-                      <div className="flex items-center justify-between mt-1.5">
-                        <p className="text-[12px] font-medium text-gray-500">A {(0.5 * i).toFixed(1)} km</p>
-                        <div className="flex items-center gap-1 bg-gray-50 px-1.5 py-0.5 rounded-md">
-                          <Star className="w-3 h-3 text-yellow-500 fill-yellow-500" />
-                          <span className="text-[11px] font-bold text-gray-700">4.{9 - i}</span>
-                        </div>
-                      </div>
+                  <div key={i} className="w-[200px] shrink-0 block group cursor-pointer hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300">
+                    <div className="w-full aspect-square bg-gray-100 rounded-[24px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.04)] group-hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] border border-black/[0.04] transition-all duration-300">
+                       
+                       {/* Imagen completa de fondo */}
+                       <Image 
+                         src={`/portadas/portada${i === 1 ? '1' : '1'}.jpg`} // Fallback to portada1 for mock
+                         alt={`Club ${i}`}
+                         fill
+                         className="object-cover transition-transform duration-700 group-hover:scale-105"
+                         onError={(e) => {
+                           e.currentTarget.src = `https://images.unsplash.com/photo-1576085898323-218337e3e43c?auto=format&fit=crop&q=80&w=400&h=300&random=${i + 20}`;
+                         }}
+                       />
+                       
+                       {/* Gradiente oscuro inferior para legibilidad */}
+                       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent/10 pointer-events-none"></div>
+                       
+                       {/* Top Badge (Distancia) - Sólido gris claro */}
+                       <div className="absolute top-3 left-3 bg-[#EBEBEB] text-black text-[12px] font-bold px-3 py-1.5 rounded-full z-10 flex items-center gap-1.5 shadow-sm">
+                         <MapPin size={14} strokeWidth={2.5} /> {(0.5 * i).toFixed(1)} km
+                       </div>
+
+                       {/* Botón Heart (Arriba derecha) */}
+                       <div 
+                         onClick={(e) => { e.preventDefault(); e.stopPropagation(); }} 
+                         className="absolute top-3 right-3 w-9 h-9 bg-[#EBEBEB] rounded-full flex items-center justify-center z-10 hover:scale-105 transition-transform cursor-pointer shadow-sm"
+                       >
+                         <Heart size={18} color="black" strokeWidth={2} />
+                       </div>
+
+                       {/* Contenido inferior */}
+                       <div className="absolute bottom-0 left-0 right-0 p-4 z-10 flex flex-col">
+                         <span className="text-[20px] font-display font-black tracking-tighter text-white leading-tight truncate drop-shadow-md mb-1">Club Local {i}</span>
+                         
+                         <div className="flex items-center gap-2 text-[14px] font-light text-white/90 drop-shadow-sm">
+                           <div className="flex items-center gap-1.5">
+                             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+                             <span className="tracking-wide font-medium text-white">Abierto</span>
+                           </div>
+                           <span className="opacity-40 text-[10px]">•</span>
+                           <div className="flex items-center gap-1">
+                             <Star size={12} className="text-yellow-400 fill-yellow-400" />
+                             <span className="tracking-wide font-bold">4.{9 - i}</span>
+                           </div>
+                         </div>
+                       </div>
+                       
+                       {/* Sutil brillo interior para realzar premiumness */}
+                       <div className="absolute inset-0 rounded-[24px] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15)] pointer-events-none"></div>
                     </div>
                   </div>
                 ))}
