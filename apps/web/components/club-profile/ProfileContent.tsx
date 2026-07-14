@@ -247,7 +247,7 @@ export function ProfileContent({ club }: ProfileContentProps) {
                 </h2>
               </div>
               <LazyMount height={380}>
-                <TabPhotosCarousel club={club} />
+                <TabPhotosCarousel club={club} onClick={() => setActiveTab('Fotos')} />
               </LazyMount>
             </section>
 
