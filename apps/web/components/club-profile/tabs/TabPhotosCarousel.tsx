@@ -1,77 +1,90 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import type { Club } from '@/types';
+import { Image as ImageIcon } from 'lucide-react';
 
 // Fotos locales de fallback (cuando el club aún no tiene galería)
 const FALLBACK_PHOTOS = [
   '/portadas/cannabis.jpg',
   '/portadas/cannabis2.jpg',
   '/portadas/cannabis3.jpg',
+  '/portadas/cannabis.jpg', // Una más para probar el '+X fotos'
 ];
 
 export function TabPhotosCarousel({ club }: { club: Club }) {
   // Usar fotos reales del club si existen, si no fallback local
-  const photos =
-    club.photos && club.photos.length > 0 ? club.photos : FALLBACK_PHOTOS;
+  const photos = club.photos && club.photos.length > 0 ? club.photos : FALLBACK_PHOTOS;
 
-  const [currentIndex, setCurrentIndex] = useState(0);
+  if (photos.length === 0) return null;
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % photos.length);
-    }, 4000);
-    return () => clearInterval(timer);
-  }, [photos.length]);
+  if (photos.length === 1) {
+    return (
+      <div className="w-full aspect-[4/3] rounded-[24px] overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.04)] relative cursor-pointer hover:opacity-95 transition-opacity border border-black/[0.04]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={photos[0]} alt={`Foto de ${club.name}`} className="w-full h-full object-cover" />
+      </div>
+    );
+  }
+
+  if (photos.length === 2) {
+    return (
+      <div className="w-full aspect-[4/3] rounded-[24px] overflow-hidden flex gap-1 shadow-[0_4px_24px_rgba(0,0,0,0.04)] cursor-pointer hover:opacity-95 transition-opacity border border-black/[0.04]">
+        <div className="w-1/2 h-full relative">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={photos[0]} alt={`Foto 1 de ${club.name}`} className="w-full h-full object-cover" />
+        </div>
+        <div className="w-1/2 h-full relative">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={photos[1]} alt={`Foto 2 de ${club.name}`} className="w-full h-full object-cover" />
+        </div>
+      </div>
+    );
+  }
+
+  const mainPhoto = photos[0];
+  const sidePhoto1 = photos[1];
+  const sidePhoto2 = photos[2];
+  const extraPhotos = photos.length > 3 ? photos.length - 3 : 0;
 
   return (
     <div className="w-full">
-      {/* Featured Large Image */}
-      <div className="relative w-full aspect-square rounded-3xl overflow-hidden mb-3 bg-gray-100">
-        {photos.map((url, i) => (
-          // eslint-disable-next-line @next/next/no-img-element
+      <div className="relative w-full aspect-[4/3] md:aspect-[21/9] rounded-[24px] overflow-hidden flex gap-1 bg-gray-100 shadow-[0_4px_24px_rgba(0,0,0,0.04)] cursor-pointer hover:opacity-95 transition-opacity border border-black/[0.04]">
+        {/* Foto principal (Izquierda) */}
+        <div className="w-[68%] h-full relative">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            key={i}
-            src={url}
-            alt={`Foto ${i + 1} de ${club.name}`}
-            loading={i === 0 ? 'eager' : 'lazy'}
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
-              i === currentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
-            }`}
+            src={mainPhoto}
+            alt={`Foto principal de ${club.name}`}
+            className="w-full h-full object-cover"
           />
-        ))}
-        {/* Counter */}
-        <div className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full text-white text-[11px] font-bold tracking-widest z-20 shadow-sm">
-          {currentIndex + 1} / {photos.length}
         </div>
-      </div>
-
-      {/* Thumbnails Row */}
-      <div className="flex overflow-x-auto hide-scrollbar gap-2 pb-2 -mx-5 px-5 md:mx-0 md:px-0">
-        {photos.map((url, i) => (
-          <button
-            key={i}
-            onClick={() => setCurrentIndex(i)}
-            className={`relative w-[72px] h-[72px] shrink-0 rounded-[16px] overflow-hidden transition-all duration-300 ${
-              i === currentIndex
-                ? 'ring-2 ring-black ring-offset-2 scale-[0.95]'
-                : 'scale-100 hover:scale-[0.98] ring-0'
-            }`}
-          >
+        
+        {/* Fotos apiladas (Derecha) */}
+        <div className="w-[32%] h-full flex flex-col gap-1">
+          <div className="w-full h-1/2 relative bg-gray-200">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={url}
-              alt={`Miniatura ${i + 1}`}
-              loading="lazy"
+              src={sidePhoto1}
+              alt={`Foto 2 de ${club.name}`}
               className="w-full h-full object-cover"
             />
-          </button>
-        ))}
-      </div>
-
-      {/* Ver todas las fotos */}
-      <div className="mt-6 flex justify-center">
-        <button className="px-6 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-900 font-bold rounded-full transition-all text-sm flex items-center gap-2">
-          Ver todas las fotos
-        </button>
+          </div>
+          <div className="w-full h-1/2 relative bg-gray-200">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={sidePhoto2}
+              alt={`Foto 3 de ${club.name}`}
+              className="w-full h-full object-cover"
+            />
+            {/* Overlay para ver todas */}
+            <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white backdrop-blur-[1px]">
+              <ImageIcon className="w-5 h-5 mb-1 opacity-90" />
+              <span className="font-bold text-[12px] md:text-sm tracking-tight leading-tight">Ver todas</span>
+              {extraPhotos > 0 && (
+                <span className="text-[10px] font-medium opacity-90 mt-0.5">+{extraPhotos} fotos</span>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
