@@ -7,7 +7,9 @@ const FALLBACK_PHOTOS = [
   '/portadas/cannabis.jpg',
   '/portadas/cannabis2.jpg',
   '/portadas/cannabis3.jpg',
-  '/portadas/cannabis.jpg', // Una más para probar el '+X fotos'
+  '/portadas/cannabis.jpg',
+  '/portadas/cannabis2.jpg',
+  '/portadas/cannabis3.jpg', // 6 fotos para llenar la nueva cuadrícula 3x2
 ];
 
 interface Props {
@@ -23,7 +25,7 @@ export function TabPhotosCarousel({ club, onClick }: Props) {
 
   if (photos.length === 1) {
     return (
-      <div onClick={onClick} className="w-full aspect-[4/3] rounded-[24px] overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.04)] relative cursor-pointer hover:opacity-95 transition-opacity border border-black/[0.04]">
+      <div onClick={onClick} className="w-full aspect-[4/3] rounded-[18px] overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.04)] relative cursor-pointer hover:opacity-95 transition-opacity border border-black/[0.04]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={photos[0]} alt={`Foto de ${club.name}`} className="w-full h-full object-cover" />
       </div>
@@ -32,7 +34,7 @@ export function TabPhotosCarousel({ club, onClick }: Props) {
 
   if (photos.length === 2) {
     return (
-      <div onClick={onClick} className="w-full aspect-[4/3] rounded-[24px] overflow-hidden flex gap-1 shadow-[0_4px_24px_rgba(0,0,0,0.04)] cursor-pointer hover:opacity-95 transition-opacity border border-black/[0.04]">
+      <div onClick={onClick} className="w-full aspect-[4/3] rounded-[18px] overflow-hidden flex gap-1 shadow-[0_4px_24px_rgba(0,0,0,0.04)] cursor-pointer hover:opacity-95 transition-opacity border border-black/[0.04]">
         <div className="w-1/2 h-full relative">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={photos[0]} alt={`Foto 1 de ${club.name}`} className="w-full h-full object-cover" />
@@ -47,7 +49,7 @@ export function TabPhotosCarousel({ club, onClick }: Props) {
 
   if (photos.length === 3) {
     return (
-      <div onClick={onClick} className="w-full aspect-[4/3] rounded-[24px] overflow-hidden flex gap-1 shadow-[0_4px_24px_rgba(0,0,0,0.04)] cursor-pointer hover:opacity-95 transition-opacity border border-black/[0.04]">
+      <div onClick={onClick} className="w-full aspect-[4/3] rounded-[18px] overflow-hidden flex gap-1 shadow-[0_4px_24px_rgba(0,0,0,0.04)] cursor-pointer hover:opacity-95 transition-opacity border border-black/[0.04]">
         <div className="w-[68%] h-full relative">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={photos[0]} alt={`Foto 1 de ${club.name}`} className="w-full h-full object-cover" />
@@ -70,25 +72,29 @@ export function TabPhotosCarousel({ club, onClick }: Props) {
     );
   }
 
-  // 4 or more photos
-  const displayPhotos = photos.slice(0, 4);
-  const extraPhotos = photos.length > 4 ? photos.length - 4 : 0;
+  // 4 or more photos: We use a grid.
+  // For 4 photos, 2x2. For 5 or more, we cap display at 6 (3x2).
+  const isFourPhotos = photos.length === 4;
+  const gridColsClass = isFourPhotos ? 'grid-cols-2' : 'grid-cols-3';
+  const displayLimit = isFourPhotos ? 4 : 6;
+  const displayPhotos = photos.slice(0, displayLimit);
+  const extraPhotos = photos.length > displayLimit ? photos.length - displayLimit : 0;
 
   return (
     <div className="w-full">
       <div 
         onClick={onClick}
-        className="relative w-full aspect-square md:aspect-[21/9] rounded-[24px] overflow-hidden grid grid-cols-2 grid-rows-2 gap-1 bg-gray-100 shadow-[0_4px_24px_rgba(0,0,0,0.04)] cursor-pointer hover:opacity-95 transition-opacity border border-black/[0.04]"
+        className={`relative w-full rounded-[18px] overflow-hidden grid ${gridColsClass} gap-1 bg-gray-100 shadow-[0_4px_24px_rgba(0,0,0,0.04)] cursor-pointer hover:opacity-95 transition-opacity border border-black/[0.04]`}
       >
         {displayPhotos.map((url, idx) => (
-          <div key={idx} className="w-full h-full relative bg-gray-200">
+          <div key={idx} className="w-full aspect-square relative bg-gray-200">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={url}
               alt={`Foto ${idx + 1} de ${club.name}`}
               className="w-full h-full object-cover"
             />
-            {idx === 3 && (
+            {idx === displayLimit - 1 && (
               <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white backdrop-blur-[1px]">
                 <ImageIcon className="w-5 h-5 mb-1 opacity-90" />
                 <span className="font-bold text-[12px] md:text-sm tracking-tight leading-tight">Ver todas</span>
