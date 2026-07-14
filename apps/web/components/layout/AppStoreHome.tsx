@@ -292,7 +292,7 @@ export function AppStoreHome({ clubs }: AppStoreHomeProps) {
       <div>
         <Carousel title="🔝 Clubes Destacados">
           {filteredClubs.length > 0 ? filteredClubs.map((club) => (
-            <Link key={club.id} href={`/clubs/${club.slug || club.id}`} prefetch={true} className="w-[260px] shrink-0 snap-start block group cursor-pointer hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 h-full">
+            <Link key={club.id} href={`/clubs/${club.slug || club.id}`} prefetch={true} className="w-[234px] shrink-0 snap-start block group cursor-pointer hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 h-full">
               <div className="w-full h-full aspect-[4/3] bg-background-secondary rounded-[24px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.04)] group-hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] border border-border-subtle/20 transition-all duration-300">
                  
                  {/* Imagen completa de fondo */}
