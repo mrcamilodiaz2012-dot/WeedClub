@@ -323,9 +323,9 @@ export function ProfileContent({ club }: ProfileContentProps) {
               {!showOtherClubs ? (
                 <button 
                   onClick={() => setShowOtherClubs(true)}
-                  className="w-full py-4 px-6 bg-white hover:bg-gray-50 border border-gray-200 shadow-sm rounded-[20px] flex items-center justify-center gap-2 transition-all font-semibold text-gray-800"
+                  className="w-full py-3.5 flex items-center justify-center gap-2 text-[15px] font-medium text-gray-600 bg-gray-50 hover:bg-gray-100 rounded-[16px] transition-colors"
                 >
-                  <MapPin className="w-5 h-5 text-gray-500" />
+                  <MapPin className="w-4 h-4" />
                   Explorar otros clubs en la zona
                 </button>
               ) : (
