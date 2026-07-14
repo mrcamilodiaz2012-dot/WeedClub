@@ -75,6 +75,7 @@ export function ProfileContent({ club }: ProfileContentProps) {
   const [selectedFlowerId, setSelectedFlowerId] = useState<number | null>(null);
   const [activeModalId, setActiveModalId] = useState<number | null>(null);
   const [likedFlowers, setLikedFlowers] = useState<Set<number>>(new Set());
+  const [showOtherClubs, setShowOtherClubs] = useState(false);
 
   const toggleLike = (e: React.MouseEvent, id: number) => {
     e.stopPropagation();
@@ -318,15 +319,25 @@ export function ProfileContent({ club }: ProfileContentProps) {
             </section>
 
             {/* Otros clubs en la zona Section */}
-            <section>
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight flex items-center gap-2">
-                  <MapPin className="w-6 h-6 text-gray-900" />
-                  Otros clubs en la zona
-                </h2>
-                <button className="text-sm font-semibold text-gray-500 hover:text-gray-900">Ver todos</button>
-              </div>
-              <div className="flex overflow-x-auto hide-scrollbar gap-4 pb-6 -mx-5 px-5 md:mx-0 md:px-0">
+            <section className="mb-4">
+              {!showOtherClubs ? (
+                <button 
+                  onClick={() => setShowOtherClubs(true)}
+                  className="w-full py-4 px-6 bg-white hover:bg-gray-50 border border-gray-200 shadow-sm rounded-[20px] flex items-center justify-center gap-2 transition-all font-semibold text-gray-800"
+                >
+                  <MapPin className="w-5 h-5 text-gray-500" />
+                  Explorar otros clubs en la zona
+                </button>
+              ) : (
+                <div className="animate-in fade-in slide-in-from-top-4 duration-500">
+                  <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight flex items-center gap-2">
+                      <MapPin className="w-6 h-6 text-gray-900" />
+                      Otros clubs en la zona
+                    </h2>
+                    <button onClick={() => setShowOtherClubs(false)} className="text-sm font-semibold text-gray-500 hover:text-gray-900">Ocultar</button>
+                  </div>
+                  <div className="flex overflow-x-auto hide-scrollbar gap-4 pb-6 -mx-5 px-5 md:mx-0 md:px-0">
                 {[1, 2, 3, 4].map((i) => (
                   <div key={i} className="w-[200px] shrink-0 block group cursor-pointer hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300">
                     <div className="w-full aspect-square bg-gray-100 rounded-[24px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.04)] group-hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] border border-black/[0.04] transition-all duration-300">
@@ -381,6 +392,8 @@ export function ProfileContent({ club }: ProfileContentProps) {
                   </div>
                 ))}
               </div>
+              </div>
+              )}
             </section>
           </div>
         )}
