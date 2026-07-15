@@ -110,7 +110,7 @@ function MenuItem({ icon, title, subtitle, hideBorder = false }: { icon: React.R
     <div className={`flex items-center justify-between p-4 bg-white hover:bg-gray-50 transition-colors cursor-pointer active:bg-gray-100 ${hideBorder ? '' : 'border-b border-border-subtle/40'}`}>
       <div className="flex items-center gap-4">
         <div className="w-11 h-11 rounded-full bg-gray-50 flex items-center justify-center border border-gray-100 shadow-inner">
-          {React.cloneElement(icon as React.ReactElement, { size: 20, strokeWidth: 2 })}
+          {React.cloneElement(icon as React.ReactElement<{ size?: number, strokeWidth?: number }>, { size: 20, strokeWidth: 2 })}
         </div>
         <div className="flex flex-col">
           <span className="text-[16px] font-display font-bold text-text-primary tracking-tight">{title}</span>
