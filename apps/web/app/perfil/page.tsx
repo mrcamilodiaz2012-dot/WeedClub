@@ -6,82 +6,102 @@ import {
   Bell, 
   ShieldCheck, 
   HelpCircle, 
-  ChevronRight, 
-  QrCode
+  ChevronRight,
+  Calendar,
+  Clock,
+  FileText,
+  LogOut
 } from "lucide-react";
 
 export default function PerfilPage() {
   return (
-    <div className="w-full h-full min-h-screen pb-32 overflow-y-auto bg-[#F2F2F7] font-sans">
+    <div className="w-full h-full min-h-screen pb-32 overflow-y-auto bg-[#F5F5F7] font-sans">
       
-      {/* Header Profile Info - iOS Contacts Style */}
-      <div className="px-4 pt-14 pb-8 flex flex-col items-center justify-center">
-        <div className="w-24 h-24 rounded-full overflow-hidden mb-4 shadow-sm border border-gray-200 bg-white">
+      {/* Header Profile Info */}
+      <div className="px-4 pt-16 pb-10 flex flex-col items-center justify-center">
+        <div className="w-28 h-28 rounded-full overflow-hidden mb-5 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border-[3px] border-white bg-white">
           <img src="/portadas/cannabis2.jpg" alt="Andrés García" className="w-full h-full object-cover" />
         </div>
-        <h1 className="text-[28px] font-semibold tracking-tight text-black leading-tight">
+        <h1 className="text-[30px] font-semibold tracking-tight text-[#1C1C1E] leading-tight">
           Andrés García
         </h1>
-        <p className="text-[15px] text-[#8E8E93] mt-1 font-medium">
+        <p className="text-[16px] text-[#8E8E93] mt-1 font-normal">
           andres@example.com
         </p>
       </div>
 
-      <div className="px-4 space-y-6">
+      <div className="px-4 space-y-7">
         
-        {/* Virtual Card / Apple Wallet Style */}
+        {/* Cuenta Section */}
         <section>
-          <div className="w-full bg-[#1C1C1E] rounded-[14px] p-5 relative overflow-hidden shadow-sm cursor-pointer active:scale-[0.98] transition-transform flex flex-col">
-            <div className="flex justify-between items-start">
-              <div className="flex flex-col">
-                <span className="text-white/60 text-[11px] font-semibold uppercase tracking-wider mb-1">WeedClub Pass</span>
-                <span className="text-white font-mono text-[20px] tracking-widest">WC-2026-8941</span>
-              </div>
-              <div className="w-10 h-10 bg-white rounded-[10px] flex items-center justify-center shadow-sm">
-                <QrCode className="w-6 h-6 text-black" strokeWidth={2} />
-              </div>
-            </div>
-            <div className="mt-6 flex justify-between items-end">
-              <span className="text-white/50 text-[13px] font-medium">Socio Activo</span>
-            </div>
+          <h2 className="text-[13px] font-semibold text-[#8E8E93] uppercase tracking-wider mb-2.5 ml-4">Cuenta</h2>
+          <div className="bg-white rounded-[14px] overflow-hidden shadow-[0_1px_8px_rgba(0,0,0,0.02)]">
+            <MenuItem 
+              icon={<User size={18} className="text-white" strokeWidth={2.5} />} 
+              iconBg="bg-[#007AFF]" 
+              title="Datos Personales" 
+            />
+            <MenuItem 
+              icon={<ShieldCheck size={18} className="text-white" strokeWidth={2.5} />} 
+              iconBg="bg-[#34C759]" 
+              title="Privacidad y Seguridad" 
+            />
+            <MenuItem 
+              icon={<Bell size={18} className="text-white" strokeWidth={2.5} />} 
+              iconBg="bg-[#FF9500]" 
+              title="Notificaciones" 
+              hideBorder 
+            />
           </div>
         </section>
 
-        {/* Options Menu - iOS Inset Grouped Table View */}
-        <section className="bg-white rounded-[10px] overflow-hidden shadow-sm">
-          <MenuItem 
-            icon={<User size={16} className="text-white" strokeWidth={2.5} />} 
-            iconBg="bg-[#007AFF]" 
-            title="Datos Personales" 
-          />
-          <MenuItem 
-            icon={<Bell size={16} className="text-white" strokeWidth={2.5} />} 
-            iconBg="bg-[#FF9500]" 
-            title="Notificaciones" 
-          />
-          <MenuItem 
-            icon={<ShieldCheck size={16} className="text-white" strokeWidth={2.5} />} 
-            iconBg="bg-[#34C759]" 
-            title="Privacidad y Seguridad" 
-          />
-          <MenuItem 
-            icon={<HelpCircle size={16} className="text-white" strokeWidth={2.5} />} 
-            iconBg="bg-[#8E8E93]" 
-            title="Ayuda y Soporte" 
-            hideBorder 
-          />
+        {/* Actividad Section */}
+        <section>
+          <h2 className="text-[13px] font-semibold text-[#8E8E93] uppercase tracking-wider mb-2.5 ml-4">Actividad</h2>
+          <div className="bg-white rounded-[14px] overflow-hidden shadow-[0_1px_8px_rgba(0,0,0,0.02)]">
+            <MenuItem 
+              icon={<Calendar size={18} className="text-white" strokeWidth={2.5} />} 
+              iconBg="bg-[#5856D6]" 
+              title="Mis Reservas" 
+            />
+            <MenuItem 
+              icon={<Clock size={18} className="text-white" strokeWidth={2.5} />} 
+              iconBg="bg-[#FF2D55]" 
+              title="Historial" 
+              hideBorder 
+            />
+          </div>
         </section>
 
-        {/* Logout Button - iOS Style */}
-        <section className="bg-white rounded-[10px] overflow-hidden shadow-sm">
-          <button className="w-full bg-white py-3.5 flex items-center justify-center text-[#FF3B30] text-[17px] font-normal transition-colors active:bg-gray-100">
-            Cerrar Sesión
-          </button>
+        {/* Soporte Section */}
+        <section>
+          <h2 className="text-[13px] font-semibold text-[#8E8E93] uppercase tracking-wider mb-2.5 ml-4">Soporte</h2>
+          <div className="bg-white rounded-[14px] overflow-hidden shadow-[0_1px_8px_rgba(0,0,0,0.02)]">
+            <MenuItem 
+              icon={<HelpCircle size={18} className="text-white" strokeWidth={2.5} />} 
+              iconBg="bg-[#007AFF]" 
+              title="Ayuda y Soporte" 
+            />
+            <MenuItem 
+              icon={<FileText size={18} className="text-white" strokeWidth={2.5} />} 
+              iconBg="bg-[#8E8E93]" 
+              title="Términos y Condiciones" 
+              hideBorder 
+            />
+          </div>
         </section>
+
+        {/* Discreed Logout Button */}
+        <div className="pt-2 pb-6 flex justify-center">
+          <button className="flex items-center space-x-2 text-[#8E8E93] hover:text-[#FF3B30] transition-colors px-6 py-3 rounded-full active:bg-gray-100/50">
+            <LogOut size={18} strokeWidth={2} />
+            <span className="text-[16px] font-medium">Cerrar sesión</span>
+          </button>
+        </div>
 
         {/* Footer info */}
-        <div className="text-center pt-2 pb-8">
-          <span className="text-[13px] text-[#8E8E93]">WeedClub App v1.0.0</span>
+        <div className="text-center pb-8">
+          <span className="text-[13px] text-[#C7C7CC]">WeedClub App v1.0.0</span>
         </div>
 
       </div>
@@ -91,12 +111,12 @@ export default function PerfilPage() {
 
 function MenuItem({ icon, iconBg, title, hideBorder = false }: { icon: React.ReactNode, iconBg: string, title: string, hideBorder?: boolean }) {
   return (
-    <div className="flex items-center bg-white hover:bg-gray-50 transition-colors cursor-pointer active:bg-gray-200 pl-4">
-      <div className={`w-[28px] h-[28px] rounded-[6px] flex items-center justify-center mr-3.5 shadow-sm ${iconBg}`}>
+    <div className="flex items-center bg-white hover:bg-[#F9F9F9] transition-colors cursor-pointer active:bg-[#F2F2F7] pl-4">
+      <div className={`w-[30px] h-[30px] rounded-[8px] flex items-center justify-center mr-4 ${iconBg} shadow-sm`}>
         {icon}
       </div>
-      <div className={`flex-1 flex items-center justify-between py-3 pr-4 ${hideBorder ? '' : 'border-b border-[#C6C6C8]'}`}>
-        <span className="text-[17px] text-black font-normal tracking-tight">{title}</span>
+      <div className={`flex-1 flex items-center justify-between py-3.5 pr-4 ${hideBorder ? '' : 'border-b border-[#E5E5EA]'}`}>
+        <span className="text-[17px] text-[#1C1C1E] font-normal tracking-tight">{title}</span>
         <ChevronRight size={20} className="text-[#C7C7CC]" strokeWidth={2.5} />
       </div>
     </div>
