@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { Heart } from "lucide-react";
-import { ClubCard } from "@/components/clubs/ClubCard";
+import { Heart, MapPin } from "lucide-react";
+import Link from "next/link";
 import type { Club } from "@/types";
 
 // Mock Data
@@ -81,9 +81,53 @@ export default function SeguidosPage() {
               </h2>
             )}
             {LIKED_CLUBS.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 gap-4">
                 {LIKED_CLUBS.map((club) => (
-                  <ClubCard key={club.id} club={club} />
+                  <Link key={club.id} href={`/clubs/${club.slug || club.id}`} prefetch={true} className="w-full block group cursor-pointer hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300">
+                    <div className="w-full aspect-square bg-background-secondary rounded-[24px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.04)] group-hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] border border-border-subtle/20 transition-all duration-300">
+                       
+                       {/* Imagen completa de fondo */}
+                       <img src={club.cover_image_url ?? '/portadas/cannabis.jpg'} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt={club.name} />
+                       
+                       {/* Gradiente oscuro inferior para legibilidad */}
+                       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent/10 pointer-events-none"></div>
+                       
+                       {/* Top Badge (Distancia) - Sólido gris claro */}
+                       <div className="absolute top-3 left-3 bg-[#EBEBEB] text-black text-[10px] font-bold px-2 py-1 rounded-full z-10 flex items-center gap-1 shadow-sm">
+                         <MapPin size={10} strokeWidth={2.5} /> 1.2 km
+                       </div>
+
+                       {/* Botón Heart (Arriba derecha) */}
+                       <div 
+                         onClick={(e) => {
+                           e.preventDefault();
+                           e.stopPropagation();
+                         }} 
+                         className="absolute top-3 right-3 w-8 h-8 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center z-10 hover:scale-105 transition-transform cursor-pointer shadow-sm"
+                       >
+                         <Heart size={14} className="fill-white text-white" strokeWidth={2} />
+                       </div>
+
+                       {/* Contenido inferior */}
+                       <div className="absolute bottom-0 left-0 right-0 p-4 z-10 flex flex-col">
+                         <span className="text-[17px] font-display font-black tracking-tighter text-white leading-tight truncate drop-shadow-md mb-1">{club.name}</span>
+                         
+                         <div className="flex items-center gap-1.5 text-[11px] font-light text-white/90 drop-shadow-sm">
+                           <div className="flex items-center gap-1">
+                             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+                             <span className="tracking-wide font-medium text-white">Abierto</span>
+                           </div>
+                           <span className="opacity-40 text-[8px]">•</span>
+                           <div className="flex items-center gap-1 truncate">
+                             <span className="tracking-wide truncate">{club.city}</span>
+                           </div>
+                         </div>
+                       </div>
+                       
+                       {/* Sutil brillo interior para realzar premiumness */}
+                       <div className="absolute inset-0 rounded-[24px] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15)] pointer-events-none"></div>
+                    </div>
+                  </Link>
                 ))}
               </div>
             ) : (
