@@ -42,8 +42,13 @@ const LIKED_FLOWERS = [
   { id: 3, name: "Amnesia Haze", type: "HÍBRIDA", thc: "22%", cbd: "0.5%", flavor: "Cítrico, Pino", effect: "Creativo", color: "text-emerald-600", bg: "bg-emerald-50 border border-emerald-100", image: "/weed/Colores%20Naturales/N3.webp" },
 ];
 
+const LIKED_GROW_SHOPS = [
+  { id: 101, title: "Green Care GrowShop", subtitle: "Semillas y Cultivo", rating: 4.8, city: "Barcelona", img: "/portadas/cannabis.jpg" },
+  { id: 103, title: "Seed Point Madrid", subtitle: "Especialistas en genética", rating: 4.7, city: "Madrid", img: "/portadas/cannabis3.jpg" },
+];
+
 export default function SeguidosPage() {
-  const [activeTab, setActiveTab] = useState<'Todo' | 'Clubs' | 'Flores'>('Todo');
+  const [activeTab, setActiveTab] = useState<'Todo' | 'Clubs' | 'Flores' | 'Growshops'>('Todo');
 
   return (
     <div className="w-full h-full min-h-screen pb-32 overflow-y-auto bg-background-base">
@@ -54,8 +59,8 @@ export default function SeguidosPage() {
         </h1>
         
         {/* Tabs */}
-        <div className="flex bg-background-secondary p-1.5 rounded-full border border-border-subtle/50 mb-2">
-          {(['Todo', 'Clubs', 'Flores'] as const).map((tab) => (
+        <div className="flex bg-background-secondary p-1.5 rounded-full border border-border-subtle/50 mb-2 overflow-x-auto hide-scrollbar">
+          {(['Todo', 'Clubs', 'Flores', 'Growshops'] as const).map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
@@ -186,6 +191,65 @@ export default function SeguidosPage() {
               </div>
             ) : (
               <EmptyState title="No has guardado ninguna flor" subtitle="Guarda tus flores favoritas dándole me gusta a los productos." />
+            )}
+          </section>
+        )}
+
+        {(activeTab === 'Todo' || activeTab === 'Growshops') && (
+          <section>
+            {(activeTab === 'Todo' && LIKED_GROW_SHOPS.length > 0) && (
+              <h2 className="text-[20px] font-display font-bold text-text-primary mb-4 flex items-center gap-2">
+                Grow Shops Guardados
+              </h2>
+            )}
+            {LIKED_GROW_SHOPS.length > 0 ? (
+              <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
+                {LIKED_GROW_SHOPS.map(shop => (
+                  <Link key={shop.id} href={`/shops/${shop.id}`} className="block group active:scale-[0.98] transition-transform">
+                    <div className="w-full bg-white border border-border-subtle/60 rounded-[16px] overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300 flex flex-col h-full relative">
+                      
+                      {/* Imagen de la tienda */}
+                      <div className="w-full aspect-[16/9] relative overflow-hidden bg-background-secondary">
+                        <img src={shop.img} alt={shop.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                        
+                        {/* Etiqueta de tienda */}
+                        <div className="absolute top-1.5 left-1.5 bg-white/90 backdrop-blur-md px-1.5 py-0.5 rounded-[6px] flex items-center shadow-sm">
+                          <span className="text-[8px] font-bold text-text-primary uppercase tracking-wider">Grow Shop</span>
+                        </div>
+                      </div>
+
+                      {/* Botón Heart */}
+                      <div 
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                        }} 
+                        className="absolute top-1.5 right-1.5 w-7 h-7 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center z-10 hover:scale-105 transition-transform cursor-pointer shadow-sm"
+                      >
+                        <Heart size={14} className="fill-red-500 text-red-500" strokeWidth={2} />
+                      </div>
+                      
+                      {/* Info de la tienda */}
+                      <div className="p-2.5 flex flex-col flex-1">
+                        <h3 className="text-[13px] font-display font-bold tracking-tight text-text-primary leading-tight mb-0.5 line-clamp-1">{shop.title}</h3>
+                        <span className="text-[10px] text-text-secondary mb-2 line-clamp-1">{shop.subtitle}</span>
+                        
+                        {/* Footer de tarjeta */}
+                        <div className="mt-auto flex items-center justify-between pt-1.5 border-t border-border-subtle/30">
+                          <div className="flex items-center gap-1 text-[9px] font-semibold text-text-secondary">
+                            <MapPin size={9} className="opacity-70" /> <span className="truncate max-w-[60px]">{shop.city}</span>
+                          </div>
+                          <div className="flex items-center gap-1 text-[10px] font-bold text-text-primary">
+                            <span className="text-amber-500 text-[10px] translate-y-[-0.5px]">★</span> {shop.rating}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <EmptyState title="No sigues ningún grow shop aún" subtitle="Explora la sección de grow shops y guarda tus favoritos para no perderlos de vista." />
             )}
           </section>
         )}
