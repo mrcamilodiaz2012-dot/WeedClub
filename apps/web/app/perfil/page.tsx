@@ -15,40 +15,42 @@ import {
 
 export default function PerfilPage() {
   return (
-    <div className="w-full h-full min-h-screen pb-32 overflow-y-auto bg-[#F5F5F7] font-sans">
+    <div className="w-full h-full min-h-screen pb-32 overflow-y-auto bg-[#FAFAFA] font-sans">
       
       {/* Header Profile Info */}
-      <div className="px-4 pt-16 pb-10 flex flex-col items-center justify-center">
-        <div className="w-28 h-28 rounded-full overflow-hidden mb-5 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border-[3px] border-white bg-white">
-          <img src="/portadas/cannabis2.jpg" alt="Andrés García" className="w-full h-full object-cover" />
+      <div className="px-4 pt-16 pb-12 flex flex-col items-center justify-center">
+        <div className="relative mb-5">
+          <div className="w-28 h-28 rounded-full overflow-hidden shadow-md ring-4 ring-white bg-white">
+            <img src="/portadas/cannabis2.jpg" alt="Andrés García" className="w-full h-full object-cover" />
+          </div>
         </div>
-        <h1 className="text-[30px] font-semibold tracking-tight text-[#1C1C1E] leading-tight">
+        <h1 className="text-2xl font-bold tracking-tight text-gray-900 leading-tight">
           Andrés García
         </h1>
-        <p className="text-[16px] text-[#8E8E93] mt-1 font-normal">
+        <p className="text-sm text-gray-500 mt-1 font-medium">
           andres@example.com
         </p>
       </div>
 
-      <div className="px-4 space-y-7">
+      <div className="px-5 space-y-8 max-w-lg mx-auto">
         
         {/* Cuenta Section */}
         <section>
-          <h2 className="text-[13px] font-semibold text-[#8E8E93] uppercase tracking-wider mb-2.5 ml-4">Cuenta</h2>
-          <div className="bg-white rounded-[14px] overflow-hidden shadow-[0_1px_8px_rgba(0,0,0,0.02)]">
+          <h2 className="text-base font-semibold text-gray-900 mb-3 ml-1">Cuenta</h2>
+          <div className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
             <MenuItem 
-              icon={<User size={18} className="text-white" strokeWidth={2.5} />} 
-              iconBg="bg-[#007AFF]" 
+              icon={<User size={20} className="text-blue-600" strokeWidth={2} />} 
+              iconBg="bg-blue-50" 
               title="Datos Personales" 
             />
             <MenuItem 
-              icon={<ShieldCheck size={18} className="text-white" strokeWidth={2.5} />} 
-              iconBg="bg-[#34C759]" 
+              icon={<ShieldCheck size={20} className="text-emerald-600" strokeWidth={2} />} 
+              iconBg="bg-emerald-50" 
               title="Privacidad y Seguridad" 
             />
             <MenuItem 
-              icon={<Bell size={18} className="text-white" strokeWidth={2.5} />} 
-              iconBg="bg-[#FF9500]" 
+              icon={<Bell size={20} className="text-amber-500" strokeWidth={2} />} 
+              iconBg="bg-amber-50" 
               title="Notificaciones" 
               hideBorder 
             />
@@ -57,16 +59,16 @@ export default function PerfilPage() {
 
         {/* Actividad Section */}
         <section>
-          <h2 className="text-[13px] font-semibold text-[#8E8E93] uppercase tracking-wider mb-2.5 ml-4">Actividad</h2>
-          <div className="bg-white rounded-[14px] overflow-hidden shadow-[0_1px_8px_rgba(0,0,0,0.02)]">
+          <h2 className="text-base font-semibold text-gray-900 mb-3 ml-1">Actividad</h2>
+          <div className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
             <MenuItem 
-              icon={<Calendar size={18} className="text-white" strokeWidth={2.5} />} 
-              iconBg="bg-[#5856D6]" 
+              icon={<Calendar size={20} className="text-indigo-600" strokeWidth={2} />} 
+              iconBg="bg-indigo-50" 
               title="Mis Reservas" 
             />
             <MenuItem 
-              icon={<Clock size={18} className="text-white" strokeWidth={2.5} />} 
-              iconBg="bg-[#FF2D55]" 
+              icon={<Clock size={20} className="text-rose-500" strokeWidth={2} />} 
+              iconBg="bg-rose-50" 
               title="Historial" 
               hideBorder 
             />
@@ -75,33 +77,33 @@ export default function PerfilPage() {
 
         {/* Soporte Section */}
         <section>
-          <h2 className="text-[13px] font-semibold text-[#8E8E93] uppercase tracking-wider mb-2.5 ml-4">Soporte</h2>
-          <div className="bg-white rounded-[14px] overflow-hidden shadow-[0_1px_8px_rgba(0,0,0,0.02)]">
+          <h2 className="text-base font-semibold text-gray-900 mb-3 ml-1">Soporte</h2>
+          <div className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
             <MenuItem 
-              icon={<HelpCircle size={18} className="text-white" strokeWidth={2.5} />} 
-              iconBg="bg-[#007AFF]" 
+              icon={<HelpCircle size={20} className="text-blue-600" strokeWidth={2} />} 
+              iconBg="bg-blue-50" 
               title="Ayuda y Soporte" 
             />
             <MenuItem 
-              icon={<FileText size={18} className="text-white" strokeWidth={2.5} />} 
-              iconBg="bg-[#8E8E93]" 
+              icon={<FileText size={20} className="text-gray-600" strokeWidth={2} />} 
+              iconBg="bg-gray-100" 
               title="Términos y Condiciones" 
               hideBorder 
             />
           </div>
         </section>
 
-        {/* Discreed Logout Button */}
-        <div className="pt-2 pb-6 flex justify-center">
-          <button className="flex items-center space-x-2 text-[#8E8E93] hover:text-[#FF3B30] transition-colors px-6 py-3 rounded-full active:bg-gray-100/50">
+        {/* Discrete Logout Button */}
+        <div className="pt-4 pb-6 flex justify-center">
+          <button className="flex items-center space-x-2 text-gray-400 hover:text-red-500 transition-colors px-6 py-3 rounded-full hover:bg-red-50 active:scale-95">
             <LogOut size={18} strokeWidth={2} />
-            <span className="text-[16px] font-medium">Cerrar sesión</span>
+            <span className="text-sm font-semibold">Cerrar sesión</span>
           </button>
         </div>
 
         {/* Footer info */}
         <div className="text-center pb-8">
-          <span className="text-[13px] text-[#C7C7CC]">WeedClub App v1.0.0</span>
+          <span className="text-xs text-gray-400 font-medium">WeedClub App v1.0.0</span>
         </div>
 
       </div>
@@ -111,14 +113,17 @@ export default function PerfilPage() {
 
 function MenuItem({ icon, iconBg, title, hideBorder = false }: { icon: React.ReactNode, iconBg: string, title: string, hideBorder?: boolean }) {
   return (
-    <div className="flex items-center bg-white hover:bg-[#F9F9F9] transition-colors cursor-pointer active:bg-[#F2F2F7] pl-4">
-      <div className={`w-[30px] h-[30px] rounded-[8px] flex items-center justify-center mr-4 ${iconBg} shadow-sm`}>
-        {icon}
+    <div className="group cursor-pointer">
+      <div className="flex items-center p-4 hover:bg-gray-50 transition-colors">
+        <div className={`w-10 h-10 rounded-full flex items-center justify-center mr-4 ${iconBg} group-active:scale-95 transition-transform`}>
+          {icon}
+        </div>
+        <div className="flex-1 flex items-center justify-between">
+          <span className="text-[15px] text-gray-700 font-medium">{title}</span>
+          <ChevronRight size={18} className="text-gray-300 group-hover:text-gray-400 transition-colors" strokeWidth={2.5} />
+        </div>
       </div>
-      <div className={`flex-1 flex items-center justify-between py-3.5 pr-4 ${hideBorder ? '' : 'border-b border-[#E5E5EA]'}`}>
-        <span className="text-[17px] text-[#1C1C1E] font-normal tracking-tight">{title}</span>
-        <ChevronRight size={20} className="text-[#C7C7CC]" strokeWidth={2.5} />
-      </div>
+      {!hideBorder && <div className="h-[1px] bg-gray-100 ml-16 mr-4" />}
     </div>
   );
 }
