@@ -87,14 +87,13 @@ export function AppStoreHome({ clubs }: AppStoreHomeProps) {
           <span className="text-[25px] font-display font-bold tracking-tight text-text-primary leading-none" style={{ letterSpacing: '-0.03em' }}>Clubs</span>
         </div>
 
-        {/* Location Selector (Centered) */}
         <div className="flex items-center justify-center">
           <button 
             onClick={() => setIsLocationModalOpen(true)}
-            className="h-[32px] px-4 bg-black/5 hover:bg-black/10 transition-colors rounded-full flex items-center gap-2 text-text-primary"
+            className="flex items-center gap-1.5 text-text-primary hover:opacity-70 transition-opacity"
           >
-            <span className="font-bold text-[14px]">{selectedLocation ? selectedLocation.name : "Ubicación"}</span>
-            <ChevronDown size={16} strokeWidth={2} className="text-text-primary" />
+            <span className="font-bold text-[15px]">{selectedLocation ? selectedLocation.name : "Ubicación"}</span>
+            <ChevronDown size={16} strokeWidth={2.5} className="text-text-primary mt-0.5" />
           </button>
         </div>
 
