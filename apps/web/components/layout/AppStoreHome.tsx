@@ -84,7 +84,6 @@ export function AppStoreHome({ clubs }: AppStoreHomeProps) {
       <div className="px-4 pt-4 pb-2 bg-background-base grid grid-cols-3 items-center">
         <div className="flex items-center gap-2">
           <img src="/weed-maps.svg" alt="WeedClub" className="h-8 w-auto" />
-          <span className="text-[25px] font-display font-bold tracking-tight text-text-primary leading-none" style={{ letterSpacing: '-0.03em' }}>Clubs</span>
         </div>
 
         <div className="flex items-center justify-center">
