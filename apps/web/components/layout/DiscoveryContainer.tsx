@@ -52,7 +52,7 @@ export function DiscoveryContainer({ initialLat, initialLon, initialZoom = 13 }:
         <div className="flex items-center justify-between py-3 relative">
           <div className="relative w-10 h-10">
             <Image 
-              src="/logos/logo2.svg" 
+              src="/weed-maps.svg" 
               alt="WeedClub Isotipo" 
               fill 
               className="object-contain"

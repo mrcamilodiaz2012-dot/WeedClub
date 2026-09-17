@@ -8,7 +8,7 @@ export const revalidate = 300; // Refrescar clubs cada 5 minutos
 const MOCK_CLUBS: Club[] = [
   {
     id: '1', name: 'Green Leaf Club 1', slug: 'green-leaf-club-1',
-    description: null, logo_url: '/logo2.svg',
+    description: null, logo_url: '/weed-maps.svg',
     cover_image_url: '/portadas/cannabis2.jpg',
     lat: 40.4168, lng: -3.7038, address: 'Calle Falsa 123', city: 'Madrid',
     province: 'Madrid', status: 'active', subscription_tier: 'premium',
@@ -19,7 +19,7 @@ const MOCK_CLUBS: Club[] = [
   },
   {
     id: '2', name: 'Green Leaf Club 2', slug: 'green-leaf-club-2',
-    description: null, logo_url: '/logo2.svg',
+    description: null, logo_url: '/weed-maps.svg',
     cover_image_url: '/portadas/cannabis.jpg',
     lat: 41.3851, lng: 2.1734, address: 'Carrer Falsa 456', city: 'Barcelona',
     province: 'Barcelona', status: 'active', subscription_tier: 'basic',
@@ -30,7 +30,7 @@ const MOCK_CLUBS: Club[] = [
   },
   {
     id: '3', name: 'Canna Valencia', slug: 'canna-valencia',
-    description: null, logo_url: '/logo2.svg',
+    description: null, logo_url: '/weed-maps.svg',
     cover_image_url: '/portadas/cannabis3.jpg',
     lat: 39.4699, lng: -0.3763, address: 'Carrer de Falsa 789', city: 'Valencia',
     province: 'Valencia', status: 'active', subscription_tier: 'basic',

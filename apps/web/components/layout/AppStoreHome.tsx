@@ -83,7 +83,7 @@ export function AppStoreHome({ clubs }: AppStoreHomeProps) {
       {/* Top Header (Not Sticky) */}
       <div className="px-4 pt-4 pb-2 bg-background-base grid grid-cols-3 items-center">
         <div className="flex items-center gap-2">
-          <img src="/logo2.svg" alt="WeedClub" className="h-8 w-auto" />
+          <img src="/weed-maps.svg" alt="WeedClub" className="h-8 w-auto" />
           <span className="text-[25px] font-display font-bold tracking-tight text-text-primary leading-none" style={{ letterSpacing: '-0.03em' }}>Clubs</span>
         </div>
 

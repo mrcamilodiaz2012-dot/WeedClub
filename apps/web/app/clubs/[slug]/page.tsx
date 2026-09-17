@@ -43,7 +43,7 @@ function getMockClub(identifier: string): Club {
     name: names[idx] ?? `Club ${id}`,
     slug: MOCK_SLUGS[idx] ?? `mock-club-${id}`,
     description: `Bienvenido al Club ${id}. Este es un perfil generado dinámicamente para probar la nueva arquitectura de perfil.`,
-    logo_url: '/logo2.svg',
+    logo_url: '/weed-maps.svg',
     cover_image_url: covers[id] ?? '/portadas/cannabis.jpg',
     lat: 40.4168,
     lng: -3.7038,
