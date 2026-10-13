@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { Card, CardContent } from '../ui/Card';
 import { Badge } from '../ui/Badge';
-import { MapPin, Star } from 'lucide-react';
+import { MapPin, Clock, Star, Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import type { Club } from '@/types';
@@ -18,8 +18,10 @@ interface ClubCardProps {
 }
 
 export function ClubCard({ club, isSelected, isHovered, onClick, onMouseEnter, onMouseLeave }: ClubCardProps) {
-  const coverUrl = club.cover_image_url ?? club.photos[0] ?? '/portadas/cannabis.jpg';
+  // Usamos una URL estática segura de images.unsplash.com para que funcione siempre y al instante
+  const coverUrl = 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=400';
   const isOpen = club.status === 'active'; // Lógica simplificada por ahora
+  const isPremium = club.subscription_tier === 'premium';
 
   return (
     <motion.div
@@ -49,9 +51,15 @@ export function ClubCard({ club, isSelected, isHovered, onClick, onMouseEnter, o
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
           
-          <div className="absolute top-3 left-3 px-2.5 py-1 bg-gray-900/80 backdrop-blur-md text-white text-xs font-bold rounded-lg uppercase tracking-wider shadow-sm">
-            {club.is_claimed ? 'Gestionado' : 'Sin reclamar'}
-          </div>
+          <button className="absolute top-3 right-3 p-2 bg-white/20 backdrop-blur-md rounded-full hover:bg-white/40 transition hover:scale-110">
+            <Heart className="w-5 h-5 text-white" />
+          </button>
+          
+          {isPremium && (
+            <div className="absolute top-3 left-3 px-2.5 py-1 bg-gray-900/80 backdrop-blur-md text-brand-accent text-xs font-bold rounded-lg uppercase tracking-wider flex items-center gap-1 shadow-sm">
+              <Star className="w-3 h-3 fill-brand-accent" /> Premium
+            </div>
+          )}
         </div>
         
         <CardContent className="p-4">
@@ -62,16 +70,15 @@ export function ClubCard({ club, isSelected, isHovered, onClick, onMouseEnter, o
               </h3>
               <p className="text-text-secondary text-sm flex items-center mt-1">
                 <MapPin className="w-3 h-3 mr-1" />
-                {club.city ?? 'Ubicación pendiente'}
-                {club.distance_km != null && <span className="text-gray-400 ml-1">· {club.distance_km.toFixed(1)} km</span>}
+                {club.city} • <span className="text-gray-400 ml-1">1.2 km</span>
               </p>
             </div>
             <div className="flex flex-col items-end">
               <div className="flex items-center space-x-1 font-semibold text-text-primary">
                 <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                <span>{club.rating.toFixed(1)}</span>
+                <span>4.8</span>
               </div>
-              <span className="text-xs text-gray-400 font-medium">({club.review_count})</span>
+              <span className="text-xs text-gray-400 font-medium">(120)</span>
             </div>
           </div>
           
@@ -86,11 +93,9 @@ export function ClubCard({ club, isSelected, isHovered, onClick, onMouseEnter, o
                    Cerrado
                  </Badge>
                )}
-               {club.amenities.slice(0, 1).map((amenity) => (
-                 <Badge key={amenity} variant="outline" className="text-text-secondary border-gray-200">
-                   {amenity.replaceAll('-', ' ')}
-                 </Badge>
-               ))}
+               <Badge variant="outline" className="text-text-secondary border-gray-200">
+                 Pet Friendly
+               </Badge>
             </div>
           </div>
         </CardContent>

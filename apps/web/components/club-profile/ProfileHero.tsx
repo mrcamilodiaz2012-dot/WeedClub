@@ -2,7 +2,7 @@
 
 import React from 'react';
 import type { Club } from '@/types';
-import { BadgeCheck, Share2, ArrowLeft, MapPin, Phone, Clock, Navigation } from 'lucide-react';
+import { BadgeCheck, Share2, Bookmark, ArrowLeft, MapPin, Phone, Clock, Navigation } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
@@ -11,16 +11,16 @@ interface ProfileHeroProps {
 }
 
 // Deriva el estado abierto/cerrado desde opening_hours o status
-function getOpenStatus(club: Club): { isOpen: boolean | null; label: string } {
+function getOpenStatus(club: Club): { isOpen: boolean; label: string } {
   if (club.status !== 'active') return { isOpen: false, label: 'Cerrado' };
-  if (Object.keys(club.opening_hours).length === 0) return { isOpen: null, label: 'Horario no indicado' };
+  if (!club.opening_hours) return { isOpen: true, label: 'Abierto' };
 
   const days = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
   const today = days[new Date().getDay()] ?? 'lunes';
   const hours = club.opening_hours?.[today];
   if (!hours || hours === 'cerrado') return { isOpen: false, label: 'Cerrado hoy' };
 
-  const [, close] = hours.split('-').map((t) => t.trim());
+  const [open, close] = hours.split('-').map((t) => t.trim());
   return { isOpen: true, label: `Cierra ${close ?? ''}` };
 }
 
@@ -55,15 +55,15 @@ export function ProfileHero({ club }: ProfileHeroProps) {
             <h1 className="text-[32px] md:text-[48px] font-black tracking-tighter text-white leading-[1.0] drop-shadow-lg">
               {club.name}
             </h1>
-            {club.is_claimed && <BadgeCheck aria-label="Perfil gestionado por un representante verificado" className="w-[22px] h-[22px] md:w-[26px] md:h-[26px] text-[#1ed760] shrink-0 drop-shadow-md" fill="currentColor" stroke="white" strokeWidth={1.5} />}
+            <BadgeCheck className="w-[22px] h-[22px] md:w-[26px] md:h-[26px] text-[#1ed760] shrink-0 drop-shadow-md" fill="currentColor" stroke="white" strokeWidth={1.5} />
           </div>
 
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[14px] text-white/90 leading-tight mt-2 drop-shadow-sm">
             {/* Horario */}
             <div className="flex items-center gap-1">
-              <Clock className={`w-[15px] h-[15px] ${isOpen === true ? 'text-emerald-400' : isOpen === false ? 'text-red-400' : 'text-white/70'}`} />
-              <span className={`font-semibold ${isOpen === true ? 'text-emerald-400' : isOpen === false ? 'text-red-400' : 'text-white/80'}`}>
-                {isOpen === true ? 'Abierto' : isOpen === false ? 'Cerrado' : 'Información'}
+              <Clock className={`w-[15px] h-[15px] ${isOpen ? 'text-emerald-400' : 'text-red-400'}`} />
+              <span className={`font-semibold ${isOpen ? 'text-emerald-400' : 'text-red-400'}`}>
+                {isOpen ? 'Abierto' : 'Cerrado'}
               </span>
               <span className="text-white/80">⋅ {label}</span>
             </div>
@@ -112,18 +112,13 @@ export function ProfileHero({ club }: ProfileHeroProps) {
           </div>
         )}
 
-        {/* Top Right — Compartir */}
+        {/* Top Right — Compartir / Guardar */}
         <div className="absolute top-4 right-4 flex items-center gap-3 z-10">
-          <button
-            type="button"
-            onClick={async () => {
-              if (navigator.share) await navigator.share({ title: club.name, url: window.location.href });
-              else await navigator.clipboard.writeText(window.location.href);
-            }}
-            className="text-white hover:text-white/80 transition-all drop-shadow-md p-1"
-            aria-label="Compartir club"
-          >
+          <button className="text-white hover:text-white/80 transition-all drop-shadow-md p-1">
             <Share2 className="w-6 h-6" />
+          </button>
+          <button className="text-white hover:text-white/80 transition-all drop-shadow-md p-1">
+            <Bookmark className="w-6 h-6" />
           </button>
         </div>
       </div>
@@ -159,9 +154,10 @@ export function ProfileHero({ club }: ProfileHeroProps) {
             </a>
           )}
 
-          <span className="text-xs font-semibold text-gray-500">
-            {club.is_claimed ? 'Perfil gestionado por el club' : 'Información pública'}
-          </span>
+          {/* Seguir */}
+          <button className="h-[36px] px-5 rounded-full bg-black text-white font-bold text-[14px] flex items-center justify-center hover:bg-gray-900 transition-colors">
+            Seguir
+          </button>
         </div>
       </div>
     </div>

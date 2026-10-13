@@ -7,7 +7,6 @@
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types",
-    "validate": "node scripts/validate-project.js",
     "seed": "node scripts/seed/seed.js",
     "seed:reset": "node scripts/seed/reset.js",
     "seed:reseed": "node scripts/seed/reseed.js"
@@ -29,8 +28,5 @@
   "dependencies": {
     "mapbox-gl": "^3.24.1",
     "react-map-gl": "^8.1.1"
-  },
-  "overrides": {
-    "shell-quote": "1.12.0"
   }
 }

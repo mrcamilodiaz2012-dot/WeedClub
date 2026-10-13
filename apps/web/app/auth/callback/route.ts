@@ -4,19 +4,18 @@ import { createClient } from '@/utils/supabase/server'
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url)
   const code = searchParams.get('code')
-  const requestedNext = searchParams.get('next')
-  const next = requestedNext?.startsWith('/') && !requestedNext.startsWith('//')
-    ? requestedNext
-    : '/club/panel'
+  // if "next" is in param, use it as the redirect URL
+  const next = searchParams.get('next') ?? '/perfil'
 
   if (code) {
     const supabase = createClient()
     const { error } = await supabase.auth.exchangeCodeForSession(code)
     
     if (!error) {
-      return NextResponse.redirect(new URL(next, origin))
+      return NextResponse.redirect(`${origin}${next}`)
     }
   }
 
-  return NextResponse.redirect(new URL('/club/acceso?error=oauth', origin))
+  // return the user to an error page with some instructions
+  return NextResponse.redirect(`${origin}/login?error=Ocurrió un error con la autenticación`)
 }

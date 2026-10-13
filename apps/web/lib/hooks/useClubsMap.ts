@@ -2,19 +2,18 @@ import useSWR from 'swr';
 import { createClient } from '@/utils/supabase/client';
 import { useDebounce } from 'use-debounce';
 
-const fetcher = async ([lat, lon, radiusKm, amenity]: [number, number, number, string | null]) => {
+const fetcher = async ([lat, lon, radius_km, amenity]: [number, number, number, string | null]) => {
   const supabase = createClient();
   
-  const { data, error } = await supabase.rpc('get_nearby_clubs', {
-    p_lat: lat,
-    p_lon: lon,
-    p_radius_km: radiusKm,
-  });
+  // Por ahora llamamos al RPC básico. 
+  // TODO: Actualizar el RPC en Supabase para que acepte un filtro de amenity si es necesario, 
+  // o filtrarlo en memoria si el dataset inicial es pequeño.
+  const { data, error } = await supabase.rpc('get_nearby_clubs', { lat, lon, radius_km });
   
   if (error) throw new Error(error.message);
   
   // Filtrado muy básico en cliente por ahora para la demo
-  const results = data || [];
+  let results = data || [];
   if (amenity) {
     // Si tuviéramos un RPC más avanzado, esto iría allí.
     // Como get_nearby_clubs no retorna club_amenities expandido, 

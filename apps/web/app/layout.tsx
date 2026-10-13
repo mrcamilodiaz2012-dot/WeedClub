@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { BottomTabBar } from "@/components/layout/BottomTabBar";
-import { AgeGate } from "@/components/legal/AgeGate";
-import { SiteFooter } from "@/components/legal/SiteFooter";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -15,11 +13,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: {
-    default: "WeedClub",
-    template: "%s",
-  },
-  description: "Directorio de clubes y asociaciones: información, ubicación, horarios y contacto.",
+  title: "WeedClub",
+  description: "The ultimate cannabis community",
 };
 
 export default function RootLayout({
@@ -28,12 +23,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
+    <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
-        <SiteFooter />
         <BottomTabBar />
-        <AgeGate />
       </body>
     </html>
   );

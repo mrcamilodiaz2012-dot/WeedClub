@@ -1,115 +1,159 @@
-# WeedClub
+# Turborepo starter
 
-Directorio público de clubes y asociaciones, con búsqueda, mapa, perfiles públicos y un área gratuita para que los propietarios mantengan la información de su club.
+This Turborepo starter is maintained by the Turborepo core team.
 
-## Alcance actual
+## Using this example
 
-Incluido:
+Run the following command:
 
-- Directorio público de clubes.
-- Búsqueda por nombre, ciudad y servicios.
-- Mapa interactivo y geolocalización opcional.
-- Perfiles con contacto, horarios, servicios, fotos y ubicación.
-- Registro y acceso exclusivo para propietarios o representantes.
-- Reclamación y moderación de perfiles.
-- Panel de edición del club y galería.
-- Páginas legales versionadas, confirmación de mayoría de edad y aceptación expresa para representantes.
-- Canal de notificación y cola administrativa para contenido presuntamente ilícito o incorrecto.
-
-Fuera del alcance actual:
-
-- Pagos, planes y Stripe.
-- Cuentas para usuarios finales.
-- Favoritos personales.
-- Creación de reseñas por usuarios.
-- Reservas o compraventa de productos.
-
-## Tecnología
-
-- Next.js 16 y React 19 para la web.
-- Supabase para PostgreSQL, Auth y Storage.
-- PostGIS para búsquedas por distancia.
-- Mapbox GL con cartografía de CARTO.
-- Turborepo para el monorepo.
-- Expo SDK 56 y Expo Router para el cliente móvil público.
-
-## Configuración
-
-Requisitos: Node.js 18 o superior, npm y un proyecto de Supabase.
-
-```bash
-npm install
-cp apps/web/.env.example apps/web/.env.local
+```sh
+npx create-turbo@latest
 ```
 
-Completa las variables de `apps/web/.env.local` y aplica las migraciones:
+## What's inside?
 
-```bash
-npx supabase link --project-ref TU_PROJECT_REF
-npx supabase db push
+This Turborepo includes the following packages/apps:
+
+### Apps and Packages
+
+- `docs`: a [Next.js](https://nextjs.org/) app
+- `web`: another [Next.js](https://nextjs.org/) app
+- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
+- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
+- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+
+Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+
+### Utilities
+
+This Turborepo has some additional tools already setup for you:
+
+- [TypeScript](https://www.typescriptlang.org/) for static type checking
+- [ESLint](https://eslint.org/) for code linting
+- [Prettier](https://prettier.io) for code formatting
+
+### Build
+
+To build all apps and packages, run the following command:
+
+With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
+
+```sh
+cd my-turborepo
+turbo build
 ```
 
-Para desarrollo web:
+Without global `turbo`, use your package manager:
 
-```bash
-npm run dev --workspace=web
+```sh
+cd my-turborepo
+npx turbo build
+npm dlx turbo build
+npm exec turbo build
 ```
 
-La web estará disponible en `http://localhost:3000`.
+You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
 
-Para la app móvil:
+With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
 
-```bash
-cp apps/mobile/.env.example apps/mobile/.env
-npm run start --workspace=mobile
+```sh
+turbo build --filter=docs
 ```
 
-Completa las variables públicas de Supabase y `EXPO_PUBLIC_SITE_URL`. La app móvil ofrece el directorio, búsqueda y fichas públicas; el acceso y la gestión de propietarios se abren en la web.
+Without global `turbo`:
 
-## Datos de desarrollo
-
-Los scripts de seed usan la service role configurada en `apps/web/.env.local`:
-
-```bash
-npm run seed
-npm run seed:reset
-npm run seed:reseed
+```sh
+npx turbo build --filter=docs
+npm exec turbo build --filter=docs
+npm exec turbo build --filter=docs
 ```
 
-No ejecutes `seed:reset` contra producción.
+### Develop
 
-## Comprobaciones
+To develop all apps and packages, run the following command:
 
-```bash
-npm run check-types
-npm run lint
-npm run validate
+With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
+
+```sh
+cd my-turborepo
+turbo dev
 ```
 
-`validate` comprueba que el alcance actual no vuelva a introducir Stripe y que las rutas y migraciones esenciales estén presentes.
+Without global `turbo`, use your package manager:
 
-Antes de un lanzamiento público completa y verifica [LEGAL_LAUNCH_CHECKLIST.md](./LEGAL_LAUNCH_CHECKLIST.md). Las páginas muestran un aviso visible mientras falten los datos reales del titular en `apps/web/.env.local`.
-
-También puedes comprobar la compatibilidad móvil con `npx expo install --check` desde `apps/mobile`.
-
-## Flujo de propietario
-
-1. El representante crea su acceso en `/club/registro`.
-2. Selecciona un club sin reclamar en `/club/reclamar`.
-3. Un perfil con rol `super_admin` revisa la solicitud en `/admin/reclamaciones`.
-4. Al aprobarla, el club queda asignado al representante.
-5. El propietario edita contenido, horarios, servicios e imágenes desde `/club/panel`.
-
-Los avisos sobre contenido se reciben en `/reportar-contenido` y se resuelven desde `/admin/reportes`. La comunicación de la decisión por correo debe realizarla una persona responsable de moderación.
-
-Para convertir un perfil existente en administrador debe hacerse desde un entorno seguro de Supabase, nunca desde el navegador:
-
-```sql
-update public.profiles
-set role = 'super_admin'
-where id = 'UUID_DEL_ADMINISTRADOR';
+```sh
+cd my-turborepo
+npx turbo dev
+npm exec turbo dev
+npm exec turbo dev
 ```
 
-## Despliegue
+You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
 
-La aplicación web está preparada para Vercel. Configura las mismas variables de entorno y aplica las migraciones en Supabase antes de desplegar una versión que use el nuevo directorio público.
+With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+
+```sh
+turbo dev --filter=web
+```
+
+Without global `turbo`:
+
+```sh
+npx turbo dev --filter=web
+npm exec turbo dev --filter=web
+npm exec turbo dev --filter=web
+```
+
+### Remote Caching
+
+> [!TIP]
+> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+
+Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+
+By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+
+With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
+
+```sh
+cd my-turborepo
+turbo login
+```
+
+Without global `turbo`, use your package manager:
+
+```sh
+cd my-turborepo
+npx turbo login
+npm exec turbo login
+npm exec turbo login
+```
+
+This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+
+Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+
+With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+
+```sh
+turbo link
+```
+
+Without global `turbo`:
+
+```sh
+npx turbo link
+npm exec turbo link
+npm exec turbo link
+```
+
+## Useful Links
+
+Learn more about the power of Turborepo:
+
+- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
+- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
+- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
+- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
+- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
+- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)

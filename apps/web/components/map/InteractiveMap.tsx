@@ -1,8 +1,8 @@
 'use client';
 
 import * as React from 'react';
-import Map, { Marker, NavigationControl, type MarkerEvent, type ViewStateChangeEvent } from 'react-map-gl/mapbox';
-import { motion } from 'framer-motion';
+import Map, { Marker, NavigationControl } from 'react-map-gl';
+import { motion, AnimatePresence } from 'framer-motion';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import type { Club } from '@/types';
 import { trackEvent } from '@/lib/analytics';
@@ -19,21 +19,8 @@ interface InteractiveMapProps {
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
-type MappableClub = Club & { lat: number; lng: number };
-
-interface PinMarkerProps {
-  club: MappableClub;
-  isSelected: boolean;
-  isHovered: boolean;
-  onSelect: (id: string) => void;
-  onHover: (id: string | null) => void;
-}
-
-function hasCoordinates(club: Club): club is MappableClub {
-  return club.lat != null && club.lng != null;
-}
-
-const PinMarker = React.memo(({ club, isSelected, isHovered, onSelect, onHover }: PinMarkerProps) => {
+// Componente Memoizado del Pin para evitar re-renders por hover si no le afecta
+const PinMarker = React.memo(({ club, isSelected, isHovered, onSelect, onHover }: any) => {
   const active = isSelected || isHovered;
   
   return (
@@ -41,8 +28,8 @@ const PinMarker = React.memo(({ club, isSelected, isHovered, onSelect, onHover }
       longitude={club.lng}
       latitude={club.lat}
       anchor="bottom"
-      onClick={(event: MarkerEvent<MouseEvent>) => {
-        event.originalEvent.stopPropagation();
+      onClick={(e: any) => {
+        e.originalEvent.stopPropagation();
         onSelect(club.id);
       }}
     >
@@ -98,13 +85,13 @@ export function InteractiveMap({ clubs, selectedClubId, hoveredClubId, onSelectC
       <Map
         mapboxAccessToken={MAPBOX_TOKEN !== 'tu-mapbox-token' ? MAPBOX_TOKEN : undefined}
         {...viewport}
-        onMove={(event: ViewStateChangeEvent) => onViewportChange(event.viewState)}
+        onMove={(evt: any) => onViewportChange(evt.viewState)}
         mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
         reuseMaps
       >
         <NavigationControl position="top-right" />
         
-        {clubs.filter(hasCoordinates).map(club => (
+        {clubs.map(club => (
           <PinMarker 
             key={club.id}
             club={club}

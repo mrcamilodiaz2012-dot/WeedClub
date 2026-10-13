@@ -15,7 +15,7 @@ export async function updateSession(request: NextRequest) {
           return request.cookies.getAll()
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value))
+          cookiesToSet.forEach(({ name, value, options }) => request.cookies.set(name, value))
           supabaseResponse = NextResponse.next({
             request,
           })
@@ -35,15 +35,15 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  const protectedPath = request.nextUrl.pathname.startsWith('/club/panel')
-    || request.nextUrl.pathname.startsWith('/club/reclamar')
-    || request.nextUrl.pathname.startsWith('/admin');
-
-  if (!user && protectedPath) {
+  if (
+    !user &&
+    !request.nextUrl.pathname.startsWith('/login') &&
+    !request.nextUrl.pathname.startsWith('/auth') &&
+    request.nextUrl.pathname.startsWith('/dashboard')
+  ) {
+    // no user, potentially respond by redirecting the user to the login page
     const url = request.nextUrl.clone()
-    url.pathname = '/club/acceso'
-    url.search = ''
-    url.searchParams.set('next', `${request.nextUrl.pathname}${request.nextUrl.search}`)
+    url.pathname = '/login'
     return NextResponse.redirect(url)
   }
 

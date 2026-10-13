@@ -1,84 +1,64 @@
-# Supabase: desarrollo y despliegue
+# Guía de Gestión de Base de Datos (Supabase Remoto)
 
-## Entornos
+Dado que utilizamos dos entornos remotos (Dev y Prod), aquí tienes las instrucciones claras para vincular los proyectos, ejecutar migraciones, y desplegar cambios.
 
-Usa proyectos separados para desarrollo y producción. Todas las migraciones deben probarse primero en desarrollo.
+## 1. Vincular los Proyectos Remotos
+
+Abre una terminal en la raíz del monorepo (`/Users/andres/PROGRAMADOR/Proyectos/WeedClub`) y autentícate en la CLI de Supabase:
 
 ```bash
 npx supabase login
-npx supabase link --project-ref PROJECT_REF_DESARROLLO
+```
+*(Sigue las instrucciones en el navegador o pega tu access token).*
+
+Una vez logueado, vincula tu entorno de **Desarrollo**:
+
+```bash
+npx supabase link --project-ref <REFERENCE_ID_DEV>
+```
+*(Ingresa tu contraseña de base de datos cuando se te solicite).*
+
+## 2. Configurar Variables de Entorno
+
+Ve a **Project Settings -> API** en tu panel de Supabase y copia tus credenciales en los siguientes archivos:
+- `apps/web/.env.local`
+- `apps/mobile/.env`
+
+*(Revisa los archivos `.env.example` en cada carpeta si necesitas la plantilla).*
+
+## 3. Ejecutar Migraciones (Desplegar Cambios a la BD)
+
+Para empujar las migraciones locales (`supabase/migrations/*.sql`) hacia el proyecto vinculado (Dev o Prod), ejecuta:
+
+```bash
 npx supabase db push
 ```
 
-Variables necesarias en `apps/web/.env.local`:
+Este comando leerá todos los archivos en la carpeta de migraciones y los aplicará secuencialmente en el proyecto remoto. **Esto creará las tablas, PostGIS y políticas de RLS en la nube.**
 
-```dotenv
-NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_ANON_KEY=
-SUPABASE_SERVICE_ROLE_KEY=
-NEXT_PUBLIC_MAPBOX_TOKEN=
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
-NEXT_PUBLIC_LEGAL_NAME=
-NEXT_PUBLIC_LEGAL_TAX_ID=
-NEXT_PUBLIC_LEGAL_ADDRESS=
-NEXT_PUBLIC_LEGAL_EMAIL=
-NEXT_PUBLIC_LEGAL_REGISTRY=
-```
+## 4. Ejecutar Seeds (Datos de Prueba)
 
-La `SUPABASE_SERVICE_ROLE_KEY` solo se usa en scripts administrativos locales. Nunca debe estar disponible en componentes del navegador.
-
-## Migración del directorio
-
-`20261012000000_public_directory.sql`:
-
-- Elimina las columnas históricas de pagos y planes.
-- Añade contacto por WhatsApp e Instagram.
-- Crea la vista agregada `club_directory`.
-- Corrige las distancias mediante PostGIS `geography`.
-- Restringe Storage a carpetas propiedad del club.
-- Impide que una cuenta cambie su propio rol o reclame un club ya asignado.
-- Añade la revisión transaccional de reclamaciones.
-
-Después de aplicar la migración ejecuta:
+Si tienes un archivo `supabase/seed.sql` con datos de prueba, puedes insertarlos en la base de datos remota usando:
 
 ```bash
-node scripts/validate-infra.js
+npx supabase db reset --linked
 ```
+> [!WARNING]  
+> Esto **borrará** todos los datos de tu base de datos remota vinculada y la recreará usando tus migraciones y el archivo seed. ¡Solo usa esto en el entorno DEV!
 
-## Datos de desarrollo
+## 5. Desplegar a Producción
 
-```bash
-npm run seed
-```
+Cuando estés listo para subir tus cambios a `WeedClub Prod`:
 
-Para borrar exclusivamente los registros creados por los scripts y volver a generarlos:
+1. Vincula el CLI al proyecto de producción:
+   ```bash
+   npx supabase link --project-ref <REFERENCE_ID_PROD>
+   ```
+2. Empuja las migraciones a producción:
+   ```bash
+   npx supabase db push
+   ```
+3. *(Opcional)* Si realizaste cambios manuales en Prod que no están en local, usa `npx supabase db pull` antes de empujar.
 
-```bash
-npm run seed:reseed
-```
-
-Revisa siempre el proyecto vinculado antes de ejecutar un reset. No uses estos scripts contra producción.
-
-## Primer administrador
-
-Crea la cuenta desde `/club/registro` y asigna el rol desde SQL Editor usando el UUID correcto:
-
-```sql
-update public.profiles
-set role = 'super_admin'
-where id = 'UUID_DEL_ADMINISTRADOR';
-```
-
-El administrador podrá revisar solicitudes en `/admin/reclamaciones`.
-
-La migración `20261013000000_legal_compliance.sql` añade el registro de aceptación legal, restringe la lectura de perfiles, exige una declaración en las reclamaciones y crea el flujo de reportes de contenido. Los reportes se revisan en `/admin/reportes`.
-
-## Producción
-
-1. Haz una copia de seguridad.
-2. Vincula la CLI al proyecto de producción.
-3. Ejecuta `npx supabase db push`.
-4. Configura las variables web en Vercel.
-5. Despliega la web.
-6. Completa `LEGAL_LAUNCH_CHECKLIST.md`.
-7. Comprueba portada, búsqueda, mapa, perfil público, acceso de propietario, una reclamación y un reporte de contenido de prueba.
+---
+**Siguiente Paso Inmediato:** Una vez hayas vinculado tu proyecto Dev y corrido `npx supabase db push`, avísame. Yo ejecutaré el script de validación `scripts/validate-infra.js` para asegurar que todo funciona perfecto.

@@ -1,15 +1,8 @@
-import type { Metadata } from 'next';
-import { PublicMap } from '@/components/map/PublicMap';
-import { getPublicClubs } from '@/lib/clubs';
-
-export const metadata: Metadata = {
-  title: 'Mapa de clubes | WeedClub',
-  description: 'Explora clubes y asociaciones en el mapa.',
-};
-
-export const dynamic = 'force-dynamic';
-
-export default async function MapaPage() {
-  const clubs = await getPublicClubs(500);
-  return <PublicMap clubs={clubs} />;
+export default function MapaPage() {
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen pb-[80px] px-4 text-center">
+      <h1 className="text-2xl font-bold mb-2">Mapa</h1>
+      <p className="text-gray-500">Aquí irá el mapa de Clubes interactivo.</p>
+    </div>
+  );
 }

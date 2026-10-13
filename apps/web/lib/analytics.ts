@@ -8,7 +8,7 @@ export type EventName =
   | 'claim_started'
   | 'app_store_visit';
 
-export const trackEvent = (eventName: EventName, properties?: Record<string, unknown>) => {
+export const trackEvent = (eventName: EventName, properties?: Record<string, any>) => {
   // TODO: Implementar Mixpanel / PostHog / Google Analytics
   console.log(`[Analytics Stub] ${eventName}`, properties);
 };
