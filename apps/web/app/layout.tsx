@@ -14,7 +14,7 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "WeedClub",
-  description: "The ultimate cannabis community",
+  description: "Descubre clubes y consulta información de forma clara y responsable.",
 };
 
 export default function RootLayout({
@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
         <BottomTabBar />

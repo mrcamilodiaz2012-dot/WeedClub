@@ -11,6 +11,7 @@ import { useState, useEffect } from "react";
 import { type Location } from "@/components/ui/LocationSearch";
 import { LocationModal } from "@/components/ui/LocationModal";
 import Image from "next/image";
+import { LegalFooter } from "@/components/legal/LegalFooter";
 
 interface AppStoreHomeProps {
   clubs: Club[];
@@ -386,6 +387,8 @@ export function AppStoreHome({ clubs }: AppStoreHomeProps) {
           )}
         </div>
       </div>
+
+      <LegalFooter />
 
       <LocationModal 
         isOpen={isLocationModalOpen}

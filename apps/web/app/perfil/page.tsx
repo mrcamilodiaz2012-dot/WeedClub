@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { 
   User, 
   Bell, 
@@ -60,7 +61,7 @@ export default function PerfilPage() {
           <h2 className="text-xl font-display font-bold text-gray-900 mb-2">Cuenta</h2>
           <div className="flex flex-col">
             <MenuItem icon={<User size={24} strokeWidth={1.5} />} title="Datos Personales" />
-            <MenuItem icon={<ShieldCheck size={24} strokeWidth={1.5} />} title="Privacidad y Seguridad" />
+            <MenuItem icon={<ShieldCheck size={24} strokeWidth={1.5} />} title="Privacidad y Seguridad" href="/privacidad" />
             <MenuItem icon={<Bell size={24} strokeWidth={1.5} />} title="Notificaciones" />
           </div>
         </div>
@@ -79,7 +80,7 @@ export default function PerfilPage() {
           <h2 className="text-xl font-display font-bold text-gray-900 mb-2">Soporte</h2>
           <div className="flex flex-col">
             <MenuItem icon={<HelpCircle size={24} strokeWidth={1.5} />} title="Ayuda y Soporte" />
-            <MenuItem icon={<FileText size={24} strokeWidth={1.5} />} title="Términos y Condiciones" />
+            <MenuItem icon={<FileText size={24} strokeWidth={1.5} />} title="Información legal" href="/legal" />
           </div>
         </div>
 
@@ -95,9 +96,9 @@ export default function PerfilPage() {
   );
 }
 
-function MenuItem({ icon, title }: { icon: React.ReactNode, title: string }) {
-  return (
-    <div className="flex items-center justify-between py-4 group cursor-pointer active:opacity-60 transition-opacity border-b border-gray-100/80 last:border-none">
+function MenuItem({ icon, title, href }: { icon: React.ReactNode, title: string, href?: string }) {
+  const content = (
+    <>
       <div className="flex items-center gap-4">
         <div className="text-gray-400 group-hover:text-gray-900 transition-colors">
           {icon}
@@ -105,6 +106,14 @@ function MenuItem({ icon, title }: { icon: React.ReactNode, title: string }) {
         <span className="text-[17px] text-gray-900 font-medium tracking-tight">{title}</span>
       </div>
       <ChevronRight size={20} className="text-gray-300" strokeWidth={2} />
-    </div>
+    </>
+  );
+
+  const className = "flex items-center justify-between py-4 group cursor-pointer active:opacity-60 transition-opacity border-b border-gray-100/80 last:border-none";
+
+  return href ? (
+    <Link href={href} className={className}>{content}</Link>
+  ) : (
+    <div className={className}>{content}</div>
   );
 }
