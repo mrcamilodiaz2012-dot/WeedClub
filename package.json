@@ -28,7 +28,6 @@
   ],
   "dependencies": {
     "mapbox-gl": "^3.24.1",
-    "next": "16.4.0",
     "react-map-gl": "^8.1.1"
   },
   "overrides": {
