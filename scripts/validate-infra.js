@@ -49,7 +49,7 @@ async function validateInfrastructure() {
   });
 
   await runTest("Índices: Verificando índices geoespaciales y FKs", async () => {
-    const { data, error } = await supabaseAdmin.rpc('get_nearby_clubs', { lat: 0, lon: 0, radius_km: 1 });
+    const { data, error } = await supabaseAdmin.rpc('get_nearby_clubs', { p_lat: 0, p_lon: 0, p_radius_km: 1 });
     // Si la función existe y no tira error 500, los índices y postgis están montados.
     return !error; 
   });
@@ -62,7 +62,7 @@ async function validateInfrastructure() {
       location: 'POINT(-3.7 40.4)'
     };
     await supabaseAdmin.from('clubs').insert(testClub);
-    const { data } = await supabaseAdmin.rpc('get_nearby_clubs', { lat: 40.4, lon: -3.7, radius_km: 5 });
+    const { data } = await supabaseAdmin.rpc('get_nearby_clubs', { p_lat: 40.4, p_lon: -3.7, p_radius_km: 5 });
     await supabaseAdmin.from('clubs').delete().eq('slug', testClub.slug);
     return data && data.some(c => c.slug === testClub.slug);
   });
@@ -92,10 +92,9 @@ async function validateInfrastructure() {
     return error && error.code === '42501'; // 42501 = insufficient privilege
   });
 
-  await runTest("Stripe Webhook: Verificación de endpoint web", async () => {
-    // Solo podemos verificar que el archivo de la ruta existe y exporta POST
-    const webhookPath = path.resolve(process.cwd(), 'apps/web/app/api/stripe/webhook/route.ts');
-    return fs.existsSync(webhookPath);
+  await runTest("Directorio público: vista agregada disponible", async () => {
+    const { error } = await supabaseAnon.from('club_directory').select('id,name,lat,lng,is_claimed').limit(1);
+    return !error;
   });
 
   console.log("\n✅ Script de validación finalizado.");

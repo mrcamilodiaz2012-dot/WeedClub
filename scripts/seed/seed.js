@@ -25,9 +25,6 @@ const CITIES = [
 const AMENITIES = [
   { name: 'Pet Friendly', slug: 'pet-friendly', icon: 'paw' },
   { name: 'Accesible', slug: 'accesible', icon: 'wheelchair' },
-  { name: 'Extractos', slug: 'extractos', icon: 'leaf' },
-  { name: 'Comestibles', slug: 'comestibles', icon: 'cookie' },
-  { name: 'Dab Bar', slug: 'dab-bar', icon: 'fire' },
   { name: 'Juegos de Mesa', slug: 'juegos-de-mesa', icon: 'dice' },
   { name: 'Música en Vivo', slug: 'musica-en-vivo', icon: 'music' },
   { name: 'Bebidas', slug: 'bebidas', icon: 'coffee' }
@@ -44,9 +41,9 @@ async function seed() {
     const { data } = await supabase.from('cities').insert({
       name: c.name,
       slug: c.slug,
-      description: `Los mejores clubes cannábicos en ${c.name}.`,
-      meta_title: `Clubes de Cannabis en ${c.name} | WeedClub`,
-      meta_description: `Encuentra y descubre asociaciones y clubes en ${c.name}.`,
+      description: `Directorio informativo de clubes y asociaciones en ${c.name}.`,
+      meta_title: `Directorio de clubes en ${c.name} | WeedClub`,
+      meta_description: `Consulta información pública de clubes y asociaciones en ${c.name}.`,
       image_url: faker.image.urlLoremFlickr({ category: 'city', width: 800, height: 600 })
     }).select('id').single();
     cityIds[c.name] = data.id;
@@ -112,7 +109,6 @@ async function seed() {
       province: cityObj.name,
       postal_code: faker.location.zipCode('#####'),
       status: 'active',
-      subscription_tier: faker.helpers.arrayElement(['free', 'free', 'free', 'premium']),
       city_id: cityId,
       owner_id: ownerId
     }).select('id').single();

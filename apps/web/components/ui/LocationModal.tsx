@@ -20,7 +20,7 @@ interface LocationModalProps {
   selectedLocation: Location | null;
 }
 
-export function LocationModal({ isOpen, onClose, onLocationSelect, selectedLocation }: LocationModalProps) {
+export function LocationModal({ isOpen, onClose, onLocationSelect }: LocationModalProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [debouncedSearchTerm] = useDebounce(searchTerm, 300);
   const [suggestions, setSuggestions] = useState<Location[]>([]);
@@ -149,7 +149,7 @@ export function LocationModal({ isOpen, onClose, onLocationSelect, selectedLocat
 
         {searchTerm && !isLoading && suggestions.length === 0 && (
           <div className="text-center py-8 text-text-secondary">
-            No se encontraron resultados para "{searchTerm}"
+            No se encontraron resultados para &quot;{searchTerm}&quot;
           </div>
         )}
       </div>

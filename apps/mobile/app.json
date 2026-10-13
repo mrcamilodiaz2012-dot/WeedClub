@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "mobile",
-    "slug": "mobile",
+    "name": "WeedClub",
+    "slug": "weedclub",
+    "scheme": "weedclub",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,7 +19,14 @@
       },
       "predictiveBackGestureEnabled": false
     },
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
     "web": {
+      "bundler": "metro",
       "favicon": "./assets/favicon.png"
     }
   }

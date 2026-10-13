@@ -1,667 +1,192 @@
 'use client';
-import React, { useState, useEffect, useRef } from 'react';
-import type { Club } from '@/types';
-import Image from 'next/image';
+
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
+import { useState } from 'react';
+import {
+  CalendarClock,
+  Camera,
+  ExternalLink,
+  Globe,
+  Mail,
+  MapPin,
+  Phone,
+  ShieldCheck,
+  Star,
+} from 'lucide-react';
+import type { Club } from '@/types';
 
-const InteractiveMap = dynamic(() => import('../map/InteractiveMap').then(mod => mod.InteractiveMap), { ssr: false, loading: () => <div className="w-full h-full bg-gray-100 animate-pulse rounded-3xl" /> });
-const TabInfo = dynamic(() => import('./tabs/TabInfo').then(mod => mod.TabInfo));
-const TabPhotos = dynamic(() => import('./tabs/TabPhotos').then(mod => mod.TabPhotos));
-const TabPhotosCarousel = dynamic(() => import('./tabs/TabPhotosCarousel').then(mod => mod.TabPhotosCarousel));
-const TabRules = dynamic(() => import('./tabs/TabRules').then(mod => mod.TabRules));
-const TabMembership = dynamic(() => import('./tabs/TabMembership').then(mod => mod.TabMembership));
-const TabReviews = dynamic(() => import('./tabs/TabReviews').then(mod => mod.TabReviews));
-import { MapPin, Star, X, Heart } from 'lucide-react';
+const InteractiveMap = dynamic(
+  () => import('../map/InteractiveMap').then((module) => module.InteractiveMap),
+  { ssr: false, loading: () => <div className="h-[390px] animate-pulse rounded-[28px] bg-gray-100" /> }
+);
 
-/**
- * LazyMount: renders children only when the placeholder div
- * enters the viewport (rootMargin = 200px ahead of viewport).
- * This keeps Mapbox + Carousel out of the critical render path.
- */
-function LazyMount({ children, height = 400, className = '' }: { children: React.ReactNode; height?: number; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+const DAYS = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'];
 
-  useEffect(() => {
-    if (!ref.current) return;
-    const observer = new IntersectionObserver(
-      (entries) => { if (entries[0]?.isIntersecting) { setVisible(true); observer.disconnect(); } },
-      { rootMargin: '200px' }
-    );
-    observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
+const AMENITY_LABELS: Record<string, string> = {
+  wifi: 'Wi-Fi',
+  gaming: 'Zona de juegos',
+  cafeteria: 'Cafetería',
+  parking: 'Aparcamiento',
+  terraza: 'Terraza',
+  'pet-friendly': 'Admite mascotas',
+  accesible: 'Accesible',
+  'juegos-de-mesa': 'Juegos de mesa',
+  'musica-en-vivo': 'Música en vivo',
+  bebidas: 'Bebidas',
+};
+
+export function ProfileContent({ club }: { club: Club }) {
+  const hasCoordinates = club.lat != null && club.lng != null;
+  const [viewport, setViewport] = useState({
+    latitude: club.lat ?? 40.4168,
+    longitude: club.lng ?? -3.7038,
+    zoom: 14,
+  });
 
   return (
-    <div ref={ref} className={className} style={visible ? undefined : { minHeight: height }}>
-      {visible ? children : <div className="w-full bg-gray-100 animate-pulse rounded-3xl" style={{ height }} />}
+    <div className="mx-auto max-w-5xl space-y-14 px-5 py-10 pb-32 md:px-8">
+      <section className="grid gap-8 md:grid-cols-[minmax(0,1.4fr)_minmax(260px,0.6fr)]">
+        <div>
+          <SectionEyebrow>El club</SectionEyebrow>
+          <h2 className="mt-2 text-3xl font-black tracking-tight">Información del club</h2>
+          {club.description ? (
+            <p className="mt-5 whitespace-pre-line text-base leading-7 text-gray-600">{club.description}</p>
+          ) : (
+            <p className="mt-5 rounded-2xl bg-gray-50 p-5 text-sm leading-6 text-gray-500">
+              Este club todavía no ha añadido una descripción. Los datos de contacto y ubicación disponibles aparecen en esta página.
+            </p>
+          )}
+
+          {club.amenities.length > 0 && (
+            <div className="mt-8">
+              <h3 className="text-sm font-black uppercase tracking-[0.12em] text-gray-400">Servicios</h3>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {club.amenities.map((amenity) => (
+                  <span key={amenity} className="rounded-full border border-black/10 bg-white px-3.5 py-2 text-sm font-semibold text-gray-700">
+                    {AMENITY_LABELS[amenity] ?? amenity.replaceAll('-', ' ')}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <aside className="rounded-[26px] border border-black/5 bg-[#f6f7f5] p-5">
+          <div className="flex items-center gap-2">
+            <ShieldCheck className="text-emerald-600" size={20} />
+            <h3 className="font-black">Datos del perfil</h3>
+          </div>
+          <dl className="mt-5 space-y-4 text-sm">
+            <InfoRow label="Estado" value={club.is_claimed ? 'Gestionado por el club' : 'Pendiente de reclamar'} />
+            <InfoRow label="Ubicación" value={[club.city, club.province].filter(Boolean).join(', ') || 'No indicada'} />
+            {club.review_count > 0 && <InfoRow label="Valoración" value={`${club.rating.toFixed(1)} · ${club.review_count} reseñas`} />}
+          </dl>
+        </aside>
+      </section>
+
+      {club.photos.length > 0 && (
+        <section>
+          <SectionTitle icon={<Camera size={21} />} title="Fotos" />
+          <div className="mt-5 grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-4">
+            {club.photos.slice(0, 9).map((photo, index) => (
+              <div key={`${photo}-${index}`} className={`overflow-hidden rounded-[20px] bg-gray-100 ${index === 0 ? 'col-span-2 row-span-2' : ''}`}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={photo} alt={`Foto ${index + 1} de ${club.name}`} className="aspect-square h-full w-full object-cover transition duration-500 hover:scale-105" />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <section className="grid gap-8 lg:grid-cols-2">
+        <div>
+          <SectionTitle icon={<CalendarClock size={21} />} title="Horarios" />
+          <div className="mt-5 overflow-hidden rounded-[24px] border border-black/5">
+            {DAYS.map((day) => (
+              <div key={day} className="flex items-center justify-between border-b border-black/5 px-5 py-3.5 text-sm last:border-b-0">
+                <span className="font-semibold capitalize text-gray-700">{day}</span>
+                <span className={`font-bold ${club.opening_hours[day] === 'cerrado' ? 'text-red-500' : 'text-gray-950'}`}>
+                  {club.opening_hours[day] || 'No indicado'}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <SectionTitle icon={<Phone size={21} />} title="Contacto" />
+          <div className="mt-5 grid gap-3">
+            {club.phone && <ContactLink href={`tel:${club.phone}`} icon={<Phone size={18} />} label="Teléfono" value={club.phone} />}
+            {club.email && <ContactLink href={`mailto:${club.email}`} icon={<Mail size={18} />} label="Correo" value={club.email} />}
+            {club.whatsapp && <ContactLink href={`https://wa.me/${club.whatsapp.replace(/\D/g, '')}`} icon={<ExternalLink size={18} />} label="WhatsApp" value="Abrir conversación" external />}
+            {club.instagram_url && <ContactLink href={club.instagram_url} icon={<Camera size={18} />} label="Instagram" value="Ver perfil" external />}
+            {club.website_url && <ContactLink href={club.website_url} icon={<Globe size={18} />} label="Sitio web" value="Visitar sitio" external />}
+            {!club.phone && !club.email && !club.whatsapp && !club.instagram_url && !club.website_url && (
+              <div className="rounded-[24px] bg-gray-50 p-6 text-sm leading-6 text-gray-500">El club todavía no ha publicado medios de contacto.</div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <SectionTitle icon={<MapPin size={21} />} title="Ubicación" />
+        {hasCoordinates ? (
+          <div className="mt-5 h-[390px] overflow-hidden rounded-[28px] border border-black/5 shadow-sm md:h-[480px]">
+            <InteractiveMap
+              clubs={[club]}
+              selectedClubId={club.id}
+              hoveredClubId={null}
+              onSelectClub={() => undefined}
+              onHoverClub={() => undefined}
+              viewport={viewport}
+              onViewportChange={setViewport}
+            />
+          </div>
+        ) : (
+          <div className="mt-5 rounded-[24px] bg-gray-50 p-8 text-center text-sm text-gray-500">Este club aún no ha publicado coordenadas.</div>
+        )}
+      </section>
+
+      {club.review_count > 0 && (
+        <section className="rounded-[28px] bg-gray-950 p-7 text-white md:p-10">
+          <div className="flex items-center gap-2 text-amber-400">
+            <Star className="fill-current" size={22} />
+            <span className="text-3xl font-black">{club.rating.toFixed(1)}</span>
+          </div>
+          <h2 className="mt-3 text-2xl font-black tracking-tight">Valoración histórica</h2>
+          <p className="mt-2 max-w-xl text-sm leading-6 text-gray-400">
+            Calculada a partir de {club.review_count} reseñas existentes. La creación de nuevas reseñas queda desactivada mientras no haya cuentas para usuarios finales.
+          </p>
+        </section>
+      )}
+
+      <section className="rounded-[24px] border border-black/5 bg-gray-50 p-5 text-sm leading-6 text-gray-600">
+        <p><strong className="text-gray-950">Aviso:</strong> WeedClub es un directorio informativo. Esta ficha no certifica la situación legal del club, no garantiza la admisión y no ofrece venta, reserva ni intermediación de sustancias.</p>
+        <Link href={`/reportar-contenido?url=${encodeURIComponent(`/clubs/${club.slug}`)}`} className="mt-3 inline-flex font-bold text-emerald-700 underline">Reportar un error o contenido ilícito</Link>
+      </section>
     </div>
   );
 }
 
-
-interface ProfileContentProps {
-  club: Club;
+function SectionEyebrow({ children }: { children: React.ReactNode }) {
+  return <p className="text-xs font-black uppercase tracking-[0.16em] text-emerald-700">{children}</p>;
 }
 
-const TABS = ['Todo', 'Flores', 'Club', 'Fotos', 'Reseñas'];
+function SectionTitle({ icon, title }: { icon: React.ReactNode; title: string }) {
+  return <h2 className="flex items-center gap-2 text-2xl font-black tracking-tight">{icon}{title}</h2>;
+}
 
-const FLOWERS_DATA = [
-  // Exóticas
-  { id: 1, name: "Purple Exotica 1", type: "Índica", thc: "24%", cbd: "0.2%", flavor: "Uva, Dulce", effect: "Relajante", rating: "4.9", color: "text-purple-600", image: "/weed/Colores%20Exoticos/E1.webp" },
-  { id: 2, name: "Neon Sativa 2", type: "Sativa", thc: "26%", cbd: "0.1%", flavor: "Tropical", effect: "Energético", rating: "4.8", color: "text-amber-500", image: "/weed/Colores%20Exoticos/E2.webp" },
-  { id: 3, name: "Exotic Hybrid 3", type: "Híbrida", thc: "22%", cbd: "0.5%", flavor: "Cítrico, Pino", effect: "Creativo", rating: "4.7", color: "text-emerald-600", image: "/weed/Colores%20Exoticos/E3.webp" },
-  { id: 4, name: "Pink Fantasy 4", type: "Híbrida", thc: "21%", cbd: "0.8%", flavor: "Fresa, Vainilla", effect: "Felicidad", rating: "4.9", color: "text-pink-500", image: "/weed/Colores%20Exoticos/E4.webp" },
-  { id: 5, name: "Dark Magic 5", type: "Índica", thc: "25%", cbd: "1.2%", flavor: "Amaderado, Fuerte", effect: "Sedante", rating: "4.8", color: "text-gray-800", image: "/weed/Colores%20Exoticos/E5.webp" },
-  { id: 6, name: "Amber Glow 6", type: "Sativa", thc: "20%", cbd: "0.5%", flavor: "Limón, Miel", effect: "Eufórico", rating: "4.6", color: "text-orange-500", image: "/weed/Colores%20Exoticos/E6.webp" },
-  
-  // Naturales
-  { id: 7, name: "Natural Green 1", type: "Híbrida", thc: "18%", cbd: "2.0%", flavor: "Pino, Terroso", effect: "Equilibrado", rating: "4.5", color: "text-emerald-600", image: "/weed/Colores%20Naturales/N1.webp" },
-  { id: 8, name: "Classic Skunk 2", type: "Sativa", thc: "19%", cbd: "0.5%", flavor: "Skunk, Cítrico", effect: "Cerebral", rating: "4.7", color: "text-amber-600", image: "/weed/Colores%20Naturales/N2.webp" },
-  { id: 9, name: "Earthy Kush 3", type: "Índica", thc: "22%", cbd: "1.0%", flavor: "Tierra, Café", effect: "Relajante", rating: "4.8", color: "text-emerald-700", image: "/weed/Colores%20Naturales/N3.webp" },
-  { id: 10, name: "Natural Frost 4", type: "Híbrida", thc: "20%", cbd: "0.3%", flavor: "Menta, Fresco", effect: "Creativo", rating: "4.6", color: "text-emerald-500", image: "/weed/Colores%20Naturales/N4.webp" },
-  { id: 11, name: "Pure Sativa 5", type: "Sativa", thc: "21%", cbd: "0.1%", flavor: "Cítrico, Dulce", effect: "Activo", rating: "4.9", color: "text-amber-500", image: "/weed/Colores%20Naturales/N5.webp" },
-  { id: 12, name: "Deep Forest 6", type: "Índica", thc: "24%", cbd: "0.8%", flavor: "Pino, Madera", effect: "Sedante", rating: "4.8", color: "text-emerald-800", image: "/weed/Colores%20Naturales/N6.webp" },
-];
+function InfoRow({ label, value }: { label: string; value: string }) {
+  return <div className="flex items-start justify-between gap-4"><dt className="text-gray-500">{label}</dt><dd className="text-right font-bold text-gray-900">{value}</dd></div>;
+}
 
-export function ProfileContent({ club }: ProfileContentProps) {
-  const [viewport, setViewport] = useState({
-    latitude: club.lat || 40.4168,
-    longitude: club.lng || -3.7038,
-    zoom: 14
-  });
-
-  const [activeTab, setActiveTab] = useState('Todo');
-  const [selectedFlowerId, setSelectedFlowerId] = useState<number | null>(null);
-  const [activeModalId, setActiveModalId] = useState<number | null>(null);
-  const [likedFlowers, setLikedFlowers] = useState<Set<number>>(new Set());
-  const [showOtherClubs, setShowOtherClubs] = useState(false);
-
-  const toggleLike = (e: React.MouseEvent, id: number) => {
-    e.stopPropagation();
-    setLikedFlowers(prev => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
-  };
-
-  // When modal opens, set the active ID
-  useEffect(() => {
-    if (selectedFlowerId !== null) {
-      setActiveModalId(selectedFlowerId);
-    } else {
-      setActiveModalId(null);
-    }
-  }, [selectedFlowerId]);
-
-  // Prevent background scroll when modal is open
-  useEffect(() => {
-    if (selectedFlowerId !== null) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [selectedFlowerId]);
-
-  // Scroll to selected flower when modal opens
-  useEffect(() => {
-    if (selectedFlowerId !== null) {
-      const el = document.getElementById(`flower-modal-${selectedFlowerId}`);
-      if (el) {
-        el.scrollIntoView({ behavior: 'instant', block: 'nearest', inline: 'center' });
-      }
-    }
-  }, [selectedFlowerId]);
-
+function ContactLink({ href, icon, label, value, external = false }: { href: string; icon: React.ReactNode; label: string; value: string; external?: boolean }) {
   return (
-    <div className="w-full pb-20 relative">
-      {/* Tabs Carousel */}
-      <div className="w-full border-b border-gray-200 sticky top-0 bg-white/95 backdrop-blur-md z-30 pt-0">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex overflow-x-auto hide-scrollbar w-full">
-            {TABS.map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className="flex-1 min-w-[80px] hover:bg-gray-200/50 transition-colors flex justify-center pt-4"
-              >
-                <div className="relative pb-4 flex flex-col items-center justify-center">
-                  <span className={`text-[15px] ${activeTab === tab ? 'font-bold text-black' : 'font-medium text-gray-500'}`}>
-                    {tab}
-                  </span>
-                  {activeTab === tab && (
-                    <div className="absolute bottom-0 left-0 w-full h-[4px] bg-black rounded-full"></div>
-                  )}
-                </div>
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="max-w-4xl mx-auto px-5 md:px-8 py-6 flex flex-col gap-10">
-        
-        {activeTab === 'Todo' && (
-          <div className="space-y-10">
-            {/* Variedades Disponibles Section (Preview) */}
-            <section>
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">
-                  Variedades destacadas
-                </h2>
-                <button 
-                  onClick={() => setActiveTab('Flores')}
-                  className="text-sm font-semibold text-gray-500 hover:text-gray-900 transition-colors"
-                >
-                  Ver todas
-                </button>
-              </div>
-              <div className="flex overflow-x-auto hide-scrollbar gap-4 pb-6 -mx-5 px-5 md:mx-0 md:px-0">
-                {FLOWERS_DATA.slice(0, 5).map((varie) => (
-                  <div 
-                    key={varie.id} 
-                    onClick={() => setSelectedFlowerId(varie.id)}
-                    className="w-[220px] shrink-0 bg-[#F5F5F7] rounded-[24px] border border-black/[0.04] shadow-[0_8px_30px_rgba(0,0,0,0.015)] overflow-hidden group cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:-translate-y-0.5 transition-all duration-300"
-                  >
-                    <div className="w-full h-[170px] flex items-center justify-center pt-4 relative">
-                      {/* Background Glow */}
-                      <div className="absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center">
-                        <div 
-                          className="w-40 h-40 transition-colors duration-700" 
-                          style={{
-                            background: varie.type === 'Sativa' 
-                              ? 'radial-gradient(circle, rgba(251,191,36,0.35) 0%, rgba(251,191,36,0) 65%)' 
-                              : varie.type === 'Índica' 
-                                ? 'radial-gradient(circle, rgba(192,132,252,0.35) 0%, rgba(192,132,252,0) 65%)' 
-                                : 'radial-gradient(circle, rgba(52,211,153,0.35) 0%, rgba(52,211,153,0) 65%)'
-                          }} 
-                        />
-                      </div>
-                      <Image 
-                        src={varie.image} 
-                        alt={varie.name} 
-                        width={120} 
-                        height={120} 
-                        className="object-contain drop-shadow-md group-hover:scale-110 group-hover:drop-shadow-xl transition-all duration-500" 
-                      />
-                      <div className="absolute top-3 left-3">
-                        <span className={`bg-white/95 text-[10px] uppercase tracking-wider font-bold px-2.5 py-1 rounded-full shadow-sm ${varie.color}`}>
-                          {varie.type}
-                        </span>
-                      </div>
-                      <button 
-                        onClick={(e) => toggleLike(e, varie.id)}
-                        className="absolute top-3 right-3 bg-white/95 border border-black/5 w-7 h-7 rounded-full shadow-sm flex items-center justify-center hover:scale-110 active:scale-95 transition-all"
-                      >
-                        <Heart 
-                          className={`w-3.5 h-3.5 transition-colors ${
-                            likedFlowers.has(varie.id) ? 'text-red-500 fill-red-500' : 'text-gray-400'
-                          }`} 
-                        />
-                      </button>
-                    </div>
-                    <div className="p-4 pt-2 flex flex-col gap-2">
-                      <div className="flex justify-between items-start">
-                        <h3 className="font-display font-bold text-gray-900 text-[19px] leading-tight truncate">{varie.name}</h3>
-                      </div>
-                      
-                      {/* Stats Row 1: THC/CBD */}
-                      <div className="flex items-center gap-2">
-                        <div className="flex items-center gap-1 bg-gray-100 rounded-md px-1.5 py-0.5">
-                          <span className="text-[10px] font-bold text-gray-500">THC</span>
-                          <span className="text-xs font-bold text-gray-900">{varie.thc}</span>
-                        </div>
-                        <div className="flex items-center gap-1 bg-gray-100 rounded-md px-1.5 py-0.5">
-                          <span className="text-[10px] font-bold text-gray-500">CBD</span>
-                          <span className="text-xs font-bold text-gray-900">{varie.cbd}</span>
-                        </div>
-                      </div>
-                      
-                      {/* Stats Row 2: Flavor and Effect */}
-                      <div className="flex flex-col gap-1 mt-1">
-                        <div className="flex items-center gap-1.5 text-xs text-gray-600">
-                           <span className="opacity-60 text-[10px] uppercase tracking-wider font-bold w-12">Sabor</span>
-                           <span className="font-medium truncate">{varie.flavor}</span>
-                        </div>
-                        <div className="flex items-center gap-1.5 text-xs text-gray-600">
-                           <span className="opacity-60 text-[10px] uppercase tracking-wider font-bold w-12">Efecto</span>
-                           <span className="font-medium truncate">{varie.effect}</span>
-                        </div>
-                      </div>
-
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            {/* Fotos Section */}
-            <section>
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">
-                  Galería
-                </h2>
-              </div>
-              <LazyMount height={380}>
-                <TabPhotosCarousel club={club} onClick={() => setActiveTab('Fotos')} />
-              </LazyMount>
-            </section>
-
-            {/* Mapa Section */}
-            <section>
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">
-                  Ubicación
-                </h2>
-              </div>
-              <LazyMount height={400} className="w-full">
-                <div className="w-full h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-black/[0.04] relative">
-                  <InteractiveMap 
-                    clubs={[club]} 
-                    selectedClubId={club.id}
-                    hoveredClubId={null}
-                    onSelectClub={() => {}}
-                    onHoverClub={() => {}}
-                    viewport={viewport}
-                    onViewportChange={setViewport}
-                  />
-                  {/* Subtle inner shadow overlay */}
-                  <div className="absolute inset-0 pointer-events-none rounded-3xl shadow-[inset_0_0_0_1px_rgba(0,0,0,0.06)]" />
-                </div>
-              </LazyMount>
-            </section>
-
-            {/* Reseñas de Google Maps Section */}
-            <section>
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">
-                    Reseñas
-                  </h2>
-                  <div className="flex items-center gap-2 mt-1">
-                    <div className="flex text-yellow-400">
-                      {[1, 2, 3, 4, 5].map(star => <Star key={star} className="w-4 h-4 fill-current" />)}
-                    </div>
-                    <span className="font-bold text-gray-900 text-sm">4.8</span>
-                    <span className="text-gray-500 text-sm">de 124 opiniones</span>
-                  </div>
-                </div>
-                <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center font-bold text-blue-600">G</div>
-              </div>
-              <div className="flex overflow-x-auto hide-scrollbar gap-4 pb-6 -mx-5 px-5 md:mx-0 md:px-0">
-                {[
-                  { name: "Carlos M.", text: "El mejor ambiente de la ciudad, música chill y calidad top. Recomendado 100%.", time: "hace 2 semanas" },
-                  { name: "Laura G.", text: "Sitio súper acogedor para trabajar con el portátil. El staff es súper amable.", time: "hace 1 mes" },
-                  { name: "David R.", text: "Gran variedad de flores y extracciones. El local está increíblemente diseñado.", time: "hace 2 meses" },
-                ].map((review, i) => (
-                  <div key={i} className="w-[280px] shrink-0 bg-gray-50 rounded-2xl p-5 border border-gray-100">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center font-bold text-sm">
-                        {review.name[0]}
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-gray-900 text-sm">{review.name}</h4>
-                        <p className="text-xs text-gray-500">{review.time}</p>
-                      </div>
-                    </div>
-                    <div className="flex text-yellow-400 mb-2">
-                      {[1, 2, 3, 4, 5].map(star => <Star key={star} className="w-3 h-3 fill-current" />)}
-                    </div>
-                    <p className="text-sm text-gray-600 leading-relaxed">"{review.text}"</p>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            {/* Otros clubs en la zona Section */}
-            <section className="mb-4">
-              {!showOtherClubs ? (
-                <button 
-                  onClick={() => setShowOtherClubs(true)}
-                  className="w-full py-3.5 flex items-center justify-center gap-2 text-[15px] font-medium text-gray-600 bg-gray-50 hover:bg-gray-100 rounded-[16px] transition-colors"
-                >
-                  <MapPin className="w-4 h-4" />
-                  Explorar otros clubs en la zona
-                </button>
-              ) : (
-                <div className="animate-in fade-in slide-in-from-top-4 duration-500">
-                  <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight flex items-center gap-2">
-                      <MapPin className="w-6 h-6 text-gray-900" />
-                      Otros clubs en la zona
-                    </h2>
-                    <button onClick={() => setShowOtherClubs(false)} className="text-sm font-semibold text-gray-500 hover:text-gray-900">Ocultar</button>
-                  </div>
-                  <div className="flex overflow-x-auto hide-scrollbar gap-4 pb-6 -mx-5 px-5 md:mx-0 md:px-0">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="w-[200px] shrink-0 block group cursor-pointer hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300">
-                    <div className="w-full aspect-square bg-gray-100 rounded-[24px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.04)] group-hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] border border-black/[0.04] transition-all duration-300">
-                       
-                       {/* Imagen completa de fondo */}
-                       <Image 
-                         src={`/portadas/portada${i === 1 ? '1' : '1'}.jpg`} // Fallback to portada1 for mock
-                         alt={`Club ${i}`}
-                         fill
-                         className="object-cover transition-transform duration-700 group-hover:scale-105"
-                         onError={(e) => {
-                           e.currentTarget.src = `https://images.unsplash.com/photo-1576085898323-218337e3e43c?auto=format&fit=crop&q=80&w=400&h=300&random=${i + 20}`;
-                         }}
-                       />
-                       
-                       {/* Gradiente oscuro inferior para legibilidad */}
-                       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent/10 pointer-events-none"></div>
-                       
-                       {/* Top Badge (Distancia) - Sólido gris claro */}
-                       <div className="absolute top-3 left-3 bg-[#EBEBEB] text-black text-[12px] font-bold px-3 py-1.5 rounded-full z-10 flex items-center gap-1.5 shadow-sm">
-                         <MapPin size={14} strokeWidth={2.5} /> {(0.5 * i).toFixed(1)} km
-                       </div>
-
-                       {/* Botón Heart (Arriba derecha) */}
-                       <div 
-                         onClick={(e) => { e.preventDefault(); e.stopPropagation(); }} 
-                         className="absolute top-3 right-3 w-9 h-9 bg-[#EBEBEB] rounded-full flex items-center justify-center z-10 hover:scale-105 transition-transform cursor-pointer shadow-sm"
-                       >
-                         <Heart size={18} color="black" strokeWidth={2} />
-                       </div>
-
-                       {/* Contenido inferior */}
-                       <div className="absolute bottom-0 left-0 right-0 p-4 z-10 flex flex-col">
-                         <span className="text-[20px] font-display font-black tracking-tighter text-white leading-tight truncate drop-shadow-md mb-1">Club Local {i}</span>
-                         
-                         <div className="flex items-center gap-2 text-[14px] font-light text-white/90 drop-shadow-sm">
-                           <div className="flex items-center gap-1.5">
-                             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
-                             <span className="tracking-wide font-medium text-white">Abierto</span>
-                           </div>
-                           <span className="opacity-40 text-[10px]">•</span>
-                           <div className="flex items-center gap-1">
-                             <Star size={12} className="text-yellow-400 fill-yellow-400" />
-                             <span className="tracking-wide font-bold">4.{9 - i}</span>
-                           </div>
-                         </div>
-                       </div>
-                       
-                       {/* Sutil brillo interior para realzar premiumness */}
-                       <div className="absolute inset-0 rounded-[24px] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15)] pointer-events-none"></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              </div>
-              )}
-            </section>
-          </div>
-        )}
-
-        {/* Flores Section */}
-        {activeTab === 'Flores' && (
-          <section>
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">
-                Variedades disponibles
-              </h2>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
-              {FLOWERS_DATA.map((varie) => (
-                <div 
-                  key={varie.id} 
-                  onClick={() => setSelectedFlowerId(varie.id)}
-                  className="w-full bg-[#F5F5F7] rounded-[24px] border border-black/[0.04] shadow-[0_8px_30px_rgba(0,0,0,0.015)] overflow-hidden group cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col"
-                >
-                  <div className="w-full h-[140px] md:h-[180px] flex items-center justify-center pt-2 relative">
-                    {/* Background Glow */}
-                    <div className="absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center">
-                      <div 
-                        className="w-32 h-32 md:w-48 md:h-48 transition-colors duration-700" 
-                        style={{
-                          background: varie.type === 'Sativa' 
-                            ? 'radial-gradient(circle, rgba(251,191,36,0.35) 0%, rgba(251,191,36,0) 65%)' 
-                            : varie.type === 'Índica' 
-                              ? 'radial-gradient(circle, rgba(192,132,252,0.35) 0%, rgba(192,132,252,0) 65%)' 
-                              : 'radial-gradient(circle, rgba(52,211,153,0.35) 0%, rgba(52,211,153,0) 65%)'
-                        }} 
-                      />
-                    </div>
-                    <Image 
-                      src={varie.image} 
-                      alt={varie.name} 
-                      width={120} 
-                      height={120} 
-                      className="object-contain drop-shadow-md group-hover:scale-110 group-hover:drop-shadow-xl transition-all duration-500 w-[100px] md:w-[130px]" 
-                    />
-                    <div className="absolute top-3 left-3">
-                      <span className={`bg-white/95 text-[8px] md:text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-md shadow-sm ${varie.color}`}>
-                        {varie.type}
-                      </span>
-                    </div>
-                    <button 
-                      onClick={(e) => toggleLike(e, varie.id)}
-                      className="absolute top-3 right-3 bg-white/95 border border-black/5 w-6 h-6 md:w-7 md:h-7 rounded-full shadow-sm flex items-center justify-center hover:scale-110 active:scale-95 transition-all"
-                    >
-                      <Heart 
-                        className={`w-3 h-3 md:w-3.5 md:h-3.5 transition-colors ${
-                          likedFlowers.has(varie.id) ? 'text-red-500 fill-red-500' : 'text-gray-400'
-                        }`} 
-                      />
-                    </button>
-                  </div>
-                  <div className="p-3 md:p-5 pt-2 flex flex-col gap-2 flex-1 justify-between">
-                    <h3 className="font-display font-bold text-gray-900 text-sm md:text-lg leading-tight line-clamp-1">{varie.name}</h3>
-                    
-                    <div className="flex items-center gap-1.5 md:gap-2">
-                      <div className="flex items-center gap-1 bg-gray-50 rounded px-1.5 py-0.5 md:px-2 md:py-1">
-                        <span className="text-[8px] md:text-[10px] font-bold text-gray-400">THC</span>
-                        <span className="text-[10px] md:text-xs font-bold text-gray-800">{varie.thc}</span>
-                      </div>
-                      <div className="flex items-center gap-1 bg-gray-50 rounded px-1.5 py-0.5 md:px-2 md:py-1">
-                        <span className="text-[8px] md:text-[10px] font-bold text-gray-400">CBD</span>
-                        <span className="text-[10px] md:text-xs font-bold text-gray-800">{varie.cbd}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* Club Section */}
-        {activeTab === 'Club' && (
-          <div className="space-y-10">
-            <section>
-              <TabInfo club={club} />
-            </section>
-            <section>
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">
-                  Membresía
-                </h2>
-              </div>
-              <TabMembership club={club} />
-            </section>
-            <section>
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">
-                  Normas Generales de Clubs
-                </h2>
-              </div>
-              <TabRules club={club} />
-            </section>
-          </div>
-        )}
-
-        {/* Fotos Section */}
-        {activeTab === 'Fotos' && (
-          <section>
-            <TabPhotos club={club} />
-          </section>
-        )}
-
-        {/* Reseñas Section */}
-        {activeTab === 'Reseñas' && (
-          <section>
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">
-                Reseñas y Opiniones
-              </h2>
-            </div>
-            <TabReviews club={club} />
-          </section>
-        )}
-
-      </div>
-
-      {/* Flower Details Modal Carousel */}
-      {selectedFlowerId !== null && (
-        <div className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-md flex flex-col justify-center animate-in fade-in duration-300">
-          <div 
-            className="absolute inset-0" 
-            onClick={() => setSelectedFlowerId(null)}
-          />
-          {/* Close Button */}
-          <button 
-            onClick={() => setSelectedFlowerId(null)}
-            className="absolute top-4 right-4 md:top-8 md:right-8 z-10 w-12 h-12 bg-black/40 hover:bg-black/60 backdrop-blur-lg rounded-full flex items-center justify-center transition-colors"
-          >
-            <X className="w-6 h-6 text-white" />
-          </button>
-
-          {/* Carousel Container */}
-          <div 
-            className="w-full relative z-10 overflow-x-auto snap-x snap-mandatory hide-scrollbar flex items-center px-[10vw] md:px-[30vw] py-10 gap-4 md:gap-6"
-            onScroll={(e) => {
-              const container = e.currentTarget;
-              const scrollLeft = container.scrollLeft;
-              const itemWidth = container.scrollWidth / FLOWERS_DATA.length;
-              const newIndex = Math.round(scrollLeft / itemWidth);
-              const activeFlower = FLOWERS_DATA[newIndex];
-              if (activeFlower && activeFlower.id !== activeModalId) {
-                setActiveModalId(activeFlower.id);
-              }
-            }}
-          >
-            {FLOWERS_DATA.map((flower, idx) => {
-              const isActive = flower.id === activeModalId;
-              return (
-                <div 
-                  key={flower.id} 
-                  id={`flower-modal-${flower.id}`}
-                  onClick={() => {
-                    if (!isActive) {
-                      const el = document.getElementById(`flower-modal-${flower.id}`);
-                      if (el) {
-                        el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                      }
-                    }
-                  }}
-                  className={`w-[80vw] md:w-[400px] shrink-0 snap-center rounded-[32px] overflow-hidden relative transition-all duration-500 ${
-                    isActive ? 'scale-100 opacity-100 shadow-[0_20px_60px_rgba(0,0,0,0.1)]' : 'scale-90 opacity-40 shadow-none cursor-pointer hover:opacity-60'
-                  }`}
-                >
-                  {/* Premium Light Background */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-white via-[#fafafa] to-[#f4f4f5]" />
-                  
-                  {/* Atmospheric Glow */}
-                  <div 
-                    className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[400px] transition-colors duration-700 pointer-events-none flex justify-center" 
-                    style={{
-                      background: flower.type === 'Sativa' 
-                        ? 'radial-gradient(ellipse at top, rgba(251,191,36,0.3) 0%, rgba(251,191,36,0) 70%)' 
-                        : flower.type === 'Índica' 
-                          ? 'radial-gradient(ellipse at top, rgba(192,132,252,0.3) 0%, rgba(192,132,252,0) 70%)' 
-                          : 'radial-gradient(ellipse at top, rgba(52,211,153,0.3) 0%, rgba(52,211,153,0) 70%)'
-                    }}
-                  />
-                  
-                  {/* Content */}
-                  <div className="relative z-10 flex flex-col h-full">
-                    {/* Header Tags */}
-                    <div className="absolute top-6 left-6 right-6 flex items-center justify-between z-20">
-                      <div className="flex items-center gap-2">
-                        <span className={`bg-white/90 border border-black/5 text-[10px] uppercase tracking-[0.2em] font-bold px-3 py-1.5 rounded-full shadow-sm ${flower.color}`}>
-                          {flower.type}
-                        </span>
-                      </div>
-                      <button 
-                        onClick={(e) => toggleLike(e, flower.id)}
-                        className="bg-white/90 border border-black/5 w-8 h-8 rounded-full shadow-sm flex items-center justify-center hover:scale-110 active:scale-95 transition-all"
-                      >
-                        <Heart 
-                          className={`w-4 h-4 transition-colors ${
-                            likedFlowers.has(flower.id) ? 'text-red-500 fill-red-500' : 'text-gray-400'
-                          }`} 
-                        />
-                      </button>
-                    </div>
-
-                    {/* Modal Image Header */}
-                    <div className="w-full h-[320px] relative flex items-center justify-center pt-8">
-                      <Image 
-                        src={flower.image} 
-                        alt={flower.name} 
-                        width={240} 
-                        height={240} 
-                        className={`object-contain transition-all duration-700 ease-out ${isActive ? 'drop-shadow-[0_30px_40px_rgba(0,0,0,0.15)] animate-float-slow scale-110' : 'drop-shadow-none scale-90'}`} 
-                      />
-                    </div>
-
-                    {/* Modal Content */}
-                    <div className="p-6 md:p-8 pt-0 flex-1 flex flex-col">
-                      <h3 className="font-display font-bold text-3xl text-gray-900 mb-6 tracking-tight">
-                        {flower.name}
-                      </h3>
-                      
-                      <div className="space-y-4">
-                        {/* THC / CBD Glass Panel */}
-                        <div className="bg-white/60 border border-white/80 backdrop-blur-xl rounded-[24px] p-5 flex items-center justify-around shadow-[0_4px_24px_rgba(0,0,0,0.03)]">
-                          <div className="flex flex-col items-center gap-1.5">
-                            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">THC</span>
-                            <span className="text-xl font-display font-bold text-gray-900">{flower.thc}</span>
-                          </div>
-                          <div className="w-px h-10 bg-gray-200" />
-                          <div className="flex flex-col items-center gap-1.5">
-                            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">CBD</span>
-                            <span className="text-xl font-display font-bold text-gray-900">{flower.cbd}</span>
-                          </div>
-                        </div>
-
-                        {/* Flavor / Effect Panels */}
-                        <div className="grid grid-cols-2 gap-4">
-                          <div className="bg-gray-50/80 border border-gray-100 hover:bg-gray-100/80 transition-colors rounded-[20px] p-4 flex flex-col gap-1 shadow-sm">
-                            <span className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.15em]">Sabor</span>
-                            <span className="text-sm font-medium text-gray-800">{flower.flavor}</span>
-                          </div>
-                          <div className="bg-gray-50/80 border border-gray-100 hover:bg-gray-100/80 transition-colors rounded-[20px] p-4 flex flex-col gap-1 shadow-sm">
-                            <span className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.15em]">Efecto</span>
-                            <span className="text-sm font-medium text-gray-800">{flower.effect}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-          
-          {/* Pagination Dots */}
-          <div className="absolute bottom-12 md:bottom-16 left-0 right-0 flex justify-center gap-2.5 z-10 pointer-events-none">
-            {FLOWERS_DATA.map((flower) => (
-              <div 
-                key={flower.id}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  flower.id === activeModalId ? 'bg-white scale-125' : 'bg-white/40'
-                }`}
-              />
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
+    <a href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined} className="flex items-center gap-4 rounded-[20px] border border-black/5 p-4 transition hover:border-black/15 hover:bg-gray-50">
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gray-100">{icon}</span>
+      <span className="min-w-0 flex-1"><span className="block text-xs font-bold uppercase tracking-wider text-gray-400">{label}</span><span className="block truncate text-sm font-bold text-gray-900">{value}</span></span>
+      <ExternalLink size={15} className="text-gray-300" />
+    </a>
   );
 }

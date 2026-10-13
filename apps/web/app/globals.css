@@ -31,6 +31,10 @@
 }
 
 @layer utilities {
+  .legal-input {
+    @apply w-full rounded-xl border border-black/10 bg-white p-3 outline-none transition focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100;
+  }
+
   .hide-scrollbar::-webkit-scrollbar,
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
