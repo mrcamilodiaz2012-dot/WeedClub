@@ -17,6 +17,19 @@ import type { Club } from "@/types";
 const CITY_PREFERENCE_KEY = "weedclub-map-city";
 const ALL_CITIES_PREFERENCE = "__all__";
 
+type DetectedLocation = {
+  city: string;
+  latitude: number;
+  longitude: number;
+};
+
+type CityOption = {
+  name: string;
+  latitude: number;
+  longitude: number;
+  clubId: string | null;
+};
+
 function normalizeCityName(value: string) {
   return value
     .normalize("NFD")
@@ -40,16 +53,13 @@ const InteractiveMap = dynamic(
 
 export function MapDirectory({
   clubs,
-  detectedCity,
+  detectedLocation,
 }: {
   clubs: Club[];
-  detectedCity?: string | null;
+  detectedLocation?: DetectedLocation | null;
 }) {
   const cityOptions = useMemo(() => {
-    const cities = new Map<
-      string,
-      { name: string; latitude: number; longitude: number; clubId: string }
-    >();
+    const cities = new Map<string, CityOption>();
 
     clubs.forEach((club) => {
       if (
@@ -67,15 +77,28 @@ export function MapDirectory({
       }
     });
 
+    if (detectedLocation) {
+      const detectedCityKey = normalizeCityName(detectedLocation.city);
+
+      if (!cities.has(detectedCityKey)) {
+        cities.set(detectedCityKey, {
+          name: detectedLocation.city,
+          latitude: detectedLocation.latitude,
+          longitude: detectedLocation.longitude,
+          clubId: null,
+        });
+      }
+    }
+
     return Array.from(cities.values()).sort((a, b) =>
       a.name.localeCompare(b.name, "es"),
     );
-  }, [clubs]);
+  }, [clubs, detectedLocation]);
 
   const detectedCityOption = cityOptions.find(
     (city) =>
-      detectedCity &&
-      normalizeCityName(city.name) === normalizeCityName(detectedCity),
+      detectedLocation &&
+      normalizeCityName(city.name) === normalizeCityName(detectedLocation.city),
   );
   const [selectedClubId, setSelectedClubId] = useState<string | null>(
     detectedCityOption?.clubId ?? null,
