@@ -13,14 +13,13 @@ export default function PrivacyPage() {
       title="Tu información, explicada con claridad"
       description="Esta política describe qué datos personales puede tratar WeedClub, para qué los utiliza y cómo puedes ejercer tus derechos."
     >
-      <LegalSection title="1. Responsable del tratamiento">
-        <ServiceDisclosure />
+      <LegalSection title="1. Sobre el servicio">
         <p>
-          Esta versión provisional no identifica públicamente a una persona responsable del
-          tratamiento. En consecuencia, no debe utilizarse como política definitiva ni activarse la
-          recogida de datos personales en producción hasta que exista una identificación y un canal
-          de ejercicio de derechos conformes con la normativa aplicable.
+          WeedClub es la denominación pública del directorio informativo disponible en
+          weedclub.app. Esta política se aplica a los tratamientos vinculados a las funcionalidades
+          descritas a continuación.
         </p>
+        <ServiceDisclosure />
       </LegalSection>
 
       <LegalSection title="2. Datos que podemos tratar">
@@ -129,10 +128,10 @@ export default function PrivacyPage() {
       <LegalSection title="8. Derechos de las personas">
         <p>
           Puedes solicitar acceso, rectificación, supresión, oposición, limitación y portabilidad de
-          tus datos, así como retirar un consentimiento sin efectos retroactivos. WeedClub no publica
-          un correo personal. Antes de tratar datos en producción deberá habilitar un canal legal no
-          nominativo donde puedan presentarse estas solicitudes y donde, si resulta necesario, pueda
-          pedirse información razonable para comprobar la identidad de quien ejerce el derecho.
+          tus datos, así como retirar un consentimiento sin efectos retroactivos. Las solicitudes
+          deberán indicar el derecho que se desea ejercer y la información necesaria para localizar
+          los datos afectados. Cuando resulte necesario, podrá solicitarse información razonable
+          para comprobar la identidad de quien ejerce el derecho.
         </p>
         <p>
           También puedes presentar una reclamación ante la {" "}

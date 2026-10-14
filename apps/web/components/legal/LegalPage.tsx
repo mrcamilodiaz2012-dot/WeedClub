@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, AlertTriangle } from "lucide-react";
-import { legalConfig, legalIdentityIsComplete } from "@/lib/legal-config";
+import { ArrowLeft } from "lucide-react";
+import { legalConfig } from "@/lib/legal-config";
 
 const legalLinks = [
   { href: "/aviso-legal", label: "Aviso legal" },
@@ -52,18 +52,6 @@ export function LegalPage({
           </p>
         </header>
 
-        {!legalIdentityIsComplete && (
-          <aside className="mb-8 flex gap-3 rounded-3xl border border-amber-200 bg-amber-50 p-5 text-sm leading-6 text-amber-950">
-            <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
-            <p>
-              <strong>Documento provisional.</strong> Por decisión de privacidad, esta versión no
-              publica datos identificativos de ninguna persona. No debe interpretarse como un aviso
-              legal o una política de privacidad completos mientras no se determine y documente la
-              información obligatoria aplicable al servicio.
-            </p>
-          </aside>
-        )}
-
         <article className="space-y-6">{children}</article>
 
         <nav aria-label="Documentos legales" className="mt-10 border-t border-gray-100 pt-6">
@@ -111,10 +99,6 @@ export function ServiceDisclosure() {
       <dd className="font-medium text-gray-950">{publicDisclosure.activity}</dd>
       <dt className="font-semibold text-gray-500">Sitio web</dt>
       <dd className="font-medium text-gray-950">{legalConfig.domain}</dd>
-      <dt className="font-semibold text-gray-500">Identificación</dt>
-      <dd className="font-medium text-gray-950">{publicDisclosure.identity}</dd>
-      <dt className="font-semibold text-gray-500">Contacto legal</dt>
-      <dd className="font-medium text-gray-950">{publicDisclosure.legalContact}</dd>
     </dl>
   );
 }

@@ -107,15 +107,11 @@ export default function TermsPage() {
         </p>
       </LegalSection>
 
-      <LegalSection title="9. Modificaciones y contacto">
+      <LegalSection title="9. Modificaciones">
         <p>
           Estas condiciones podrán actualizarse por cambios legales, técnicos o funcionales. La fecha
           y versión vigentes aparecerán al comienzo del documento. Los cambios materiales se
           comunicarán por medios adecuados antes de que resulten exigibles cuando la ley lo requiera.
-        </p>
-        <p>
-          No se publica una dirección personal de contacto. Antes de que estas condiciones se utilicen
-          en producción deberá habilitarse un canal legal no nominativo para consultas y reclamaciones.
         </p>
       </LegalSection>
     </LegalPage>

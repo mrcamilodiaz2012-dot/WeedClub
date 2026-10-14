@@ -11,21 +11,14 @@ export default function LegalNoticePage() {
     <LegalPage
       eyebrow="Aviso legal"
       title="Información del servicio"
-      description="Este documento provisional explica la naturaleza de WeedClub y las reglas básicas de acceso a weedclub.app sin publicar datos personales."
+      description="Información general sobre la naturaleza de WeedClub y las reglas básicas de acceso a weedclub.app."
     >
-      <LegalSection title="1. Identificación y estado del documento">
+      <LegalSection title="1. Información general">
         <p>
-          WeedClub se presenta públicamente mediante su marca y dominio. Esta versión no publica el
-          nombre, identificación fiscal, domicilio ni datos registrales de ninguna persona física.
-          Tampoco afirma que esta omisión satisfaga las obligaciones de identificación que pudieran
-          resultar aplicables al servicio.
+          WeedClub es un directorio informativo accesible a través de weedclub.app. La plataforma
+          organiza y presenta información pública o facilitada por los responsables de las fichas.
         </p>
         <ServiceDisclosure />
-        <p>
-          Antes de operar públicamente o activar funciones que recojan datos personales, deberá
-          revisarse el encaje jurídico del servicio y completar la información obligatoria mediante
-          una solución válida que preserve, en la medida legalmente posible, la privacidad personal.
-        </p>
       </LegalSection>
 
       <LegalSection title="2. Finalidad de la plataforma">
@@ -82,12 +75,12 @@ export default function LegalNoticePage() {
         </p>
       </LegalSection>
 
-      <LegalSection title="6. Contacto y contenido presuntamente ilícito">
+      <LegalSection title="6. Revisión de contenidos">
         <p>
-          No se publica una dirección personal de contacto. Antes de habilitar aportaciones de
-          terceros, reclamaciones o tratamiento de datos en producción, WeedClub deberá disponer de
-          un canal legal no nominativo y operativo para recibir solicitudes, correcciones y avisos
-          sobre contenido presuntamente ilícito.
+          Las solicitudes de corrección, las reclamaciones sobre derechos y los avisos relativos a
+          contenido presuntamente ilícito deberán identificar la página o ficha afectada, explicar
+          el motivo y aportar información suficiente para permitir su revisión. WeedClub podrá
+          solicitar información adicional cuando resulte necesaria para tramitar la comunicación.
         </p>
       </LegalSection>
 
