@@ -14,7 +14,7 @@ export function BottomTabBar() {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 w-full z-50 flex items-center justify-between px-6 h-[calc(57px+env(safe-area-inset-bottom))] pb-[env(safe-area-inset-bottom)] bg-white border-t-[0.5px] border-gray-100 shadow-[0_-4px_24px_rgba(0,0,0,0.02)]">
+    <div className="fixed bottom-0 left-0 right-0 z-50 flex h-[calc(57px+env(safe-area-inset-bottom))] w-full items-center justify-between rounded-t-[30px] border border-b-0 border-gray-100 bg-white px-6 pb-[env(safe-area-inset-bottom)] shadow-[0_-8px_28px_rgba(0,0,0,0.05)]">
       <TabItem icon={<Home size={30} />} label="Inicio" href="/" active={isActive("/")} />
       <TabItem icon={<Search size={30} />} label="Buscar" href="/buscar" active={isActive("/buscar")} />
       <TabItem icon={<Map size={30} />} label="Mapa" href="/mapa" active={isActive("/mapa")} />
