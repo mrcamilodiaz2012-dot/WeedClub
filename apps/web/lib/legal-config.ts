@@ -1,17 +1,14 @@
 export const legalConfig = {
   brandName: "WeedClub",
   domain: "https://www.weedclub.app",
-  version: "1.0",
-  lastUpdated: "13 de octubre de 2026",
-  operator: {
-    legalName: "PENDIENTE DE COMPLETAR",
-    taxId: "PENDIENTE DE COMPLETAR",
-    address: "PENDIENTE DE COMPLETAR",
-    registry: "PENDIENTE DE COMPLETAR, SI PROCEDE",
-    email: "PENDIENTE DE COMPLETAR",
+  version: "1.1",
+  lastUpdated: "14 de octubre de 2026",
+  publicDisclosure: {
+    serviceName: "WeedClub",
+    activity: "Directorio informativo",
+    identity: "No publicada en esta versión provisional",
+    legalContact: "Canal no habilitado en esta versión provisional",
   },
 } as const;
 
-export const legalIdentityIsComplete = Object.values(legalConfig.operator).every(
-  (value) => !value.startsWith("PENDIENTE"),
-);
+export const legalIdentityIsComplete = false;

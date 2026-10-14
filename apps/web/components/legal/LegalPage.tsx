@@ -56,9 +56,10 @@ export function LegalPage({
           <aside className="mb-8 flex gap-3 rounded-3xl border border-amber-200 bg-amber-50 p-5 text-sm leading-6 text-amber-950">
             <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
             <p>
-              <strong>Borrador no publicable todavía.</strong> Falta incorporar el nombre o razón
-              social, NIF/CIF, domicilio, datos registrales y correo legal del titular de la
-              plataforma.
+              <strong>Documento provisional.</strong> Por decisión de privacidad, esta versión no
+              publica datos identificativos de ninguna persona. No debe interpretarse como un aviso
+              legal o una política de privacidad completos mientras no se determine y documente la
+              información obligatoria aplicable al servicio.
             </p>
           </aside>
         )}
@@ -99,23 +100,21 @@ export function LegalSection({
   );
 }
 
-export function OperatorDetails() {
-  const { operator } = legalConfig;
+export function ServiceDisclosure() {
+  const { publicDisclosure } = legalConfig;
 
   return (
     <dl className="grid gap-3 text-sm sm:grid-cols-[150px_1fr]">
-      <dt className="font-semibold text-gray-500">Titular</dt>
-      <dd className="font-medium text-gray-950">{operator.legalName}</dd>
-      <dt className="font-semibold text-gray-500">NIF/CIF</dt>
-      <dd className="font-medium text-gray-950">{operator.taxId}</dd>
-      <dt className="font-semibold text-gray-500">Domicilio</dt>
-      <dd className="font-medium text-gray-950">{operator.address}</dd>
-      <dt className="font-semibold text-gray-500">Registro</dt>
-      <dd className="font-medium text-gray-950">{operator.registry}</dd>
-      <dt className="font-semibold text-gray-500">Correo legal</dt>
-      <dd className="font-medium text-gray-950">{operator.email}</dd>
+      <dt className="font-semibold text-gray-500">Servicio</dt>
+      <dd className="font-medium text-gray-950">{publicDisclosure.serviceName}</dd>
+      <dt className="font-semibold text-gray-500">Actividad</dt>
+      <dd className="font-medium text-gray-950">{publicDisclosure.activity}</dd>
       <dt className="font-semibold text-gray-500">Sitio web</dt>
       <dd className="font-medium text-gray-950">{legalConfig.domain}</dd>
+      <dt className="font-semibold text-gray-500">Identificación</dt>
+      <dd className="font-medium text-gray-950">{publicDisclosure.identity}</dd>
+      <dt className="font-semibold text-gray-500">Contacto legal</dt>
+      <dd className="font-medium text-gray-950">{publicDisclosure.legalContact}</dd>
     </dl>
   );
 }

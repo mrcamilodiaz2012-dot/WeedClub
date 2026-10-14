@@ -12,7 +12,7 @@ const documents = [
   {
     href: "/aviso-legal",
     title: "Aviso legal",
-    description: "Identificación del titular, finalidad del sitio y reglas generales de acceso.",
+    description: "Estado legal provisional, finalidad del sitio y reglas generales de acceso.",
     icon: Scale,
   },
   {
@@ -39,8 +39,8 @@ export default function LegalHubPage() {
   return (
     <LegalPage
       eyebrow="Centro legal"
-      title="Información clara y accesible"
-      description="Aquí puedes consultar las condiciones que regulan WeedClub y conocer cómo protegemos la información de quienes utilizan la plataforma."
+      title="Información clara y provisional"
+      description="Aquí puedes consultar los documentos provisionales de WeedClub. No contienen datos personales del operador ni sustituyen una revisión jurídica antes de operar en producción."
     >
       <div className="grid gap-3 sm:grid-cols-2">
         {documents.map(({ href, title, description, icon: Icon }) => (

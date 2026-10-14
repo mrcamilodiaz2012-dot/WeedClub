@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { LegalPage, LegalSection, OperatorDetails } from "@/components/legal/LegalPage";
-import { legalConfig } from "@/lib/legal-config";
+import { LegalPage, LegalSection, ServiceDisclosure } from "@/components/legal/LegalPage";
 
 export const metadata: Metadata = {
   title: "Política de privacidad | WeedClub",
@@ -15,7 +14,13 @@ export default function PrivacyPage() {
       description="Esta política describe qué datos personales puede tratar WeedClub, para qué los utiliza y cómo puedes ejercer tus derechos."
     >
       <LegalSection title="1. Responsable del tratamiento">
-        <OperatorDetails />
+        <ServiceDisclosure />
+        <p>
+          Esta versión provisional no identifica públicamente a una persona responsable del
+          tratamiento. En consecuencia, no debe utilizarse como política definitiva ni activarse la
+          recogida de datos personales en producción hasta que exista una identificación y un canal
+          de ejercicio de derechos conformes con la normativa aplicable.
+        </p>
       </LegalSection>
 
       <LegalSection title="2. Datos que podemos tratar">
@@ -124,9 +129,10 @@ export default function PrivacyPage() {
       <LegalSection title="8. Derechos de las personas">
         <p>
           Puedes solicitar acceso, rectificación, supresión, oposición, limitación y portabilidad de
-          tus datos, así como retirar un consentimiento sin efectos retroactivos. Envía tu solicitud a
-          {" "}{legalConfig.operator.email}, indicando el derecho que quieres ejercer. Podremos pedir
-          información razonable para comprobar tu identidad.
+          tus datos, así como retirar un consentimiento sin efectos retroactivos. WeedClub no publica
+          un correo personal. Antes de tratar datos en producción deberá habilitar un canal legal no
+          nominativo donde puedan presentarse estas solicitudes y donde, si resulta necesario, pueda
+          pedirse información razonable para comprobar la identidad de quien ejerce el derecho.
         </p>
         <p>
           También puedes presentar una reclamación ante la {" "}

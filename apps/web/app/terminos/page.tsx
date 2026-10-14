@@ -114,7 +114,8 @@ export default function TermsPage() {
           comunicarán por medios adecuados antes de que resulten exigibles cuando la ley lo requiera.
         </p>
         <p>
-          Las consultas sobre estas condiciones pueden dirigirse a: {legalConfig.operator.email}.
+          No se publica una dirección personal de contacto. Antes de que estas condiciones se utilicen
+          en producción deberá habilitarse un canal legal no nominativo para consultas y reclamaciones.
         </p>
       </LegalSection>
     </LegalPage>

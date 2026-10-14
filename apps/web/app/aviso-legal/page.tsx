@@ -1,24 +1,31 @@
 import type { Metadata } from "next";
-import { LegalPage, LegalSection, OperatorDetails } from "@/components/legal/LegalPage";
+import { LegalPage, LegalSection, ServiceDisclosure } from "@/components/legal/LegalPage";
 
 export const metadata: Metadata = {
   title: "Aviso legal | WeedClub",
-  description: "Información general del titular y condiciones de acceso a WeedClub.",
+  description: "Información general del servicio y condiciones de acceso a WeedClub.",
 };
 
 export default function LegalNoticePage() {
   return (
     <LegalPage
       eyebrow="Aviso legal"
-      title="Información del titular"
-      description="Este aviso reúne la información general del prestador y las reglas básicas de acceso a weedclub.app."
+      title="Información del servicio"
+      description="Este documento provisional explica la naturaleza de WeedClub y las reglas básicas de acceso a weedclub.app sin publicar datos personales."
     >
-      <LegalSection title="1. Datos identificativos">
+      <LegalSection title="1. Identificación y estado del documento">
         <p>
-          En cumplimiento de la Ley 34/2002, de servicios de la sociedad de la información y de
-          comercio electrónico, se informa de los datos del titular del sitio:
+          WeedClub se presenta públicamente mediante su marca y dominio. Esta versión no publica el
+          nombre, identificación fiscal, domicilio ni datos registrales de ninguna persona física.
+          Tampoco afirma que esta omisión satisfaga las obligaciones de identificación que pudieran
+          resultar aplicables al servicio.
         </p>
-        <OperatorDetails />
+        <ServiceDisclosure />
+        <p>
+          Antes de operar públicamente o activar funciones que recojan datos personales, deberá
+          revisarse el encaje jurídico del servicio y completar la información obligatoria mediante
+          una solución válida que preserve, en la medida legalmente posible, la privacidad personal.
+        </p>
       </LegalSection>
 
       <LegalSection title="2. Finalidad de la plataforma">
@@ -77,10 +84,10 @@ export default function LegalNoticePage() {
 
       <LegalSection title="6. Contacto y contenido presuntamente ilícito">
         <p>
-          Para consultas legales, correcciones, reclamaciones sobre derechos o comunicaciones sobre
-          contenido presuntamente ilícito, utiliza el correo indicado en los datos identificativos.
-          La comunicación debe señalar la URL afectada, explicar el motivo y aportar información
-          suficiente para poder revisarla.
+          No se publica una dirección personal de contacto. Antes de habilitar aportaciones de
+          terceros, reclamaciones o tratamiento de datos en producción, WeedClub deberá disponer de
+          un canal legal no nominativo y operativo para recibir solicitudes, correcciones y avisos
+          sobre contenido presuntamente ilícito.
         </p>
       </LegalSection>
 
