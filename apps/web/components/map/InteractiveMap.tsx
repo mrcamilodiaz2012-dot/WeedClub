@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-import Map, { Marker, NavigationControl } from 'react-map-gl';
-import { motion, AnimatePresence } from 'framer-motion';
-import 'mapbox-gl/dist/mapbox-gl.css';
-import type { Club } from '@/types';
-import { trackEvent } from '@/lib/analytics';
+import * as React from "react";
+import Map, { Marker, NavigationControl } from "react-map-gl/mapbox";
+import { motion } from "framer-motion";
+import "mapbox-gl/dist/mapbox-gl.css";
+import type { Club } from "@/types";
+import { trackEvent } from "@/lib/analytics";
 
 interface InteractiveMapProps {
   clubs: Club[];
@@ -14,96 +14,149 @@ interface InteractiveMapProps {
   onSelectClub: (id: string, fromList?: boolean) => void;
   onHoverClub: (id: string | null) => void;
   viewport: { latitude: number; longitude: number; zoom: number };
-  onViewportChange: (viewport: { latitude: number; longitude: number; zoom: number }) => void;
+  onViewportChange: (viewport: {
+    latitude: number;
+    longitude: number;
+    zoom: number;
+  }) => void;
+  showNavigationControl?: boolean;
 }
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
-// Componente Memoizado del Pin para evitar re-renders por hover si no le afecta
-const PinMarker = React.memo(({ club, isSelected, isHovered, onSelect, onHover }: any) => {
-  const active = isSelected || isHovered;
-  
-  return (
-    <Marker
-      longitude={club.lng}
-      latitude={club.lat}
-      anchor="bottom"
-      onClick={(e: any) => {
-        e.originalEvent.stopPropagation();
-        onSelect(club.id);
-      }}
-    >
-      <motion.div 
-        className="relative group cursor-pointer z-10"
-        initial={false}
-        animate={{
-          scale: active ? 1.15 : 1,
-          zIndex: active ? 30 : 10
-        }}
-        transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-        onMouseEnter={() => onHover(club.id)}
-        onMouseLeave={() => onHover(null)}
-      >
-        <motion.div 
-          className="px-2 py-1 rounded-full shadow-md font-medium text-sm whitespace-nowrap transition-colors"
-          animate={{
-            backgroundColor: isSelected ? '#000000' : isHovered ? '#00E676' : '#FFFFFF',
-            color: active ? '#FFFFFF' : '#18181B',
-            borderColor: active ? 'transparent' : '#E4E4E7',
-            borderWidth: 1
-          }}
-        >
-          <span className="flex items-center space-x-1.5">
-            <motion.span 
-              className="w-2 h-2 rounded-full"
-              animate={{ backgroundColor: active ? '#FFFFFF' : '#00E676' }}
-            />
-            <span className={active ? 'inline-block' : 'hidden group-hover:inline-block ml-1'}>
-              {club.name.substring(0, 16)}
-            </span>
-          </span>
-        </motion.div>
-        
-        <motion.div 
-          className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 rotate-45"
-          animate={{
-            backgroundColor: isSelected ? '#000000' : isHovered ? '#00E676' : '#FFFFFF',
-            borderColor: active ? 'transparent' : '#E4E4E7',
-            borderBottomWidth: active ? 0 : 1,
-            borderRightWidth: active ? 0 : 1
-          }}
-        />
-      </motion.div>
-    </Marker>
-  );
-});
-PinMarker.displayName = 'PinMarker';
+type MappableClub = Club & { lat: number; lng: number };
 
-export function InteractiveMap({ clubs, selectedClubId, hoveredClubId, onSelectClub, onHoverClub, viewport, onViewportChange }: InteractiveMapProps) {
+interface PinMarkerProps {
+  club: MappableClub;
+  isSelected: boolean;
+  isHovered: boolean;
+  onSelect: (id: string) => void;
+  onHover: (id: string | null) => void;
+}
+
+// Componente Memoizado del Pin para evitar re-renders por hover si no le afecta
+const PinMarker = React.memo(
+  ({ club, isSelected, isHovered, onSelect, onHover }: PinMarkerProps) => {
+    const active = isSelected || isHovered;
+
+    return (
+      <Marker
+        longitude={club.lng}
+        latitude={club.lat}
+        anchor="bottom"
+        onClick={(e) => {
+          e.originalEvent.stopPropagation();
+          onSelect(club.id);
+        }}
+      >
+        <motion.div
+          className="relative group cursor-pointer z-10"
+          initial={false}
+          animate={{
+            scale: active ? 1.15 : 1,
+            zIndex: active ? 30 : 10,
+          }}
+          transition={{ type: "spring", stiffness: 400, damping: 25 }}
+          onMouseEnter={() => onHover(club.id)}
+          onMouseLeave={() => onHover(null)}
+        >
+          <motion.div
+            className="px-2 py-1 rounded-full shadow-md font-medium text-sm whitespace-nowrap transition-colors"
+            animate={{
+              backgroundColor: isSelected
+                ? "#000000"
+                : isHovered
+                  ? "#00E676"
+                  : "#FFFFFF",
+              color: active ? "#FFFFFF" : "#18181B",
+              borderColor: active ? "transparent" : "#E4E4E7",
+              borderWidth: 1,
+            }}
+          >
+            <span className="flex items-center space-x-1.5">
+              <motion.span
+                className="w-2 h-2 rounded-full"
+                animate={{ backgroundColor: active ? "#FFFFFF" : "#00E676" }}
+              />
+              <span
+                className={
+                  active
+                    ? "inline-block"
+                    : "hidden group-hover:inline-block ml-1"
+                }
+              >
+                {club.name.substring(0, 16)}
+              </span>
+            </span>
+          </motion.div>
+
+          <motion.div
+            className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 rotate-45"
+            animate={{
+              backgroundColor: isSelected
+                ? "#000000"
+                : isHovered
+                  ? "#00E676"
+                  : "#FFFFFF",
+              borderColor: active ? "transparent" : "#E4E4E7",
+              borderBottomWidth: active ? 0 : 1,
+              borderRightWidth: active ? 0 : 1,
+            }}
+          />
+        </motion.div>
+      </Marker>
+    );
+  },
+);
+PinMarker.displayName = "PinMarker";
+
+export function InteractiveMap({
+  clubs,
+  selectedClubId,
+  hoveredClubId,
+  onSelectClub,
+  onHoverClub,
+  viewport,
+  onViewportChange,
+  showNavigationControl = true,
+}: InteractiveMapProps) {
   return (
     <div className="w-full h-full relative bg-gray-100">
       <Map
-        mapboxAccessToken={MAPBOX_TOKEN !== 'tu-mapbox-token' ? MAPBOX_TOKEN : undefined}
+        mapboxAccessToken={
+          MAPBOX_TOKEN !== "tu-mapbox-token" ? MAPBOX_TOKEN : undefined
+        }
         {...viewport}
-        onMove={(evt: any) => onViewportChange(evt.viewState)}
+        onMove={(evt) =>
+          onViewportChange({
+            latitude: evt.viewState.latitude,
+            longitude: evt.viewState.longitude,
+            zoom: evt.viewState.zoom,
+          })
+        }
         mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
         reuseMaps
       >
-        <NavigationControl position="top-right" />
-        
-        {clubs.map(club => (
-          <PinMarker 
-            key={club.id}
-            club={club}
-            isSelected={selectedClubId === club.id}
-            isHovered={hoveredClubId === club.id}
-            onSelect={(id: string) => {
-              trackEvent('club_pin_click', { club_id: id });
-              onSelectClub(id, false);
-            }}
-            onHover={onHoverClub}
-          />
-        ))}
+        {showNavigationControl && <NavigationControl position="top-right" />}
+
+        {clubs
+          .filter(
+            (club): club is MappableClub =>
+              typeof club.lat === "number" && typeof club.lng === "number",
+          )
+          .map((club) => (
+            <PinMarker
+              key={club.id}
+              club={club}
+              isSelected={selectedClubId === club.id}
+              isHovered={hoveredClubId === club.id}
+              onSelect={(id: string) => {
+                trackEvent("club_pin_click", { club_id: id });
+                onSelectClub(id, false);
+              }}
+              onHover={onHoverClub}
+            />
+          ))}
       </Map>
     </div>
   );
