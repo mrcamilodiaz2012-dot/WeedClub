@@ -5,6 +5,7 @@ import Map, { Marker, NavigationControl } from "react-map-gl/mapbox";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import "mapbox-gl/dist/mapbox-gl.css";
+import type { Map as MapboxMap } from "mapbox-gl";
 import type { Club } from "@/types";
 import { trackEvent } from "@/lib/analytics";
 
@@ -24,8 +25,26 @@ interface InteractiveMapProps {
 }
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
-const MAP_STYLE =
-  "https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json";
+const MAP_STYLE = "https://tiles.openfreemap.org/styles/liberty";
+
+function applyAppleInspiredPalette(map: MapboxMap) {
+  const paintRules = [
+    ["background", "background-color", "#DDEDBB"],
+    ["water", "fill-color", "#56B8E8"],
+    ["waterway_river", "line-color", "#69BFE8"],
+    ["waterway_other", "line-color", "#78C7EB"],
+    ["landcover_wood", "fill-color", "#9ED36F"],
+    ["landcover_grass", "fill-color", "#B9DF83"],
+    ["park", "fill-color", "#AFE07E"],
+    ["landcover_sand", "fill-color", "#E8DCA8"],
+  ] as const;
+
+  paintRules.forEach(([layerId, property, value]) => {
+    if (map.getLayer(layerId)) {
+      map.setPaintProperty(layerId, property, value);
+    }
+  });
+}
 
 type MappableClub = Club & { lat: number; lng: number };
 
@@ -119,6 +138,7 @@ export function InteractiveMap({
             zoom: evt.viewState.zoom,
           })
         }
+        onLoad={(event) => applyAppleInspiredPalette(event.target)}
         mapStyle={MAP_STYLE}
         dragRotate={false}
         touchPitch={false}
