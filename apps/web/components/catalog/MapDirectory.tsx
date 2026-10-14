@@ -76,7 +76,7 @@ export function MapDirectory({ clubs }: { clubs: Club[] }) {
 
             <Link
               href="/"
-              className="pointer-events-auto rounded-full border border-black/5 bg-white px-5 py-2.5 shadow-[0_6px_24px_rgba(0,0,0,0.12)]"
+              className="pointer-events-auto"
               aria-label="Ir al inicio de WeedClub"
             >
               <Image
@@ -96,18 +96,6 @@ export function MapDirectory({ clubs }: { clubs: Club[] }) {
               <Search size={21} strokeWidth={2} />
             </Link>
           </div>
-
-          <Link
-            href="/buscar"
-            className="pointer-events-auto mt-3 flex h-13 items-center gap-3 rounded-full border border-black/5 bg-white px-5 text-[15px] font-semibold text-text-secondary shadow-[0_8px_30px_rgba(0,0,0,0.14)] transition-transform active:scale-[0.99]"
-          >
-            <Search
-              size={20}
-              className="text-text-primary"
-              aria-hidden="true"
-            />
-            Buscar club o ciudad
-          </Link>
         </div>
       </header>
 
