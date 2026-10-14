@@ -35,4 +35,8 @@ export interface Club {
   // Membresía
   membership_standard_price: number | null;
   membership_premium_price: number | null;
+
+  // Solo para contenido local de demostración. Nunca implica verificación real.
+  is_demo?: boolean;
+  verification_status?: 'verified' | 'unverified' | 'demo';
 }

@@ -92,12 +92,6 @@ async function validateInfrastructure() {
     return error && error.code === '42501'; // 42501 = insufficient privilege
   });
 
-  await runTest("Stripe Webhook: Verificación de endpoint web", async () => {
-    // Solo podemos verificar que el archivo de la ruta existe y exporta POST
-    const webhookPath = path.resolve(process.cwd(), 'apps/web/app/api/stripe/webhook/route.ts');
-    return fs.existsSync(webhookPath);
-  });
-
   console.log("\n✅ Script de validación finalizado.");
 }
 

@@ -5,13 +5,13 @@ import Link from "next/link";
 import type { Club } from "@/types";
 
 import { Carousel } from "@/components/ui/Carousel";
-import { AppListItem } from "@/components/ui/AppListItem";
-import { Search, Map as MapIcon, MapPin, Heart, ChevronDown, Bell, UserCircle, X, BadgeCheck, Clock, Navigation } from "lucide-react";
+import { Search, Map as MapIcon, MapPin, Heart, ChevronDown, Bell, UserCircle, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { type Location } from "@/components/ui/LocationSearch";
 import { LocationModal } from "@/components/ui/LocationModal";
 import Image from "next/image";
 import { LegalFooter } from "@/components/legal/LegalFooter";
+import { CATEGORY_LINKS, CITIES, FLOWERS, GROW_SHOPS } from "@/lib/catalog";
 
 interface AppStoreHomeProps {
   clubs: Club[];
@@ -54,12 +54,7 @@ export function AppStoreHome({ clubs }: AppStoreHomeProps) {
     };
   }, [selectedFlowerId]);
 
-  const POPULAR_FLOWERS = [
-    { id: 1, name: "Purple Exotica 1", type: "ÍNDICA", thc: "24%", cbd: "0.2%", flavor: "Uva, Dulce", effect: "Relajante", color: "text-purple-600", bg: "bg-purple-50 border border-purple-100", image: "/weed/Colores%20Exoticos/E1.webp" },
-    { id: 2, name: "Neon Sativa 2", type: "SATIVA", thc: "26%", cbd: "0.1%", flavor: "Tropical", effect: "Energético", color: "text-orange-500", bg: "bg-orange-50 border border-orange-100", image: "/weed/Colores%20Exoticos/E2.webp" },
-    { id: 3, name: "Amnesia Haze", type: "HÍBRIDA", thc: "22%", cbd: "0.5%", flavor: "Cítrico, Pino", effect: "Creativo", color: "text-emerald-600", bg: "bg-emerald-50 border border-emerald-100", image: "/weed/Colores%20Naturales/N3.webp" },
-    { id: 4, name: "Gelato 33", type: "ÍNDICA", thc: "25%", cbd: "0.1%", flavor: "Fresa, Vainilla", effect: "Felicidad", color: "text-purple-600", bg: "bg-purple-50 border border-purple-100", image: "/weed/Colores%20Exoticos/E3.webp" }
-  ];
+  const POPULAR_FLOWERS = FLOWERS;
 
   const filteredClubs = selectedLocation
     ? clubs.filter(c =>
@@ -68,16 +63,9 @@ export function AppStoreHome({ clubs }: AppStoreHomeProps) {
       )
     : clubs;
 
-  const MOCK_GROW_SHOPS = [
-    { id: 101, title: "Green Care GrowShop", subtitle: "Semillas y Cultivo", rating: 4.8, city: "Barcelona", img: "/portadas/cannabis.jpg" },
-    { id: 102, title: "Urban Cultivation", subtitle: "Todo para tu huerto", rating: 4.9, city: "Barcelona", img: "/portadas/cannabis2.jpg" },
-    { id: 103, title: "Seed Point Madrid", subtitle: "Especialistas en genética", rating: 4.7, city: "Madrid", img: "/portadas/cannabis3.jpg" },
-    { id: 104, title: "The Plant Store", subtitle: "Fertilizantes y más", rating: 4.6, city: "Valencia", img: "/portadas/cannabis.jpg" },
-  ];
-  
   const filteredGrowShops = selectedLocation
-    ? MOCK_GROW_SHOPS.filter(c => c.city.toLowerCase() === selectedLocation.name.toLowerCase() || c.city.toLowerCase() === selectedLocation.province?.toLowerCase())
-    : MOCK_GROW_SHOPS;
+    ? GROW_SHOPS.filter(c => c.city.toLowerCase() === selectedLocation.name.toLowerCase() || c.city.toLowerCase() === selectedLocation.province?.toLowerCase())
+    : GROW_SHOPS;
 
   return (
     <div className="w-full h-full pb-32 overflow-y-auto bg-background-base">
@@ -98,50 +86,45 @@ export function AppStoreHome({ clubs }: AppStoreHomeProps) {
         </div>
 
         <div className="flex items-center justify-end gap-2">
-          <button className="w-[32px] h-[32px] rounded-full bg-black/5 hover:bg-black/10 transition-colors flex items-center justify-center text-text-primary">
+          <Link href="/notificaciones" aria-label="Notificaciones" className="w-[32px] h-[32px] rounded-full bg-black/5 hover:bg-black/10 transition-colors flex items-center justify-center text-text-primary">
             <Bell size={16} strokeWidth={2} />
-          </button>
-          <button className="w-[32px] h-[32px] rounded-full bg-black/5 hover:bg-black/10 transition-colors flex items-center justify-center text-text-primary">
+          </Link>
+          <Link href="/perfil" aria-label="Perfil" className="w-[32px] h-[32px] rounded-full bg-black/5 hover:bg-black/10 transition-colors flex items-center justify-center text-text-primary">
             <UserCircle size={18} strokeWidth={2} />
-          </button>
+          </Link>
         </div>
       </div>
 
       {/* Search Bar (Sticky) */}
       <div className="px-4 py-4 sticky top-0 bg-background-base z-40">
-        <div className="w-full h-[54px] bg-background-secondary rounded-full flex items-center px-4 gap-4 border border-transparent focus-within:border-border-subtle transition-colors">
+        <form action="/buscar" className="w-full h-[54px] bg-background-secondary rounded-full flex items-center px-4 gap-4 border border-transparent focus-within:border-border-subtle transition-colors">
           <Search size={22} className="text-text-secondary shrink-0" />
           <input 
             type="text" 
+            name="q"
             placeholder="Buscar Clubs, productos..." 
-            className="bg-transparent border-none outline-none text-[17px] text-text-primary w-full placeholder:text-text-secondary font-medium"
+            className="bg-transparent border-none outline-none text-[17px] text-text-primary w-full min-w-0 placeholder:text-text-secondary font-medium"
           />
-        </div>
+        </form>
       </div>
 
       {/* 1. Categorías (Stories) */}
       <div className="pt-4 pb-4 w-full overflow-x-auto hide-scrollbar">
         <div className="flex items-start gap-4 px-4 after:content-[''] after:w-[1px] after:shrink-0">
-          {[
-            { name: "Ciudades", color: "bg-sky-300", icon: <img src="/iconos/Ciudad.webp" alt="Ciudades" className="w-11 h-11 object-contain opacity-90" /> },
-            { name: "Top Clubs", color: "bg-orange-300", icon: <img src="/iconos/fuego.webp" alt="Top Clubs" className="w-11 h-11 object-contain opacity-90" /> },
-            { name: "Flores", color: "bg-emerald-300", icon: <img src="/iconos/flor.webp" alt="Flores" className="w-11 h-11 object-contain opacity-90" /> },
-            { name: "Eventos", color: "bg-purple-300", icon: <img src="/iconos/eventos.webp" alt="Eventos" className="w-11 h-11 object-contain opacity-90" /> },
-            { name: "Grow Shops", color: "bg-lime-300", icon: <img src="/iconos/grow.webp" alt="Grow Shops" className="w-11 h-11 object-contain opacity-90" /> }
-          ].map((cat, i) => (
-            <button key={i} className="flex flex-col items-center gap-2 group">
+          {CATEGORY_LINKS.map((cat) => (
+            <Link key={cat.href} href={cat.href} className="flex flex-col items-center gap-2 group">
               <div className={`w-[68px] h-[68px] rounded-full ${cat.color} flex items-center justify-center text-2xl overflow-hidden group-hover:-translate-y-0.5 group-active:scale-95 transition-all duration-300 shadow-[0_4px_14px_rgba(0,0,0,0.02)] group-hover:shadow-[0_6px_20px_rgba(0,0,0,0.04)]`}>
-                {cat.icon}
+                <img src={cat.icon} alt={cat.name} className="w-11 h-11 object-contain opacity-90" />
               </div>
               <span className="text-[12px] font-medium text-text-secondary tracking-tight">{cat.name}</span>
-            </button>
+            </Link>
           ))}
         </div>
       </div>
 
 
       {/* 2. Cerca de Ti (Rectángulos Verticales 4:5) */}
-      <Carousel title="📍 Cerca de Ti">
+      <Carousel title="📍 Cerca de Ti" viewAllHref="/clubs">
         {filteredClubs.length > 0 ? filteredClubs.map((club) => (
           <Link key={club.id} href={`/clubs/${club.slug || club.id}`} prefetch={true} className="w-[246px] shrink-0 snap-start block h-full">
             <div className="w-full h-full flex flex-col bg-[#F5F5F7] rounded-[24px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.015)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] transition-shadow duration-300 border border-border-subtle/40">
@@ -152,7 +135,7 @@ export function AppStoreHome({ clubs }: AppStoreHomeProps) {
                  <div className="absolute inset-0 bg-black/10"></div>
                  
                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md text-text-primary text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-[0_2px_8px_rgba(0,0,0,0.02)]">
-                   <MapIcon size={11} strokeWidth={2} /> 1.2 km
+                   <MapIcon size={11} strokeWidth={2} /> {club.is_demo ? 'Demo' : 'Ver ficha'}
                  </div>
 
                  <button className="absolute top-4 right-4 w-[32px] h-[32px] bg-white/90 backdrop-blur-md text-text-primary rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.02)] flex items-center justify-center hover:scale-105 active:scale-95 transition-all">
@@ -212,14 +195,9 @@ export function AppStoreHome({ clubs }: AppStoreHomeProps) {
 
 
       {/* 3. Ciudades Populares (Círculos) */}
-      <Carousel title="🌍 Ciudades">
-        {[
-          { name: "Barcelona", img: "/portadas-ciudades/barcelona.webp" },
-          { name: "Madrid", img: "/portadas-ciudades/madrid.webp" },
-          { name: "Valencia", img: "/portadas-ciudades/valencia.webp" },
-          { name: "Alicante", img: "/portadas-ciudades/alicante.webp" }
-        ].map((city, idx) => (
-          <div key={idx} className="w-[165px] shrink-0 snap-start cursor-pointer group hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 h-full">
+      <Carousel title="🌍 Ciudades" viewAllHref="/ciudades">
+        {CITIES.map((city) => (
+          <Link key={city.slug} href={`/ciudades/${city.slug}`} className="w-[165px] shrink-0 snap-start cursor-pointer group hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 h-full">
             <div className="w-full h-full aspect-square bg-background-secondary border border-border-subtle/40 rounded-[24px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.015)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] transition-all duration-300">
                <img src={city.img} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={city.name} />
                
@@ -234,13 +212,13 @@ export function AppStoreHome({ clubs }: AppStoreHomeProps) {
                  <span className="text-white font-display font-black tracking-tighter text-[24px] leading-tight drop-shadow-md text-center">{city.name}</span>
                </div>
             </div>
-          </div>
+          </Link>
         ))}
       </Carousel>
 
 
       {/* 4. Flores Populares */}
-      <Carousel title="🔥 Flores Populares">
+      <Carousel title="🔥 Flores Populares" viewAllHref="/flores">
         {POPULAR_FLOWERS.map((flower) => (
           <div key={flower.id} className="w-[180px] shrink-0 snap-start h-full">
             <div 
@@ -289,7 +267,7 @@ export function AppStoreHome({ clubs }: AppStoreHomeProps) {
 
       {/* 5. Clubes Destacados (Posters Horizontales) */}
       <div>
-        <Carousel title="🔝 Clubes Destacados">
+        <Carousel title="🔝 Clubes Destacados" viewAllHref="/clubs">
           {filteredClubs.length > 0 ? filteredClubs.map((club) => (
             <Link key={club.id} href={`/clubs/${club.slug || club.id}`} prefetch={true} className="w-[234px] shrink-0 snap-start block group cursor-pointer hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 h-full">
               <div className="w-full h-full aspect-[4/3] bg-background-secondary rounded-[24px] overflow-hidden relative shadow-[0_8px_30px_rgba(0,0,0,0.04)] group-hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] border border-border-subtle/20 transition-all duration-300">
@@ -302,7 +280,7 @@ export function AppStoreHome({ clubs }: AppStoreHomeProps) {
                  
                  {/* Top Badge (Distancia) - Sólido gris claro */}
                  <div className="absolute top-3 left-3 bg-[#EBEBEB] text-black text-[12px] font-bold px-3 py-1.5 rounded-full z-10 flex items-center gap-1.5 shadow-sm">
-                   <MapIcon size={14} strokeWidth={2.5} /> 1.2 km
+                   <MapIcon size={14} strokeWidth={2.5} /> {club.is_demo ? 'Demo' : 'Ver ficha'}
                  </div>
 
                  {/* Botón Heart (Arriba derecha) */}
@@ -320,7 +298,7 @@ export function AppStoreHome({ clubs }: AppStoreHomeProps) {
                    <div className="flex items-center gap-2 text-[14px] font-light text-white/90 drop-shadow-sm">
                      <div className="flex items-center gap-1.5">
                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
-                       <span className="tracking-wide font-medium text-white">Abierto</span>
+                       <span className="tracking-wide font-medium text-white">{club.is_demo ? 'Demo' : 'Abierto'}</span>
                      </div>
                      <span className="opacity-40 text-[10px]">•</span>
                      <div className="flex items-center gap-1">
@@ -344,12 +322,12 @@ export function AppStoreHome({ clubs }: AppStoreHomeProps) {
           <h2 className="text-[26px] font-display font-black text-text-primary flex items-center gap-2 tracking-tight leading-none">
             🌱 Grow Shops
           </h2>
-          <span className="text-[15px] font-semibold text-brand-accent cursor-pointer hover:opacity-80 transition-opacity">Ver Todos</span>
+          <Link href="/grow-shops" className="text-[15px] font-semibold text-brand-accent cursor-pointer hover:opacity-80 transition-opacity">Ver Todos</Link>
         </div>
         
         <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
           {filteredGrowShops.length > 0 ? filteredGrowShops.map(shop => (
-            <Link key={shop.id} href={`/shops/${shop.id}`} className="block group active:scale-[0.98] transition-transform">
+            <Link key={shop.id} href={`/grow-shops/${shop.slug}`} className="block group active:scale-[0.98] transition-transform">
               <div className="w-full bg-white border border-border-subtle/60 rounded-[16px] overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300 flex flex-col h-full">
                 
                 {/* Imagen de la tienda */}
@@ -358,7 +336,7 @@ export function AppStoreHome({ clubs }: AppStoreHomeProps) {
                   
                   {/* Etiqueta de tienda */}
                   <div className="absolute top-1.5 left-1.5 bg-white/90 backdrop-blur-md px-1.5 py-0.5 rounded-[6px] flex items-center shadow-sm">
-                    <span className="text-[8px] font-bold text-text-primary uppercase tracking-wider">Grow Shop</span>
+                    <span className="text-[8px] font-bold text-text-primary uppercase tracking-wider">Grow Shop · Demo</span>
                   </div>
                 </div>
                 
@@ -516,6 +494,14 @@ export function AppStoreHome({ clubs }: AppStoreHomeProps) {
                             <span className="text-sm font-medium text-gray-800">{flower.effect}</span>
                           </div>
                         </div>
+
+                        <Link
+                          href={`/flores/${flower.slug}`}
+                          onClick={() => setSelectedFlowerId(null)}
+                          className="w-full h-11 rounded-full bg-black text-white text-[13px] font-bold flex items-center justify-center active:scale-[0.98] transition-transform"
+                        >
+                          Ver ficha completa
+                        </Link>
                       </div>
                     </div>
                   </div>

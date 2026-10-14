@@ -1,14 +1,16 @@
 "use client";
 
 import React, { ReactNode } from "react";
+import Link from "next/link";
 
 interface CarouselProps {
   title?: string;
   subtitle?: string;
+  viewAllHref?: string;
   children: ReactNode;
 }
 
-export function Carousel({ title, subtitle, children }: CarouselProps) {
+export function Carousel({ title, subtitle, viewAllHref, children }: CarouselProps) {
   return (
     <div className="mb-6 w-full">
       {title && (
@@ -18,7 +20,11 @@ export function Carousel({ title, subtitle, children }: CarouselProps) {
               {title}
             </h2>
           </div>
-          <button className="text-[#00E676] font-semibold text-sm hover:opacity-80 transition-opacity">Ver Todos</button>
+          {viewAllHref ? (
+            <Link href={viewAllHref} className="text-[#00E676] font-semibold text-sm hover:opacity-80 transition-opacity">Ver Todos</Link>
+          ) : (
+            <span className="text-[#00E676] font-semibold text-sm">Ver Todos</span>
+          )}
         </div>
       )}
       <div className="w-full overflow-x-auto snap-x snap-mandatory scroll-pl-2 scrollbar-hide pb-4">

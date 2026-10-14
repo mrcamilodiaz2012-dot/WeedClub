@@ -3,49 +3,11 @@
 import React, { useState } from "react";
 import { Heart, MapPin } from "lucide-react";
 import Link from "next/link";
-import type { Club } from "@/types";
+import { DEMO_CLUBS, FLOWERS, GROW_SHOPS } from "@/lib/catalog";
 
-// Mock Data
-const LIKED_CLUBS: Club[] = [
-  {
-    id: "club-1",
-    name: "Green Leaf Club 1",
-    slug: "green-leaf-1",
-    city: "Madrid",
-    status: "active",
-    subscription_tier: "premium",
-    cover_image_url: "/portadas/cannabis.jpg",
-    // placeholders
-    description: null, logo_url: null, lat: null, lng: null, address: null, province: null,
-    phone: null, whatsapp: null, instagram_url: null, website_url: null,
-    opening_hours: null, photos: null, rating: 4.8, review_count: 120,
-    amenities: null, membership_standard_price: null, membership_premium_price: null,
-  },
-  {
-    id: "club-2",
-    name: "Green Leaf Club 2",
-    slug: "green-leaf-2",
-    city: "Barcelona",
-    status: "active",
-    subscription_tier: "standard",
-    cover_image_url: "/portadas/cannabis2.jpg",
-    // placeholders
-    description: null, logo_url: null, lat: null, lng: null, address: null, province: null,
-    phone: null, whatsapp: null, instagram_url: null, website_url: null,
-    opening_hours: null, photos: null, rating: 4.9, review_count: 240,
-    amenities: null, membership_standard_price: null, membership_premium_price: null,
-  }
-];
-
-const LIKED_FLOWERS = [
-  { id: 1, name: "Purple Exotica", type: "ÍNDICA", thc: "24%", cbd: "0.2%", flavor: "Uva, Dulce", effect: "Relajante", color: "text-purple-600", bg: "bg-purple-50 border border-purple-100", image: "/weed/Colores%20Exoticos/E1.webp" },
-  { id: 3, name: "Amnesia Haze", type: "HÍBRIDA", thc: "22%", cbd: "0.5%", flavor: "Cítrico, Pino", effect: "Creativo", color: "text-emerald-600", bg: "bg-emerald-50 border border-emerald-100", image: "/weed/Colores%20Naturales/N3.webp" },
-];
-
-const LIKED_GROW_SHOPS = [
-  { id: 101, title: "Green Care GrowShop", subtitle: "Semillas y Cultivo", rating: 4.8, city: "Barcelona", img: "/portadas/cannabis.jpg" },
-  { id: 103, title: "Seed Point Madrid", subtitle: "Especialistas en genética", rating: 4.7, city: "Madrid", img: "/portadas/cannabis3.jpg" },
-];
+const LIKED_CLUBS = DEMO_CLUBS.slice(0, 2);
+const LIKED_FLOWERS = FLOWERS.filter((flower) => flower.id === 1 || flower.id === 3);
+const LIKED_GROW_SHOPS = GROW_SHOPS.filter((shop) => shop.slug === 'green-care-growshop' || shop.slug === 'seed-point-madrid');
 
 export default function SeguidosPage() {
   const [activeTab, setActiveTab] = useState<'Todo' | 'Clubs' | 'Flores' | 'Growshops'>('Todo');
@@ -120,7 +82,7 @@ export default function SeguidosPage() {
                          <div className="flex items-center gap-1.5 text-[11px] font-light text-white/90 drop-shadow-sm">
                            <div className="flex items-center gap-1">
                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
-                             <span className="tracking-wide font-medium text-white">Abierto</span>
+                             <span className="tracking-wide font-medium text-white">{club.is_demo ? 'Demo' : 'Abierto'}</span>
                            </div>
                            <span className="opacity-40 text-[8px]">•</span>
                            <div className="flex items-center gap-1 truncate">
@@ -151,7 +113,7 @@ export default function SeguidosPage() {
             {LIKED_FLOWERS.length > 0 ? (
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {LIKED_FLOWERS.map((flower) => (
-                  <div key={flower.id} className="w-full">
+                  <Link key={flower.id} href={`/flores/${flower.slug}`} className="w-full block">
                     <div className="w-full bg-[#F5F5F7] border border-border-subtle/40 rounded-[24px] p-4 relative flex flex-col shadow-[0_8px_30px_rgba(0,0,0,0.015)] cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:-translate-y-0.5 transition-all duration-300">
                       
                       {/* Background Glow */}
@@ -161,9 +123,9 @@ export default function SeguidosPage() {
 
                       <div className="flex justify-between items-start z-10 relative">
                         <span className={`text-[10px] font-bold px-2 py-1 rounded-full ${flower.color} ${flower.bg}`}>{flower.type}</span>
-                        <button className="w-[30px] h-[30px] rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.015)] border border-border-subtle/40 flex items-center justify-center text-red-500 transition-colors z-20">
+                        <span className="w-[30px] h-[30px] rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.015)] border border-border-subtle/40 flex items-center justify-center text-red-500 transition-colors z-20">
                           <Heart className="fill-red-500 text-red-500" size={15} strokeWidth={2} />
-                        </button>
+                        </span>
                       </div>
                       
                       {/* Product Image */}
@@ -186,7 +148,7 @@ export default function SeguidosPage() {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
             ) : (
@@ -205,7 +167,7 @@ export default function SeguidosPage() {
             {LIKED_GROW_SHOPS.length > 0 ? (
               <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
                 {LIKED_GROW_SHOPS.map(shop => (
-                  <Link key={shop.id} href={`/shops/${shop.id}`} className="block group active:scale-[0.98] transition-transform">
+                  <Link key={shop.id} href={`/grow-shops/${shop.slug}`} className="block group active:scale-[0.98] transition-transform">
                     <div className="w-full bg-white border border-border-subtle/60 rounded-[16px] overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300 flex flex-col h-full relative">
                       
                       {/* Imagen de la tienda */}

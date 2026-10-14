@@ -29,7 +29,10 @@ export function ProfileHero({ club }: ProfileHeroProps) {
   const { isOpen, label } = getOpenStatus(club);
 
   const coverUrl = club.cover_image_url || '/portadas/cannabis.jpg';
-  const mapsUrl = `https://maps.google.com/?q=${encodeURIComponent(`${club.address ?? ''}, ${club.city ?? ''}`)}`;
+  const mapsQuery = club.is_demo && club.lat != null && club.lng != null
+    ? `${club.lat},${club.lng}`
+    : `${club.address ?? ''}, ${club.city ?? ''}`;
+  const mapsUrl = `https://maps.google.com/?q=${encodeURIComponent(mapsQuery)}`;
   const waUrl = club.whatsapp ? `https://wa.me/${club.whatsapp.replace(/\D/g, '')}` : null;
 
   return (
@@ -55,7 +58,9 @@ export function ProfileHero({ club }: ProfileHeroProps) {
             <h1 className="text-[32px] md:text-[48px] font-black tracking-tighter text-white leading-[1.0] drop-shadow-lg">
               {club.name}
             </h1>
-            <BadgeCheck className="w-[22px] h-[22px] md:w-[26px] md:h-[26px] text-[#1ed760] shrink-0 drop-shadow-md" fill="currentColor" stroke="white" strokeWidth={1.5} />
+            {club.verification_status === 'verified' && (
+              <BadgeCheck className="w-[22px] h-[22px] md:w-[26px] md:h-[26px] text-[#1ed760] shrink-0 drop-shadow-md" fill="currentColor" stroke="white" strokeWidth={1.5} />
+            )}
           </div>
 
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[14px] text-white/90 leading-tight mt-2 drop-shadow-sm">
@@ -63,9 +68,9 @@ export function ProfileHero({ club }: ProfileHeroProps) {
             <div className="flex items-center gap-1">
               <Clock className={`w-[15px] h-[15px] ${isOpen ? 'text-emerald-400' : 'text-red-400'}`} />
               <span className={`font-semibold ${isOpen ? 'text-emerald-400' : 'text-red-400'}`}>
-                {isOpen ? 'Abierto' : 'Cerrado'}
+                {club.is_demo ? 'Horario demo' : isOpen ? 'Abierto' : 'Cerrado'}
               </span>
-              <span className="text-white/80">⋅ {label}</span>
+              <span className="text-white/80">⋅ {club.is_demo ? 'Sin verificar' : label}</span>
             </div>
 
             {/* Teléfono — solo si existe */}
@@ -155,9 +160,11 @@ export function ProfileHero({ club }: ProfileHeroProps) {
           )}
 
           {/* Seguir */}
-          <button className="h-[36px] px-5 rounded-full bg-black text-white font-bold text-[14px] flex items-center justify-center hover:bg-gray-900 transition-colors">
-            Seguir
-          </button>
+          {!club.is_demo && (
+            <button className="h-[36px] px-5 rounded-full bg-black text-white font-bold text-[14px] flex items-center justify-center hover:bg-gray-900 transition-colors">
+              Seguir
+            </button>
+          )}
         </div>
       </div>
     </div>

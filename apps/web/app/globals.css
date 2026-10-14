@@ -25,8 +25,11 @@
 }
 
 @layer base {
+  html,
   body {
     @apply bg-background-base text-text-primary font-sans antialiased;
+    max-width: 100%;
+    overflow-x: clip;
   }
 }
 
