@@ -3,6 +3,7 @@
 import * as React from "react";
 import Map, { Marker, NavigationControl } from "react-map-gl/mapbox";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import "mapbox-gl/dist/mapbox-gl.css";
 import type { Club } from "@/types";
 import { trackEvent } from "@/lib/analytics";
@@ -23,6 +24,8 @@ interface InteractiveMapProps {
 }
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
+const MAP_STYLE =
+  "https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json";
 
 type MappableClub = Club & { lat: number; lng: number };
 
@@ -49,61 +52,43 @@ const PinMarker = React.memo(
           onSelect(club.id);
         }}
       >
-        <motion.div
-          className="relative group cursor-pointer z-10"
+        <motion.button
+          type="button"
+          aria-label={`Abrir ${club.name}`}
+          className="group relative z-10 cursor-pointer"
           initial={false}
           animate={{
-            scale: active ? 1.15 : 1,
+            scale: active ? 1.06 : 1,
             zIndex: active ? 30 : 10,
           }}
-          transition={{ type: "spring", stiffness: 400, damping: 25 }}
+          transition={{ type: "spring", stiffness: 420, damping: 28 }}
           onMouseEnter={() => onHover(club.id)}
           onMouseLeave={() => onHover(null)}
         >
-          <motion.div
-            className="px-2 py-1 rounded-full shadow-md font-medium text-sm whitespace-nowrap transition-colors"
-            animate={{
-              backgroundColor: isSelected
-                ? "#000000"
-                : isHovered
-                  ? "#00E676"
-                  : "#FFFFFF",
-              color: active ? "#FFFFFF" : "#18181B",
-              borderColor: active ? "transparent" : "#E4E4E7",
-              borderWidth: 1,
-            }}
+          <div
+            className={`flex h-11 items-center border border-black/10 bg-white shadow-[0_5px_18px_rgba(0,0,0,0.22)] ${
+              active
+                ? "gap-2 rounded-full py-1.5 pl-2 pr-3"
+                : "w-11 justify-center rounded-full p-2.5"
+            }`}
           >
-            <span className="flex items-center space-x-1.5">
-              <motion.span
-                className="w-2 h-2 rounded-full"
-                animate={{ backgroundColor: active ? "#FFFFFF" : "#00E676" }}
-              />
-              <span
-                className={
-                  active
-                    ? "inline-block"
-                    : "hidden group-hover:inline-block ml-1"
-                }
-              >
-                {club.name.substring(0, 16)}
+            <Image
+              src="/logo2.svg"
+              alt=""
+              width={25}
+              height={25}
+              className="h-6 w-6 shrink-0"
+              aria-hidden="true"
+            />
+            {active && (
+              <span className="max-w-36 truncate text-[13px] font-bold tracking-tight text-gray-950">
+                {club.name}
               </span>
-            </span>
-          </motion.div>
+            )}
+          </div>
 
-          <motion.div
-            className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 rotate-45"
-            animate={{
-              backgroundColor: isSelected
-                ? "#000000"
-                : isHovered
-                  ? "#00E676"
-                  : "#FFFFFF",
-              borderColor: active ? "transparent" : "#E4E4E7",
-              borderBottomWidth: active ? 0 : 1,
-              borderRightWidth: active ? 0 : 1,
-            }}
-          />
-        </motion.div>
+          <span className="absolute -bottom-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 border-b border-r border-black/10 bg-white" />
+        </motion.button>
       </Marker>
     );
   },
@@ -121,7 +106,7 @@ export function InteractiveMap({
   showNavigationControl = true,
 }: InteractiveMapProps) {
   return (
-    <div className="w-full h-full relative bg-gray-100">
+    <div className="relative h-full w-full bg-[#EEF1F3]">
       <Map
         mapboxAccessToken={
           MAPBOX_TOKEN !== "tu-mapbox-token" ? MAPBOX_TOKEN : undefined
@@ -134,7 +119,10 @@ export function InteractiveMap({
             zoom: evt.viewState.zoom,
           })
         }
-        mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
+        mapStyle={MAP_STYLE}
+        dragRotate={false}
+        touchPitch={false}
+        pitchWithRotate={false}
         reuseMaps
       >
         {showNavigationControl && <NavigationControl position="top-right" />}

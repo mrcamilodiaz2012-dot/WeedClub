@@ -9,6 +9,7 @@ import {
   Check,
   ChevronDown,
   ChevronRight,
+  LocateFixed,
   MapPin,
   Search,
 } from "lucide-react";
@@ -138,6 +139,25 @@ export function MapDirectory({ clubs }: { clubs: Club[] }) {
     });
   };
 
+  const recenterMap = () => {
+    const city = cityOptions.find(
+      (option) =>
+        option.name.toLocaleLowerCase("es") ===
+        selectedCity?.toLocaleLowerCase("es"),
+    );
+
+    if (city) {
+      setViewport({
+        latitude: city.latitude,
+        longitude: city.longitude,
+        zoom: 11.5,
+      });
+      return;
+    }
+
+    setViewport({ latitude: 40.4168, longitude: -3.7038, zoom: 5.2 });
+  };
+
   return (
     <section
       className="relative h-full w-full overflow-hidden"
@@ -163,7 +183,7 @@ export function MapDirectory({ clubs }: { clubs: Club[] }) {
           <div className="flex items-center justify-between">
             <Link
               href="/"
-              className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full border border-black/5 bg-white text-text-primary shadow-[0_6px_24px_rgba(0,0,0,0.12)] transition-transform active:scale-95"
+              className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full border border-black/5 bg-white/95 text-text-primary shadow-[0_6px_24px_rgba(0,0,0,0.12)] backdrop-blur-xl transition-transform active:scale-95"
               aria-label="Volver al inicio"
             >
               <ArrowLeft size={21} strokeWidth={2} />
@@ -191,7 +211,7 @@ export function MapDirectory({ clubs }: { clubs: Club[] }) {
                 <div
                   role="listbox"
                   aria-label="Ciudades disponibles"
-                  className="absolute left-1/2 top-[calc(100%+8px)] max-h-[55vh] w-56 -translate-x-1/2 overflow-y-auto rounded-[22px] border border-black/5 bg-white p-2 shadow-[0_14px_45px_rgba(0,0,0,0.18)]"
+                  className="absolute left-1/2 top-[calc(100%+8px)] max-h-[55vh] w-56 -translate-x-1/2 overflow-y-auto rounded-[22px] border border-black/5 bg-white/95 p-2 shadow-[0_14px_45px_rgba(0,0,0,0.18)] backdrop-blur-xl"
                 >
                   <button
                     type="button"
@@ -233,7 +253,7 @@ export function MapDirectory({ clubs }: { clubs: Club[] }) {
 
             <Link
               href="/buscar"
-              className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full border border-black/5 bg-white text-text-primary shadow-[0_6px_24px_rgba(0,0,0,0.12)] transition-transform active:scale-95"
+              className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full border border-black/5 bg-white/95 text-text-primary shadow-[0_6px_24px_rgba(0,0,0,0.12)] backdrop-blur-xl transition-transform active:scale-95"
               aria-label="Buscar"
             >
               <Search size={21} strokeWidth={2} />
@@ -242,11 +262,24 @@ export function MapDirectory({ clubs }: { clubs: Club[] }) {
         </div>
       </header>
 
+      <button
+        type="button"
+        onClick={recenterMap}
+        className={`absolute right-4 z-20 flex h-12 w-12 items-center justify-center rounded-full border border-black/5 bg-white/95 text-[#007AFF] shadow-[0_6px_24px_rgba(0,0,0,0.16)] backdrop-blur-xl transition-transform active:scale-95 ${
+          selectedClub
+            ? "bottom-[calc(174px+env(safe-area-inset-bottom))]"
+            : "bottom-[calc(73px+env(safe-area-inset-bottom))]"
+        }`}
+        aria-label={`Centrar mapa en ${selectedCity ?? "todas las ciudades"}`}
+      >
+        <LocateFixed size={22} strokeWidth={2.2} aria-hidden="true" />
+      </button>
+
       {selectedClub && (
         <div className="pointer-events-none absolute inset-x-0 bottom-[calc(73px+env(safe-area-inset-bottom))] z-20 px-4">
           <Link
             href={`/clubs/${selectedClub.slug || selectedClub.id}`}
-            className="pointer-events-auto mx-auto flex w-full max-w-md items-center gap-3 rounded-[24px] border border-black/5 bg-white p-3 shadow-[0_12px_40px_rgba(0,0,0,0.18)] transition-transform active:scale-[0.98]"
+            className="pointer-events-auto mx-auto flex w-full max-w-md items-center gap-3 rounded-[24px] border border-black/5 bg-white/95 p-3 shadow-[0_12px_40px_rgba(0,0,0,0.18)] backdrop-blur-xl transition-transform active:scale-[0.98]"
           >
             <Image
               src={selectedClub.cover_image_url ?? "/portadas/cannabis.jpg"}
