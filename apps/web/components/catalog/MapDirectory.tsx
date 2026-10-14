@@ -1,10 +1,17 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ChevronRight, MapPin, Search } from "lucide-react";
+import {
+  ArrowLeft,
+  Check,
+  ChevronDown,
+  ChevronRight,
+  MapPin,
+  Search,
+} from "lucide-react";
 import type { Club } from "@/types";
 
 const InteractiveMap = dynamic(
@@ -21,19 +28,87 @@ const InteractiveMap = dynamic(
 );
 
 export function MapDirectory({ clubs }: { clubs: Club[] }) {
-  const [selectedClubId, setSelectedClubId] = useState<string | null>(
-    clubs[0]?.id ?? null,
+  const initialClub = clubs.find(
+    (club) => typeof club.lat === "number" && typeof club.lng === "number",
   );
+  const [selectedClubId, setSelectedClubId] = useState<string | null>(
+    initialClub?.id ?? null,
+  );
+  const [selectedCity, setSelectedCity] = useState<string | null>(
+    initialClub?.city ?? null,
+  );
+  const [isCityMenuOpen, setIsCityMenuOpen] = useState(false);
   const [hoveredClubId, setHoveredClubId] = useState<string | null>(null);
-  const [viewport, setViewport] = useState({
-    latitude: 40.4168,
-    longitude: -3.7038,
-    zoom: 5.2,
-  });
+  const [viewport, setViewport] = useState(() => ({
+    latitude: initialClub?.lat ?? 40.4168,
+    longitude: initialClub?.lng ?? -3.7038,
+    zoom: initialClub ? 11.5 : 5.2,
+  }));
+  const cityMenuRef = useRef<HTMLDivElement>(null);
+
+  const cityOptions = useMemo(() => {
+    const cities = new Map<
+      string,
+      { name: string; latitude: number; longitude: number; clubId: string }
+    >();
+
+    clubs.forEach((club) => {
+      if (
+        club.city &&
+        typeof club.lat === "number" &&
+        typeof club.lng === "number" &&
+        !cities.has(club.city.toLocaleLowerCase("es"))
+      ) {
+        cities.set(club.city.toLocaleLowerCase("es"), {
+          name: club.city,
+          latitude: club.lat,
+          longitude: club.lng,
+          clubId: club.id,
+        });
+      }
+    });
+
+    return Array.from(cities.values()).sort((a, b) =>
+      a.name.localeCompare(b.name, "es"),
+    );
+  }, [clubs]);
+
+  const visibleClubs = useMemo(
+    () =>
+      selectedCity
+        ? clubs.filter(
+            (club) =>
+              club.city?.toLocaleLowerCase("es") ===
+              selectedCity.toLocaleLowerCase("es"),
+          )
+        : clubs,
+    [clubs, selectedCity],
+  );
+
   const selectedClub = useMemo(
     () => clubs.find((club) => club.id === selectedClubId),
     [clubs, selectedClubId],
   );
+
+  useEffect(() => {
+    if (!isCityMenuOpen) return;
+
+    const closeMenu = (event: PointerEvent) => {
+      if (!cityMenuRef.current?.contains(event.target as Node)) {
+        setIsCityMenuOpen(false);
+      }
+    };
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsCityMenuOpen(false);
+    };
+
+    document.addEventListener("pointerdown", closeMenu);
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.removeEventListener("pointerdown", closeMenu);
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [isCityMenuOpen]);
 
   const selectClub = (id: string) => {
     setSelectedClubId(id);
@@ -41,6 +116,26 @@ export function MapDirectory({ clubs }: { clubs: Club[] }) {
     if (club?.lat != null && club.lng != null) {
       setViewport({ latitude: club.lat, longitude: club.lng, zoom: 13 });
     }
+    if (club?.city) setSelectedCity(club.city);
+  };
+
+  const selectCity = (city: (typeof cityOptions)[number] | null) => {
+    setIsCityMenuOpen(false);
+
+    if (!city) {
+      setSelectedCity(null);
+      setSelectedClubId(null);
+      setViewport({ latitude: 40.4168, longitude: -3.7038, zoom: 5.2 });
+      return;
+    }
+
+    setSelectedCity(city.name);
+    setSelectedClubId(city.clubId);
+    setViewport({
+      latitude: city.latitude,
+      longitude: city.longitude,
+      zoom: 11.5,
+    });
   };
 
   return (
@@ -52,7 +147,7 @@ export function MapDirectory({ clubs }: { clubs: Club[] }) {
 
       <div className="absolute inset-0">
         <InteractiveMap
-          clubs={clubs}
+          clubs={visibleClubs}
           selectedClubId={selectedClubId}
           hoveredClubId={hoveredClubId}
           onSelectClub={selectClub}
@@ -74,19 +169,67 @@ export function MapDirectory({ clubs }: { clubs: Club[] }) {
               <ArrowLeft size={21} strokeWidth={2} />
             </Link>
 
-            <Link
-              href="/"
-              className="pointer-events-auto"
-              aria-label="Ir al inicio de WeedClub"
-            >
-              <Image
-                src="/weed-maps.svg"
-                alt="WeedClub"
-                width={130}
-                height={37}
-                className="h-8 w-auto"
-              />
-            </Link>
+            <div ref={cityMenuRef} className="pointer-events-auto relative">
+              <button
+                type="button"
+                onClick={() => setIsCityMenuOpen((isOpen) => !isOpen)}
+                className="flex items-center gap-1.5 px-2 py-2 text-[16px] font-extrabold tracking-tight text-text-primary transition-opacity active:opacity-60"
+                aria-haspopup="listbox"
+                aria-expanded={isCityMenuOpen}
+                aria-label="Cambiar ciudad"
+              >
+                <span>{selectedCity ?? "Todas las ciudades"}</span>
+                <ChevronDown
+                  size={17}
+                  strokeWidth={2.5}
+                  className={`transition-transform ${isCityMenuOpen ? "rotate-180" : ""}`}
+                  aria-hidden="true"
+                />
+              </button>
+
+              {isCityMenuOpen && (
+                <div
+                  role="listbox"
+                  aria-label="Ciudades disponibles"
+                  className="absolute left-1/2 top-[calc(100%+8px)] max-h-[55vh] w-56 -translate-x-1/2 overflow-y-auto rounded-[22px] border border-black/5 bg-white p-2 shadow-[0_14px_45px_rgba(0,0,0,0.18)]"
+                >
+                  <button
+                    type="button"
+                    role="option"
+                    aria-selected={selectedCity === null}
+                    onClick={() => selectCity(null)}
+                    className="flex w-full items-center justify-between rounded-2xl px-3 py-3 text-left text-[14px] font-semibold transition-colors hover:bg-background-secondary"
+                  >
+                    Todas las ciudades
+                    {selectedCity === null && (
+                      <Check size={17} className="text-brand-accent" />
+                    )}
+                  </button>
+
+                  {cityOptions.map((city) => {
+                    const isSelected =
+                      city.name.toLocaleLowerCase("es") ===
+                      selectedCity?.toLocaleLowerCase("es");
+
+                    return (
+                      <button
+                        key={city.name}
+                        type="button"
+                        role="option"
+                        aria-selected={isSelected}
+                        onClick={() => selectCity(city)}
+                        className="flex w-full items-center justify-between rounded-2xl px-3 py-3 text-left text-[14px] font-semibold transition-colors hover:bg-background-secondary"
+                      >
+                        {city.name}
+                        {isSelected && (
+                          <Check size={17} className="text-brand-accent" />
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
 
             <Link
               href="/buscar"
