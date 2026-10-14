@@ -22,11 +22,6 @@ interface InteractiveMapProps {
     zoom: number;
   }) => void;
   showNavigationControl?: boolean;
-  userLocation?: {
-    latitude: number;
-    longitude: number;
-    accuracy: number;
-  } | null;
 }
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
@@ -215,7 +210,6 @@ export function InteractiveMap({
   viewport,
   onViewportChange,
   showNavigationControl = true,
-  userLocation = null,
 }: InteractiveMapProps) {
   return (
     <div className="relative h-full w-full bg-[#EEF1F3]">
@@ -259,24 +253,6 @@ export function InteractiveMap({
               onHover={onHoverClub}
             />
           ))}
-
-        {userLocation && (
-          <Marker
-            longitude={userLocation.longitude}
-            latitude={userLocation.latitude}
-            anchor="center"
-          >
-            <div
-              className="relative h-8 w-8"
-              role="img"
-              aria-label="Tu ubicación"
-              title={`Tu ubicación (precisión aproximada: ${Math.round(userLocation.accuracy)} m)`}
-            >
-              <span className="absolute inset-0 animate-ping rounded-full bg-[#007AFF]/25" />
-              <span className="absolute inset-1 rounded-full border-[3px] border-white bg-[#007AFF] shadow-[0_3px_12px_rgba(0,0,0,0.3)]" />
-            </div>
-          </Marker>
-        )}
       </Map>
     </div>
   );
