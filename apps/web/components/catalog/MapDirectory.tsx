@@ -14,6 +14,17 @@ import {
 } from "lucide-react";
 import type { Club } from "@/types";
 
+const CITY_PREFERENCE_KEY = "weedclub-map-city";
+const ALL_CITIES_PREFERENCE = "__all__";
+
+function normalizeCityName(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim()
+    .toLocaleLowerCase("es");
+}
+
 const InteractiveMap = dynamic(
   () =>
     import("@/components/map/InteractiveMap").then(
@@ -27,25 +38,13 @@ const InteractiveMap = dynamic(
   },
 );
 
-export function MapDirectory({ clubs }: { clubs: Club[] }) {
-  const initialClub = clubs.find(
-    (club) => typeof club.lat === "number" && typeof club.lng === "number",
-  );
-  const [selectedClubId, setSelectedClubId] = useState<string | null>(
-    initialClub?.id ?? null,
-  );
-  const [selectedCity, setSelectedCity] = useState<string | null>(
-    initialClub?.city ?? null,
-  );
-  const [isCityMenuOpen, setIsCityMenuOpen] = useState(false);
-  const [hoveredClubId, setHoveredClubId] = useState<string | null>(null);
-  const [viewport, setViewport] = useState(() => ({
-    latitude: initialClub?.lat ?? 40.4168,
-    longitude: initialClub?.lng ?? -3.7038,
-    zoom: initialClub ? 11.5 : 5.2,
-  }));
-  const cityMenuRef = useRef<HTMLDivElement>(null);
-
+export function MapDirectory({
+  clubs,
+  detectedCity,
+}: {
+  clubs: Club[];
+  detectedCity?: string | null;
+}) {
   const cityOptions = useMemo(() => {
     const cities = new Map<
       string,
@@ -57,9 +56,9 @@ export function MapDirectory({ clubs }: { clubs: Club[] }) {
         club.city &&
         typeof club.lat === "number" &&
         typeof club.lng === "number" &&
-        !cities.has(club.city.toLocaleLowerCase("es"))
+        !cities.has(normalizeCityName(club.city))
       ) {
-        cities.set(club.city.toLocaleLowerCase("es"), {
+        cities.set(normalizeCityName(club.city), {
           name: club.city,
           latitude: club.lat,
           longitude: club.lng,
@@ -73,13 +72,34 @@ export function MapDirectory({ clubs }: { clubs: Club[] }) {
     );
   }, [clubs]);
 
+  const detectedCityOption = cityOptions.find(
+    (city) =>
+      detectedCity &&
+      normalizeCityName(city.name) === normalizeCityName(detectedCity),
+  );
+  const [selectedClubId, setSelectedClubId] = useState<string | null>(
+    detectedCityOption?.clubId ?? null,
+  );
+  const [selectedCity, setSelectedCity] = useState<string | null>(
+    detectedCityOption?.name ?? null,
+  );
+  const [isCityMenuOpen, setIsCityMenuOpen] = useState(false);
+  const [hoveredClubId, setHoveredClubId] = useState<string | null>(null);
+  const [viewport, setViewport] = useState(() => ({
+    latitude: detectedCityOption?.latitude ?? 40.4168,
+    longitude: detectedCityOption?.longitude ?? -3.7038,
+    zoom: detectedCityOption ? 11.5 : 5.2,
+  }));
+  const cityMenuRef = useRef<HTMLDivElement>(null);
+  const hasRestoredCityPreference = useRef(false);
+
   const visibleClubs = useMemo(
     () =>
       selectedCity
         ? clubs.filter(
             (club) =>
-              club.city?.toLocaleLowerCase("es") ===
-              selectedCity.toLocaleLowerCase("es"),
+              club.city &&
+              normalizeCityName(club.city) === normalizeCityName(selectedCity),
           )
         : clubs,
     [clubs, selectedCity],
@@ -89,6 +109,48 @@ export function MapDirectory({ clubs }: { clubs: Club[] }) {
     () => clubs.find((club) => club.id === selectedClubId),
     [clubs, selectedClubId],
   );
+
+  useEffect(() => {
+    if (hasRestoredCityPreference.current) return;
+    hasRestoredCityPreference.current = true;
+
+    let preference: string | null = null;
+    try {
+      preference = window.localStorage.getItem(CITY_PREFERENCE_KEY);
+    } catch {
+      return;
+    }
+
+    if (!preference) return;
+
+    if (preference === ALL_CITIES_PREFERENCE) {
+      setSelectedCity(null);
+      setSelectedClubId(null);
+      setViewport({ latitude: 40.4168, longitude: -3.7038, zoom: 5.2 });
+      return;
+    }
+
+    const preferredCity = cityOptions.find(
+      (city) => normalizeCityName(city.name) === normalizeCityName(preference),
+    );
+
+    if (!preferredCity) {
+      try {
+        window.localStorage.removeItem(CITY_PREFERENCE_KEY);
+      } catch {
+        // La detección por ciudad sigue funcionando aunque el almacenamiento falle.
+      }
+      return;
+    }
+
+    setSelectedCity(preferredCity.name);
+    setSelectedClubId(preferredCity.clubId);
+    setViewport({
+      latitude: preferredCity.latitude,
+      longitude: preferredCity.longitude,
+      zoom: 11.5,
+    });
+  }, [cityOptions]);
 
   useEffect(() => {
     if (!isCityMenuOpen) return;
@@ -121,6 +183,15 @@ export function MapDirectory({ clubs }: { clubs: Club[] }) {
 
   const selectCity = (city: (typeof cityOptions)[number] | null) => {
     setIsCityMenuOpen(false);
+
+    try {
+      window.localStorage.setItem(
+        CITY_PREFERENCE_KEY,
+        city?.name ?? ALL_CITIES_PREFERENCE,
+      );
+    } catch {
+      // La selección actual funciona aunque el navegador no permita guardarla.
+    }
 
     if (!city) {
       setSelectedCity(null);
@@ -215,8 +286,9 @@ export function MapDirectory({ clubs }: { clubs: Club[] }) {
 
                   {cityOptions.map((city) => {
                     const isSelected =
-                      city.name.toLocaleLowerCase("es") ===
-                      selectedCity?.toLocaleLowerCase("es");
+                      selectedCity != null &&
+                      normalizeCityName(city.name) ===
+                        normalizeCityName(selectedCity);
 
                     return (
                       <button
