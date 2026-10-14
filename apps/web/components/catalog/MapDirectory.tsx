@@ -8,12 +8,20 @@ import {
   ArrowLeft,
   Check,
   ChevronDown,
-  ChevronRight,
+  LoaderCircle,
   LocateFixed,
   MapPin,
+  Navigation,
   Search,
+  X,
 } from "lucide-react";
 import type { Club } from "@/types";
+
+type UserLocation = {
+  latitude: number;
+  longitude: number;
+  accuracy: number;
+};
 
 const InteractiveMap = dynamic(
   () =>
@@ -40,6 +48,11 @@ export function MapDirectory({ clubs }: { clubs: Club[] }) {
   );
   const [isCityMenuOpen, setIsCityMenuOpen] = useState(false);
   const [hoveredClubId, setHoveredClubId] = useState<string | null>(null);
+  const [userLocation, setUserLocation] = useState<UserLocation | null>(null);
+  const [locationStatus, setLocationStatus] = useState<
+    "idle" | "locating" | "ready" | "error"
+  >("idle");
+  const [locationError, setLocationError] = useState<string | null>(null);
   const [viewport, setViewport] = useState(() => ({
     latitude: initialClub?.lat ?? 40.4168,
     longitude: initialClub?.lng ?? -3.7038,
@@ -139,24 +152,52 @@ export function MapDirectory({ clubs }: { clubs: Club[] }) {
     });
   };
 
-  const recenterMap = () => {
-    const city = cityOptions.find(
-      (option) =>
-        option.name.toLocaleLowerCase("es") ===
-        selectedCity?.toLocaleLowerCase("es"),
-    );
-
-    if (city) {
-      setViewport({
-        latitude: city.latitude,
-        longitude: city.longitude,
-        zoom: 11.5,
-      });
+  const locateUser = () => {
+    if (!navigator.geolocation) {
+      setLocationStatus("error");
+      setLocationError("Tu navegador no permite obtener la ubicación.");
       return;
     }
 
-    setViewport({ latitude: 40.4168, longitude: -3.7038, zoom: 5.2 });
+    setLocationStatus("locating");
+    setLocationError(null);
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const currentLocation = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          accuracy: position.coords.accuracy,
+        };
+
+        setUserLocation(currentLocation);
+        setViewport({
+          latitude: currentLocation.latitude,
+          longitude: currentLocation.longitude,
+          zoom: 14.5,
+        });
+        setLocationStatus("ready");
+      },
+      (error) => {
+        setLocationStatus("error");
+        setLocationError(
+          error.code === 1
+            ? "Activa el permiso de ubicación para mostrar dónde estás."
+            : "No hemos podido obtener tu ubicación. Inténtalo de nuevo.",
+        );
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 60000,
+      },
+    );
   };
+
+  const directionsUrl =
+    selectedClub?.lat != null && selectedClub.lng != null
+      ? `https://maps.apple.com/directions?destination=${encodeURIComponent(`${selectedClub.lat},${selectedClub.lng}`)}&mode=driving`
+      : null;
 
   return (
     <section
@@ -175,6 +216,7 @@ export function MapDirectory({ clubs }: { clubs: Club[] }) {
           viewport={viewport}
           onViewportChange={setViewport}
           showNavigationControl={false}
+          userLocation={userLocation}
         />
       </div>
 
@@ -262,55 +304,102 @@ export function MapDirectory({ clubs }: { clubs: Club[] }) {
         </div>
       </header>
 
+      {locationError && (
+        <div
+          role="alert"
+          className="absolute inset-x-4 top-[calc(5.25rem+env(safe-area-inset-top))] z-30 mx-auto flex max-w-md items-center gap-3 rounded-[18px] border border-black/5 bg-white/95 px-4 py-3 text-[13px] font-semibold text-text-primary shadow-[0_10px_32px_rgba(0,0,0,0.16)] backdrop-blur-xl"
+        >
+          <span className="min-w-0 flex-1">{locationError}</span>
+          <button
+            type="button"
+            onClick={() => setLocationError(null)}
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-background-secondary"
+            aria-label="Cerrar aviso"
+          >
+            <X size={16} aria-hidden="true" />
+          </button>
+        </div>
+      )}
+
       <button
         type="button"
-        onClick={recenterMap}
-        className={`absolute right-4 z-20 flex h-12 w-12 items-center justify-center rounded-full border border-black/5 bg-white/95 text-[#007AFF] shadow-[0_6px_24px_rgba(0,0,0,0.16)] backdrop-blur-xl transition-transform active:scale-95 ${
+        onClick={locateUser}
+        disabled={locationStatus === "locating"}
+        className={`absolute right-4 z-20 flex h-12 w-12 items-center justify-center rounded-full border shadow-[0_6px_24px_rgba(0,0,0,0.16)] backdrop-blur-xl transition-all active:scale-95 disabled:cursor-wait ${
+          locationStatus === "ready"
+            ? "border-white/70 bg-[#007AFF] text-white"
+            : "border-black/5 bg-white/95 text-[#007AFF]"
+        } ${
           selectedClub
             ? "bottom-[calc(174px+env(safe-area-inset-bottom))]"
             : "bottom-[calc(73px+env(safe-area-inset-bottom))]"
         }`}
-        aria-label={`Centrar mapa en ${selectedCity ?? "todas las ciudades"}`}
+        aria-label={
+          locationStatus === "locating"
+            ? "Obteniendo tu ubicación"
+            : "Mostrar mi ubicación"
+        }
       >
-        <LocateFixed size={22} strokeWidth={2.2} aria-hidden="true" />
+        {locationStatus === "locating" ? (
+          <LoaderCircle
+            size={22}
+            strokeWidth={2.2}
+            className="animate-spin"
+            aria-hidden="true"
+          />
+        ) : (
+          <LocateFixed size={22} strokeWidth={2.2} aria-hidden="true" />
+        )}
       </button>
 
       {selectedClub && (
         <div className="pointer-events-none absolute inset-x-0 bottom-[calc(73px+env(safe-area-inset-bottom))] z-20 px-4">
-          <Link
-            href={`/clubs/${selectedClub.slug || selectedClub.id}`}
-            className="pointer-events-auto mx-auto flex w-full max-w-md items-center gap-3 rounded-[24px] border border-black/5 bg-white/95 p-3 shadow-[0_12px_40px_rgba(0,0,0,0.18)] backdrop-blur-xl transition-transform active:scale-[0.98]"
-          >
-            <Image
-              src={selectedClub.cover_image_url ?? "/portadas/cannabis.jpg"}
-              alt={selectedClub.name}
-              width={68}
-              height={68}
-              className="h-17 w-17 shrink-0 rounded-[18px] object-cover"
-            />
-            <div className="min-w-0 flex-1">
-              <div className="flex items-center gap-2">
-                <h2 className="truncate font-display text-[18px] font-black tracking-tighter">
-                  {selectedClub.name}
-                </h2>
-                {selectedClub.is_demo && (
-                  <span className="shrink-0 rounded-full bg-amber-100 px-2 py-1 text-[8px] font-black uppercase text-amber-900">
-                    Demo
-                  </span>
-                )}
+          <article className="pointer-events-auto mx-auto flex w-full max-w-md items-center gap-3 rounded-[24px] border border-black/5 bg-white/95 p-3 shadow-[0_12px_40px_rgba(0,0,0,0.18)] backdrop-blur-xl transition-transform active:scale-[0.98]">
+            <Link
+              href={`/clubs/${selectedClub.slug || selectedClub.id}`}
+              className="flex min-w-0 flex-1 items-center gap-3"
+            >
+              <Image
+                src={selectedClub.cover_image_url ?? "/portadas/cannabis.jpg"}
+                alt={selectedClub.name}
+                width={68}
+                height={68}
+                className="h-17 w-17 shrink-0 rounded-[18px] object-cover"
+              />
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center gap-2">
+                  <h2 className="truncate font-display text-[18px] font-black tracking-tighter">
+                    {selectedClub.name}
+                  </h2>
+                  {selectedClub.is_demo && (
+                    <span className="shrink-0 rounded-full bg-amber-100 px-2 py-1 text-[8px] font-black uppercase text-amber-900">
+                      Demo
+                    </span>
+                  )}
+                </div>
+                <p className="mt-1 flex items-center gap-1 text-[12px] text-text-secondary">
+                  <MapPin size={13} aria-hidden="true" />
+                  {selectedClub.city}
+                </p>
+                <p className="mt-1 truncate text-[11px] text-text-secondary">
+                  {selectedClub.address ?? "Consulta la información del club"}
+                </p>
               </div>
-              <p className="mt-1 flex items-center gap-1 text-[12px] text-text-secondary">
-                <MapPin size={13} aria-hidden="true" />
-                {selectedClub.city}
-              </p>
-              <p className="mt-1 truncate text-[11px] text-text-secondary">
-                {selectedClub.address ?? "Consulta la información del club"}
-              </p>
-            </div>
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-background-secondary text-text-primary">
-              <ChevronRight size={19} aria-hidden="true" />
-            </span>
-          </Link>
+            </Link>
+
+            {directionsUrl && (
+              <a
+                href={directionsUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="flex h-16 w-[78px] shrink-0 flex-col items-center justify-center gap-1 rounded-[18px] bg-[#007AFF] text-white shadow-[0_5px_16px_rgba(0,122,255,0.25)] transition-transform active:scale-95"
+                aria-label={`Cómo llegar a ${selectedClub.name}`}
+              >
+                <Navigation size={20} strokeWidth={2.2} aria-hidden="true" />
+                <span className="text-[10px] font-extrabold">Cómo llegar</span>
+              </a>
+            )}
+          </article>
         </div>
       )}
     </section>
