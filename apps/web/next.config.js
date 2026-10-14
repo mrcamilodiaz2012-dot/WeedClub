@@ -1,6 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ['react-map-gl', 'mapbox-gl'],
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Permissions-Policy',
+            value: 'geolocation=(self)',
+          },
+        ],
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {

@@ -53,6 +53,7 @@ export function MapDirectory({ clubs }: { clubs: Club[] }) {
     "idle" | "locating" | "ready" | "error"
   >("idle");
   const [locationError, setLocationError] = useState<string | null>(null);
+  const [isLocationHelpOpen, setIsLocationHelpOpen] = useState(false);
   const [viewport, setViewport] = useState(() => ({
     latitude: initialClub?.lat ?? 40.4168,
     longitude: initialClub?.lng ?? -3.7038,
@@ -177,13 +178,19 @@ export function MapDirectory({ clubs }: { clubs: Club[] }) {
           zoom: 14.5,
         });
         setLocationStatus("ready");
+        setIsLocationHelpOpen(false);
       },
       (error) => {
         setLocationStatus("error");
+
+        if (error.code === 1) {
+          setLocationError(null);
+          setIsLocationHelpOpen(true);
+          return;
+        }
+
         setLocationError(
-          error.code === 1
-            ? "Activa el permiso de ubicación para mostrar dónde estás."
-            : "No hemos podido obtener tu ubicación. Inténtalo de nuevo.",
+          "No hemos podido obtener tu ubicación. Inténtalo de nuevo.",
         );
       },
       {
@@ -304,12 +311,100 @@ export function MapDirectory({ clubs }: { clubs: Club[] }) {
         </div>
       </header>
 
+      {isLocationHelpOpen && (
+        <div
+          className="absolute inset-0 z-40 flex items-end justify-center bg-black/20 px-4 pb-[calc(5.5rem+env(safe-area-inset-bottom))] pt-20 backdrop-blur-[2px]"
+          onClick={() => setIsLocationHelpOpen(false)}
+        >
+          <section
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="location-help-title"
+            className="w-full max-w-md rounded-[28px] bg-white p-5 shadow-[0_20px_60px_rgba(0,0,0,0.25)]"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="flex items-start justify-between gap-4">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#E8F3FF] text-[#007AFF]">
+                <LocateFixed size={24} strokeWidth={2.2} aria-hidden="true" />
+              </span>
+              <button
+                type="button"
+                onClick={() => setIsLocationHelpOpen(false)}
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-background-secondary text-text-primary"
+                aria-label="Cerrar instrucciones"
+              >
+                <X size={17} aria-hidden="true" />
+              </button>
+            </div>
+
+            <h2
+              id="location-help-title"
+              className="mt-4 font-display text-[24px] font-black tracking-tight text-text-primary"
+            >
+              Permite tu ubicación
+            </h2>
+            <p className="mt-2 text-[14px] leading-5 text-text-secondary">
+              Safari tiene bloqueado el acceso para weedclub.app. Puedes
+              activarlo sin salir de esta página:
+            </p>
+
+            <ol className="mt-4 space-y-3">
+              {[
+                "Pulsa el icono de página a la izquierda de weedclub.app.",
+                "Entra en Configuración del sitio web. Si aparece “Más”, ábrelo primero.",
+                "En Ubicación elige Permitir y vuelve a intentarlo.",
+              ].map((step, index) => (
+                <li
+                  key={step}
+                  className="flex items-start gap-3 text-[13px] font-semibold leading-5 text-text-primary"
+                >
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-background-secondary text-[11px] font-black">
+                    {index + 1}
+                  </span>
+                  <span>{step}</span>
+                </li>
+              ))}
+            </ol>
+
+            <button
+              type="button"
+              onClick={() => {
+                setIsLocationHelpOpen(false);
+                locateUser();
+              }}
+              className="mt-5 flex h-12 w-full items-center justify-center rounded-2xl bg-[#007AFF] text-[14px] font-extrabold text-white transition-transform active:scale-[0.98]"
+            >
+              Volver a intentar
+            </button>
+
+            {directionsUrl && (
+              <a
+                href={directionsUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-2 flex h-11 w-full items-center justify-center gap-2 rounded-2xl text-[13px] font-bold text-[#007AFF]"
+              >
+                <Navigation size={17} aria-hidden="true" />
+                Abrir la ruta de todos modos
+              </a>
+            )}
+          </section>
+        </div>
+      )}
+
       {locationError && (
         <div
           role="alert"
           className="absolute inset-x-4 top-[calc(5.25rem+env(safe-area-inset-top))] z-30 mx-auto flex max-w-md items-center gap-3 rounded-[18px] border border-black/5 bg-white/95 px-4 py-3 text-[13px] font-semibold text-text-primary shadow-[0_10px_32px_rgba(0,0,0,0.16)] backdrop-blur-xl"
         >
           <span className="min-w-0 flex-1">{locationError}</span>
+          <button
+            type="button"
+            onClick={locateUser}
+            className="shrink-0 text-[12px] font-extrabold text-[#007AFF]"
+          >
+            Reintentar
+          </button>
           <button
             type="button"
             onClick={() => setLocationError(null)}
