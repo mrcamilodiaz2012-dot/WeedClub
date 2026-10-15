@@ -232,10 +232,16 @@ export function MapDirectory({
     });
   };
 
-  const directionsUrl =
-    selectedClub?.lat != null && selectedClub.lng != null
-      ? `https://maps.apple.com/directions?destination=${encodeURIComponent(`${selectedClub.lat},${selectedClub.lng}`)}&mode=driving`
-      : null;
+  const directionsDestination = selectedClub
+    ? selectedClub.address && !selectedClub.address.includes('aproximada')
+      ? `${selectedClub.address}, ${selectedClub.locality ?? selectedClub.city ?? ''}`
+      : selectedClub.lat != null && selectedClub.lng != null
+        ? `${selectedClub.lat},${selectedClub.lng}`
+        : null
+    : null;
+  const directionsUrl = directionsDestination
+    ? `https://maps.apple.com/directions?destination=${encodeURIComponent(directionsDestination)}&mode=driving`
+    : null;
 
   return (
     <section
@@ -368,10 +374,15 @@ export function MapDirectory({
                       Demo
                     </span>
                   )}
+                  {!selectedClub.is_demo && selectedClub.verification_status === 'unverified' && (
+                    <span className="shrink-0 rounded-full bg-emerald-100 px-2 py-1 text-[8px] font-black uppercase text-emerald-900">
+                      Pública
+                    </span>
+                  )}
                 </div>
                 <p className="mt-1 flex items-center gap-1 text-[12px] text-text-secondary">
                   <MapPin size={13} aria-hidden="true" />
-                  {selectedClub.city}
+                  {selectedClub.locality ?? selectedClub.city}
                 </p>
                 <p className="mt-1 truncate text-[11px] text-text-secondary">
                   {selectedClub.address ?? "Consulta la información del club"}

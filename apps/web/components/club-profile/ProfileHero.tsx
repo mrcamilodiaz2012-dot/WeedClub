@@ -20,7 +20,7 @@ function getOpenStatus(club: Club): { isOpen: boolean; label: string } {
   const hours = club.opening_hours?.[today];
   if (!hours || hours === 'cerrado') return { isOpen: false, label: 'Cerrado hoy' };
 
-  const [open, close] = hours.split('-').map((t) => t.trim());
+  const [, close] = hours.split('-').map((t) => t.trim());
   return { isOpen: true, label: `Cierra ${close ?? ''}` };
 }
 
@@ -32,8 +32,15 @@ export function ProfileHero({ club }: ProfileHeroProps) {
   const mapsQuery = club.is_demo && club.lat != null && club.lng != null
     ? `${club.lat},${club.lng}`
     : `${club.address ?? ''}, ${club.city ?? ''}`;
-  const mapsUrl = `https://maps.google.com/?q=${encodeURIComponent(mapsQuery)}`;
+  const mapsUrl = club.google_maps_url ?? `https://maps.google.com/?q=${encodeURIComponent(mapsQuery)}`;
   const waUrl = club.whatsapp ? `https://wa.me/${club.whatsapp.replace(/\D/g, '')}` : null;
+  const publicListingHours = (() => {
+    if (!club.opening_hours) return 'Por confirmar';
+    const days = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+    const today = days[new Date().getDay()] ?? 'lunes';
+    return club.opening_hours[today] ?? 'Consultar';
+  })();
+  const isPublicListing = !club.is_demo && club.verification_status === 'unverified';
 
   return (
     <div className="relative w-full bg-white">
@@ -63,14 +70,20 @@ export function ProfileHero({ club }: ProfileHeroProps) {
             )}
           </div>
 
+          {!club.is_demo && club.verification_status === 'unverified' && (
+            <span className="mb-1 mt-2 w-fit rounded-full border border-white/25 bg-black/35 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-white backdrop-blur-sm">
+              Ficha pública · No reclamada
+            </span>
+          )}
+
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[14px] text-white/90 leading-tight mt-2 drop-shadow-sm">
             {/* Horario */}
             <div className="flex items-center gap-1">
               <Clock className={`w-[15px] h-[15px] ${isOpen ? 'text-emerald-400' : 'text-red-400'}`} />
-              <span className={`font-semibold ${isOpen ? 'text-emerald-400' : 'text-red-400'}`}>
-                {club.is_demo ? 'Horario demo' : isOpen ? 'Abierto' : 'Cerrado'}
+              <span className={`font-semibold ${isPublicListing ? 'text-white' : isOpen ? 'text-emerald-400' : 'text-red-400'}`}>
+                {club.is_demo ? 'Horario demo' : isPublicListing ? 'Horario publicado' : isOpen ? 'Abierto' : 'Cerrado'}
               </span>
-              <span className="text-white/80">⋅ {club.is_demo ? 'Sin verificar' : label}</span>
+              <span className="text-white/80">⋅ {club.is_demo ? 'Sin verificar' : isPublicListing ? publicListingHours : label}</span>
             </div>
 
             {/* Teléfono — solo si existe */}
@@ -126,6 +139,12 @@ export function ProfileHero({ club }: ProfileHeroProps) {
             <Bookmark className="w-6 h-6" />
           </button>
         </div>
+
+        {club.media_status === 'reference' && (
+          <span className="absolute right-4 top-16 z-20 rounded-full bg-black/55 px-2.5 py-1 text-[9px] font-semibold text-white/90 backdrop-blur-sm">
+            Imagen de referencia
+          </span>
+        )}
       </div>
 
       {/* Action Bar */}

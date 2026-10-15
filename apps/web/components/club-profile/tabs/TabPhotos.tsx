@@ -3,10 +3,16 @@ import type { Club } from '@/types';
 import Image from 'next/image';
 
 export function TabPhotos({ club }: { club: Club }) {
-  // Mock data for gallery
-  const photos = Array.from({ length: 15 }).map((_, i) => (
-    `https://images.unsplash.com/photo-1576085898323-218337e3e43c?auto=format&fit=crop&q=80&w=400&h=400&random=${i}`
-  ));
+  const photos = club.photos ?? [];
+
+  if (photos.length === 0) {
+    return (
+      <div className="rounded-3xl border border-gray-100 bg-gray-50 px-6 py-12 text-center">
+        <p className="font-semibold text-gray-700">Este perfil todavía no tiene fotos verificadas.</p>
+        <p className="mt-2 text-sm text-gray-500">El club puede añadirlas cuando reclame su ficha.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full">
@@ -24,12 +30,6 @@ export function TabPhotos({ club }: { club: Club }) {
         ))}
       </div>
       
-      {/* Load more placeholder */}
-      <div className="mt-8 text-center">
-        <button className="px-6 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-900 font-semibold rounded-full transition-colors text-sm">
-          Cargar más fotos
-        </button>
-      </div>
     </div>
   );
 }

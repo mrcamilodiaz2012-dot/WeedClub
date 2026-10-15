@@ -18,10 +18,15 @@ export function ClubDirectoryCard({ club }: { club: Club }) {
             Demo
           </span>
         )}
+        {!club.is_demo && club.verification_status === 'unverified' && (
+          <span className="absolute top-3 left-3 bg-white/90 text-black text-[9px] uppercase tracking-wider font-black px-2.5 py-1 rounded-full">
+            Ficha pública
+          </span>
+        )}
         <div className="absolute left-0 right-0 bottom-0 p-4 text-white">
           <h2 className="text-[22px] font-display font-black tracking-tighter leading-tight">{club.name}</h2>
           <p className="mt-1 text-[12px] text-white/80 flex items-center gap-1.5">
-            <MapPin size={13} /> {club.city ?? 'Ubicación pendiente'}
+            <MapPin size={13} /> {club.locality ?? club.city ?? 'Ubicación pendiente'}
           </p>
         </div>
       </article>

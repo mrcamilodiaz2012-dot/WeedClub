@@ -5,13 +5,12 @@ import { ProfileHero } from '@/components/club-profile/ProfileHero';
 import { ProfileContent } from '@/components/club-profile/ProfileContent';
 import { ClaimClubBanner } from '@/components/club-profile/ClaimClubBanner';
 import { DemoNotice } from '@/components/catalog/DemoNotice';
-import { DEMO_CLUBS } from '@/lib/catalog';
-import { getClubByIdentifier } from '@/lib/clubs';
+import { getClubByIdentifier, LOCAL_CLUBS } from '@/lib/clubs';
 
 export const revalidate = 3600;
 
 export function generateStaticParams() {
-  return DEMO_CLUBS.map((club) => ({ slug: club.slug }));
+  return LOCAL_CLUBS.map((club) => ({ slug: club.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {

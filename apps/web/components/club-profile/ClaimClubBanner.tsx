@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { ShieldAlert } from 'lucide-react';
 
 export function ClaimClubBanner() {
@@ -12,9 +13,9 @@ export function ClaimClubBanner() {
             <p className="text-sm text-gray-500">Reclama esta página para gestionar tu perfil, actualizar información y añadir fotos.</p>
           </div>
         </div>
-        <button className="whitespace-nowrap px-6 py-2.5 bg-white border border-gray-300 hover:bg-gray-50 text-gray-900 font-semibold rounded-xl transition-colors text-sm w-full md:w-auto">
+        <Link href="/registro?tipo=club" className="whitespace-nowrap px-6 py-2.5 bg-white border border-gray-300 hover:bg-gray-50 text-gray-900 font-semibold rounded-xl transition-colors text-sm w-full md:w-auto text-center">
           Reclamar Club
-        </button>
+        </Link>
       </div>
     </div>
   );

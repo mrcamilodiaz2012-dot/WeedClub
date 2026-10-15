@@ -1,10 +1,40 @@
 import React from 'react';
 import type { Club } from '@/types';
-import { Check, Sparkles } from 'lucide-react';
+import { Check, ExternalLink, Info, Sparkles } from 'lucide-react';
 
 export function TabMembership({ club }: { club: Club }) {
   const standardPrice = club.membership_standard_price;
   const premiumPrice = club.membership_premium_price;
+
+  if (standardPrice == null && premiumPrice == null && !club.is_demo) {
+    const contactUrl = club.website_url ?? club.google_maps_url;
+
+    return (
+      <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+        <div className="flex items-start gap-4">
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gray-100">
+            <Info className="h-5 w-5 text-gray-700" />
+          </div>
+          <div>
+            <h3 className="text-lg font-bold text-gray-900">Afiliación gestionada por el club</h3>
+            <p className="mt-2 text-sm leading-relaxed text-gray-600">
+              {club.membership_note ?? 'El acceso está reservado a socios. Consulta directamente los requisitos, la disponibilidad y cualquier cuota vigente.'}
+            </p>
+            {contactUrl && (
+              <a
+                href={contactUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-5 inline-flex items-center gap-2 rounded-xl bg-black px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-gray-900"
+              >
+                Consultar información <ExternalLink className="h-4 w-4" />
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-8">

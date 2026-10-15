@@ -1,6 +1,22 @@
 import { createClient } from '@supabase/supabase-js';
 import { DEMO_CLUBS } from '@/lib/catalog';
+import { LANZAROTE_CLUBS } from '@/lib/lanzarote-clubs';
 import type { Club } from '@/types';
+
+export const LOCAL_CLUBS: Club[] = [...LANZAROTE_CLUBS, ...DEMO_CLUBS];
+
+function mergeClubs(remoteClubs: Club[], limit: number) {
+  const seen = new Set<string>();
+
+  return [...LANZAROTE_CLUBS, ...remoteClubs, ...DEMO_CLUBS]
+    .filter((club) => {
+      const keys = [club.id, club.slug].filter(Boolean);
+      if (keys.some((key) => seen.has(key))) return false;
+      keys.forEach((key) => seen.add(key));
+      return true;
+    })
+    .slice(0, limit);
+}
 
 function publicClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -16,7 +32,7 @@ function publicClient() {
 export async function getActiveClubs(limit = 50): Promise<Club[]> {
   try {
     const supabase = publicClient();
-    if (!supabase) return DEMO_CLUBS;
+    if (!supabase) return LOCAL_CLUBS.slice(0, limit);
 
     const { data, error } = await supabase
       .from('clubs')
@@ -26,10 +42,10 @@ export async function getActiveClubs(limit = 50): Promise<Club[]> {
       .limit(limit)
       .abortSignal(AbortSignal.timeout(4_000));
 
-    if (error || !data?.length) return DEMO_CLUBS;
-    return data as Club[];
+    if (error || !data?.length) return LOCAL_CLUBS.slice(0, limit);
+    return mergeClubs(data as Club[], limit);
   } catch {
-    return DEMO_CLUBS;
+    return LOCAL_CLUBS.slice(0, limit);
   }
 }
 
@@ -43,10 +59,10 @@ export async function getClubByIdentifier(identifier: string): Promise<Club | nu
     'green-leaf-2': 'green-leaf-club-2',
   };
   const resolvedIdentifier = legacyAliases[identifier] ?? identifier;
-  const demoClub = DEMO_CLUBS.find(
+  const localClub = LOCAL_CLUBS.find(
     (club) => club.slug === resolvedIdentifier || club.id === resolvedIdentifier,
   );
-  if (demoClub) return demoClub;
+  if (localClub) return localClub;
 
   if (!/^[a-zA-Z0-9-]+$/.test(identifier)) return null;
 

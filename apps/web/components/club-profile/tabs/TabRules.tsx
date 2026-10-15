@@ -1,22 +1,25 @@
 import React from 'react';
 import type { Club } from '@/types';
-import { ShieldAlert, Fingerprint, Smartphone, Backpack, UserCheck, CheckCircle2 } from 'lucide-react';
+import { ShieldAlert, Fingerprint, MapPinOff, ScrollText, UserCheck, CheckCircle2 } from 'lucide-react';
 
 export function TabRules({ club }: { club: Club }) {
-  // Mapping rules to specific icons for a more visual, modern look
+  const ageRule = club.minimum_age
+    ? `Edad mínima publicada: ${club.minimum_age} años`
+    : 'Acceso exclusivo para personas adultas';
   const rules = [
-    { text: "Prohibida la entrada a menores de 21 años", icon: ShieldAlert },
+    { text: ageRule, icon: ShieldAlert },
     { text: "Uso exclusivo para socios registrados", icon: UserCheck },
-    { text: "No se permite sacar productos del club", icon: Backpack },
-    { text: "Prohibido el uso de móviles en dispensario", icon: Smartphone },
+    { text: "El acceso está sujeto a la admisión del club", icon: CheckCircle2 },
+    { text: "Consulta y acepta las normas internas", icon: ScrollText },
+    { text: "No consumas ni portes cannabis en espacios públicos", icon: MapPinOff },
     { text: "Comportamiento respetuoso con otros socios", icon: CheckCircle2 },
-    { text: "Obligatorio presentar DNI y carnet al entrar", icon: Fingerprint }
+    { text: "Presenta una identificación válida al registrarte", icon: Fingerprint }
   ];
 
   return (
     <div className="space-y-6">
       <p className="text-[15px] text-gray-600 leading-relaxed max-w-2xl">
-        Para garantizar un entorno seguro y agradable para todos nuestros socios, es imprescindible cumplir con las siguientes normas del establecimiento.
+        Estas son pautas generales de acceso responsable. Cada asociación establece sus propios requisitos y normas internas.
       </p>
 
       {/* Modern Grid Layout for Rules */}
@@ -38,7 +41,7 @@ export function TabRules({ club }: { club: Club }) {
       <div className="mt-8 flex items-start gap-3 p-4 rounded-2xl bg-red-50/50 border border-red-100/50">
         <ShieldAlert className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
         <p className="text-[13px] text-red-900/80 leading-relaxed">
-          <strong className="font-bold text-red-900">Aviso:</strong> El incumplimiento reiterado de las normas puede resultar en la suspensión temporal o permanente de la condición de socio.
+          <strong className="font-bold text-red-900">Importante:</strong> Confirma las condiciones directamente con el club. La información pública puede cambiar y no sustituye sus estatutos ni la normativa aplicable.
         </p>
       </div>
     </div>

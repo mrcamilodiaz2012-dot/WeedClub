@@ -39,4 +39,12 @@ export interface Club {
   // Solo para contenido local de demostración. Nunca implica verificación real.
   is_demo?: boolean;
   verification_status?: 'verified' | 'unverified' | 'demo';
+
+  // Datos opcionales de fichas públicas todavía no reclamadas por el club.
+  locality?: string | null;
+  minimum_age?: number | null;
+  membership_note?: string | null;
+  google_maps_url?: string | null;
+  public_data_updated_at?: string | null;
+  media_status?: 'club' | 'reference';
 }

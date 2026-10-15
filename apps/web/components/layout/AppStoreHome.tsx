@@ -149,7 +149,7 @@ export function AppStoreHome({ clubs }: AppStoreHomeProps) {
                  <div className="absolute bottom-0 left-0 right-0 p-4 z-20 flex flex-col">
                    <span className="text-[22px] font-black tracking-tighter text-white leading-tight mb-0">{club.name}</span>
                    <span className="text-[13px] text-white/70 flex items-center gap-2 font-light">
-                     <MapPin size={14} className="opacity-70" /> {club.city}
+                     <MapPin size={14} className="opacity-70" /> {club.locality ?? club.city}
                    </span>
                  </div>
                </div>
@@ -157,12 +157,11 @@ export function AppStoreHome({ clubs }: AppStoreHomeProps) {
                {/* Mitad Inferior: Sección Blanca */}
                <div className="w-full flex flex-col pt-6 pb-6 bg-[#F5F5F7] relative">
                  
-                 <div className="px-4 mb-2">
-                   <span className="text-[10px] font-bold text-text-tertiary/80 uppercase tracking-[0.15em]">Podrías encontrar...</span>
-                 </div>
-
-                 {/* Productos en Stock (Distribución Estática) */}
-                 <div className="flex justify-between w-full px-4 pb-2">
+                 {club.is_demo ? <>
+                   <div className="px-4 mb-2">
+                     <span className="text-[10px] font-bold text-text-tertiary/80 uppercase tracking-[0.15em]">Contenido de muestra</span>
+                   </div>
+                   <div className="flex justify-between w-full px-4 pb-2">
                     {[
                       { id: 1, name: "Purple Exotica", image: "/weed/Colores%20Exoticos/E1.webp" },
                       { id: 2, name: "Neon Sativa", image: "/weed/Colores%20Exoticos/E2.webp" },
@@ -182,7 +181,16 @@ export function AppStoreHome({ clubs }: AppStoreHomeProps) {
                       </div>
                       <span className="text-[9.5px] font-normal text-text-tertiary text-center leading-tight w-full px-0.5 tracking-wide">Ver más</span>
                     </div>
-                 </div>
+                   </div>
+                 </> : (
+                   <div className="flex min-h-[90px] flex-col justify-center px-4">
+                     <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-emerald-700">Ficha pública</span>
+                     <p className="mt-2 line-clamp-2 text-[13px] font-medium leading-snug text-text-primary">
+                       {club.address ?? `Información disponible en ${club.locality ?? club.city}`}
+                     </p>
+                     <p className="mt-2 text-[11px] text-text-secondary">Horario, contacto y cómo llegar</p>
+                   </div>
+                 )}
                </div>
             </div>
           </Link>
@@ -298,11 +306,11 @@ export function AppStoreHome({ clubs }: AppStoreHomeProps) {
                    <div className="flex items-center gap-2 text-[14px] font-light text-white/90 drop-shadow-sm">
                      <div className="flex items-center gap-1.5">
                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
-                       <span className="tracking-wide font-medium text-white">{club.is_demo ? 'Demo' : 'Abierto'}</span>
+                       <span className="tracking-wide font-medium text-white">{club.is_demo ? 'Demo' : 'Ficha pública'}</span>
                      </div>
                      <span className="opacity-40 text-[10px]">•</span>
                      <div className="flex items-center gap-1">
-                       <span className="tracking-wide">{club.city}</span>
+                       <span className="tracking-wide">{club.locality ?? club.city}</span>
                      </div>
                    </div>
                  </div>

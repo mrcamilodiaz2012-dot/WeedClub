@@ -85,6 +85,15 @@ export const CITIES: CityEntry[] = [
     lat: 38.3452,
     lng: -0.481,
   },
+  {
+    slug: 'lanzarote',
+    name: 'Lanzarote',
+    province: 'Las Palmas',
+    img: '/portadas/cannabis3.jpg',
+    description: 'Consulta las fichas públicas de asociaciones localizadas en Lanzarote, con dirección, horario, contacto y acceso al mapa cuando esos datos están disponibles.',
+    lat: 29.0469,
+    lng: -13.5899,
+  },
 ];
 
 const DEMO_HOURS = {

@@ -2,24 +2,13 @@ import React from 'react';
 import type { Club } from '@/types';
 import { Image as ImageIcon } from 'lucide-react';
 
-// Fotos locales de fallback (cuando el club aún no tiene galería)
-const FALLBACK_PHOTOS = [
-  '/portadas/cannabis.jpg',
-  '/portadas/cannabis2.jpg',
-  '/portadas/cannabis3.jpg',
-  '/portadas/cannabis.jpg',
-  '/portadas/cannabis2.jpg',
-  '/portadas/cannabis3.jpg', // 6 fotos para llenar la nueva cuadrícula 3x2
-];
-
 interface Props {
   club: Club;
   onClick?: () => void;
 }
 
 export function TabPhotosCarousel({ club, onClick }: Props) {
-  // Usar fotos reales del club si existen, si no fallback local
-  const photos = club.photos && club.photos.length > 0 ? club.photos : FALLBACK_PHOTOS;
+  const photos = club.photos ?? [];
 
   if (photos.length === 0) return null;
 

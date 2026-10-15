@@ -44,8 +44,6 @@ interface ProfileContentProps {
   club: Club;
 }
 
-const TABS = ['Todo', 'Flores', 'Club', 'Fotos', 'Reseñas'];
-
 const FLOWERS_DATA = [
   // Exóticas
   { id: 1, name: "Purple Exotica 1", type: "Índica", thc: "24%", cbd: "0.2%", flavor: "Uva, Dulce", effect: "Relajante", rating: "4.9", color: "text-purple-600", image: "/weed/Colores%20Exoticos/E1.webp" },
@@ -65,6 +63,15 @@ const FLOWERS_DATA = [
 ];
 
 export function ProfileContent({ club }: ProfileContentProps) {
+  const hasPhotos = Boolean(club.photos?.length);
+  const hasPublishedRating = club.rating != null && (club.review_count ?? 0) > 0;
+  const tabs = [
+    'Todo',
+    ...(club.is_demo ? ['Flores'] : []),
+    'Club',
+    ...(hasPhotos ? ['Fotos'] : []),
+    ...(hasPublishedRating ? ['Reseñas'] : []),
+  ];
   const [viewport, setViewport] = useState({
     latitude: club.lat || 40.4168,
     longitude: club.lng || -3.7038,
@@ -124,7 +131,7 @@ export function ProfileContent({ club }: ProfileContentProps) {
       <div className="w-full border-b border-gray-200 sticky top-0 bg-white/95 backdrop-blur-md z-30 pt-0">
         <div className="max-w-4xl mx-auto">
           <div className="flex overflow-x-auto hide-scrollbar w-full">
-            {TABS.map((tab) => (
+            {tabs.map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
@@ -149,7 +156,7 @@ export function ProfileContent({ club }: ProfileContentProps) {
         {activeTab === 'Todo' && (
           <div className="space-y-10">
             {/* Variedades Disponibles Section (Preview) */}
-            <section>
+            {club.is_demo && <section>
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">
                   Variedades destacadas
@@ -238,10 +245,10 @@ export function ProfileContent({ club }: ProfileContentProps) {
                   </div>
                 ))}
               </div>
-            </section>
+            </section>}
 
             {/* Fotos Section */}
-            <section>
+            {hasPhotos && <section>
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">
                   Galería
@@ -250,7 +257,7 @@ export function ProfileContent({ club }: ProfileContentProps) {
               <LazyMount height={380}>
                 <TabPhotosCarousel club={club} onClick={() => setActiveTab('Fotos')} />
               </LazyMount>
-            </section>
+            </section>}
 
             {/* Mapa Section */}
             <section>
@@ -276,50 +283,17 @@ export function ProfileContent({ club }: ProfileContentProps) {
               </LazyMount>
             </section>
 
-            {/* Reseñas de Google Maps Section */}
-            <section>
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">
-                    Reseñas
-                  </h2>
-                  <div className="flex items-center gap-2 mt-1">
-                    <div className="flex text-yellow-400">
-                      {[1, 2, 3, 4, 5].map(star => <Star key={star} className="w-4 h-4 fill-current" />)}
-                    </div>
-                    <span className="font-bold text-gray-900 text-sm">4.8</span>
-                    <span className="text-gray-500 text-sm">de 124 opiniones</span>
-                  </div>
+            {hasPublishedRating && (
+              <section>
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">Valoración pública</h2>
                 </div>
-                <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center font-bold text-blue-600">G</div>
-              </div>
-              <div className="flex overflow-x-auto hide-scrollbar gap-4 pb-6 -mx-5 px-5 md:mx-0 md:px-0">
-                {[
-                  { name: "Carlos M.", text: "El mejor ambiente de la ciudad, música chill y calidad top. Recomendado 100%.", time: "hace 2 semanas" },
-                  { name: "Laura G.", text: "Sitio súper acogedor para trabajar con el portátil. El staff es súper amable.", time: "hace 1 mes" },
-                  { name: "David R.", text: "Gran variedad de flores y extracciones. El local está increíblemente diseñado.", time: "hace 2 meses" },
-                ].map((review, i) => (
-                  <div key={i} className="w-[280px] shrink-0 bg-gray-50 rounded-2xl p-5 border border-gray-100">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center font-bold text-sm">
-                        {review.name[0]}
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-gray-900 text-sm">{review.name}</h4>
-                        <p className="text-xs text-gray-500">{review.time}</p>
-                      </div>
-                    </div>
-                    <div className="flex text-yellow-400 mb-2">
-                      {[1, 2, 3, 4, 5].map(star => <Star key={star} className="w-3 h-3 fill-current" />)}
-                    </div>
-                    <p className="text-sm text-gray-600 leading-relaxed">"{review.text}"</p>
-                  </div>
-                ))}
-              </div>
-            </section>
+                <TabReviews club={club} />
+              </section>
+            )}
 
             {/* Otros clubs en la zona Section */}
-            <section className="mb-4">
+            {club.is_demo && <section className="mb-4">
               {!showOtherClubs ? (
                 <button 
                   onClick={() => setShowOtherClubs(true)}
@@ -394,12 +368,12 @@ export function ProfileContent({ club }: ProfileContentProps) {
               </div>
               </div>
               )}
-            </section>
+            </section>}
           </div>
         )}
 
         {/* Flores Section */}
-        {activeTab === 'Flores' && (
+        {activeTab === 'Flores' && club.is_demo && (
           <section>
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">
@@ -496,14 +470,14 @@ export function ProfileContent({ club }: ProfileContentProps) {
         )}
 
         {/* Fotos Section */}
-        {activeTab === 'Fotos' && (
+        {activeTab === 'Fotos' && hasPhotos && (
           <section>
             <TabPhotos club={club} />
           </section>
         )}
 
         {/* Reseñas Section */}
-        {activeTab === 'Reseñas' && (
+        {activeTab === 'Reseñas' && hasPublishedRating && (
           <section>
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-display font-bold text-gray-900 tracking-tight">
@@ -517,7 +491,7 @@ export function ProfileContent({ club }: ProfileContentProps) {
       </div>
 
       {/* Flower Details Modal Carousel */}
-      {selectedFlowerId !== null && (
+      {selectedFlowerId !== null && club.is_demo && (
         <div className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-md flex flex-col justify-center animate-in fade-in duration-300">
           <div 
             className="absolute inset-0" 
